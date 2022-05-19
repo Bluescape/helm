@@ -10,7 +10,7 @@ All charts sources are located in the `charts` folder.
 
 ```shell
 # add it
-helm repo add bluescape-charts https://bluescape.github.io/helm-poc
+helm repo add bluescape-charts https://bluescape.github.io/helm
 
 # search it
 helm search repo bluescape-charts
