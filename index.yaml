@@ -1,3 +1,398 @@
 apiVersion: v1
-entries: {}
-generated: "2022-05-19T18:24:33.980032993Z"
+entries:
+  aws-lb-controller-crds:
+  - apiVersion: v2
+    appVersion: 1.17.0
+    created: "2022-05-19T22:04:01.822996043Z"
+    description: A Helm chart for Kubernetes
+    digest: 6048b227660344fc4b241b2881fa72418a37171fcfcee283dbef8c8cab47fc47
+    name: aws-lb-controller-crds
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/aws-lb-controller-crds-0.2.0/aws-lb-controller-crds-0.2.0.tgz
+    version: 0.2.0
+  bluescape-aws-load-balancer-controller:
+  - apiVersion: v2
+    appVersion: v2.3.0
+    created: "2022-05-19T22:04:01.981090734Z"
+    description: AWS Load Balancer Controller Helm chart for Kubernetes
+    digest: 86d464b583bd1c9c68c62072643e87d04410e6e2b931a3d35f0dc7c86c52a9c7
+    home: https://github.com/aws/eks-charts
+    icon: https://raw.githubusercontent.com/aws/eks-charts/master/docs/logo/aws.png
+    keywords:
+    - eks
+    - alb
+    - load balancer
+    - ingress
+    - nlb
+    maintainers:
+    - email: kishorj@users.noreply.github.com
+      name: kishorj
+      url: https://github.com/kishorj
+    - email: m00nf1sh@users.noreply.github.com
+      name: m00nf1sh
+      url: https://github.com/m00nf1sh
+    name: bluescape-aws-load-balancer-controller
+    sources:
+    - https://github.com/aws/eks-charts
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-aws-load-balancer-controller-1.3.3/bluescape-aws-load-balancer-controller-1.3.3.tgz
+    version: 1.3.3
+  bluescape-eks-aux:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-05-19T22:04:02.175744178Z"
+    description: A Helm chart for Kubernetes
+    digest: 5c23dc6882c8e1b30214deb6cb3863cbce4100dbeca1461ffaf2add22c1a2a35
+    name: bluescape-eks-aux
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-eks-aux-0.7.0/bluescape-eks-aux-0.7.0.tgz
+    version: 0.7.0
+  bluescape-emissary-crds:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-05-19T22:04:02.310310207Z"
+    description: A Helm chart for Kubernetes
+    digest: 32368a3978b29ca82265b0214b472bdd8d1cae6fd9fca2d29edc31cfba1adf59
+    name: bluescape-emissary-crds
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-emissary-crds-0.1.0/bluescape-emissary-crds-0.1.0.tgz
+    version: 0.1.0
+  bluescape-monitoring-crds:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-05-19T22:04:02.481532089Z"
+    description: A Helm chart for Kubernetes
+    digest: db40330503c7966c830bb99fe4bbe671b8532fe5125f5ce4a43e6ee5a1467502
+    name: bluescape-monitoring-crds
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-crds-0.1.0/bluescape-monitoring-crds-0.1.0.tgz
+    version: 0.1.0
+  bluescape-monitoring-dashboards:
+  - apiVersion: v2
+    appVersion: 1.16.2
+    created: "2022-05-19T22:04:02.630535617Z"
+    description: A Helm chart for Kubernetes
+    digest: e220c85c7ca15fad9d6668352c0896a4a4ca013d2b68a36a1f136f0d4fa99178
+    name: bluescape-monitoring-dashboards
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-dashboards-0.2.12/bluescape-monitoring-dashboards-0.2.12.tgz
+    version: 0.2.12
+  bluescape-monitoring-grafana:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-05-19T22:04:02.753784468Z"
+    dependencies:
+    - alias: bluescape-monitoring-dashboards
+      condition: custom_dashboards.enable
+      name: bluescape-monitoring-dashboards
+      repository: https://bluescape.github.io/helm-charts
+      version: 0.2.0
+    description: A Helm chart for Kubernetes
+    digest: 93b69182634e57819b2d52d50ce3785be1433fc0d39b41f8a58a3f2bd4844ae3
+    name: bluescape-monitoring-grafana
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-grafana-0.2.5/bluescape-monitoring-grafana-0.2.5.tgz
+    version: 0.2.5
+  cdata:
+  - apiVersion: v2
+    appVersion: 9dd09eb6-release-22.05.2
+    created: "2022-05-19T22:04:02.909175541Z"
+    description: A Helm chart for CDATA container
+    digest: 3015bfa0f0a2b20868c07ac6c180eb038242b278cb3fa1f0f4a856d802749ed6
+    name: cdata
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/cdata-0.1.0/cdata-0.1.0.tgz
+    version: 0.1.0
+  cortex:
+  - apiVersion: v2
+    appVersion: v1.10.0
+    created: "2022-05-19T22:04:03.050659017Z"
+    dependencies:
+    - alias: memcached
+      condition: memcached.enabled
+      name: memcached
+      repository: https://charts.bitnami.com/bitnami
+      version: 5.15.4
+    - alias: memcached-index-read
+      condition: memcached-index-read.enabled
+      name: memcached
+      repository: https://charts.bitnami.com/bitnami
+      version: 5.15.4
+    - alias: memcached-index-write
+      condition: memcached-index-write.enabled
+      name: memcached
+      repository: https://charts.bitnami.com/bitnami
+      version: 5.15.4
+    - alias: memcached-frontend
+      condition: memcached-frontend.enabled
+      name: memcached
+      repository: https://charts.bitnami.com/bitnami
+      version: 5.15.4
+    - alias: memcached-blocks-index
+      name: memcached
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - blocks-storage-memcached
+      version: 5.15.4
+    - alias: memcached-blocks
+      name: memcached
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - blocks-storage-memcached
+      version: 5.15.4
+    - alias: memcached-blocks-metadata
+      name: memcached
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - blocks-storage-memcached
+      version: 5.15.4
+    description: Horizontally scalable, highly available, multi-tenant, long term
+      Prometheus.
+    digest: 6681502af20f8a4acce4089e08a9851461bab3dc629676301f58f92b5b883508
+    home: https://cortexmetrics.io/
+    icon: https://avatars2.githubusercontent.com/u/43045022?s=200&v=4
+    kubeVersion: ^1.19.0-0
+    maintainers:
+    - email: thayward@infoblox.com
+      name: Tom Hayward
+      url: https://github.com/kd7lxl
+    - email: Niclas.Schad@plusserver.com
+      name: Niclas Schad
+      url: https://github.com/ShuzZzle
+    name: cortex
+    sources:
+    - https://github.com/cortexproject/cortex-helm-chart
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/cortex-0.7.0/cortex-0.7.0.tgz
+    version: 0.7.0
+  cp-helm-charts:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2022-05-19T22:04:03.226102629Z"
+    dependencies:
+    - condition: cp-kafka.enabled
+      name: cp-kafka
+      repository: file://./charts/cp-kafka
+      version: 0.1.1
+    - condition: cp-zookeeper.enabled
+      name: cp-zookeeper
+      repository: file://./charts/cp-zookeeper
+      version: 0.1.1
+    - condition: cp-schema-registry.enabled
+      name: cp-schema-registry
+      repository: file://./charts/cp-schema-registry
+      version: 0.1.1
+    - condition: cp-kafka-rest.enabled
+      name: cp-kafka-rest
+      repository: file://./charts/cp-kafka-rest
+      version: 0.1.1
+    - condition: cp-kafka-connect.enabled
+      name: cp-kafka-connect
+      repository: file://./charts/cp-kafka-connect
+      version: 0.1.1
+    - condition: cp-ksql-server.enabled
+      name: cp-ksql-server
+      repository: file://./charts/cp-ksql-server
+      version: 0.1.1
+    - condition: cp-control-center.enabled
+      name: cp-control-center
+      repository: file://./charts/cp-control-center
+      version: 0.1.1
+    description: A Helm chart for Confluent Platform Community Edition
+    digest: 5f46087e0a8e91d39cc549a8f940ca177e22c9bd3de26623636fb0fa7c188be9
+    name: cp-helm-charts
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/cp-helm-charts-0.5.1/cp-helm-charts-0.5.1.tgz
+    version: 0.5.1
+  dex:
+  - apiVersion: v1
+    appVersion: 2.24.0
+    created: "2022-05-19T22:04:03.354196313Z"
+    deprecated: true
+    description: DEPRECATED OpenID Connect Identity (OIDC) and OAuth 2.0 Provider
+      with Pluggable Connectors
+    digest: 2d8796b0e15064e67b49baaa4e39b95bcaf55cc69efad0714e625f0ea7077293
+    home: https://github.com/dexidp/dex/
+    icon: https://github.com/dexidp/dex/raw/master/Documentation/logos/dex-glyph-color.png
+    keywords:
+    - dex
+    - oidc
+    name: dex
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/dex-2.15.2/dex-2.15.2.tgz
+    version: 2.15.2
+  edge-stack:
+  - apiVersion: v2
+    appVersion: 2.2.2
+    created: "2022-05-19T22:04:03.501677331Z"
+    dependencies:
+    - name: emissary-ingress
+      repository: file://./charts/emissary-ingress
+      version: 7.3.2
+    description: A Helm chart for Ambassador Edge Stack
+    digest: 9b3072a205556730f60d873f218c40fe4f4e503c917279cbcb3672f231879c39
+    home: https://www.getambassador.io/
+    icon: https://www.getambassador.io/images/logo.png
+    keywords:
+    - api gateway
+    - ambassador
+    - datawire
+    - envoy
+    - edge stack
+    maintainers:
+    - email: markus@maga.se
+      name: flydiverny
+    - email: flynn@datawire.io
+      name: kflynn
+    - email: nkrause@datawire.io
+      name: nbkrause
+    - email: lukeshu@datawire.io
+      name: lukeshu
+    name: edge-stack
+    sources:
+    - https://github.com/datawire/ambassador
+    - https://github.com/prometheus/statsd_exporter
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/edge-stack-7.3.2/edge-stack-7.3.2.tgz
+    version: 7.3.2
+  gangway:
+  - apiVersion: v1
+    appVersion: 3.3.0
+    created: "2022-05-19T22:04:03.619114442Z"
+    deprecated: true
+    description: DEPRECATED An application that can be used to easily enable authentication
+      flows via OIDC for a kubernetes cluster.
+    digest: d0d33cc6a10038b1227ea5a6c3e01d33a4c4997b743c5b86a8b92153af95be16
+    home: https://github.com/heptiolabs/gangway
+    name: gangway
+    sources:
+    - https://github.com/heptiolabs/gangway
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/gangway-0.4.5/gangway-0.4.5.tgz
+    version: 0.4.5
+  gatekeeper-policy-manager:
+  - apiVersion: v2
+    appVersion: v0.4.0
+    created: "2022-05-19T22:04:03.748670836Z"
+    description: A Helm chart for Gatekeeper Policy Manager which is a simple read-only
+      web UI for viewing OPA Gatekeeper policies' status in a Kubernetes Cluster.
+    digest: 8bead9682ab3de03cc79af84eca88d694780e050c1e55b609e7dbdae925975ab
+    name: gatekeeper-policy-manager
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/gatekeeper-policy-manager-0.4.0/gatekeeper-policy-manager-0.4.0.tgz
+    version: 0.4.0
+  gen3-wall-logging:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-05-19T22:04:03.881423852Z"
+    dependencies:
+    - condition: nxlog-ce.enabled
+      name: nxlog-ce
+      repository: file://./charts/nxlog-ce
+      version: 0.1.0
+    - condition: stunnel.enabled
+      name: stunnel
+      repository: file://./charts/stunnel
+      version: 0.2.0
+    - condition: sockhop.enabled
+      name: sockhop
+      repository: file://./charts/sockhop
+      version: 0.2.0
+    description: A Helm chart for Kubernetes
+    digest: 24588f23095cc4c522ce697e5b4dca3e8ab02c7fc39833e2e526ca414612f46c
+    name: gen3-wall-logging
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/gen3-wall-logging-0.2.0/gen3-wall-logging-0.2.0.tgz
+    version: 0.2.0
+  host-redirect:
+  - apiVersion: v2
+    created: "2022-05-19T22:04:04.016257383Z"
+    description: A Helm chart that created FQND based redirects, requires Ambassador
+      and Cert-Manager installed in the cluster.
+    digest: ff3ff88247ccbb556242ef87404802e70764f08805938d90ebc42535944668df
+    name: host-redirect
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/host-redirect-0.1.0/host-redirect-0.1.0.tgz
+    version: 0.1.0
+  istio-additions:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-05-19T22:04:04.169544241Z"
+    description: A Helm chart for Kubernetes
+    digest: 3342d7c9d68dac8223fd73329de6b5b66c72ebc4e421bfd71fa48d73e678bc46
+    name: istio-additions
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/istio-additions-0.2.0/istio-additions-0.2.0.tgz
+    version: 0.2.0
+  kube-oidc-proxy:
+  - apiVersion: v1
+    appVersion: v0.3.0
+    created: "2022-05-19T22:04:04.304819075Z"
+    description: A Helm chart for kube-oidc-proxy
+    digest: ffd333085590a3278ccc905fd51cdd6d5477c51b55f357548d7b30d11a437dd3
+    home: https://github.com/jetstack/kube-oidc-proxy
+    maintainers:
+    - name: mhrabovcin
+    - name: joshvanl
+    name: kube-oidc-proxy
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/kube-oidc-proxy-0.3.1/kube-oidc-proxy-0.3.1.tgz
+    version: 0.3.1
+  lacework-agent:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: "2022-05-19T22:04:04.501306231Z"
+    description: Lacework Agent
+    digest: 76fadf119a4953d3e835dd9a9073676af8f2addc25822df5dc102d10fab677c4
+    home: https://www.lacework.com
+    icon: https://www.lacework.com/wp-content/uploads/2019/07/Lacework_Logo_color_2019.svg
+    keywords:
+    - monitoring
+    - security
+    - run-time
+    - metric
+    - troubleshooting
+    maintainers:
+    - email: jim.conner@bluescape.com
+      name: Jim Conner
+    - email: info@lacework.net
+      name: lacework-support
+    name: lacework-agent
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/lacework-agent-5.0.0/lacework-agent-5.0.0.tgz
+    version: 5.0.0
+  oauth2-proxy:
+  - apiVersion: v1
+    appVersion: 5.1.0
+    created: "2022-05-19T22:04:04.616409326Z"
+    deprecated: true
+    description: DEPRECATED - A reverse proxy that provides authentication with Google,
+      Github or other providers
+    digest: 3014304ceefd2fef71667fbc45d1effbc4dc0386126c8d78ea346354ee0439b0
+    home: https://pusher.github.io/oauth2_proxy/
+    keywords:
+    - kubernetes
+    - oauth
+    - oauth2
+    - authentication
+    - google
+    - github
+    kubeVersion: '>=1.9.0-0'
+    name: oauth2-proxy
+    sources:
+    - https://github.com/pusher/oauth2_proxy
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/oauth2-proxy-3.2.5/oauth2-proxy-3.2.5.tgz
+    version: 3.2.5
+generated: "2022-05-19T22:04:04.616423926Z"
