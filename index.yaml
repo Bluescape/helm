@@ -85,6 +85,22 @@ entries:
   bluescape-monitoring-grafana:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-05-19T22:13:22.427436053Z"
+    dependencies:
+    - alias: bluescape-monitoring-dashboards
+      condition: custom_dashboards.enable
+      name: bluescape-monitoring-dashboards
+      repository: https://bluescape.github.io/helm
+      version: 0.2.12
+    description: A Helm chart for Kubernetes
+    digest: def0db003e4c605b1cc03a792082af3ca8e9c421588e82d832b6cd16331fef2e
+    name: bluescape-monitoring-grafana
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-grafana-0.2.6/bluescape-monitoring-grafana-0.2.6.tgz
+    version: 0.2.6
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-05-19T22:04:02.753784468Z"
     dependencies:
     - alias: bluescape-monitoring-dashboards
@@ -395,4 +411,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/oauth2-proxy-3.2.5/oauth2-proxy-3.2.5.tgz
     version: 3.2.5
-generated: "2022-05-19T22:04:04.616423926Z"
+generated: "2022-05-19T22:13:22.427452753Z"
