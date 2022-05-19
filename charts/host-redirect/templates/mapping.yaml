@@ -1,0 +1,11 @@
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: {{ required "A valid fqdn.from value is required!" .Values.fqdn.from }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  ambassador_id: {{ .Values.ambassadorId }}
+  host: {{ required "A valid fqdn.from value is required!" .Values.fqdn.from }}
+  prefix: /
+  service: {{ required "A valid fqdn.to value is required!" .Values.fqdn.to }}
+  host_redirect: true

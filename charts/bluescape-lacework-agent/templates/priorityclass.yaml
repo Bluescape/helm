@@ -1,0 +1,10 @@
+{{ with .Values.priorityClass }}
+{{ if .create }}
+apiVersion: scheduling.k8s.io/v1
+description: {{ default "Priority class for bluescape-lacework-agent resource." .description }}
+kind: PriorityClass
+metadata:
+  name: {{ default "bluescape-lacework-agent" .name }}
+value: {{ required "A positive integer is required in 'priorityClass.value' property when priorityClass creation is enabled." (int64 .value) }}
+{{- end }}
+{{- end }}

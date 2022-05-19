@@ -1,0 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name:  custom-upstream-5xx-4xx-errors-rpm-dashboard
+  namespace: grafana
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  name:  custom-upstream-5xx-4xx-errors-rpm-dashboard
+  configMapRef:
+    name:  custom-upstream-5xx-4xx-errors-rpm-dashboard
+    key:  custom-upstream-5xx-4xx-errors-rpm-dashboard.json

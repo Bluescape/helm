@@ -1,0 +1,13 @@
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: gen3-certificate-lifecycle-management-dashboard
+  namespace: grafana
+  labels:
+     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  name: gen3-certificate-lifecycle-management-dashboard
+  configMapRef:
+    name: gen3-certificate-lifecycle-management-dashboard
+    key: gen3-certificate-lifecycle-management-dashboard.json

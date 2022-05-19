@@ -1,0 +1,29 @@
+apiVersion: v2
+appVersion: 2.2.2
+dependencies:
+- name: emissary-ingress
+  version: 7.3.2
+  repository: file://./charts/emissary-ingress
+description: A Helm chart for Ambassador Edge Stack
+home: https://www.getambassador.io/
+icon: https://www.getambassador.io/images/logo.png
+keywords:
+- api gateway
+- ambassador
+- datawire
+- envoy
+- edge stack
+maintainers:
+- email: markus@maga.se
+  name: flydiverny
+- email: flynn@datawire.io
+  name: kflynn
+- email: nkrause@datawire.io
+  name: nbkrause
+- email: lukeshu@datawire.io
+  name: lukeshu
+name: edge-stack
+sources:
+- https://github.com/datawire/ambassador
+- https://github.com/prometheus/statsd_exporter
+version: 7.3.2

@@ -1,0 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name:  falco-dashboard
+  namespace: grafana
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  name:  falco-dashboard
+  configMapRef:
+    name:  falco-dashboard
+    key:  falco-dashboard.json

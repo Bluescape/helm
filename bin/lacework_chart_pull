@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+# example of URL
+# https://github.com/lacework/lacework-agent-releases/releases/download/v4.0.32/4.0.32.tgz
+
+# Flow:
+# wget <version> release (version specified on cli)
+# extract helm chart from tarball
+# store helm chart in packages
+
+tmpdir=$(mktemp -d /var/tmp/LW_helm_XXXXXXXX)
+base_dir="$(cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd)"
+chart_repo_path="$base_dir/../packages"
+lacework_rel_base_url='https://github.com/lacework/lacework-agent-releases/releases/download'
+version="${1:-4.0.32}"
+version="${version/^v/}"
+lacework_url="$lacework_rel_base_url/v$version/$version.tgz"
+lacework_file="lacework-v$version"
+lacework_tgz="$lacework_file.tgz"
+lacework_pkg="$chart_repo_path/$lacework_tgz"
+old_chksum=''
+new_chksum=''
+
+if [[ -e "$lacework_pkg" ]]; then
+  old_chksum=$(sha256sum "$lacework_pkg")
+fi
+
+if pushd "$tmpdir"; then
+  if ! wget -O "$lacework_tgz" "$lacework_url"; then
+    exit $?
+  fi
+fi
+
+if ! tar xzf "$lacework_tgz" "$version"/helm.tar.gz; then
+  exit $?
+fi
+
+if ! tar xzf "$version"/helm.tar.gz ./helm/lacework-agent; then
+  exit $?
+fi
+
+if ! mv helm/lacework-agent .; then
+  exit $?
+fi
+
+if ! tar cfz "$lacework_tgz" lacework-agent/; then
+  exit $?
+fi
+
+new_chksum=$(sha256sum "$lacework_tgz")
+
+if [[ -n "$old_chksum" ]]; then
+  echo >&2 "A copy of this package already exists with chksum: $old_chksum"
+  echo >&2 "the new file's chksum is $new_chksum"
+
+  if [[ "$old_chksum" != "$new_chksum" ]]; then
+    echo >&2 """
+
+  these checksums do not match...
+
+  Please remove the old chart: $lacework_tgz and re-run this if you want to import
+  this new chart.
+    """
+    exit 1
+  fi
+fi
+
+if mv "$lacework_tgz" "$chart_repo_path"/; then
+  rm -rf "$tmpdir"
+fi

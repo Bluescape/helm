@@ -1,0 +1,21 @@
+{{- if .Values.kubedb_catalog.setup_postgres_11_1 }}
+apiVersion: 'catalog.kubedb.com/v1alpha1'
+kind: 'PostgresVersion'
+metadata:
+  name: "11.1"
+  labels:
+    app: kubedb
+    {{- include "bluescape-eks-aux.labels" . | nindent 4 }}
+spec:
+  version: "11.1"
+  deprecated: false
+  db:
+    image: "kubedb/postgres:11.1"
+  exporter:
+    image: "kubedb/postgres_exporter:v0.4.7"
+  tools:
+    image: "kubedb/postgres-tools:11.1"
+  podSecurityPolicies:
+    databasePolicyName: "postgres-db"
+    snapshotterPolicyName: "postgres-snapshot"
+{{- end }}

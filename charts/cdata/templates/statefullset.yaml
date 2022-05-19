@@ -1,0 +1,93 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "cdata.fullname" . }}
+  labels:
+    {{- include "cdata.labels" . | nindent 4 }}
+spec:
+  replicas: 1 # supporting only one instance due to license limitation
+  selector:
+    matchLabels:
+      {{- include "cdata.selectorLabels" . | nindent 6 }}
+  serviceName: {{ include "cdata.fullname" . }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "cdata.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "cdata.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.targetPort }}
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /usr/src/app/cdata-sync/db/
+              name: {{ include "cdata.fullname" . }}
+              subPath: db
+            - mountPath: /usr/src/app/cdata-sync/data/
+              name: {{ include "cdata.fullname" . }}
+              subPath: data
+            - mountPath: /usr/src/app/cdata-sync/downloads/
+              name: {{ include "cdata.fullname" . }}
+              subPath: downloads
+            - mountPath: /usr/src/app/cdata-sync/libs/
+              name: {{ include "cdata.fullname" . }}
+              subPath: libs
+          livenessProbe:
+            tcpSocket:
+              port: {{ .Values.service.targetPort }}
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+            initialDelaySeconds: 30
+          readinessProbe:
+            tcpSocket:
+              port: {{ .Values.service.targetPort }}
+            failureThreshold: 3
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
+            initialDelaySeconds: 30
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  volumeClaimTemplates:
+  - metadata:
+      name: {{ include "cdata.fullname" . }}
+      labels:
+      {{- include "cdata.labels" . | nindent 8 }}
+    spec:
+      storageClassName: {{  .Values.persistence.storageClass | required "persistence.storageClass must be specified"| quote }}
+      accessModes:
+        - {{ .Values.persistence.accessMode | quote }}
+      resources:
+        requests:
+          storage: {{ .Values.persistence.size | quote }}

@@ -1,0 +1,15 @@
+{{- if .Values.istio.peerauthentication.setup_bitnami_mongodb.enabled }}
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: mongodb
+  namespace: mongodb
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+  labels:
+    app: security
+    {{- include "istio-additions.labels" . | nindent 4 }}
+spec:
+  mtls:
+    mode: {{ .Values.istio.peerauthentication.setup_bitnami_mongodb.mode }}
+{{- end }}

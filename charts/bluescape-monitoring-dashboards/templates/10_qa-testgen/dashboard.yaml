@@ -1,0 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name:  qa-k6-autogen-dashboard
+  namespace: grafana
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  name:  qa-k6-autogen-dashboard
+  configMapRef:
+    name:  qa-k6-autogen-dashboard
+    key:  qa-k6-autogen-dashboard.json

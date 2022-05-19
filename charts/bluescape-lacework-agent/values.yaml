@@ -1,0 +1,104 @@
+# Default values for Lacework Agent.
+
+image:
+  registry: docker.io
+  repository: lacework/datacollector
+  tag: 5.0.0
+
+  # imagePullPolicy should be Always to get the latest container
+  # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  pullPolicy: Always
+
+  # [Optional] imagePullSecrets.
+  # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  # imagePullSecrets:
+  #   - name: CustomerRegistryKeySecretName
+
+# Annotations to instantiated pods
+  podAnnotations: {}
+
+# configmap Annotations for things like banzaicloud's vault-secrets-webhook
+# configmap mutation
+configmapAnnotations: {}
+
+# secret Annotations for things like banzaicloud's vault-secrets-webhook
+# inline secrets mutation
+secretAnnotations: {}
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+resources:
+  # The requests/limits is guidance and should be adjusted based on the workload
+  # Please contact Lacework support for additional details
+  # https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits
+  # https://support.lacework.com/hc/en-us/articles/360047019354-Usage-Impact-of-Agent-Deployment
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 1450Mi
+
+laceworkConfig:
+  # [Optional] Set to "disable" to disable autoupgrade of the datacollector
+  autoUpgrade: enable
+  # [Required] An access token is required before running agents.
+  # Visit https://<LACEWORK UI URL> for eg: https://lacework.lacework.net
+  accessToken:
+  # [Optional] Give your k8s environment a friendly name
+  env:
+  # [Optional] Kubernetes cluster name
+  # https://support.lacework.com/hc/en-us/articles/360005263034-Deploy-on-Kubernetes
+  kubernetesCluster:
+  # [Optional] Region specific Lacework service URL. If not provided
+  # the Agent defaults to the US region
+  serverUrl:
+
+###########################################################################
+# Set daemonset priorityClassName
+# To assign a priorityClass to a pod, leave `create` false and enter a name
+# for the name property.
+# If `create` is true, be sure to assign a description, name, and value here
+# and a priorityClass will be created.
+priorityClass:
+  create: false
+  description:
+  name: system-cluster-critical
+  value: null
+
+# Allow Lacework agent to run on all nodes including master node
+tolerations:
+  - key: node-role.kubernetes.io/master
+    effect: NoSchedule
+    operator: Exists
+#  - key: xxxx
+#    effect: NoSchedule
+#    operator: Exists
+daemonset:
+  # Use rolling updates in the DaemonSet
+  # https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/
+  updateStrategy:
+    type: RollingUpdate
+  # DaemonSet to schedule using affinity rules
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+              - amd64
+              - arm64
+          - key: kubernetes.io/os
+            operator: In
+            values:
+              - linux

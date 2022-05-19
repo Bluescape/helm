@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "nxlog-ce.fullname" . }}
+  labels:
+    {{- include "nxlog-ce.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - name: tcp-1514
+      port: 1514
+      protocol: TCP
+      targetPort: 1514
+    - name: tcp-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    - name: tcp-8443
+      port: 8443
+      protocol: TCP
+      targetPort: 8443
+  selector:
+    {{- include "nxlog-ce.selectorLabels" . | nindent 4 }}

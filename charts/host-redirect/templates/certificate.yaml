@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  annotations:
+  name: {{ required "A valid fqdn.from value is required!" .Values.fqdn.from }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  dnsNames:
+  - {{ required "A valid fqdn.from value is required!" .Values.fqdn.from }}
+  issuerRef:
+    kind: ClusterIssuer
+    name: {{ .Values.certManager.clusterIssuer }}
+  secretName: {{ required "A valid fqdn.from value is required!" .Values.fqdn.from }}

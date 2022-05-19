@@ -1,0 +1,83 @@
+# Default values for istio-additions.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+## Ambassador configuration(s) for ServiceMesh
+ambassador:
+  setup_tracingservice:
+    enabled: false
+    tracing_uri: 'jaeger-aio-collector.istio-system.svc.cluster.local:9411'
+  setup_tlscontext:
+    enabled: false
+
+## Istio
+istio:
+  ### ServiceMonitor configuration(s)
+  serviceMonitor:
+    enabled: false
+
+  ### Enable PeerAuthentication for auxiliary components
+  peerauthentication:
+    setup_vault:
+      enabled: false
+      mode: PERMISSIVE
+    setup_vault_secrets_webhook:
+      enabled: false
+      mode: PERMISSIVE
+    setup_bitnami_redis:
+      enabled: false
+      mode: PERMISSIVE
+    setup_bitnami_mongodb:
+      enabled: false
+      mode: PERMISSIVE
+#    setup_bluescape_ns:
+#      - namespace: ns1
+#        mode: PERMISSIVE
+#      - namespace: ns2
+#        mode: STRICT
+
+## Management console for an Istio-based service mesh
+kiali:
+  basic_config:
+    enabled: false
+    image:
+      override: false
+      repository: quay.io/kiali/kiali
+      tag: v1.37.0
+    ingress:
+      enabled: false
+      host: 'kiali.example.bluescape.io'
+    in_cluster_urls:
+      grafana: 'http://grafana-service.grafana.svc:3000'
+      prometheus: 'http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090'
+      tracing: 'http://jaeger-aio-query.istio-system.svc.cluster.local:16686/jaeger'
+  prod_config:
+    enabled: false
+    image:
+      override: false
+      repository: quay.io/kiali/kiali
+      tag: v1.37.0
+    ingress:
+      enabled: false
+      host: 'kiali.example.bluescape.io'
+    in_cluster_urls:
+      grafana: 'http://grafana-service.grafana.svc:3000'
+      prometheus: 'http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090'
+      tracing: 'http://jaeger-aio-query.istio-system.svc.cluster.local:16686/jaeger'
+
+## Open source end-to-end distributed tracing system
+jaeger:
+  basic_config:
+    enabled: false
+    image:
+      repository: jaegertracing/all-in-one
+      tag: 1.23
+    ingress:
+      enabled: false
+  prod_config:
+    enabled: false
+    image:
+      repository: jaegertracing/all-in-one
+      tag: 1.23
+    ingress:
+      enabled: false

@@ -1,0 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name:  unit-test-coverage-dashboard
+  namespace: grafana
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  name:  unit-test-coverage-dashboard
+  configMapRef:
+    name:  unit-test-coverage-dashboard
+    key:  unit-test-coverage-dashboard.json

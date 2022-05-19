@@ -1,0 +1,13 @@
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: prometheus-alerts-dashboard-dashboard
+  namespace: grafana
+  labels:
+     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  name: prometheus-alerts-dashboard-dashboard
+  configMapRef:
+    name: prometheus-alerts-dashboard-dashboard
+    key: prometheus-alerts-dashboard-dashboard.json

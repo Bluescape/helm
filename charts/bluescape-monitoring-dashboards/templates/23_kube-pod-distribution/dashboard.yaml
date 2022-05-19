@@ -1,0 +1,13 @@
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: kubernetes-cluster-pod-distribution-report-dashboard
+  namespace: grafana
+  labels:
+     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  name: kubernetes-cluster-pod-distribution-report-dashboard
+  configMapRef:
+    name: kubernetes-cluster-pod-distribution-report-dashboard
+    key: kubernetes-cluster-pod-distribution-report-dashboard.json

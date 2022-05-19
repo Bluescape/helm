@@ -1,0 +1,30 @@
+{{- if .Values.jaeger.basic_config.enabled }}
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger-aio
+spec:
+  strategy: allInOne
+  allInOne:
+    image: "{{ .Values.jaeger.basic_config.image.repository }}:{{ .Values.jaeger.basic_config.image.tag }}"
+    options:
+      log-level: debug
+      query:
+        base-path: /jaeger
+      collector:
+        zipkin:
+          host-port: 9411
+    resources:
+      limits:
+        cpu: 200m
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+  storage:
+    options:
+      memory:
+        max-traces: 10000
+  ingress:
+    enabled: {{ .Values.jaeger.basic_config.ingress.enabled }}
+{{- end }}

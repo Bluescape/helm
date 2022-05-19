@@ -1,0 +1,117 @@
+# Default values for cdata.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  # image source: https://github.com/Bluescape/analytics-init/tree/main/cdata
+  repository: bluescape/cdata
+  tag: 9dd09eb6-release-22.05.2
+  # Overrides the image tag whose default is the chart appVersion.
+  pullPolicy: IfNotPresent
+
+imagePullSecrets:
+  # default bluescape dockerhub credentials secret
+  - name: regcred
+nameOverride: "cdata"
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8181
+
+# annotations for secret
+secret:
+  annotations: {}
+
+ingress:
+  enabled: false
+  className: ""
+  hosts:
+  - host: chart-example.local
+    paths: []
+  annotations:
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  #hosts:
+  #  - host: chart-example.local
+  #    paths:
+  #      - path: /
+  #        pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  limits:
+    cpu: '2'
+    memory: 12000Mi
+  requests:
+    cpu: 15m
+    memory: 628Mi
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+# standard k8s tolerations
+tolerations:
+  - key: node.kubernetes.io/not-ready
+    operator: Exists
+    effect: NoExecute
+    tolerationSeconds: 300
+  - key: node.kubernetes.io/unreachable
+    operator: Exists
+    effect: NoExecute
+    tolerationSeconds: 300
+
+affinity:
+  # should not run on spot instances
+  nodeAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        preference:
+          matchExpressions:
+            - key: node.kubernetes.io/lifecycle
+              operator: NotIn
+              values:
+                - spot
+
+persistence:
+  # must be set
+  storageClass:
+  accessMode: ReadWriteOnce
+  size: 5Gi

@@ -1,0 +1,25 @@
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  annotations:
+  name: {{ required "A valid fqdn.from value is required!" .Values.fqdn.from }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  acmeProvider:
+    authority: none
+  ambassador_id: {{ .Values.ambassadorId }}
+  hostname: {{ required "A valid fqdn.from value is required!" .Values.fqdn.from }}
+  requestPolicy:
+    insecure:
+      action: Redirect
+      additionalPort: 8080
+  selector:
+    matchLabels:
+      hostname: {{ required "A valid fqdn.from value is required!" .Values.fqdn.from }}
+  tls:
+    min_tls_version: v1.2
+  tlsSecret:
+    name: {{ required "A valid fqdn.from value is required!" .Values.fqdn.from }}
+status:
+  state: Ready
+  tlsCertificateSource: Other

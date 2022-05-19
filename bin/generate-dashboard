@@ -1,0 +1,158 @@
+#!/bin/bash
+
+set -eo pipefail
+
+workdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+dashboard_base="$workdir/../charts/bluescape-monitoring-dashboards"
+to_add="$1"
+new_dashboard_dir="$2"
+prereqs=(yaml2json json2yaml jq)
+darwin_prereqs=(ggrep gsed)
+IFS=/ read -ra DIRS <<< "$dashboard_base"
+
+generate_configmap()
+{
+  local skipped_entry
+  skipped_entry=$($grep '{{' "$dashboard_base"/templates/0_template/configmap.yaml)
+  cm_title="$(jq -Mr .title "$to_add" | tr ' ' '-' | tr -d '/' | \
+    tr '[:upper:]' '[:lower:]')-dashboard"
+
+  $grep -v '{{' "$dashboard_base"/templates/0_template/configmap.yaml | \
+    yaml2json - | \
+    jq --arg addin "$skipped_entry" --arg n "$cm_title" --arg d \
+    "$(< "$to_add" jq -Mr 'del(.__inputs) | del(.__requires)')" -Mr \
+    '.metadata.name = $n | .data = {($n + ".json"): $d}
+      | .metadata.labels = $addin' | \
+    json2yaml - > "$new_dashboard_dir"/configmap-tmp.yaml && \
+  $sed -re 's/(labels:)/\1\n/' -e "s#'##g" "$new_dashboard_dir"/configmap-tmp.yaml \
+    > "$new_dashboard_dir"/configmap.yaml && \
+  rm "$new_dashboard_dir"/configmap-tmp.yaml
+
+  # fix reference for legendFormat gotpl braced strings so helm
+  # doesn't accidentally attempt to interpolate those strings
+  perl -ln -e \
+    'if ( /legendFormat/ &&  !/`/ ) { s/\{\{(\s*.*\s*)\}\}/{{ `{{$1}}` }}/g }; print' \
+    "$new_dashboard_dir"/configmap.yaml > "$new_dashboard_dir"/configmap-fixed.yaml && \
+  mv "$new_dashboard_dir"/configmap-fixed.yaml "$new_dashboard_dir"/configmap.yaml
+}
+
+generate_dashboard_manifest()
+{
+  local skipped_entry
+  skipped_entry=$($grep '{{' "$dashboard_base"/templates/0_template/configmap.yaml)
+
+  $grep -v '{{' "$dashboard_base"/templates/0_template/dashboard.yaml | \
+    yaml2json - | \
+    jq --arg addin "$skipped_entry" --arg n "$cm_title" \
+    '.metadata.name = $n | .metadata.labels = $addin |
+     .spec.name = $n     | .spec.configMapRef.name = $n |
+     .spec.configMapRef.key = $n + ".json"' | \
+    json2yaml - > "$new_dashboard_dir"/dashboard-tmp.yaml && \
+  $sed -re 's/(labels:)/\1\n/' -e "s#'##g" "$new_dashboard_dir"/dashboard-tmp.yaml \
+    > "$new_dashboard_dir"/dashboard.yaml && \
+  rm "$new_dashboard_dir"/dashboard-tmp.yaml
+}
+
+check_prereqs()
+{
+  if [[ $(uname -s) == 'Darwin' ]]; then
+    # shellcheck disable=SC2206
+    prereqs+=(${darwin_prereqs[*]})
+  fi
+
+  for r in "${prereqs[@]}"; do
+    if ! which "$r" >/dev/null 2>&1; then
+      echo >&2 "The pre-requisite '$r' does not exist or is not in"\
+               "your PATH. Please fix."
+      exit 1
+    fi
+  done
+}
+
+usage()
+{
+  echo >&2 """
+  Usage: $0 <path to dashboard.json> <new chart directory name>
+
+  The chart directory name will be a *directory* created under which the
+  generated dashboard manifest and configmap will get placed.
+
+  NOTE: this script is not capable of generating multiple dashboards
+  under a single chart template directory. If you need that, you'll have
+  to manually add the dashboard.
+  """
+}
+
+sanity_check_arg1()
+{
+  if [[ -z "$to_add" ]]; then
+    echo >&2 "No dashboard JSON file specified."
+    usage
+    exit 1
+  fi
+
+  if ! test -e "$to_add"; then
+    echo >&2 "The dashboard JSON '$to_add' does not exist."
+    usage
+    exit 1
+  fi
+
+  if ! jq . "$to_add" >/dev/null 2>&1; then
+    echo >&2 'The dashboard manifest does not seem to be valid JSON.'\
+             'Please validate.'
+    usage
+    exit 1
+  fi
+}
+
+sanity_check_arg2()
+{
+  local desired_path
+  num_dirs=${#DIRS[@]}
+  desired_path="charts/bluescape-monitoring-dashboards"
+  current_path="${DIRS[((num_dirs - 2))]}/${DIRS[((num_dirs - 1))]}"
+
+  if [[ -z "$new_dashboard_dir" ]]; then
+    echo >&2 'Please specify the directory in which the dashboard should be created.'
+    usage
+    exit 1
+  fi
+
+  if [[ "$current_path" != "$desired_path" ]]; then
+    printf >&2 "Please run this script from the %s path in the helm repo\n" $desired_path
+    echo "Current path is $current_path"
+    usage
+    exit 1
+  fi
+
+  if [[ "$new_dashboard_dir" =~ ^/ ]]; then
+    echo >&2 'Please use a relative path for the dashboard directory.'
+    exit 1
+  fi
+
+  # if the user specifies the "templates/<directory>" then remove "templates"
+  # otherwise just use the specified relative path
+  new_dashboard_dir="$dashboard_base/templates/$(echo "${new_dashboard_dir/templates//}" | $sed -r 's#/+#/#g')"
+  if ! mkdir -p "$new_dashboard_dir"; then
+    echo >&2 "Unable to create dashboard directory. mkdir error code was $!"
+    exit 1
+  fi
+}
+
+case $(uname -s) in
+  Linux) grep=$(which grep)
+    sed=$(which sed)
+  ;;
+  Darwin) grep=$(which ggrep)
+          sed=$(which gsed)
+  ;;
+  *) echo >& 'Not sure how to evaluate this distro'
+     exit 1
+  ;;
+esac
+
+check_prereqs
+sanity_check_arg1
+sanity_check_arg2
+generate_configmap
+generate_dashboard_manifest

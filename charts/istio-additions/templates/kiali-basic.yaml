@@ -1,0 +1,109 @@
+{{- if .Values.kiali.basic_config.enabled }}
+apiVersion: kiali.io/v1alpha1
+kind: Kiali
+metadata:
+  name: kiali
+  annotations:
+    ansible.sdk.operatorframework.io/verbosity: "1"
+spec:
+  istio_namespace: "istio-system"
+  api:
+    namespaces:
+      label_selector: kiali-enabled=true
+  auth:
+    strategy: anonymous
+  deployment:
+    {{- if .Values.kiali.basic_config.image.override }}
+    image_name: {{ .Values.kiali.basic_config.image.repository }}
+    image_version: {{ .Values.kiali.basic_config.image.tag }}
+    {{- end }}
+    ingress_enabled: {{ .Values.kiali.basic_config.ingress.enabled }}
+    override_ingress_yaml:
+      metadata:
+        annotations:
+          kubernetes.io/ingress.class: "nginx"
+          nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+          nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2/start?rd=https://$host$request_uri$is_args$args
+          nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2/auth
+          kubernetes.io/tls-acme: "true"
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          acme.cert-manager.io/http01-ingress-class: nginx
+      spec:
+        rules:
+        - host: {{ .Values.kiali.basic_config.ingress.host }}
+          http:
+            paths:
+            - backend:
+                serviceName: kiali
+                servicePort: 20001
+              path: /
+            - backend:
+                serviceName: kiali
+                servicePort: 20001
+              path: /kiali
+        tls:
+        - hosts:
+          - {{ .Values.kiali.basic_config.ingress.host }}
+          secretName: {{ .Values.kiali.basic_config.ingress.host }}
+    accessible_namespaces:
+      - "**"
+    affinity:
+      node: {}
+      pod: {}
+      pod_anti: {}
+    hpa:
+      spec:
+        maxReplicas: 6
+        minReplicas: 3
+        targetCPUUtilizationPercentage: 80
+    instance_name: "kiali"
+    logger:
+      log_format: text
+      log_level: info
+      sampler_rate: "1"
+      time_field_format: 2006-01-02T15:04:05Z07:00
+    pod_annotations:
+      "sidecar.istio.io/inject": "false"
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1024Mi
+      requests:
+        cpu: 10m
+        memory: 20Mi
+  external_services:
+    grafana:
+      enabled: false
+      in_cluster_url: {{ .Values.kiali.basic_config.in_cluster_urls.grafana }}
+    istio:
+      component_status:
+        components:
+        - app_label: istiod
+          is_core: true
+          is_proxy: false
+        - app_label: istio-ingressgateway
+          is_core: true
+          is_proxy: true
+        enabled: true
+    prometheus:
+      url: {{ .Values.kiali.basic_config.in_cluster_urls.prometheus }}
+    tracing:
+      ### Non GRPC
+      in_cluster_url: {{ .Values.kiali.basic_config.in_cluster_urls.tracing }}
+      use_grpc: false
+  identity: {}
+  kubernetes_config:
+    qps: 50
+  login_token:
+    signing_key: ''
+  server:
+    metrics_enabled: true
+    metrics_port: 9090
+    port: 20001
+    web_root: ''
+    securityContext:
+      allowPrivilegeEscalation: false
+      privileged: false
+      readOnlyRootFilesystem: true
+      runAsNonRoot: true
+{{- end }}

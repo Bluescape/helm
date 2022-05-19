@@ -1,0 +1,15 @@
+1. Validate "STATUS" the External Secrets:
+{{- if or .Values.external_secrets.setup_argocd_secret .Values.external_secrets.setup_github_secret .Values.external_secrets.setup_loki_secret }}
+kubectl get ExternalSecrets --all-namespaces
+{{- end }}
+
+2. Validate "READY" status of ClusterIssuer:
+{{- if or .Values.cert_manager.setup_letsencrypt_prod_cluster_dns_issuer .Values.cert_manager.setup_letsencrypt_prod_cluster_issuer }}
+kubectl get ClusterIssuer --all-namespaces
+{{- end }}
+
+3. Validate "STATUS" of Vault:
+{{- if or .Values.vault.enabled }}
+kubectl get Vault -n vault
+{{- end }}
+

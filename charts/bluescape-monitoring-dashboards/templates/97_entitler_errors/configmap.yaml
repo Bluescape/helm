@@ -1,0 +1,230 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: entitler-errors-dashboard
+  namespace: grafana
+  labels:
+     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4
+    }}
+data:
+  entitler-errors-dashboard.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 11,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "PBEC7A2ED9322AC83"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "points",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 7,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "id": 2,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "table",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "pluginVersion": "8.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "PBEC7A2ED9322AC83"
+              },
+              "expr": "count_over_time({ component=\"entitler\" }|json|level=\"50\"[1m])",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "TIME: {{ `{{time}}` }} || CLUSTER ID: {{ `{{cluster_id}}` }} || NAMESPACE: {{ `{{namespace}}` }} || POD: {{ `{{pod}}` }} || COMPONENT EXTRACTED: {{ `{{component_extracted}}` }} || ERROR LEVEL: {{ `{{level}}` }} || ERROR MSG:  {{ `{{msg}}` }} || ERROR STACK: {{ `{{err_stack}}` }}",
+              "range": true,
+              "refId": "A",
+              "resolution": 10
+            }
+          ],
+          "title": "Entitler Level 50 Errors",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "PBEC7A2ED9322AC83"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "points",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 7,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "normal"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 0
+          },
+          "id": 3,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "table",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "pluginVersion": "8.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "loki",
+                "uid": "PBEC7A2ED9322AC83"
+              },
+              "expr": "count_over_time({ component=\"entitler\" }|json|level=\"60\"[1m])",
+              "hide": false,
+              "instant": false,
+              "legendFormat": "TIME: {{ `{{time}}` }} || CLUSTER ID: {{ `{{cluster_id}}` }} || NAMESPACE: {{ `{{namespace}}` }} || POD: {{ `{{pod}}` }} || COMPONENT EXTRACTED: {{ `{{component_extracted}}` }} || ERROR LEVEL: {{ `{{level}}` }} || ERROR MSG:  {{ `{{msg}}` }} || ERROR STACK: {{ `{{err_stack}}` }}",
+              "range": true,
+              "refId": "A",
+              "resolution": 10
+            }
+          ],
+          "title": "Entitler Level 60 Errors",
+          "type": "timeseries"
+        }
+      ],
+      "refresh": "",
+      "schemaVersion": 34,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": []
+      },
+      "time": {
+        "from": "now-2d",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Entitler Errors",
+      "uid": "da831ff1fc22f9034d07f3f7889752b8745de559",
+      "version": 3,
+      "weekStart": ""
+    }

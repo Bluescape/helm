@@ -1,0 +1,52 @@
+# Default values for bluescape-monitoring-grafana.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+nameOverride: ""
+fullnameOverride: ""
+
+custom_dashboards:
+  enable: false
+
+external_secrets:
+  setup_grafana_oidc_secret: true
+
+grafana:
+  replicaCount: 1
+  domain_name: example.io
+  cluster_id: example
+  baseImage: grafana/grafana:8.3.3
+
+  # Deploy cluster in HA Mode - 3 replicas with PostgreSQL database cluster
+  # deployed with kubedb
+  # Requires kubedb generated postgresql secret called "postgres-grafana-auth"
+  ha_mode: false
+
+  config:
+    security:
+      admin_password: "ZTFmZmNkMDUwMDg0ZWI5YmNhOWM2YTRmODliMGRiNjcxZTc1"
+      admin_user: root
+    auth:
+      users:
+        auto_assign_org_role: "Editor"
+      disable_login_form: false
+      disable_signout_menu: false
+#      anonymous:
+#        enabled: false
+#        auth:
+#          basic: true
+#
+#      generic_oauth:
+#        enabled: false
+#        client_id: ""
+#        client_secret: "" 
+#        scopes: ""
+#        auth_url: https://dex.example.io/auth
+#        token_url: https://dex.example.io/token
+#        allow_sign_up: true
+#        allowed_domains: example.io
+
+  ingress:
+    enabled: false
+    tls: false
+    annotations: {}

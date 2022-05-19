@@ -1,0 +1,22 @@
+{{- if .Values.kubedb_catalog.setup_mysql_5_6 }}
+apiVersion: 'catalog.kubedb.com/v1alpha1'
+kind: 'MySQLVersion'
+metadata:
+  name: "5.7.25"
+  labels:
+    app: kubedb
+    {{- include "bluescape-eks-aux.labels" . | nindent 4 }}
+spec:
+  db:
+    image: 'mysql:5.6'
+  exporter:
+    image: 'kubedb/mysqld-exporter:v0.11.0'
+  initContainer:
+    image: kubedb/busybox
+  podSecurityPolicies:
+    databasePolicyName: mysql-db
+    snapshotterPolicyName: mysql-snapshot
+  tools:
+    image: 'kubedb/mysql-tools:5.7.25'
+  version: 5.7.25
+{{- end }}

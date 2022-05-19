@@ -1,0 +1,5 @@
+apiVersion: v2
+name: host-redirect
+description: A Helm chart that created FQND based redirects, requires Ambassador and Cert-Manager installed in the cluster.
+type: application
+version: 0.1.0

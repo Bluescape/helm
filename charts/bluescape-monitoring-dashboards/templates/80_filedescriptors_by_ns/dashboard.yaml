@@ -1,0 +1,13 @@
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: filedescriptors-usage-by-namespace-dashboard
+  namespace: grafana
+  labels:
+     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  name: filedescriptors-usage-by-namespace-dashboard
+  configMapRef:
+    name: filedescriptors-usage-by-namespace-dashboard
+    key: filedescriptors-usage-by-namespace-dashboard.json

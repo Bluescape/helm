@@ -1,0 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name:  nodejs-apps-dashboard
+  namespace: grafana
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  name:  nodejs-apps-dashboard
+  configMapRef:
+    name:  nodejs-apps-dashboard
+    key:  nodejs-apps-dashboard.json

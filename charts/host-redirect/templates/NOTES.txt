@@ -1,0 +1,7 @@
+- Namespace: {{ .Release.Namespace }}
+- Certificate for {{ .Values.fqdn.from }} is requested using {{ .Values.certManager.clusterIssuer }} cluster issuer
+- Created host record for {{ .Values.fqdn.from }}
+- Mapping created: {{ .Values.fqdn.from }} should now be redirected to {{ .Values.fqdn.to }}
+
+TEST COMMAND:
+  curl -i https://{{ .Values.fqdn.from }}

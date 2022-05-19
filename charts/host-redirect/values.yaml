@@ -1,0 +1,12 @@
+certManager:
+  # cluster issuer to use for `fqdn.from` hostname
+  clusterIssuer: letsencrypt-prod-dns
+
+# ambassador id to use
+ambassadorId: default
+
+fqdn:
+  # full hostname to redirect from (this should be on the domain that your ambassador serves)
+  from:
+  # full hostname to redirect to (can be anything desired)
+  to:

@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nxlog-conf
+  labels:
+    {{- include "nxlog-ce.labels" . | nindent 4 }}
+data:
+  nxlog.conf: |
+      ########################################
+      # Global directives                    #
+      ########################################
+      User nxlog
+      Group nxlog
+  
+      LogFile /tmp/nxlog.log
+      LogLevel INFO
+      ########################################
+      # Modules                              #
+      ########################################
+      <Input input_tcp>
+          Module      im_tcp
+          Host        0.0.0.0
+          Port        8080
+          InputType   LineBased
+      </Input>
+  
+      #<Output logFileOut>
+      #    Module      om_file
+      #    File        "/tmp/out_file.log"
+      #</Output>
+  
+      <Output logConsoleOut>
+          Module      om_file
+          File        "/dev/stdout"
+      </Output>
+  
+      ########################################
+      # Routes                               #
+      ########################################
+      
+      #<Route tcproute_debug>
+      #     Path        input_tcp => logFileOut, logConsoleOut
+      #</Route>
+
+      <Route tcproute>
+           Path        input_tcp => logConsoleOut
+      </Route>
