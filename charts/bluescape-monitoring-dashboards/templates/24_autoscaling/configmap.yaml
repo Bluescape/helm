@@ -79,9 +79,12 @@ data:
             },
             {
               "alias": "target-handles",
-              "dashes": true,
               "fill": 0,
               "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
             },
             {
               "alias": "min-pods",
@@ -226,9 +229,12 @@ data:
             },
             {
               "alias": "target-handles",
-              "dashes": true,
               "fill": 0,
               "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
             },
             {
               "alias": "min-pods",
@@ -372,9 +378,12 @@ data:
             },
             {
               "alias": "target-handles",
-              "dashes": true,
               "fill": 0,
               "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
             },
             {
               "alias": "min-pods",
@@ -390,7 +399,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg(pod:graphql_gateway_nodejs_active_handles_total:sum{namespace=\"$namespace\"})",
+              "expr": "avg(graphql_gateway_nodejs_active_handles_total{namespace=\"$namespace\"})",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -518,9 +527,12 @@ data:
             },
             {
               "alias": "target-handles",
-              "dashes": true,
               "fill": 0,
               "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
             },
             {
               "alias": "min-pods",
@@ -664,9 +676,12 @@ data:
             },
             {
               "alias": "target-handles",
-              "dashes": true,
               "fill": 0,
               "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
             },
             {
               "alias": "min-pods",
@@ -810,9 +825,12 @@ data:
             },
             {
               "alias": "target-handles",
-              "dashes": true,
               "fill": 0,
               "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
             },
             {
               "alias": "min-pods",
@@ -956,9 +974,12 @@ data:
             },
             {
               "alias": "target-handles",
-              "dashes": true,
               "fill": 0,
               "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
             },
             {
               "alias": "min-pods",
@@ -1102,9 +1123,12 @@ data:
             },
             {
               "alias": "target-handles",
-              "dashes": true,
               "fill": 0,
               "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
             },
             {
               "alias": "min-pods",
@@ -1269,7 +1293,7 @@ data:
         ]
       },
       "timezone": "",
-      "title": "Autoscaling Testing",
+      "title": "Nodejs Active Handles Autoscaling Testing",
       "uid": "HgmxHKk7z",
       "version": 2
     }
