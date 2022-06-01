@@ -23,7 +23,7 @@ Jump down to verify dashboards below.
 
 ## Automatic Addition
 
-These instructions cover how to use the `generate_dashboard` script located
+These instructions cover how to use the `add-dashboard` script located
 in `<repo>/helm/charts/bluescape-monitoring-dashboards`
 
 ### Pre-requisites
@@ -44,7 +44,7 @@ and if it isn't in the proper directory then it will exit with an error
 
 
 ```
-Usage: ./generate_dashboard <path/to/exported/dashboard.json> <new_dashboard_directory>
+Usage: ../bin/add-dashboard <path/to/exported/dashboard.json> <new_dashboard_directory>
 
 ```
 
@@ -58,7 +58,7 @@ pathing. A simple name such as `65_dashboard_name` is sufficient.
 
 ```
 $ cd <repo>/helm/charts/bluescape-monitoring-dashboards
-./generate_dashboard $HOME/Downloads/Redis.json 44_redis_dashboard
+../bin/add-dashboard $HOME/Downloads/Redis.json 44_redis_dashboard
 ```
 
 ### Validations performed at runtime
