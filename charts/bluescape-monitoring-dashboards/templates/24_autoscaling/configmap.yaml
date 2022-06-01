@@ -28,20 +28,14 @@ data:
       "id": 57,
       "iteration": 1624860426688,
       "links": [],
+
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "description": "pods with nodejs_active_handles determined by the grafana query 'sum by (service) (nodejs_active_handles_total)' and searches for service_nodejs_active_handles vars.",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
@@ -68,7 +62,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "8.3.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -116,7 +110,7 @@ data:
               "refId": "E"
             },
             {
-              "expr": "count by (namespace, service) (up{service=~\"config-center-service\",namespace=\"$namespace\"})",
+              "expr": "count by (namespace, service) (up{service=\"config-center-service\",namespace=\"$namespace\"})",
               "hide": false,
               "interval": "",
               "legendFormat": "pods",
@@ -138,9 +132,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Config Center Service Autoscaling",
           "tooltip": {
             "shared": true,
@@ -149,9 +141,7 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
@@ -160,12 +150,9 @@ data:
               "format": "short",
               "label": "pods",
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
-              "decimals": null,
               "format": "none",
               "label": "avg. no. handles",
               "logBase": 1,
@@ -175,174 +162,15 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
-
         {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 12,
-            "x": 12,
-            "y": 12
-          },
-          "hiddenSeries": false,
-          "id": 10,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.2.2",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "handles",
-              "yaxis": 2
-            },
-            {
-              "alias": "target-handles",
-              "fill": 0,
-              "yaxis": 2
-            },
-            {
-              "alias": "pods",
-              "dashes": true
-            },
-            {
-              "alias": "min-pods",
-              "dashes": true
-            },
-            {
-              "alias": "max-pods",
-              "dashes": true
-            }
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "avg(pod:nodejs_active_handles_total:sum{service=\"video-worker\"})",
-              "hide": false,
-              "instant": false,
-              "interval": "",
-              "legendFormat": "handles",
-              "refId": "A"
-            },
-            {
-              "expr": "1000",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "target-handles",
-              "refId": "E"
-            },
-            {
-              "expr": "count by (namespace, service) (up{service=\"video-worker\",namespace=\"$namespace\"})",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "pods",
-              "refId": "B"
-            },
-            {
-              "expr": "3",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "min-pods",
-              "refId": "C"
-            },
-            {
-              "expr": "30",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "max-pods",
-              "refId": "D"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Video Worker Service Autoscaling",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "pods",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "decimals": null,
-              "format": "none",
-              "label": "avg. no. handles",
-              "logBase": 1,
-              "max": "1500",
-              "min": "0",
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
@@ -369,7 +197,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "8.3.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -416,7 +244,7 @@ data:
               "refId": "E"
             },
             {
-              "expr": "count by (namespace, service) (up{service=~\"elementary\",namespace=\"$namespace\"})",
+              "expr": "count by (namespace, service) (up{service=\"elementary\",namespace=\"$namespace\"})",
               "hide": false,
               "interval": "",
               "legendFormat": "pods",
@@ -438,10 +266,8 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
-          "title": "Elementary Autoscaling",
+          "title": "Elementary Service Autoscaling",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -449,9 +275,7 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
@@ -460,12 +284,9 @@ data:
               "format": "short",
               "label": "pods",
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
-              "decimals": null,
               "format": "none",
               "label": "avg. no. handles",
               "logBase": 1,
@@ -475,31 +296,22 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
-
         {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 12,
-            "x": 12,
-            "y": 0
+            "x": 0,
+            "y": 6
           },
           "hiddenSeries": false,
           "id": 5,
@@ -519,7 +331,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "8.3.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -551,7 +363,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg(pod:nodejs_active_handles_total:sum{service=\"worker\",namespace=\"$namespace\"})",
+              "expr": "avg(nodejs_active_handles_total{service=\"entitler\",namespace=\"$namespace\"})",
               "hide": false,
               "instant": false,
               "interval": "",
@@ -566,7 +378,7 @@ data:
               "refId": "E"
             },
             {
-              "expr": "count by (namespace, service) (up{service=~\"worker\",namespace=\"$namespace\"})",
+              "expr": "count by (namespace, service) (up{service=\"entitler\",namespace=\"$namespace\"})",
               "hide": false,
               "interval": "",
               "legendFormat": "pods",
@@ -588,10 +400,8 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
-          "title": "Worker Autoscaling",
+          "title": "Entitler Service Autoscaling",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -599,9 +409,7 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
@@ -610,12 +418,9 @@ data:
               "format": "short",
               "label": "pods",
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
-              "decimals": null,
               "format": "none",
               "label": "avg. no. handles",
               "logBase": 1,
@@ -625,181 +430,21 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
-
-
         {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 12
-          },
-          "hiddenSeries": false,
-          "id": 10,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.2.2",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "handles",
-              "yaxis": 2
-            },
-            {
-              "alias": "target-handles",
-              "fill": 0,
-              "yaxis": 2
-            },
-            {
-              "alias": "pods",
-              "dashes": true
-            },
-            {
-              "alias": "min-pods",
-              "dashes": true
-            },
-            {
-              "alias": "max-pods",
-              "dashes": true
-            }
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "avg(pod:nodejs_active_handles_total:sum{service=\"transfer\"})",
-              "hide": false,
-              "instant": false,
-              "interval": "",
-              "legendFormat": "handles",
-              "refId": "A"
-            },
-            {
-              "expr": "1000",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "target-handles",
-              "refId": "E"
-            },
-            {
-              "expr": "count by (namespace, service) (up{service=\"transfer\",namespace=\"$namespace\"})",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "pods",
-              "refId": "B"
-            },
-            {
-              "expr": "3",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "min-pods",
-              "refId": "C"
-            },
-            {
-              "expr": "30",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "max-pods",
-              "refId": "D"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Transfer Service Autoscaling",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "pods",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "decimals": null,
-              "format": "none",
-              "label": "avg. no. handles",
-              "logBase": 1,
-              "max": "1500",
-              "min": "0",
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 12,
-            "x": 0,
             "y": 6
           },
           "hiddenSeries": false,
@@ -820,7 +465,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "8.3.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -889,9 +534,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Graphql Service Autoscaling",
           "tooltip": {
             "shared": true,
@@ -900,9 +543,7 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
@@ -911,12 +552,9 @@ data:
               "format": "short",
               "label": "pods",
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
-              "decimals": null,
               "format": "none",
               "label": "avg. no. handles",
               "logBase": 1,
@@ -926,8 +564,7 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -935,21 +572,14 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 12,
-            "x": 12,
-            "y": 6
+            "x": 0,
+            "y": 12
           },
           "hiddenSeries": false,
           "id": 6,
@@ -969,7 +599,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "8.3.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1038,9 +668,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Identity API Service Autoscaling",
           "tooltip": {
             "shared": true,
@@ -1049,9 +677,7 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
@@ -1060,12 +686,9 @@ data:
               "format": "short",
               "label": "pods",
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
-              "decimals": null,
               "format": "none",
               "label": "avg. no. handles",
               "logBase": 1,
@@ -1075,180 +698,21 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
-
         {
           "aliasColors": {},
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 0
-          },
-          "hiddenSeries": false,
-          "id": 5,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.2.2",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "handles",
-              "yaxis": 2
-            },
-            {
-              "alias": "target-handles",
-              "fill": 0,
-              "yaxis": 2
-            },
-            {
-              "alias": "pods",
-              "dashes": true
-            },
-            {
-              "alias": "min-pods",
-              "dashes": true
-            },
-            {
-              "alias": "max-pods",
-              "dashes": true
-            }
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "avg(pod:nodejs_active_handles_total:sum{service=\"entitler\",namespace=\"$namespace\"})",
-              "hide": false,
-              "instant": false,
-              "interval": "",
-              "legendFormat": "handles",
-              "refId": "A"
-            },
-            {
-              "expr": "1000",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "target-handles",
-              "refId": "E"
-            },
-            {
-              "expr": "count by (namespace, service) (up{service=~\"entitler\",namespace=\"$namespace\"})",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "pods",
-              "refId": "B"
-            },
-            {
-              "expr": "3",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "min-pods",
-              "refId": "C"
-            },
-            {
-              "expr": "30",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "max-pods",
-              "refId": "D"
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "Entitler Autoscaling",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "pods",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "decimals": null,
-              "format": "none",
-              "label": "avg. no. handles",
-              "logBase": 1,
-              "max": "1500",
-              "min": "0",
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": null,
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
-          "fill": 0,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 12,
-            "x": 0,
             "y": 12
           },
           "hiddenSeries": false,
@@ -1269,7 +733,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "8.3.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1338,9 +802,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Isam Service Autoscaling",
           "tooltip": {
             "shared": true,
@@ -1349,9 +811,7 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
@@ -1360,12 +820,9 @@ data:
               "format": "short",
               "label": "pods",
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
-              "decimals": null,
               "format": "none",
               "label": "avg. no. handles",
               "logBase": 1,
@@ -1375,8 +832,7 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1384,14 +840,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
@@ -1418,7 +867,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "8.3.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1487,9 +936,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Portal API Service Autoscaling",
           "tooltip": {
             "shared": true,
@@ -1498,9 +945,7 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
@@ -1509,12 +954,9 @@ data:
               "format": "short",
               "label": "pods",
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
-              "decimals": null,
               "format": "none",
               "label": "avg. no. handles",
               "logBase": 1,
@@ -1524,8 +966,7 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1533,14 +974,7 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
           "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 0,
           "fillGradient": 0,
           "gridPos": {
@@ -1567,7 +1001,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "8.3.3",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1614,7 +1048,7 @@ data:
               "refId": "E"
             },
             {
-              "expr": "count by (namespace, service) (up{service=~\"socket\",namespace=\"$namespace\"})",
+              "expr": "count by (namespace, service) (up{service=\"socket\",namespace=\"$namespace\"})",
               "hide": false,
               "interval": "",
               "legendFormat": "pods",
@@ -1636,9 +1070,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Socket Service Autoscaling",
           "tooltip": {
             "shared": true,
@@ -1647,9 +1079,7 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
@@ -1658,12 +1088,9 @@ data:
               "format": "short",
               "label": "pods",
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
-              "decimals": null,
               "format": "none",
               "label": "avg. no. handles",
               "logBase": 1,
@@ -1673,8 +1100,409 @@ data:
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "description": "",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 24
+          },
+          "hiddenSeries": false,
+          "id": 10,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "handles",
+              "yaxis": 2
+            },
+            {
+              "alias": "target-handles",
+              "fill": 0,
+              "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
+            },
+            {
+              "alias": "min-pods",
+              "dashes": true
+            },
+            {
+              "alias": "max-pods",
+              "dashes": true
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "avg(pod:nodejs_active_handles_total:sum{service=\"transfer\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "handles",
+              "refId": "A"
+            },
+            {
+              "expr": "1000",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "target-handles",
+              "refId": "E"
+            },
+            {
+              "expr": "count by (namespace, service) (up{service=\"transfer\",namespace=\"$namespace\"})",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "pods",
+              "refId": "B"
+            },
+            {
+              "expr": "3",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "min-pods",
+              "refId": "C"
+            },
+            {
+              "expr": "30",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "max-pods",
+              "refId": "D"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Transfer Service Autoscaling",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "pods",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "none",
+              "label": "avg. no. handles",
+              "logBase": 1,
+              "max": "1500",
+              "min": "0",
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "description": "",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 24
+          },
+          "hiddenSeries": false,
+          "id": 5,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "handles",
+              "yaxis": 2
+            },
+            {
+              "alias": "target-handles",
+              "fill": 0,
+              "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
+            },
+            {
+              "alias": "min-pods",
+              "dashes": true
+            },
+            {
+              "alias": "max-pods",
+              "dashes": true
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "avg(pod:nodejs_active_handles_total:sum{service=\"video-worker\",namespace=\"$namespace\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "handles",
+              "refId": "A"
+            },
+            {
+              "expr": "1000",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "target-handles",
+              "refId": "E"
+            },
+            {
+              "expr": "count by (namespace, service) (up{service=\"video-worker\",namespace=\"$namespace\"})",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "pods",
+              "refId": "B"
+            },
+            {
+              "expr": "3",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "min-pods",
+              "refId": "C"
+            },
+            {
+              "expr": "30",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "max-pods",
+              "refId": "D"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Video-Worker Service Autoscaling",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "pods",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "none",
+              "label": "avg. no. handles",
+              "logBase": 1,
+              "max": "1500",
+              "min": "0",
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "description": "",
+          "fill": 0,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 30
+          },
+          "hiddenSeries": false,
+          "id": 5,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "alias": "handles",
+              "yaxis": 2
+            },
+            {
+              "alias": "target-handles",
+              "fill": 0,
+              "yaxis": 2
+            },
+            {
+              "alias": "pods",
+              "dashes": true
+            },
+            {
+              "alias": "min-pods",
+              "dashes": true
+            },
+            {
+              "alias": "max-pods",
+              "dashes": true
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "avg(pod:nodejs_active_handles_total:sum{service=\"worker\",namespace=\"$namespace\"})",
+              "hide": false,
+              "instant": false,
+              "interval": "",
+              "legendFormat": "handles",
+              "refId": "A"
+            },
+            {
+              "expr": "1000",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "target-handles",
+              "refId": "E"
+            },
+            {
+              "expr": "count by (namespace, service) (up{service=\"worker\",namespace=\"$namespace\"})",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "pods",
+              "refId": "B"
+            },
+            {
+              "expr": "3",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "min-pods",
+              "refId": "C"
+            },
+            {
+              "expr": "30",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "max-pods",
+              "refId": "D"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Worker Service Autoscaling",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "pods",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "none",
+              "label": "avg. no. handles",
+              "logBase": 1,
+              "max": "1500",
+              "min": "0",
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
           }
         }
       ],
