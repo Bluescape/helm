@@ -114,7 +114,7 @@ data:
             },
             {
               "expr": "count by (namespace, service) (up{service=~\"config-center-service\",namespace=\"$namespace\"})",
-              "hide": true,
+              "hide": false,
               "interval": "",
               "legendFormat": "pods",
               "refId": "B"
@@ -391,7 +391,7 @@ data:
           "targets": [
             {
               "expr": "avg(pod:graphql_gateway_nodejs_active_handles_total:sum{namespace=\"$namespace\"})",
-              "hide": true,
+              "hide": false,
               "instant": false,
               "interval": "",
               "legendFormat": "handles",
@@ -537,7 +537,7 @@ data:
           "targets": [
             {
               "expr": "avg(pod:nodejs_active_handles_total:sum{service=\"identity-api\",namespace=\"$namespace\"})",
-              "hide": true,
+              "hide": false,
               "instant": false,
               "interval": "",
               "legendFormat": "handles",
@@ -829,7 +829,7 @@ data:
           "targets": [
             {
               "expr": "avg(pod:nodejs_active_handles_total:sum{service=\"listener-api\"})",
-              "hide": true,
+              "hide": false,
               "instant": false,
               "interval": "",
               "legendFormat": "handles",
