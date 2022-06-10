@@ -2,7 +2,7 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
-  name:   "{{ .Values.cert_manager.setup_legacy_letsencrypt_extra_cluster_issuer.name }}"
+  name:   "{{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.name }}"
   annotations:
     argocd.argoproj.io/sync-options: Prune=false
   labels:
@@ -26,6 +26,6 @@ spec:
           hostedZoneID: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.hosted_zone_id }}
           accessKeyID: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.access_key_id }}
           secretAccessKeySecretRef:
-            name:   "{{ .Values.cert_manager.setup_legacy_letsencrypt_extra_cluster_issuer.name }}"
+            name:   "{{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.name }}"
             key: secretAccessKey
 {{- end }}

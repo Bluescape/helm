@@ -18,7 +18,7 @@ vault:
 cert_manager:
   setup_letsencrypt_prod_cluster_issuer: false
   setup_letsencrypt_prod_cluster_dns_issuer: false
-  setup_legacy_letsencrypt_extra_cluster_issuer:
+  setup_letsencrypt_extra_cluster_issuer:
     enabled: false
     name: "letsencrypt-extra"
     access_key_id: ABCDEFXXXXXXX
