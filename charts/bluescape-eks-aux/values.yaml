@@ -18,8 +18,9 @@ vault:
 cert_manager:
   setup_letsencrypt_prod_cluster_issuer: false
   setup_letsencrypt_prod_cluster_dns_issuer: false
-  setup_legacy_letsencrypt_old_prod_cluster_issuer:
+  setup_legacy_letsencrypt_extra_cluster_issuer:
     enabled: false
+    name: "letsencrypt-extra"
     access_key_id: ABCDEFXXXXXXX
     region: us-east-1
     dns_zone: bluescape.com
@@ -32,7 +33,9 @@ cert_manager:
     preferred_chain: 'ISRG Root X1' # Specify a CA’s common name for the certificate to be issued by
 
 external_secrets:
-  setup_legacy_old_prod_cluster_issuer_secret: false
+  setup_legacy_extra_cluster_issuer_secret: false
+  cluster_issuer_name: ""
+
   setup_gatekeeper_policy_manager_secret: false
   setup_prometheus_metrics_secret: false
   setup_threatstack_secret: false
