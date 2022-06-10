@@ -1,0 +1,31 @@
+{{- if .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.enabled }}
+apiVersion: cert-manager.io/v1alpha2
+kind: ClusterIssuer
+metadata:
+  name:   "{{ .Values.cert_manager.setup_legacy_letsencrypt_extra_cluster_issuer.name }}"
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+  labels:
+    {{- include "bluescape-eks-aux.labels" . | nindent 4 }}
+spec:
+  acme:
+    server: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.acme_server }}
+    email: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.email }}
+    preferredChain: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.preferred_chain }}
+    privateKeySecretRef:
+      name: letsencrypt-admin-dns
+    solvers:
+    - selector:
+        dnsZones:
+          - {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.dns_zone | quote }}
+      dns01:
+        cnameStrategy: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.cname_strategy }}
+        route53:
+          region: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.region }}
+          role: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.role }}
+          hostedZoneID: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.hosted_zone_id }}
+          accessKeyID: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.access_key_id }}
+          secretAccessKeySecretRef:
+            name:   "{{ .Values.cert_manager.setup_legacy_letsencrypt_extra_cluster_issuer.name }}"
+            key: secretAccessKey
+{{- end }}
