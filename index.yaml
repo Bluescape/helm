@@ -458,6 +458,73 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/lacework-agent-5.0.0/lacework-agent-5.0.0.tgz
     version: 5.0.0
+  metrics-server:
+  - annotations:
+      category: Analytics
+    apiVersion: v2
+    appVersion: 0.4.1
+    created: "2022-06-17T02:54:11.935164987Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: Metrics Server is a cluster-wide aggregator of resource usage data.
+      Metrics Server collects metrics from the Summary API, exposed by Kubelet on
+      each node.
+    digest: 939c3fbcfd003abf298ae19d1002a9102aa5238c862c88a3ff23d3accca9e37d
+    home: https://github.com/bitnami/charts/tree/master/bitnami/metrics-server
+    icon: https://bitnami.com/assets/stacks/metrics-server/img/metrics-server-stack-110x117.png
+    keywords:
+    - metrics-server
+    - cluster
+    - metrics
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: metrics-server
+    sources:
+    - https://github.com/bitnami/bitnami-docker-metrics-server
+    - https://github.com/kubernetes-incubator/metrics-server
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/metrics-server-5.3.1/metrics-server-5.3.1.tgz
+    version: 5.3.1
+  mongodb:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 4.4.9
+    created: "2022-06-17T02:54:12.095384475Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: NoSQL document-oriented database that stores JSON-like documents
+      with dynamic schemas, simplifying the integration of data in content-driven
+      applications.
+    digest: 1a7c38bb7afe66190da6dd211ad4e2670e172906157ac7c4545486600cab01e7
+    home: https://github.com/bitnami/charts/tree/master/bitnami/mongodb
+    icon: https://bitnami.com/assets/stacks/mongodb/img/mongodb-stack-220x234.png
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    - cluster
+    - replicaset
+    - replication
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: mongodb
+    sources:
+    - https://github.com/bitnami/bitnami-docker-mongodb
+    - https://mongodb.org
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/mongodb-10.26.4/mongodb-10.26.4.tgz
+    version: 10.26.4
   oauth2-proxy:
   - apiVersion: v1
     appVersion: 5.1.0
@@ -481,4 +548,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/oauth2-proxy-3.2.5/oauth2-proxy-3.2.5.tgz
     version: 3.2.5
-generated: "2022-06-10T23:04:35.076737818Z"
+generated: "2022-06-17T02:54:12.095435275Z"
