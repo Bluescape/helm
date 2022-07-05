@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 data:
-  template-dashboard.json: |-
+  gen3-document-upload-metrics-dashboard.json: |-
     {
       "annotations": {
         "list": [
