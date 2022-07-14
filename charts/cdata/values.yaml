@@ -5,7 +5,7 @@
 image:
   # image source: https://github.com/Bluescape/analytics-init/tree/main/cdata
   repository: bluescape/cdata
-  tag: 9dd09eb6-release-22.05.2
+  tag: 3db33dd
   # Overrides the image tag whose default is the chart appVersion.
   pullPolicy: IfNotPresent
 
@@ -41,8 +41,8 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 80
-  targetPort: 8181
+  port: 443
+  targetPort: 443
 
 # annotations for secret
 secret:
@@ -52,8 +52,8 @@ ingress:
   enabled: false
   className: ""
   hosts:
-  - host: chart-example.local
-    paths: []
+    - host: chart-example.local
+      paths: []
   annotations:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
@@ -69,7 +69,7 @@ ingress:
 
 resources:
   limits:
-    cpu: '2'
+    cpu: "2"
     memory: 12000Mi
   requests:
     cpu: 15m
