@@ -207,6 +207,16 @@ entries:
     version: 0.2.5
   cdata:
   - apiVersion: v2
+    appVersion: 99525b7-release-21.0.8194
+    created: "2022-07-14T16:15:50.944600623Z"
+    description: A Helm chart for CDATA container
+    digest: 02e2ab590c4c1ed4e8b64bc16b0c3aacbf3fd0ddd6b0c04121a502b613d09aeb
+    name: cdata
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/cdata-0.2.0/cdata-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     appVersion: 3db33dd
     created: "2022-07-14T13:19:21.675193038Z"
     description: A Helm chart for CDATA container
@@ -578,4 +588,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/oauth2-proxy-3.2.5/oauth2-proxy-3.2.5.tgz
     version: 3.2.5
-generated: "2022-07-14T13:19:21.675228338Z"
+generated: "2022-07-14T16:15:50.944703123Z"
