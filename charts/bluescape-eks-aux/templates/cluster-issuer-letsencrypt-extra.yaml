@@ -1,5 +1,9 @@
 {{- if .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.enabled }}
+{{- if .Capabilities.APIVersions.Has "cert-manager.io/v1" }}
+apiVersion: cert-manager.io/v1
+{{- else }}
 apiVersion: cert-manager.io/v1alpha2
+{{- end }}
 kind: ClusterIssuer
 metadata:
   name:   "{{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.name }}"
