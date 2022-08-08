@@ -266,6 +266,33 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/cdata-0.1.0/cdata-0.1.0.tgz
     version: 0.1.0
+  contour:
+  - annotations:
+      category: Infrastructure
+    apiVersion: v1
+    appVersion: 1.7.0
+    created: "2022-08-08T20:53:08.029021852Z"
+    description: Contour Ingress controller for Kubernetes
+    digest: 5c6412dab965b44f6bd695332047e53183f23aa8a4134ef91e27b2a2a6402dea
+    home: https://projectcontour.io
+    icon: https://bitnami.com/assets/stacks/contour/img/contour-stack-220x234.png
+    keywords:
+    - ingress
+    - envoy
+    - contour
+    maintainers:
+    - name: cellebyte
+      url: https://github.com/Cellebyte
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: contour
+    sources:
+    - https://github.com/projectcontour/contour
+    - https://github.com/envoyproxy/envoy
+    - https://github.com/bitnami/bitnami-docker-contour
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/contour-1.2.0-alpha1/contour-1.2.0-alpha1.tgz
+    version: 1.2.0-alpha1
   cortex:
   - apiVersion: v2
     appVersion: v1.10.0
@@ -418,6 +445,38 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/edge-stack-7.3.2/edge-stack-7.3.2.tgz
     version: 7.3.2
+  external-dns:
+  - annotations:
+      category: DeveloperTools
+    apiVersion: v2
+    appVersion: 0.11.0
+    created: "2022-08-08T20:53:08.170708348Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: ExternalDNS is a Kubernetes addon that configures public DNS servers
+      with information about exposed Kubernetes services to make them discoverable.
+    digest: d0d4885939518ff9f384145d7b5bb6917c7152079984e66801ef4e60b18f67e6
+    home: https://github.com/bitnami/charts/tree/master/bitnami/external-dns
+    icon: https://bitnami.com/assets/stacks/external-dns/img/external-dns-stack-220x234.png
+    keywords:
+    - external-dns
+    - network
+    - dns
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: external-dns
+    sources:
+    - https://github.com/kubernetes-sigs/external-dns
+    - https://github.com/bitnami/bitnami-docker-external-dns
+    - https://github.com/kubernetes-sigs/external-dns
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/external-dns-6.2.6-alpha1/external-dns-6.2.6-alpha1.tgz
+    version: 6.2.6-alpha1
   gangway:
   - apiVersion: v1
     appVersion: 3.3.0
@@ -560,6 +619,40 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/metrics-server-5.3.1/metrics-server-5.3.1.tgz
     version: 5.3.1
+  minio:
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: 2021.4.6
+    created: "2022-08-08T20:53:08.315305395Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: Bitnami Object Storage based on MinIO(R) is an object storage server,
+      compatible with Amazon S3 cloud storage service, mainly used for storing unstructured
+      data (such as photos, videos, log files, etc.)
+    digest: 8000665709693bdbbd740e437c79896523d6f4a85920ad1304e82e3e08a1c223
+    home: https://github.com/bitnami/charts/tree/master/bitnami/minio
+    icon: https://bitnami.com/assets/stacks/minio/img/minio-stack-220x234.png
+    keywords:
+    - minio
+    - storage
+    - object-storage
+    - s3
+    - cluster
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: minio
+    sources:
+    - https://github.com/bitnami/bitnami-docker-minio
+    - https://min.io
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/minio-6.7.2-alpha1/minio-6.7.2-alpha1.tgz
+    version: 6.7.2-alpha1
   mongodb:
   - annotations:
       category: Database
@@ -618,4 +711,38 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/oauth2-proxy-3.2.5/oauth2-proxy-3.2.5.tgz
     version: 3.2.5
-generated: "2022-07-20T21:34:04.047888484Z"
+  redis:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 6.2.3
+    created: "2022-08-08T20:53:08.486736543Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: Open source, advanced key-value store. It is often referred to as
+      a data structure server since keys can contain strings, hashes, lists, sets
+      and sorted sets.
+    digest: 6044f8412d9bae4363298a4ab46d1fc2b5fbe62bdfa0c6cc8dd5ac4ec87f310d
+    home: https://github.com/bitnami/charts/tree/master/bitnami/redis
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: redis
+    sources:
+    - https://github.com/bitnami/bitnami-docker-redis
+    - http://redis.io/
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
+    version: 14.1.1-alpha1
+generated: "2022-08-08T20:53:08.487001857Z"
