@@ -1,0 +1,1180 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: service-status-dashboard
+  namespace: grafana
+  labels:
+     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+data:
+  service-status-dashboard.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": "-- Grafana --",
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "description": "Monitoring service status by check service tcp port via prometheus blackbox exporter",
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "gnetId": 11992,
+      "graphTooltip": 0,
+      "id": 66,
+      "iteration": 1660118175936,
+      "links": [
+        {
+          "asDropdown": true,
+          "icon": "dashboard",
+          "includeVars": true,
+          "keepTime": true,
+          "tags": [
+            "kubernetes"
+          ],
+          "targetBlank": true,
+          "title": "K8s cluster mertics",
+          "tooltip": "",
+          "type": "dashboards",
+          "url": ""
+        }
+      ],
+      "liveNow": false,
+      "panels": [
+        {
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 8,
+            "x": 0,
+            "y": 0
+          },
+          "id": 18,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "8.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": false,
+              "expr": "avg_over_time(probe_success[$__interval]) * 100",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "title": "Availability Target",
+          "type": "stat"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "fieldConfig": {
+            "defaults": {
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 16,
+            "x": 8,
+            "y": 0
+          },
+          "hiddenSeries": false,
+          "id": 13,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"2\"}[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "2xx",
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"3\"}[1m]))",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "3xx",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"4\"}[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "4xx",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"5\"}[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "5xx",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Response Code",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P889B6F71E75DDEDB"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto"
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "passed": {
+                      "color": "green",
+                      "index": 0,
+                      "text": "Passed"
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 0,
+            "y": 8
+          },
+          "id": 20,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "8.3.3",
+          "targets": [
+            {
+              "alias": "$tag_environment - $tag_product - Passed",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P889B6F71E75DDEDB"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "uuid"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "test_results",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT \"status\" FROM \"test_results\"",
+              "rawQuery": true,
+              "refId": "A",
+              "resultFormat": "table",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "passed"
+                    ],
+                    "type": "field"
+                  },
+                  {
+                    "params": [],
+                    "type": "sum"
+                  }
+                ]
+              ],
+              "tags": []
+            }
+          ],
+          "title": "Synthetic Test",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "uuid": true
+                },
+                "indexByName": {},
+                "renameByName": {
+                  "failed": "Failed",
+                  "passed": "Passed",
+                  "pending": "Pending",
+                  "skipped": "Skipped"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 4,
+            "w": 16,
+            "x": 8,
+            "y": 8
+          },
+          "hiddenSeries": false,
+          "id": 14,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"3\"}[1m]))",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "3xx",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"4\"}[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "4xx",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"5\"}[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "5xx",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "API Error Rate",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:504",
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:505",
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 5,
+            "w": 16,
+            "x": 8,
+            "y": 12
+          },
+          "hiddenSeries": false,
+          "id": 12,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_cluster_internal_upstream_rq_xx{envoy_response_code_class=\"2\", pod=~\"${pod}\"}[1m]))",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "2xx",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_cluster_internal_upstream_rq_xx{envoy_response_code_class=\"3\", pod=~\"${pod}\"}[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "3xx",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_cluster_internal_upstream_rq_xx{envoy_response_code_class=\"4\", pod=~\"${pod}\"}[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "4xx",
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_cluster_internal_upstream_rq_xx{envoy_response_code_class=\"5\", pod=~\"${pod}\"}[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "5xx",
+              "refId": "D"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "API Response Codes",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P889B6F71E75DDEDB"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-blues"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto"
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "fail": {
+                      "color": "red",
+                      "index": 0,
+                      "text": "Fail"
+                    },
+                    "pass": {
+                      "color": "green",
+                      "index": 1,
+                      "text": "Pass"
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "bool"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 8,
+            "x": 0,
+            "y": 15
+          },
+          "id": 22,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 0,
+            "showHeader": true
+          },
+          "pluginVersion": "8.3.3",
+          "targets": [
+            {
+              "alias": "",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P889B6F71E75DDEDB"
+              },
+              "query": "SELECT \"name\",\"status\" FROM \"test_results\"",
+              "rawQuery": true,
+              "refId": "A",
+              "resultFormat": "table"
+            }
+          ],
+          "title": "Endpoint Status",
+          "type": "table"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 5,
+            "w": 16,
+            "x": 8,
+            "y": 17
+          },
+          "hiddenSeries": false,
+          "id": 15,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_http_downstream_cx_http1_active[1m]))",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "HTTP/1",
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_http_downstream_cx_http2_active_active[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "HTTP/2",
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(increase(envoy_http_downstream_cx_upgrades_active[1m]))",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Websocket",
+              "refId": "C"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Transaction",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "columns": [],
+          "fontSize": "100%",
+          "gridPos": {
+            "h": 11,
+            "w": 8,
+            "x": 0,
+            "y": 22
+          },
+          "id": 5,
+          "links": [],
+          "pluginVersion": "6.5.2",
+          "showHeader": true,
+          "sort": {
+            "col": 1,
+            "desc": false
+          },
+          "styles": [
+            {
+              "$$hashKey": "object:727",
+              "alias": "Time",
+              "align": "auto",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "hidden"
+            },
+            {
+              "$$hashKey": "object:728",
+              "alias": "Service",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Metric",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:729",
+              "alias": "Status",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value",
+              "thresholds": [
+                "0",
+                "1"
+              ],
+              "type": "string",
+              "unit": "short",
+              "valueMaps": [
+                {
+                  "$$hashKey": "object:777",
+                  "text": "ONLINE",
+                  "value": "1"
+                },
+                {
+                  "$$hashKey": "object:778",
+                  "text": "OFFLINE",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "$$hashKey": "object:730",
+              "alias": "",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": false,
+              "expr": "probe_success",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{ `{{ group }}-{{ instance }}` }}",
+              "refId": "A"
+            }
+          ],
+          "title": "Service Availability",
+          "transform": "timeseries_to_rows",
+          "type": "table-old"
+        },
+        {
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "continuous-GrYlRd"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 50
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 16,
+            "x": 8,
+            "y": 22
+          },
+          "id": 16,
+          "links": [],
+          "options": {
+            "displayMode": "lcd",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showUnfilled": true
+          },
+          "pluginVersion": "8.3.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "avg(probe_duration_seconds) by(instance)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
+            }
+          ],
+          "title": "Response/Sec",
+          "type": "bargauge"
+        }
+      ],
+      "refresh": "",
+      "schemaVersion": 34,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "current": {
+              "selected": true,
+              "text": "http",
+              "value": "http"
+            },
+            "hide": 0,
+            "includeAll": false,
+            "label": "Listener port",
+            "multi": false,
+            "name": "listener_port",
+            "options": [
+              {
+                "selected": true,
+                "text": "http",
+                "value": "http"
+              },
+              {
+                "selected": false,
+                "text": "admin",
+                "value": "admin"
+              }
+            ],
+            "query": "http,admin",
+            "queryValue": "",
+            "skipUrlSync": false,
+            "type": "custom"
+          },
+          {
+            "current": {
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
+            },
+            "definition": "label_values(pod)",
+            "hide": 0,
+            "includeAll": true,
+            "label": "pod",
+            "multi": true,
+            "name": "pod",
+            "options": [],
+            "query": {
+              "query": "label_values(pod)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": "/^aes-ambassador-\\d+.*/",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": false,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "P889B6F71E75DDEDB"
+            },
+            "definition": "show tag values with key = product",
+            "hide": 0,
+            "includeAll": true,
+            "multi": false,
+            "name": "Product",
+            "options": [],
+            "query": "show tag values with key = product",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": false,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "P889B6F71E75DDEDB"
+            },
+            "definition": "show tag values with key = environment",
+            "hide": 0,
+            "includeAll": true,
+            "multi": false,
+            "name": "Environment",
+            "options": [],
+            "query": "show tag values with key = environment",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": false,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "P889B6F71E75DDEDB"
+            },
+            "definition": "show tag values with key = feature ",
+            "hide": 0,
+            "includeAll": true,
+            "multi": false,
+            "name": "Feature",
+            "options": [],
+            "query": "show tag values with key = feature ",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": false,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "P889B6F71E75DDEDB"
+            },
+            "definition": "show tag values with key=test where feature = $Feature",
+            "hide": 0,
+            "includeAll": true,
+            "multi": false,
+            "name": "Test",
+            "options": [],
+            "query": "show tag values with key=test where feature = $Feature",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 1,
+            "type": "query"
+          },
+          {
+            "hide": 2,
+            "name": "testFilter",
+            "query": "product=~/^$Product/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
+            "skipUrlSync": false,
+            "type": "constant"
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": false,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "P889B6F71E75DDEDB"
+            },
+            "definition": "show tag values with key = exe",
+            "hide": 0,
+            "includeAll": true,
+            "multi": false,
+            "name": "Process",
+            "options": [],
+            "query": "show tag values with key = exe",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "hide": 2,
+            "name": "testGroup",
+            "query": "environment,uuid,test,feature,product",
+            "skipUrlSync": false,
+            "type": "constant"
+          },
+          {
+            "hide": 2,
+            "name": "testRunFilter",
+            "query": "product=~/^$Product/ AND \"environment\" =~ /^$Environment$/ AND \"process\" =~ /^$Process$/",
+            "skipUrlSync": false,
+            "type": "constant"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-5m",
+        "to": "now"
+      },
+      "timepicker": {
+        "refresh_intervals": [
+          "5s",
+          "10s",
+          "30s",
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "2h",
+          "1d"
+        ]
+      },
+      "timezone": "",
+      "title": "Service Status",
+      "uid": "m9yGD09Wk",
+      "version": 4,
+      "weekStart": ""
+    }
