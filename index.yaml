@@ -133,6 +133,16 @@ entries:
   bluescape-emissary-crds-3:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-08-18T10:45:51.55726264Z"
+    description: A Helm chart for Kubernetes
+    digest: bd3fab310a2517d14800af4428a15ed73668e235837f94157c457159f05532df
+    name: bluescape-emissary-crds-3
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-emissary-crds-3-0.2.0/bluescape-emissary-crds-3-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-08-17T20:49:49.573284502Z"
     description: A Helm chart for Kubernetes
     digest: 5043d5d24e6dd07e6e3e98a6e775e0fe3a44a8f064fbb8cb770eae04c78cf37d
@@ -909,4 +919,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2022-08-17T20:49:49.573464502Z"
+generated: "2022-08-18T10:45:51.557398442Z"
