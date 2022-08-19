@@ -17,6 +17,10 @@ grafana:
   cluster_id: example
   baseImage: grafana/grafana:8.3.3
 
+  # Used to pass GF_INSTALL_PLUGINS env var to grafana to install additional plugins on start:
+  # https://github.com/grafana-operator/grafana-operator/blob/master/documentation/plugins.md
+  pluginInstallString: grafana-piechart-panel
+
   # Deploy cluster in HA Mode - 3 replicas with PostgreSQL database cluster
   # deployed with kubedb
   # Requires kubedb generated postgresql secret called "postgres-grafana-auth"
