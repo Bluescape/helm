@@ -19,6 +19,10 @@ items:
         - secretRef:
             name: grafana-oidc-auth
         {{- end }}
+        {{- if ne .Values.grafana.pluginInstallString "" }}
+        - secretRef:
+            name: grafana-install-plugins
+        {{- end }}
     {{- else }}
     deployment:
       replicas: 1
@@ -26,6 +30,10 @@ items:
       envFrom:
         - secretRef:
             name: grafana-oidc-auth
+        {{- end }}
+        {{- if ne .Values.grafana.pluginInstallString "" }}
+        - secretRef:
+            name: grafana-install-plugins
         {{- end }}
     {{- end }}
     config:
