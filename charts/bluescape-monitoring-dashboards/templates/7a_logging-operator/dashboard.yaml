@@ -1,12 +1,12 @@
 apiVersion: integreatly.org/v1alpha1
 kind: GrafanaDashboard
 metadata:
-  name:  logging-loki-dashboard-2.0
+  name:  logging-operator-dashboard
   namespace: grafana
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  logging-loki-dashboard-2.0
+  name:  logging-operator-dashboard
   configMapRef:
-    name:  logging-loki-dashboard-2.0
-    key:  loki-dashboard.json
+    name:  logging-operator-dashboard
+    key:  logging-operator-dashboard.json
