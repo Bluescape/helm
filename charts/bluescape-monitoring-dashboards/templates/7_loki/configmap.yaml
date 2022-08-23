@@ -61,7 +61,7 @@ data:
           }
         ]
       },
-      "description": "Loki metrics via 2.0",
+      "description": "Loki metrics via 2.0 (Bluescape Modified Version)",
       "editable": true,
       "gnetId": 13407,
       "graphTooltip": 0,
@@ -3730,7 +3730,96 @@ data:
             "align": false,
             "alignLevel": null
           }
-        }
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "Shows the number of active streams in Loki's ingester memory.\n\nNOTE: \"fake\" tenant = \"loki-system\" logs as seen in Grafana",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 11,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 76
+          },
+          "id": 75,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom"
+            },
+            "tooltip": {
+              "mode": "single"
+            }
+          },
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "exemplar": true,
+              "expr": "sum(loki_ingester_memory_streams{job=\"system-loki-distributed-ingester\"}) by (tenant)",
+              "interval": "",
+              "legendFormat": "{{ '{{tenant}}' }}",
+              "refId": "A"
+            }
+          ],
+          "title": "Ingester Memory Streams",
+          "type": "timeseries"
+      }
       ],
       "schemaVersion": 26,
       "style": "dark",
@@ -3781,5 +3870,5 @@ data:
       "timezone": "",
       "title": "Logging - Loki 2.0 Global Metrics",
       "uid": "MQHVDmtWk",
-      "version": 37
+      "version": 38
     }
