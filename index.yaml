@@ -165,6 +165,16 @@ entries:
   bluescape-monitoring-dashboards:
   - apiVersion: v2
     appVersion: 1.16.4
+    created: "2022-08-24T13:00:54.214472106Z"
+    description: A Helm chart for Kubernetes
+    digest: 29f19ff94fb9608a8f8d6c35410d06a41ad2b511375fbdba91a92dd057d68096
+    name: bluescape-monitoring-dashboards
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-dashboards-0.2.22/bluescape-monitoring-dashboards-0.2.22.tgz
+    version: 0.2.22
+  - apiVersion: v2
+    appVersion: 1.16.4
     created: "2022-08-23T21:14:24.644528876Z"
     description: A Helm chart for Kubernetes
     digest: da65051ee8a2de256cbda48b2e13305304c0da8f849673fc7158bf87557cae3e
@@ -955,4 +965,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2022-08-23T21:14:24.644625176Z"
+generated: "2022-08-24T13:00:54.214592007Z"
