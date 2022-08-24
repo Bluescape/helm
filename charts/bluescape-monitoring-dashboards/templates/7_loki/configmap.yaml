@@ -3813,7 +3813,7 @@ data:
               "exemplar": true,
               "expr": "sum(loki_ingester_memory_streams{job=\"system-loki-distributed-ingester\"}) by (tenant)",
               "interval": "",
-              "legendFormat": "{{ '{{tenant}}' }}",
+              "legendFormat": "{{ `{{tenant}}` }}",
               "refId": "A"
             }
           ],
