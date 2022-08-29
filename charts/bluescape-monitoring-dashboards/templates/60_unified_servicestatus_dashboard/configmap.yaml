@@ -33,8 +33,8 @@ data:
       "fiscalYearStartMonth": 0,
       "gnetId": 11992,
       "graphTooltip": 0,
-      "id": 66,
-      "iteration": 1660118175936,
+      "id": 108,
+      "iteration": 1661576474529,
       "links": [
         {
           "asDropdown": true,
@@ -73,7 +73,7 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 6,
             "w": 8,
             "x": 0,
             "y": 0
@@ -240,118 +240,114 @@ data:
           }
         },
         {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "P889B6F71E75DDEDB"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "align": "auto",
-                "displayMode": "auto"
-              },
-              "mappings": [
-                {
-                  "options": {
-                    "passed": {
-                      "color": "green",
-                      "index": 0,
-                      "text": "Passed"
-                    }
-                  },
-                  "type": "value"
-                }
-              ],
-              "thresholds": {
-                "mode": "percentage",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
+          "columns": [],
+          "fontSize": "100%",
           "gridPos": {
-            "h": 7,
+            "h": 9,
             "w": 8,
             "x": 0,
-            "y": 8
+            "y": 6
           },
-          "id": 20,
-          "options": {
-            "footer": {
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
+          "id": 5,
+          "links": [],
+          "pluginVersion": "6.5.2",
+          "showHeader": true,
+          "sort": {
+            "col": 1,
+            "desc": false
+          },
+          "styles": [
+            {
+              "$$hashKey": "object:727",
+              "alias": "Time",
+              "align": "auto",
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "pattern": "Time",
+              "type": "hidden"
             },
-            "showHeader": true
-          },
-          "pluginVersion": "8.3.3",
+            {
+              "$$hashKey": "object:728",
+              "alias": "Service",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Metric",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            },
+            {
+              "$$hashKey": "object:729",
+              "alias": "Status",
+              "align": "auto",
+              "colorMode": "cell",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "mappingType": 1,
+              "pattern": "Value",
+              "thresholds": [
+                "0",
+                "1"
+              ],
+              "type": "string",
+              "unit": "short",
+              "valueMaps": [
+                {
+                  "$$hashKey": "object:777",
+                  "text": "ONLINE",
+                  "value": "1"
+                },
+                {
+                  "$$hashKey": "object:778",
+                  "text": "OFFLINE",
+                  "value": "0"
+                }
+              ]
+            },
+            {
+              "$$hashKey": "object:730",
+              "alias": "",
+              "align": "auto",
+              "colors": [
+                "rgba(245, 54, 54, 0.9)",
+                "rgba(237, 129, 40, 0.89)",
+                "rgba(50, 172, 45, 0.97)"
+              ],
+              "decimals": 2,
+              "pattern": "/.*/",
+              "thresholds": [],
+              "type": "number",
+              "unit": "short"
+            }
+          ],
           "targets": [
             {
-              "alias": "$tag_environment - $tag_product - Passed",
               "datasource": {
-                "type": "influxdb",
-                "uid": "P889B6F71E75DDEDB"
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
               },
-              "groupBy": [
-                {
-                  "params": [
-                    "uuid"
-                  ],
-                  "type": "tag"
-                }
-              ],
-              "hide": false,
-              "measurement": "test_results",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT \"status\" FROM \"test_results\"",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "table",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "passed"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "sum"
-                  }
-                ]
-              ],
-              "tags": []
+              "exemplar": false,
+              "expr": "probe_success",
+              "instant": true,
+              "interval": "",
+              "legendFormat": "{{ `{{ group }}-{{ instance }}` }}",
+              "refId": "A"
             }
           ],
-          "title": "Synthetic Test",
-          "transformations": [
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "uuid": true
-                },
-                "indexByName": {},
-                "renameByName": {
-                  "failed": "Failed",
-                  "passed": "Passed",
-                  "pending": "Pending",
-                  "skipped": "Skipped"
-                }
-              }
-            }
-          ],
-          "type": "table"
+          "title": "Service Availability",
+          "transform": "timeseries_to_rows",
+          "type": "table-old"
         },
         {
           "aliasColors": {},
@@ -588,36 +584,12 @@ data:
           }
         },
         {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "P889B6F71E75DDEDB"
-          },
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "continuous-blues"
+                "mode": "continuous-GrYlRd"
               },
-              "custom": {
-                "align": "auto",
-                "displayMode": "auto"
-              },
-              "mappings": [
-                {
-                  "options": {
-                    "fail": {
-                      "color": "red",
-                      "index": 0,
-                      "text": "Fail"
-                    },
-                    "pass": {
-                      "color": "green",
-                      "index": 1,
-                      "text": "Pass"
-                    }
-                  },
-                  "type": "value"
-                }
-              ],
+              "mappings": [],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -627,11 +599,10 @@ data:
                   },
                   {
                     "color": "red",
-                    "value": 80
+                    "value": 50
                   }
                 ]
-              },
-              "unit": "bool"
+              }
             },
             "overrides": []
           },
@@ -641,34 +612,37 @@ data:
             "x": 0,
             "y": 15
           },
-          "id": 22,
+          "id": 16,
+          "links": [],
           "options": {
-            "footer": {
-              "fields": "",
-              "reducer": [
-                "sum"
+            "displayMode": "lcd",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
               ],
-              "show": false
+              "fields": "",
+              "values": false
             },
-            "frameIndex": 0,
-            "showHeader": true
+            "showUnfilled": true
           },
           "pluginVersion": "8.3.3",
           "targets": [
             {
-              "alias": "",
               "datasource": {
-                "type": "influxdb",
-                "uid": "P889B6F71E75DDEDB"
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
               },
-              "query": "SELECT \"name\",\"status\" FROM \"test_results\"",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "table"
+              "exemplar": true,
+              "expr": "avg(probe_duration_seconds) by(instance)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "",
+              "refId": "A"
             }
           ],
-          "title": "Endpoint Status",
-          "type": "table"
+          "title": "Response/Sec",
+          "type": "bargauge"
         },
         {
           "aliasColors": {},
@@ -779,175 +753,576 @@ data:
           }
         },
         {
-          "columns": [],
-          "fontSize": "100%",
-          "gridPos": {
-            "h": 11,
-            "w": 8,
-            "x": 0,
-            "y": 22
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
           },
-          "id": 5,
-          "links": [],
-          "pluginVersion": "6.5.2",
-          "showHeader": true,
-          "sort": {
-            "col": 1,
-            "desc": false
-          },
-          "styles": [
-            {
-              "$$hashKey": "object:727",
-              "alias": "Time",
-              "align": "auto",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "hidden"
-            },
-            {
-              "$$hashKey": "object:728",
-              "alias": "Service",
-              "align": "auto",
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "Metric",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "$$hashKey": "object:729",
-              "alias": "Status",
-              "align": "auto",
-              "colorMode": "cell",
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "mappingType": 1,
-              "pattern": "Value",
-              "thresholds": [
-                "0",
-                "1"
-              ],
-              "type": "string",
-              "unit": "short",
-              "valueMaps": [
-                {
-                  "$$hashKey": "object:777",
-                  "text": "ONLINE",
-                  "value": "1"
-                },
-                {
-                  "$$hashKey": "object:778",
-                  "text": "OFFLINE",
-                  "value": "0"
-                }
-              ]
-            },
-            {
-              "$$hashKey": "object:730",
-              "alias": "",
-              "align": "auto",
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "number",
-              "unit": "short"
-            }
-          ],
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "exemplar": false,
-              "expr": "probe_success",
-              "instant": true,
-              "interval": "",
-              "legendFormat": "{{ `{{ group }}-{{ instance }}` }}",
-              "refId": "A"
-            }
-          ],
-          "title": "Service Availability",
-          "transform": "timeseries_to_rows",
-          "type": "table-old"
-        },
-        {
           "fieldConfig": {
             "defaults": {
-              "color": {
-                "mode": "continuous-GrYlRd"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 50
-                  }
-                ]
-              }
+              "links": []
             },
             "overrides": []
           },
+          "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
-            "h": 11,
-            "w": 16,
-            "x": 8,
+            "h": 8,
+            "w": 12,
+            "x": 0,
             "y": 22
           },
-          "id": 16,
-          "links": [],
-          "options": {
-            "displayMode": "lcd",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showUnfilled": true
+          "hiddenSeries": false,
+          "id": 20,
+          "legend": {
+            "alignAsTable": true,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 450,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
           },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
           "pluginVersion": "8.3.3",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
           "targets": [
             {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "exemplar": true,
-              "expr": "avg(probe_duration_seconds) by(instance)",
+              "expr": "(sum by (container) (rate(container_cpu_usage_seconds_total{node=~\"${node_name:regex}\", container=~\"${container_name:regex}\", namespace=~\"${namespace:regex}\"}[1m]))) * 100",
+              "format": "time_series",
+              "hide": false,
               "instant": false,
-              "interval": "",
-              "legendFormat": "",
+              "interval": "${interval}",
+              "intervalFactor": 1,
+              "legendFormat": "{{ `{{ container }}` }}",
               "refId": "A"
             }
           ],
-          "title": "Response/Sec",
-          "type": "bargauge"
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Avg CPU Usage per Container",
+          "tooltip": {
+            "shared": false,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "percent",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "decimals": 2,
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 22
+          },
+          "hiddenSeries": false,
+          "id": 22,
+          "interval": "",
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 585,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum((container_memory_usage_bytes{node=~\"${node_name:regex}\", container=~\"${container_name:regex}\", namespace=~\"${namespace:regex}\"})/1024/1024) by (container)",
+              "interval": "${interval}",
+              "legendFormat": "{{ `{{ container }}` }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Memory Usage per Container",
+          "tooltip": {
+            "shared": false,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "decmbytes",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 0,
+            "y": 30
+          },
+          "hiddenSeries": false,
+          "id": 26,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 510,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum(rate(container_fs_writes_bytes_total{pod=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[1m])) by (container))/1024",
+              "interval": "${interval}",
+              "legendFormat": "{{ `{{ container }}` }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Container Disk Writes (kbps)",
+          "tooltip": {
+            "shared": false,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "deckbytes",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 12,
+            "x": 12,
+            "y": 30
+          },
+          "hiddenSeries": false,
+          "id": 24,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 510,
+            "sort": "avg",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum(rate(container_fs_reads_bytes_total{container=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[1m])) by (container))/1024",
+              "interval": "${interval}",
+              "legendFormat": "{{ `{{container}}` }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Container Disk Reads (kbps)",
+          "tooltip": {
+            "shared": false,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "deckbytes",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "editable": true,
+          "error": false,
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "grid": {},
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 0,
+            "y": 37
+          },
+          "hiddenSeries": false,
+          "id": 30,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "hideEmpty": false,
+            "hideZero": false,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 510,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 2,
+          "links": [],
+          "nullPointMode": "null as zero",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum(rate(container_network_transmit_bytes_total{pod=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[5m])) by (namespace))/1024",
+              "interval": "${interval}",
+              "legendFormat": "{{ `{{ namespace }}` }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Sent Network Traffic per Namespace",
+          "tooltip": {
+            "msResolution": true,
+            "shared": false,
+            "sort": 2,
+            "value_type": "cumulative"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "deckbytes",
+              "label": "",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": "",
+              "logBase": 1,
+              "max": 8,
+              "min": 0,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 8,
+            "w": 12,
+            "x": 12,
+            "y": 37
+          },
+          "hiddenSeries": false,
+          "id": 28,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": true,
+            "max": true,
+            "min": true,
+            "rightSide": true,
+            "show": true,
+            "sideWidth": 510,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "8.3.3",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "(sum(rate(container_network_receive_bytes_total{pod=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[5m])) by (namespace))/1024",
+              "interval": "${interval}",
+              "legendFormat": "{{ `{{ namespace }}` }}",
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Received Network Traffic per Namespace",
+          "tooltip": {
+            "shared": false,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "deckbytes",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
         }
       ],
       "refresh": "",
@@ -956,34 +1331,6 @@ data:
       "tags": [],
       "templating": {
         "list": [
-          {
-            "current": {
-              "selected": true,
-              "text": "http",
-              "value": "http"
-            },
-            "hide": 0,
-            "includeAll": false,
-            "label": "Listener port",
-            "multi": false,
-            "name": "listener_port",
-            "options": [
-              {
-                "selected": true,
-                "text": "http",
-                "value": "http"
-              },
-              {
-                "selected": false,
-                "text": "admin",
-                "value": "admin"
-              }
-            ],
-            "query": "http,admin",
-            "queryValue": "",
-            "skipUrlSync": false,
-            "type": "custom"
-          },
           {
             "current": {
               "selected": true,
@@ -1012,145 +1359,187 @@ data:
             "type": "query"
           },
           {
-            "allValue": "*",
+            "allValue": ".+",
             "current": {
-              "selected": false,
-              "text": "All",
-              "value": "$__all"
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
             },
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P889B6F71E75DDEDB"
-            },
-            "definition": "show tag values with key = product",
+            "definition": "label_values(namespace)",
             "hide": 0,
             "includeAll": true,
-            "multi": false,
-            "name": "Product",
+            "label": "Namespace",
+            "multi": true,
+            "name": "namespace",
             "options": [],
-            "query": "show tag values with key = product",
+            "query": {
+              "query": "label_values(namespace)",
+              "refId": "StandardVariableQuery"
+            },
             "refresh": 1,
-            "regex": "",
-            "skipUrlSync": false,
-            "sort": 0,
-            "type": "query"
-          },
-          {
-            "allValue": "*",
-            "current": {
-              "selected": false,
-              "text": "All",
-              "value": "$__all"
-            },
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P889B6F71E75DDEDB"
-            },
-            "definition": "show tag values with key = environment",
-            "hide": 0,
-            "includeAll": true,
-            "multi": false,
-            "name": "Environment",
-            "options": [],
-            "query": "show tag values with key = environment",
-            "refresh": 1,
-            "regex": "",
-            "skipUrlSync": false,
-            "sort": 0,
-            "type": "query"
-          },
-          {
-            "allValue": "*",
-            "current": {
-              "selected": false,
-              "text": "All",
-              "value": "$__all"
-            },
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P889B6F71E75DDEDB"
-            },
-            "definition": "show tag values with key = feature ",
-            "hide": 0,
-            "includeAll": true,
-            "multi": false,
-            "name": "Feature",
-            "options": [],
-            "query": "show tag values with key = feature ",
-            "refresh": 1,
-            "regex": "",
-            "skipUrlSync": false,
-            "sort": 0,
-            "type": "query"
-          },
-          {
-            "allValue": "*",
-            "current": {
-              "selected": false,
-              "text": "All",
-              "value": "$__all"
-            },
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P889B6F71E75DDEDB"
-            },
-            "definition": "show tag values with key=test where feature = $Feature",
-            "hide": 0,
-            "includeAll": true,
-            "multi": false,
-            "name": "Test",
-            "options": [],
-            "query": "show tag values with key=test where feature = $Feature",
-            "refresh": 1,
-            "regex": "",
+            "regex": ".+",
             "skipUrlSync": false,
             "sort": 1,
             "type": "query"
           },
           {
-            "hide": 2,
-            "name": "testFilter",
-            "query": "product=~/^$Product/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
-            "skipUrlSync": false,
-            "type": "constant"
-          },
-          {
-            "allValue": "*",
+            "allValue": ".+",
             "current": {
-              "selected": false,
-              "text": "All",
-              "value": "$__all"
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
             },
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P889B6F71E75DDEDB"
-            },
-            "definition": "show tag values with key = exe",
+            "definition": "label_values(kube_pod_container_info{namespace=~\"$namespace\"}, pod)",
             "hide": 0,
             "includeAll": true,
-            "multi": false,
-            "name": "Process",
+            "label": "Container Name",
+            "multi": true,
+            "name": "container_name",
             "options": [],
-            "query": "show tag values with key = exe",
+            "query": {
+              "query": "label_values(kube_pod_container_info{namespace=~\"$namespace\"}, pod)",
+              "refId": "StandardVariableQuery"
+            },
             "refresh": 1,
-            "regex": "",
+            "regex": ".+",
             "skipUrlSync": false,
-            "sort": 0,
+            "sort": 1,
             "type": "query"
           },
           {
-            "hide": 2,
-            "name": "testGroup",
-            "query": "environment,uuid,test,feature,product",
+            "auto": false,
+            "auto_count": 30,
+            "auto_min": "10s",
+            "current": {
+              "selected": false,
+              "text": "30s",
+              "value": "30s"
+            },
+            "hide": 0,
+            "label": "Interval",
+            "name": "interval",
+            "options": [
+              {
+                "selected": true,
+                "text": "30s",
+                "value": "30s"
+              },
+              {
+                "selected": false,
+                "text": "1m",
+                "value": "1m"
+              },
+              {
+                "selected": false,
+                "text": "2m",
+                "value": "2m"
+              },
+              {
+                "selected": false,
+                "text": "3m",
+                "value": "3m"
+              },
+              {
+                "selected": false,
+                "text": "5m",
+                "value": "5m"
+              },
+              {
+                "selected": false,
+                "text": "7m",
+                "value": "7m"
+              },
+              {
+                "selected": false,
+                "text": "10m",
+                "value": "10m"
+              },
+              {
+                "selected": false,
+                "text": "30m",
+                "value": "30m"
+              },
+              {
+                "selected": false,
+                "text": "1h",
+                "value": "1h"
+              },
+              {
+                "selected": false,
+                "text": "6h",
+                "value": "6h"
+              },
+              {
+                "selected": false,
+                "text": "12h",
+                "value": "12h"
+              },
+              {
+                "selected": false,
+                "text": "1d",
+                "value": "1d"
+              },
+              {
+                "selected": false,
+                "text": "7d",
+                "value": "7d"
+              },
+              {
+                "selected": false,
+                "text": "14d",
+                "value": "14d"
+              },
+              {
+                "selected": false,
+                "text": "30d",
+                "value": "30d"
+              },
+              {
+                "selected": false,
+                "text": "60d",
+                "value": "60d"
+              }
+            ],
+            "query": "30s,1m,2m,3m,5m,7m,10m,30m,1h,6h,12h,1d,7d,14d,30d,60d",
+            "refresh": 2,
             "skipUrlSync": false,
-            "type": "constant"
+            "type": "interval"
           },
           {
-            "hide": 2,
-            "name": "testRunFilter",
-            "query": "product=~/^$Product/ AND \"environment\" =~ /^$Environment$/ AND \"process\" =~ /^$Process$/",
+            "allValue": ".+",
+            "current": {
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
+            },
+            "definition": "label_values(node)",
+            "hide": 0,
+            "includeAll": true,
+            "label": "Node Name",
+            "multi": true,
+            "name": "node_name",
+            "options": [],
+            "query": {
+              "query": "label_values(node)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": ".+",
             "skipUrlSync": false,
-            "type": "constant"
+            "sort": 1,
+            "type": "query"
           }
         ]
       },
@@ -1174,7 +1563,7 @@ data:
       },
       "timezone": "",
       "title": "Service Status",
-      "uid": "m9yGD09Wk",
-      "version": 4,
+      "uid": "d06278d15608be63a8b14764db1514fac03ebf96",
+      "version": 9,
       "weekStart": ""
     }
