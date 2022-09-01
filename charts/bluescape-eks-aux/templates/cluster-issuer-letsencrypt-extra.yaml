@@ -28,7 +28,9 @@ spec:
           region: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.region }}
           role: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.role }}
           hostedZoneID: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.hosted_zone_id }}
-          accessKeyID: {{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.access_key_id }}
+          accessKeyIDSecretRef:
+            name:   "{{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.name }}"
+            key: accessKeyId
           secretAccessKeySecretRef:
             name:   "{{ .Values.cert_manager.setup_letsencrypt_extra_cluster_issuer.name }}"
             key: secretAccessKey
