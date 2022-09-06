@@ -20,7 +20,7 @@ data:
       option  tcplog
       option  dontlognull
             timeout connect 5000
-            timeout client  50000do 
+            timeout client  50000 
             timeout server  50000
 
     frontend _haproxy_frontend
