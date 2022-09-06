@@ -716,6 +716,16 @@ entries:
   istio-additions:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-09-06T20:04:56.269614171Z"
+    description: A Helm chart for Kubernetes
+    digest: 3703767a9de2545d31b9439367db37c4cb67c7aa75e56b44a7ce9ef2f8ed55a2
+    name: istio-additions
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/istio-additions-0.2.1-alpha1/istio-additions-0.2.1-alpha1.tgz
+    version: 0.2.1-alpha1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-05-19T22:04:04.169544241Z"
     description: A Helm chart for Kubernetes
     digest: 3342d7c9d68dac8223fd73329de6b5b66c72ebc4e421bfd71fa48d73e678bc46
@@ -985,4 +995,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2022-09-02T14:05:10.155498867Z"
+generated: "2022-09-06T20:04:56.270148371Z"
