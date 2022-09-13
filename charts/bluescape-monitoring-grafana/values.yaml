@@ -19,7 +19,7 @@ grafana:
 
   # Used to pass GF_INSTALL_PLUGINS env var to grafana to install additional plugins on start:
   # https://github.com/grafana-operator/grafana-operator/blob/master/documentation/plugins.md
-  pluginInstallString: grafana-piechart-panel
+  pluginInstallString: grafana-piechart-panel,grafana-sentry-datasource
 
   # Deploy cluster in HA Mode - 3 replicas with PostgreSQL database cluster
   # deployed with kubedb
