@@ -5,6 +5,8 @@ kind: ConfigMap
 metadata:
   name: prometheus-metrics-proxy-cm
   namespace: monitoring
+  labels:
+    {{- include "istio-additions.labels" . | nindent 4 }}
 data:
   haproxy.cfg: |+
     global
@@ -20,7 +22,7 @@ data:
       option  tcplog
       option  dontlognull
             timeout connect 5000
-            timeout client  50000 
+            timeout client  50000
             timeout server  50000
 
     frontend _haproxy_frontend
@@ -45,6 +47,8 @@ kind: DaemonSet
 metadata:
   name: prometheus-metrics-proxy
   namespace: monitoring
+  labels:
+    {{- include "istio-additions.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
@@ -103,6 +107,8 @@ kind: Service
 metadata:
   name: prometheus-metrics-proxy-service
   namespace: monitoring
+  labels:
+    {{- include "istio-additions.labels" . | nindent 4 }}
 spec:
   clusterIP: None
   type: ClusterIP
