@@ -1,0 +1,19 @@
+{{- if .Values.sentry_plugin_creds.enable_sentry_plugin_creds }}
+apiVersion: 'kubernetes-client.io/v1'
+kind: 'ExternalSecret'
+metadata:
+  name: "sentry-plugin-creds"
+  labels:
+    labels: {{- include "bluescape-monitoring-grafana.labels" . | nindent 4 }}
+spec:
+  backendType: vault
+  vaultMountPoint: kubernetes
+  vaultRole: default
+  data:
+    - name: GF_SENTRY_ORGSLUG
+      key: secret/data/grafana/plugins/sentry
+      property: orgSlug
+    - name: GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET
+      key: secret/data/grafana/plugins/sentry
+      property: authToken
+{{- end }}
