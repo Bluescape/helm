@@ -34,7 +34,7 @@ data:
       "gnetId": 11992,
       "graphTooltip": 0,
       "id": 108,
-      "iteration": 1661576474529,
+      "iteration": 1663953531208,
       "links": [
         {
           "asDropdown": true,
@@ -46,6 +46,20 @@ data:
           ],
           "targetBlank": true,
           "title": "K8s cluster mertics",
+          "tooltip": "",
+          "type": "dashboards",
+          "url": ""
+        },
+        {
+          "asDropdown": true,
+          "icon": "external link",
+          "includeVars": false,
+          "keepTime": true,
+          "tags": [
+            "mysql"
+          ],
+          "targetBlank": true,
+          "title": "MySQL Metrics",
           "tooltip": "",
           "type": "dashboards",
           "url": ""
@@ -1564,6 +1578,6 @@ data:
       "timezone": "",
       "title": "Service Status",
       "uid": "d06278d15608be63a8b14764db1514fac03ebf96",
-      "version": 9,
+      "version": 10,
       "weekStart": ""
     }

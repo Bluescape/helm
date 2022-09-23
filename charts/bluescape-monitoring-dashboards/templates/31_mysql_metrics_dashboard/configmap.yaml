@@ -27,7 +27,7 @@ data:
       "gnetId": 14057,
       "graphTooltip": 1,
       "id": 62,
-      "iteration": 1634274154788,
+      "iteration": 1663953721497,
       "links": [],
       "panels": [
         {
@@ -3654,9 +3654,11 @@ data:
         }
       ],
       "refresh": "10s",
-      "schemaVersion": 26,
+      "schemaVersion": 34,
       "style": "dark",
-      "tags": [],
+      "tags": [
+        "mysql"
+      ],
       "templating": {
         "list": [
           {
@@ -3779,5 +3781,5 @@ data:
       "timezone": "",
       "title": "MySQL Exporter Quickstart and Dashboard",
       "uid": "549c2bf8936f7767ea6ac47c47b00f2a",
-      "version": 1
+      "version": 2
     }
