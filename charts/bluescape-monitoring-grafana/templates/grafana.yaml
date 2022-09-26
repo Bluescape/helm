@@ -23,6 +23,10 @@ items:
         - secretRef:
             name: grafana-install-plugins
         {{- end }}
+        {{- if .Values.sentry_plugin_creds.enable_sentry_plugin_creds }}
+        - secretRef:
+            name: sentry-plugin-creds
+        {{- end }}
     {{- else }}
     deployment:
       replicas: 1
@@ -34,6 +38,10 @@ items:
         {{- if ne .Values.grafana.pluginInstallString "" }}
         - secretRef:
             name: grafana-install-plugins
+        {{- end }}
+        {{- if .Values.sentry_plugin_creds.enable_sentry_plugin_creds }}
+        - secretRef:
+            name: sentry-plugin-creds
         {{- end }}
     {{- end }}
     config:

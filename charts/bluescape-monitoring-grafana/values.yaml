@@ -11,6 +11,9 @@ custom_dashboards:
 external_secrets:
   setup_grafana_oidc_secret: true
 
+sentry_plugin_creds:
+  enable_sentry_plugin_creds: true
+
 grafana:
   replicaCount: 1
   domain_name: example.io
@@ -19,7 +22,7 @@ grafana:
 
   # Used to pass GF_INSTALL_PLUGINS env var to grafana to install additional plugins on start:
   # https://github.com/grafana-operator/grafana-operator/blob/master/documentation/plugins.md
-  pluginInstallString: grafana-piechart-panel
+  pluginInstallString: grafana-piechart-panel,grafana-sentry-datasource
 
   # Deploy cluster in HA Mode - 3 replicas with PostgreSQL database cluster
   # deployed with kubedb
