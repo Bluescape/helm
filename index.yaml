@@ -935,6 +935,17 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/mongodb-10.26.4/mongodb-10.26.4.tgz
     version: 10.26.4
+  n8n:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2022-09-29T15:13:08.811213436Z"
+    description: A Helm chart for Kubernetes
+    digest: cb212ce04ace11139ad86851e116b92588b3872c4b23abe0d9a4f33cd4398ad6
+    name: n8n
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/n8n-0.1.0-alpha1/n8n-0.1.0-alpha1.tgz
+    version: 0.1.0-alpha1
   oauth2-proxy:
   - apiVersion: v1
     appVersion: 5.1.0
@@ -1025,4 +1036,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2022-09-14T15:54:09.880024848Z"
+generated: "2022-09-29T15:13:08.811590553Z"
