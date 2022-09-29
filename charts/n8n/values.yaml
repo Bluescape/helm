@@ -84,7 +84,7 @@ global:
     # see more options to add if needed in `global._env_defaults` and https://docs.n8n.io/hosting/environment-variables/#user-management-and-smtp
 
   # tweaks might be required for Cilium
-  dnsPolicy: default
+  dnsPolicy: Default
   hostNetwork: false
 
 # Main service specific parameters
