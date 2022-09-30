@@ -948,6 +948,16 @@ entries:
   n8n:
   - apiVersion: v2
     appVersion: latest
+    created: "2022-09-30T17:29:44.352708184Z"
+    description: A Helm chart to install N8N.
+    digest: 8e728c72e06b69df0f883288d55f63fb569e6ace108fa7aa8c2629704435350f
+    name: n8n
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/n8n-0.1.0-alpha2/n8n-0.1.0-alpha2.tgz
+    version: 0.1.0-alpha2
+  - apiVersion: v2
+    appVersion: latest
     created: "2022-09-29T15:13:08.811213436Z"
     description: A Helm chart for Kubernetes
     digest: cb212ce04ace11139ad86851e116b92588b3872c4b23abe0d9a4f33cd4398ad6
@@ -1046,4 +1056,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2022-09-29T17:37:01.756884301Z"
+generated: "2022-09-30T17:29:44.352992292Z"
