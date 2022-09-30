@@ -41,9 +41,9 @@ spec:
               containerPort: {{ (merge .Values.worker.env .Values.global.env).QUEUE_HEALTH_CHECK_PORT }}
               protocol: TCP
           livenessProbe:
-            failureThreshold: 10
-            periodSeconds: 60
-            initialDelaySeconds: 5
+            failureThreshold: 3
+            periodSeconds: 20
+            initialDelaySeconds: 30
             successThreshold: 1
             timeoutSeconds: 30
             httpGet:
@@ -59,7 +59,7 @@ spec:
               path: /healthz
               port: {{ (merge .Values.worker.env .Values.global.env).QUEUE_HEALTH_CHECK_PORT }}
           startupProbe:
-            failureThreshold: 180
+            failureThreshold: 10
             periodSeconds: 10
             httpGet:
               path: /healthz
