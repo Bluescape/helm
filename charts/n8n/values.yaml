@@ -1,0 +1,209 @@
+# Default values for n8n.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: bluescape/n8n
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+global:
+  # DO NOT SET ANYTHING HERE, user `global.env` item to override things
+  env:
+    # you can set simple scalar variable as value in the map or an object like so:
+    # VAR_NAME:
+    # valueFrom:
+    #   secretKeyRef:
+    #     name: secretName
+    #     key: keyInTheSecret
+
+    # deployment specific
+    GENERIC_TIMEZONE: "America/New_York"
+    DB_TYPE: "mysqldb"
+    EXECUTIONS_MODE: "queue"
+    N8N_PATH: "/"
+    N8N_PORT: "5678"
+    N8N_PROTOCOL: "http"
+    N8N_DIAGNOSTICS_ENABLED: "true"
+    N8N_HIRING_BANNER_ENABLED: "false"
+
+    N8N_DISABLE_PRODUCTION_MAIN_PROCESS: "true"
+    N8N_SKIP_WEBHOOK_DEREGISTRATION_SHUTDOWN: "true"
+    N8N_BLOCK_ENV_ACCESS_IN_NODE: "true"
+
+    # execution: https://docs.n8n.io/hosting/environment-variables/#executions
+    EXECUTIONS_TIMEOUT: "-1"
+    EXECUTIONS_TIMEOUT_MAX: "3600"
+
+    # logging
+    N8N_LOG_LEVEL: "info" # info, warn, error, verbose, debug
+
+    # QUEUE_BULL_REDIS_ items
+    QUEUE_BULL_PREFIX: ""
+    QUEUE_BULL_REDIS_DB: "0"
+    QUEUE_BULL_REDIS_HOST: ""
+    QUEUE_BULL_REDIS_PORT: "6379"
+    QUEUE_BULL_REDIS_PASSWORD: ""
+
+    QUEUE_BULL_REDIS_TIMEOUT_THRESHOLD: 10000ms
+    QUEUE_RECOVERY_INTERVAL: "60" # seconds
+    QUEUE_HEALTH_CHECK_ACTIVE: "true"
+    QUEUE_HEALTH_CHECK_PORT: "5678" # health-check port for worker
+
+    # mysql connection default items
+    DB_TABLE_PREFIX: ""
+    DB_MYSQLDB_DATABASE: "n8n"
+    DB_MYSQLDB_PORT: 3306
+
+    # SMTP and user management
+    N8N_USER_MANAGEMENT_DISABLED: "false"
+
+    N8N_EMAIL_MODE: smtp
+    N8N_SMTP_HOST: ""
+    N8N_SMTP_PORT: ""
+    N8N_SMTP_USER: ""
+    N8N_SMTP_PASS: ""
+    N8N_SMTP_SSL: "false"
+    N8N_SMTP_SENDER: "no-reply-n8n-admin@bluescape.com"
+
+    # all these are required
+    N8N_ENCRYPTION_KEY: ""
+    # webhook URL
+    WEBHOOK_URL: ""
+
+
+
+    # mysql
+    DB_MYSQLDB_HOST: ""
+    DB_MYSQLDB_USER: ""
+    DB_MYSQLDB_PASSWORD: ""
+
+    #N8N_SMTP_SENDER: "no-reply-n8n-admin@bluescape.com"
+
+    # see more options to add if needed in `global._env_defaults` and https://docs.n8n.io/hosting/environment-variables/#user-management-and-smtp
+
+  # tweaks might be required for Cilium
+  dnsPolicy: Default
+  hostNetwork: false
+
+# Main service specific parameters
+main:
+  replicaCount: 1
+  # Add more environment variables that apply to main component (MAP style)
+  env: {}
+
+  # deployment adjustments
+  resources: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podAnnotations: {}
+  podSecurityContext: {}
+  # fsGroup: 2000
+  securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# Worker specific parameters
+worker:
+  replicaCount: 1
+  # You can define the number of jobs a worker can run in parallel by using the concurrency flag. It defaults to 10 but can be changed:
+  concurrency: 10
+
+  # webhook launch arguments
+  args: ["n8n", "worker"]
+
+  # Add more environment variables that apply to worker component (MAP style)
+  env: {}
+
+  # deployment adjustments
+  resources: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podAnnotations: {}
+  podSecurityContext: {}
+  # fsGroup: 2000
+  securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+# Webhook specific parameters
+webhook:
+  replicaCount: 1
+
+  # webhook launch arguments
+  args: ["n8n", "webhook"]
+
+  # Add more environment variables that apply to webhook component (MAP style)
+  env: {}
+
+  # deployment adjustments
+  resources: {}
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  podAnnotations: {}
+  podSecurityContext: {}
+  # fsGroup: 2000
+  securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local

@@ -1,0 +1,9 @@
+{{/* redis N8N items */}}
+{{- $null := required "global.env.N8N_ENCRYPTION_KEY is required" .Values.global.env.N8N_ENCRYPTION_KEY }}
+{{- $null := required "global.env.WEBHOOK_URL is required" .Values.global.env.WEBHOOK_URL }}
+{{/* redis required items */}}
+{{- $null := required "global.env.QUEUE_BULL_REDIS_HOST is required" .Values.global.env.QUEUE_BULL_REDIS_HOST }}
+{{/* mysql required items */}}
+{{- $null := required "global.env.DB_MYSQLDB_HOST is required" .Values.global.env.DB_MYSQLDB_HOST }}
+{{- $null := required "global.env.DB_MYSQLDB_USER is required" .Values.global.env.DB_MYSQLDB_USER }}
+{{- $null := required "global.env.DB_MYSQLDB_PASSWORD is required" .Values.global.env.DB_MYSQLDB_PASSWORD }}

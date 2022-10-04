@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "n8n.fullname" . }}-worker
+  labels:
+    n8nComponent: worker
+    {{- include "n8n.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.worker.replicaCount }}
+  selector:
+    matchLabels:
+      n8nComponent: worker
+      {{- include "n8n.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.worker.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        n8nComponent: worker
+        {{- include "n8n.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "n8n.serviceAccountName" . }}
+      dnsPolicy: {{ .Values.global.dnsPolicy }}
+      hostNetwork: {{ .Values.global.hostNetwork }}
+      securityContext:
+        {{- toYaml .Values.worker.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          args: {{- concat .Values.worker.args (list (printf "--concurrency=%v" .Values.worker.concurrency)) | toYaml | nindent 12 }}
+          securityContext: {{- toYaml .Values.worker.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ (merge .Values.worker.env .Values.global.env).QUEUE_HEALTH_CHECK_PORT }}
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            periodSeconds: 20
+            initialDelaySeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 30
+            httpGet:
+              path: /healthz
+              port: {{ (merge .Values.worker.env .Values.global.env).QUEUE_HEALTH_CHECK_PORT }}
+          readinessProbe:
+            failureThreshold: 3
+            periodSeconds: 20
+            initialDelaySeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+            httpGet:
+              path: /healthz
+              port: {{ (merge .Values.worker.env .Values.global.env).QUEUE_HEALTH_CHECK_PORT }}
+          startupProbe:
+            failureThreshold: 10
+            periodSeconds: 10
+            httpGet:
+              path: /healthz
+              port: {{ (merge .Values.worker.env .Values.global.env).QUEUE_HEALTH_CHECK_PORT }}
+          env: {{- include "renderEnvVarsMap" (merge .Values.worker.env .Values.global.env ) | indent 12}}
+          lifecycle:
+            # Send SIGINT to the process to close it's databases
+            preStop:
+              exec:
+                command:
+                - /bin/sh
+                - -c
+                - kill -2 1
+          resources:
+            {{- toYaml .Values.worker.resources | nindent 12 }}
+      {{- with .Values.worker.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.worker.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.worker.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
