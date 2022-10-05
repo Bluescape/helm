@@ -39,10 +39,14 @@ external_secrets:
   setup_gatekeeper_policy_manager_secret: false
   setup_prometheus_metrics_secret: false
   setup_threatstack_secret: false
+  setup_argocd_secret: false
+  setup_github_secret: false
   setup_loki_secret: false
 
   setup_aes_edge_stack_secret: false
   aes_edge_stack_secret_name: ""
+
+  argocd_secret_oidc_vault_key: oidc
 
 kubedb_catalog:
   setup_mongodb_3_6: false
