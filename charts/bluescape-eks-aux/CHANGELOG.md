@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.0] - 2022-10-05- NEX-2092 - Remove external-secrets dependency for ArgoCD - REVERT
+### Revert
+- reverting 0.12.0 changes
+
 ## [0.12.0] - 2022-09-28- NEX-2092 - Remove external-secrets dependency for ArgoCD
 ### Changed
 - removing `external-secret-argocd.yaml` and `external-secret-github.yaml`
