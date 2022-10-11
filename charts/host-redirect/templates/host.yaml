@@ -13,9 +13,6 @@ spec:
     insecure:
       action: Redirect
       additionalPort: 8080
-  selector:
-    matchLabels:
-      hostname: {{ required "A valid fqdn.from value is required!" .Values.fqdn.from }}
   tls:
     min_tls_version: v1.2
   tlsSecret:
