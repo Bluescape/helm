@@ -724,6 +724,16 @@ entries:
     version: 0.2.0
   host-redirect:
   - apiVersion: v2
+    created: "2022-10-11T16:32:07.113382029Z"
+    description: A Helm chart that created FQND based redirects, requires Ambassador
+      and Cert-Manager installed in the cluster.
+    digest: 04638231f7277db3b47276a5dfe7719cba7d40c77393c4be013a323b86d2affc
+    name: host-redirect
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/host-redirect-0.2.0/host-redirect-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2022-05-19T22:04:04.016257383Z"
     description: A Helm chart that created FQND based redirects, requires Ambassador
       and Cert-Manager installed in the cluster.
@@ -1076,4 +1086,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2022-10-05T15:54:37.541157574Z"
+generated: "2022-10-11T16:32:07.113513125Z"
