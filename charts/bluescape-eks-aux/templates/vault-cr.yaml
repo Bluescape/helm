@@ -4,7 +4,8 @@ kind: "Vault"
 metadata:
   name:  "vault"
   namespace: vault
-  app: vault
+  labels:
+    app: vault
 spec:
   size: "{{ .Values.vault_cr.clusterSize }}"
   image: "{{ .Values.vault_cr.image }}:{{ .Values.vault_cr.imageTag }}"
