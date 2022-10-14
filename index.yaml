@@ -40,6 +40,16 @@ entries:
     version: 1.3.3
   bluescape-eks-aux:
   - apiVersion: v2
+    appVersion: 1.17.0
+    created: "2022-10-14T17:06:35.274313335Z"
+    description: A Helm chart for Kubernetes
+    digest: c61fb589f542b14709d25936f66f201fa485699934f0fe808f22bceb8fb1fa82
+    name: bluescape-eks-aux
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-eks-aux-0.14.0/bluescape-eks-aux-0.14.0.tgz
+    version: 0.14.0
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2022-10-05T15:54:37.540707032Z"
     description: A Helm chart for Kubernetes
@@ -1086,4 +1096,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2022-10-11T16:32:07.113513125Z"
+generated: "2022-10-14T17:06:35.274433036Z"
