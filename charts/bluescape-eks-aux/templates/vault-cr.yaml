@@ -11,6 +11,22 @@ spec:
   image: "{{ .Values.vault_cr.image }}:{{ .Values.vault_cr.imageTag }}"
   bankVaultsImage: banzaicloud/bank-vaults:latest
 
+  podAntiAffinity: failure-domain.beta.kubernetes.io/zone
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: "spot"
+                operator: In
+                values: [ "false" ]
+              - key: "dedicated"
+                operator: NotIn
+                values:
+                  - loki
+                  - cortex
+                  - prometheus
+                  - edge
   annotations:
     common/annotation: 'true'
   vaultAnnotations:
@@ -23,11 +39,11 @@ spec:
     bluescape.com/log-format: string
 
   vaultPodSpec:
-    priorityClassName: system-node-critical
+    priorityClassName: "{{ .Values.vault_cr.priorityClassName }}"
   vaultConfigurerPodSpec:
-    priorityClassName: system-node-critical
+    priorityClassName: "{{ .Values.vault_cr.priorityClassName }}"
 
-  serviceAccount: vault
+  serviceAccount: "{{ .Values.vault_cr.serviceAccount }}"
   serviceType: ClusterIP
   volumeClaimTemplates:
     - metadata:
@@ -60,9 +76,10 @@ spec:
     listener:
       tcp:
         address: "0.0.0.0:8200"
+        tls_disable: {{ .Values.vault_cr.tls_disable }}
         tls_cert_file: "/vault/tls/server.crt"
         tls_key_file: "/vault/tls/server.key"
-    api_addr: "https://vault.vault.svc.cluster.local:8200"
+    api_addr: "{{ .Values.vault_cr.local_vault_addr }}"
     cluster_addr: "https://${.Env.POD_NAME}:8201"
     ui: true
 
@@ -118,21 +135,4 @@ spec:
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL
       value: debug
-
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-        - matchExpressions:
-          - key: "spot"
-            operator: In
-            values: [ "false" ]
-          - key: "dedicated"
-            operator: NotIn
-            values:
-              - loki
-              - cortex
-              - prometheus
-              - edge
-  podAntiAffinity: failure-domain.beta.kubernetes.io/zone
 {{- end }}

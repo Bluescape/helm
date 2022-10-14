@@ -23,6 +23,10 @@ vault_cr:
   bound_service_account_namespaces: []
   storageClass: "persistent"
   clusterSize: 3
+  serviceAccount: "vault"
+  priorityClassName: "system-node-critical"
+  tls_disable: false
+  local_vault_addr: "https://vault.vault.svc.cluster.local:8200"
 
 cert_manager:
   setup_letsencrypt_prod_cluster_issuer: false
