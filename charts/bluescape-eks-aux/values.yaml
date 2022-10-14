@@ -15,6 +15,15 @@ vault:
   bound_service_account_names: []
   bound_service_account_namespaces: []
 
+vault_cr:
+  enabled: false
+  image: vault
+  imageTag: "1.6.0"
+  bound_service_account_names: []
+  bound_service_account_namespaces: []
+  storageClass: "persistent"
+  clusterSize: "3"
+
 cert_manager:
   setup_letsencrypt_prod_cluster_issuer: false
   setup_letsencrypt_prod_cluster_dns_issuer: false

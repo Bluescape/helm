@@ -1,0 +1,137 @@
+{{- if .Values.vault_cr.enabled }}
+apiVersion: "vault.banzaicloud.com/v1alpha1"
+kind: "Vault"
+metadata:
+  name:  "vault"
+  namespace: vault
+  app: vault
+spec:
+  size: "{{ .Values.vault_cr.clusterSize }}"
+  image: "{{ .Values.vault_cr.image }}:{{ .Values.vault_cr.imageTag }}"
+  bankVaultsImage: banzaicloud/bank-vaults:latest
+
+  annotations:
+    common/annotation: 'true'
+  vaultAnnotations:
+    type/instance: "vault"
+  vaultConfigurerAnnotations:
+    type/instance: "vaultconfigurer"
+  vaultLabels:
+    bluescape.com/log-format: json
+  vaultConfigurerLabels:
+    bluescape.com/log-format: string
+
+  vaultPodSpec:
+    priorityClassName: system-node-critical
+  vaultConfigurerPodSpec:
+    priorityClassName: system-node-critical
+
+  serviceAccount: vault
+  serviceType: ClusterIP
+  volumeClaimTemplates:
+    - metadata:
+        name: vault-raft
+      spec:
+        storageClassName: "{{ .Values.vault_cr.storageClass }}"
+        accessModes:
+          - ReadWriteOnce
+        volumeMode: Filesystem
+        resources:
+          requests:
+            storage: 1Gi
+  volumeMounts:
+    - name: vault-raft
+      mountPath: /vault/file
+  veleroEnabled: true
+
+  caNamespaces:
+    - "*"
+  unsealConfig:
+    options:
+      preFlightChecks: true
+    kubernetes:
+      secretnamespace: vault
+
+  config:
+    storage:
+      raft:
+        path: "/vault/file"
+    listener:
+      tcp:
+        address: "0.0.0.0:8200"
+        tls_cert_file: "/vault/tls/server.crt"
+        tls_key_file: "/vault/tls/server.key"
+    api_addr: "https://vault.vault.svc.cluster.local:8200"
+    cluster_addr: "https://${.Env.POD_NAME}:8201"
+    ui: true
+
+  statsdDisabled: true
+  serviceRegistrationEnabled: true
+
+  resources:
+    vault:
+      limits:
+        cpu: 2
+        memory: 1Gi
+      requests:
+        cpu: 1
+        memory: 512Mi
+
+  externalConfig:
+    policies:
+      - name: allow_secrets
+        rules: path "secret/*" {
+          capabilities = ["create", "read", "update", "delete", "list"]
+          }
+    auth:
+      - type: kubernetes
+        roles:
+          # Allow every pod in the default namespace to use the secret kv store
+          - name: default
+            bound_service_account_names:
+              {{- range .Values.vault_cr.bound_service_account_names }}
+              - {{ . }}
+              {{- end }}
+            bound_service_account_namespaces:
+              {{- range .Values.vault_cr.bound_service_account_namespaces }}
+              - {{ . }}
+              {{- end }}
+            policies: allow_secrets
+            ttl: 1h
+          - name: secretsmutation
+            bound_service_account_names:
+              - lacework
+              - vault-secrets-webhook
+            bound_service_account_namespaces:
+              - lacework
+              - vault-secrets-webhook
+            policies:
+              - allow_secrets
+            ttl: 1h
+    secrets:
+      - path: secret
+        type: kv
+        description: General secrets.
+        options:
+          version: 2
+  vaultEnvsConfig:
+    - name: VAULT_LOG_LEVEL
+      value: debug
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "spot"
+            operator: In
+            values: [ "false" ]
+          - key: "dedicated"
+            operator: NotIn
+            values:
+              - loki
+              - cortex
+              - prometheus
+              - edge
+  podAntiAffinity: failure-domain.beta.kubernetes.io/zone
+{{- end }}
