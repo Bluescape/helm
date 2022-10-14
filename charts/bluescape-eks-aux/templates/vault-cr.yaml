@@ -51,7 +51,7 @@ spec:
     options:
       preFlightChecks: true
     kubernetes:
-      secretnamespace: vault
+      secretNamespace: vault
 
   config:
     storage:
