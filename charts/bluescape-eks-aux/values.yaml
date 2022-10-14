@@ -22,7 +22,7 @@ vault_cr:
   bound_service_account_names: []
   bound_service_account_namespaces: []
   storageClass: "persistent"
-  clusterSize: "3"
+  clusterSize: 3
 
 cert_manager:
   setup_letsencrypt_prod_cluster_issuer: false
