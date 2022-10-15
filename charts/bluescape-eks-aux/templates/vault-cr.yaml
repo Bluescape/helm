@@ -4,12 +4,9 @@ kind: "Vault"
 metadata:
   name:  "vault"
   namespace: vault
-  labels:
-    app: vault
 spec:
   size: {{ .Values.vault_cr.clusterSize }}
   image: "{{ .Values.vault_cr.image }}:{{ .Values.vault_cr.imageTag }}"
-  bankVaultsImage: banzaicloud/bank-vaults:latest
 
   podAntiAffinity: failure-domain.beta.kubernetes.io/zone
   affinity:
@@ -45,6 +42,7 @@ spec:
 
   serviceAccount: "{{ .Values.vault_cr.serviceAccount }}"
   serviceType: ClusterIP
+
   volumeClaimTemplates:
     - metadata:
         name: vault-raft
@@ -63,11 +61,12 @@ spec:
 
   caNamespaces:
     - "*"
+
   unsealConfig:
     options:
       preFlightChecks: true
     kubernetes:
-      secretNamespace: vault
+      secretNamespace: default
 
   config:
     storage:
