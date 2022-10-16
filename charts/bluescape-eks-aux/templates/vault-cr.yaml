@@ -131,7 +131,29 @@ spec:
         description: General secrets.
         options:
           version: 2
+      - type: pki
+        description: Vault PKI Backend
+        config:
+          default_lease_ttl: 168h
+          max_lease_ttl: 720h
+        configuration:
+          config:
+            - name: urls
+              issuing_certificates: "{{ .Values.vault_cr.local_vault_addr }}/v1/pki/ca"
+              crl_distribution_points: "{{ .Values.vault_cr.local_vault_addr }}/v1/pki/crl"
+          root/generate:
+            - name: internal
+              common_name: vault.vault
+          roles:
+            - name: default
+              allowed_domains: localhost,pod,svc,vault
+              allow_subdomains: true
+              generate_lease: true
+              ttl: 1m
+
   vaultEnvsConfig:
     - name: VAULT_LOG_LEVEL
       value: debug
+
+  istioEnabled: {{ .Values.vault_cr.istio_enable }}
 {{- end }}
