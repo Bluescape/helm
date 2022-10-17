@@ -8,5 +8,5 @@ metadata:
 spec:
   name:  qa-frontend-dashboard
   configMapRef:
-    name:  qa-e2e-dashboard
-    key:  qa-e2e-dashboard.json
+    name:  qa-frontend-dashboard
+    key:  qa-frontend-dashboard.json
