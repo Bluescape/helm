@@ -1,0 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name:  qa-frontend-dashboard
+  namespace: grafana
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  name:  qa-frontend-dashboard
+  configMapRef:
+    name:  qa-e2e-dashboard
+    key:  qa-e2e-dashboard.json
