@@ -1,0 +1,733 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: qa-frontend-dashboard
+  namespace: grafana
+  labels:
+    {{ - include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+data:
+  qa-frontend-dashboard.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 77,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "collapsed": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 49,
+          "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "Memory Usage",
+          "type": "row"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "PDD2CBB03B513C6AF"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 24,
+                "gradientMode": "opacity",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "always",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 1,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "table",
+              "placement": "right",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.1.4",
+          "targets": [
+            {
+              "alias": "$tag_test - max",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "procstat.memory_usage",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT max(memory_usage) FROM procstat WHERE tool='performanceHelper' AND $testFilter AND exe=~/^$Process$/ AND $timeFilter GROUP BY time(1s),$testGroup fill(none)",
+              "rawQuery": false,
+              "refId": "Max",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "max"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "tool",
+                  "operator": "=",
+                  "value": "performanceHelper"
+                }
+              ]
+            },
+            {
+              "alias": "$tag_test - min",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "procstat.memory_usage",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT max(memory_usage) FROM procstat WHERE tool='performanceHelper' AND $testFilter AND exe=~/^$Process$/ AND $timeFilter GROUP BY time(1s),$testGroup fill(none)",
+              "rawQuery": false,
+              "refId": "Min",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "min"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "tool",
+                  "operator": "=",
+                  "value": "performanceHelper"
+                }
+              ]
+            },
+            {
+              "alias": "$tag_test - p99",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "procstat.memory_usage",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT max(memory_usage) FROM procstat WHERE tool='performanceHelper' AND $testFilter AND exe=~/^$Process$/ AND $timeFilter GROUP BY time(1s),$testGroup fill(none)",
+              "rawQuery": false,
+              "refId": "p99",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "p99"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                }
+              ]
+            },
+            {
+              "alias": "$tag_test - p95",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "procstat.memory_usage",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT max(memory_usage) FROM procstat WHERE tool='performanceHelper' AND $testFilter AND exe=~/^$Process$/ AND $timeFilter GROUP BY time(1s),$testGroup fill(none)",
+              "rawQuery": false,
+              "refId": "p95",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "p95"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                }
+              ]
+            },
+            {
+              "alias": "$tag_test - p90",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "procstat.memory_usage",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT max(memory_usage) FROM procstat WHERE tool='performanceHelper' AND $testFilter AND exe=~/^$Process$/ AND $timeFilter GROUP BY time(1s),$testGroup fill(none)",
+              "rawQuery": false,
+              "refId": "p90",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "p90"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                }
+              ]
+            }
+          ],
+          "title": "Summary",
+          "type": "timeseries"
+        }
+      ],
+      "refresh": "10s",
+      "schemaVersion": 37,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "allValue": "*",
+            "current": {
+              "selected": true,
+              "text": "qa-perf-webc",
+              "value": "qa-perf-webc"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "PDD2CBB03B513C6AF"
+            },
+            "definition": "show tag values with key = package",
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "Package",
+            "options": [],
+            "query": "show tag values with key = package",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": true,
+              "text": "uat.alpha.dev.bluescape.io",
+              "value": "uat.alpha.dev.bluescape.io"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "PDD2CBB03B513C6AF"
+            },
+            "definition": "show tag values with key = environment WHERE $timeFilter",
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "Environment",
+            "options": [],
+            "query": "show tag values with key = environment WHERE $timeFilter",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": true,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "PDD2CBB03B513C6AF"
+            },
+            "definition": "show tag values with key = feature ",
+            "hide": 0,
+            "includeAll": true,
+            "multi": false,
+            "name": "Feature",
+            "options": [],
+            "query": "show tag values with key = feature ",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 1,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": false,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "PDD2CBB03B513C6AF"
+            },
+            "definition": "show tag values with key=test where feature = '$Feature'",
+            "hide": 0,
+            "includeAll": true,
+            "label": "",
+            "multi": false,
+            "name": "Test",
+            "options": [],
+            "query": "show tag values with key=test where feature = '$Feature'",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 1,
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "hide": 2,
+            "name": "testFilter",
+            "query": "product=~/^$Product/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
+            "skipUrlSync": false,
+            "type": "constant"
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": true,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "PDD2CBB03B513C6AF"
+            },
+            "definition": "show tag values with key = exe",
+            "hide": 0,
+            "includeAll": true,
+            "multi": false,
+            "name": "Process",
+            "options": [],
+            "query": "show tag values with key = exe",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "hide": 2,
+            "name": "testGroup",
+            "query": "environment,uuid,test,feature,product",
+            "skipUrlSync": false,
+            "type": "constant"
+          },
+          {
+            "hide": 2,
+            "name": "testRunFilter",
+            "query": "product=~/^$Product/ AND \"environment\" =~ /^$Environment$/ AND \"process\" =~ /^$Process$/",
+            "skipUrlSync": false,
+            "type": "constant"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-15m",
+        "to": "now"
+      },
+      "timepicker": {
+        "refresh_intervals": [
+          "10s",
+          "30s",
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "2h",
+          "1d"
+        ]
+      },
+      "timezone": "",
+      "title": "QA / Front-End Test Metrics Summary",
+      "uid": "4OdOHPS4z",
+      "version": 1,
+      "weekStart": ""
+    }
