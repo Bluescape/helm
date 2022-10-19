@@ -609,32 +609,7 @@ data:
               },
               "unit": "percent"
             },
-            "overrides": [
-              {
-                "__systemRef": "hideSeriesFrom",
-                "matcher": {
-                  "id": "byNames",
-                  "options": {
-                    "mode": "exclude",
-                    "names": [
-                      "Load Workspace @Feature:LoadWorkspace / Empty Workspace @Test_ID:C224 @Precommit - max"
-                    ],
-                    "prefix": "All except:",
-                    "readOnly": true
-                  }
-                },
-                "properties": [
-                  {
-                    "id": "custom.hideFrom",
-                    "value": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": true
-                    }
-                  }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 12,
@@ -1145,7 +1120,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": false,
+              "selected": true,
               "text": "All",
               "value": "$__all"
             },
@@ -1172,7 +1147,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": false,
+              "selected": true,
               "text": "All",
               "value": "$__all"
             },
@@ -1206,7 +1181,7 @@ data:
         ]
       },
       "time": {
-        "from": "now-1h",
+        "from": "now-12h",
         "to": "now"
       },
       "timepicker": {
