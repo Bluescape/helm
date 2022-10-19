@@ -467,7 +467,7 @@ data:
               ]
             },
             {
-              "alias": "$tag_test - p90",
+              "alias": "$tag_feature / $tag_test - p90",
               "datasource": {
                 "type": "influxdb",
                 "uid": "PDD2CBB03B513C6AF"
@@ -609,7 +609,32 @@ data:
               },
               "unit": "percent"
             },
-            "overrides": []
+            "overrides": [
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "Load Workspace @Feature:LoadWorkspace / Empty Workspace @Test_ID:C224 @Precommit - max"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": true
+                    }
+                  }
+                ]
+              }
+            ]
           },
           "gridPos": {
             "h": 12,
@@ -1042,7 +1067,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "qa-perf-webc",
               "value": "qa-perf-webc"
             },
@@ -1120,7 +1145,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "All",
               "value": "$__all"
             },
@@ -1128,14 +1153,14 @@ data:
               "type": "influxdb",
               "uid": "PDD2CBB03B513C6AF"
             },
-            "definition": "show tag values with key=test WHERE $testFilter",
+            "definition": "show tag values with key=test WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"environment\" =~ /^$Environment$/",
             "hide": 0,
             "includeAll": true,
             "label": "",
             "multi": false,
             "name": "Test",
             "options": [],
-            "query": "show tag values with key=test WHERE $testFilter",
+            "query": "show tag values with key=test WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"environment\" =~ /^$Environment$/",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -1147,7 +1172,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "All",
               "value": "$__all"
             },
@@ -1155,13 +1180,13 @@ data:
               "type": "influxdb",
               "uid": "PDD2CBB03B513C6AF"
             },
-            "definition": "show tag values with key = exe WHERE $testFilter",
+            "definition": "show tag values with key = exe WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
             "hide": 0,
             "includeAll": true,
             "multi": false,
             "name": "Process",
             "options": [],
-            "query": "show tag values with key = exe WHERE $testFilter",
+            "query": "show tag values with key = exe WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -1200,6 +1225,6 @@ data:
       "timezone": "",
       "title": "QA / Front-End Test Metrics Summary",
       "uid": "4OdOHPS4z",
-      "version": 5,
+      "version": 7,
       "weekStart": ""
     }
