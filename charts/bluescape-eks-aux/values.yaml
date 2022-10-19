@@ -68,3 +68,20 @@ kubedb_catalog:
   setup_mysql_5_6: false
   setup_postgres_11_1: false
 
+external_secrets_operator:
+  setup_cluster_secret_store_for_vault: false
+
+  setup_legacy_extra_cluster_issuer_secret: false
+  cluster_issuer_name: ""
+
+  setup_gatekeeper_policy_manager_secret: false
+  setup_prometheus_metrics_secret: false
+  setup_threatstack_secret: false
+  setup_argocd_secret: false
+  setup_github_secret: false
+  setup_loki_secret: false
+
+  setup_aes_edge_stack_secret: false
+  aes_edge_stack_secret_name: ""
+
+  argocd_secret_oidc_vault_key: oidc
