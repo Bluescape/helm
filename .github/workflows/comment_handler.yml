@@ -1,0 +1,17 @@
+name: Handle Comments
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  jira_comment:
+    uses: bluescape/reusable-github-workflows/.github/workflows/create_jira_from_pr.yml@v1
+    secrets:
+      JIRA_HOST: ${{ secrets.JIRA_HOST }}
+      JIRA_USERNAME: ${{ secrets.JIRA_USERNAME }}
+      JIRA_PASSWORD: ${{ secrets.JIRA_PASSWORD }}
+  deploy_comment:
+    uses: bluescape/reusable-github-workflows/.github/workflows/deploy_comment_handler.yml@v1
+    secrets:
+      TOKEN: ${{ secrets.BDB_GITHUBPAT }}
