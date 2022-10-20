@@ -1,4 +1,4 @@
-{{- if .Values.grafana.sentry_plugin_creds.enable_sentry_plugin_creds }}
+{{- if .Values.grafana.sync_credentials.sentry_plugin.via_external_secrets }}
 apiVersion: 'kubernetes-client.io/v1'
 kind: 'ExternalSecret'
 metadata:
@@ -15,5 +15,30 @@ spec:
       property: orgSlug
     - name: GF_SENTRY_AUTHTOKEN
       key: secret/data/grafana/plugins/sentry
+      property: authToken
+{{- end }}
+
+{{- if .Values.grafana.sync_credentials.sentry_plugin.via_external_secrets_operator }}
+apiVersion: 'external-secrets.io/v1beta1'
+kind: 'ExternalSecret'
+metadata:
+  name: "sentry-plugin-creds"
+  namespace: "grafana"
+  labels:
+    {{- include "bluescape-monitoring-grafana.labels" . | nindent 4 }}
+spec:
+  secretStoreRef:
+    name: vault-backend-cs
+    kind: ClusterSecretStore
+  target:
+    name: "sentry-plugin-creds"
+  data:
+  - secretKey: GF_SENTRY_ORGSLUG
+    remoteRef:
+      key: grafana/plugins/sentry
+      property: orgSlug
+  - secretKey: GF_SENTRY_AUTHTOKEN
+    remoteRef:
+      key: grafana/plugins/sentry
       property: authToken
 {{- end }}
