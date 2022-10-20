@@ -634,6 +634,22 @@ entries:
     version: 0.2.8-alpha2
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2022-10-20T19:33:20.434670771Z"
+    dependencies:
+    - alias: bluescape-monitoring-dashboards
+      condition: custom_dashboards.enable
+      name: bluescape-monitoring-dashboards
+      repository: https://bluescape.github.io/helm
+      version: 0.2.12
+    description: A Helm chart for Kubernetes
+    digest: fc0b2c6b79ac93f3f30fc01e9ce23aae57d6dbe832fcfa55c08892a887b0f036
+    name: bluescape-monitoring-grafana
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-grafana-0.2.8-alpha10/bluescape-monitoring-grafana-0.2.8-alpha10.tgz
+    version: 0.2.8-alpha10
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2022-10-20T00:55:12.121893908Z"
     dependencies:
     - alias: bluescape-monitoring-dashboards
@@ -1410,4 +1426,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2022-10-20T18:56:23.690376771Z"
+generated: "2022-10-20T19:33:20.434960672Z"
