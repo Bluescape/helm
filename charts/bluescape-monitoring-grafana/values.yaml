@@ -8,13 +8,17 @@ fullnameOverride: ""
 custom_dashboards:
   enable: false
 
-external_secrets:
-  setup_grafana_oidc_secret: true
-
-sentry_plugin_creds:
-  enable_sentry_plugin_creds: true
-
 grafana:
+  # User Provided credentials
+  external_secrets:
+    setup_grafana_oidc_secret: false
+
+  external_secrets_operator:
+    setup_grafana_oidc_secret: false
+
+  sentry_plugin_creds:
+    enable_sentry_plugin_creds: true
+
   replicaCount: 1
   domain_name: example.io
   cluster_id: example
