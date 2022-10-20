@@ -15,7 +15,7 @@ items:
             name: postgres-grafana-auth
         - secretRef:
             name: grafana-admin-credentials
-        {{- if or .Values.sync_credentials.grafana_oidc_secret.via_external_secrets .Values.grafana.sync_credentials.grafana_oidc_secret.via_external_secrets_operator }}
+        {{- if or .Values.sync_credentials.grafana_oidc_secret.via_external_secrets .Values.sync_credentials.grafana_oidc_secret.via_external_secrets_operator }}
         - secretRef:
             name: grafana-oidc-auth
         {{- end }}
@@ -23,14 +23,14 @@ items:
         - secretRef:
             name: grafana-install-plugins
         {{- end }}
-        {{- if or .Values.sync_credentials.sentry_plugin.via_external_secrets .Values.grafana.sync_credentials.sentry_plugin.via_external_secrets_operator }}
+        {{- if or .Values.sync_credentials.sentry_plugin.via_external_secrets .Values.sync_credentials.sentry_plugin.via_external_secrets_operator }}
         - secretRef:
             name: sentry-plugin-creds
         {{- end }}
     {{- else }}
     deployment:
       replicas: 1
-        {{- if or .Values.sync_credentials.grafana_oidc_secret.via_external_secrets .Values.grafana.sync_credentials.grafana_oidc_secret.via_external_secrets_operator }}
+        {{- if or .Values.sync_credentials.grafana_oidc_secret.via_external_secrets .Values.sync_credentials.grafana_oidc_secret.via_external_secrets_operator }}
       envFrom:
         - secretRef:
             name: grafana-oidc-auth
@@ -39,7 +39,7 @@ items:
         - secretRef:
             name: grafana-install-plugins
         {{- end }}
-        {{- if or .Values.sync_credentials.sentry_plugin.via_external_secrets .Values.grafana.sync_credentials.sentry_plugin.via_external_secrets_operator  }}
+        {{- if or .Values.sync_credentials.sentry_plugin.via_external_secrets .Values.sync_credentials.sentry_plugin.via_external_secrets_operator  }}
         - secretRef:
             name: sentry-plugin-creds
         {{- end }}
