@@ -30,8 +30,8 @@ items:
 {{- else }}
     deployment:
       replicas: 1
-      {{- if or (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets true) (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets_operator true) }}
       envFrom:
+      {{- if or (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets true) (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets_operator true) }}
         - secretRef:
             name: grafana-oidc-auth
       {{- end }}
