@@ -1,4 +1,4 @@
-{{- if .Values.grafana.sync_credentials.sentry_plugin.via_external_secrets }}
+{{- if .Values.sync_credentials.sentry_plugin.via_external_secrets }}
 apiVersion: 'kubernetes-client.io/v1'
 kind: 'ExternalSecret'
 metadata:
@@ -18,7 +18,7 @@ spec:
       property: authToken
 {{- end }}
 
-{{- if .Values.grafana.sync_credentials.sentry_plugin.via_external_secrets_operator }}
+{{- if .Values.sync_credentials.sentry_plugin.via_external_secrets_operator }}
 apiVersion: 'external-secrets.io/v1beta1'
 kind: 'ExternalSecret'
 metadata:
