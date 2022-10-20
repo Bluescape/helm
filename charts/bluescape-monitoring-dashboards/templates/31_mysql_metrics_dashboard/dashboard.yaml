@@ -7,7 +7,7 @@ metadata:
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name: mysql-exporter-quickstart-and-dashboard-dashboard
+  json: ""
   configMapRef:
     name: mysql-exporter-quickstart-and-dashboard-dashboard
     key: mysql-exporter-quickstart-and-dashboard-dashboard.json

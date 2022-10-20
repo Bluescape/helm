@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  unit-test-coverage-dashboard
+  json: ""
   configMapRef:
     name:  unit-test-coverage-dashboard
     key:  unit-test-coverage-dashboard.json

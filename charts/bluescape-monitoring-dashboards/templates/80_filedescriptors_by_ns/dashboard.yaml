@@ -7,7 +7,7 @@ metadata:
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name: filedescriptors-usage-by-namespace-dashboard
+  json: ""
   configMapRef:
     name: filedescriptors-usage-by-namespace-dashboard
     key: filedescriptors-usage-by-namespace-dashboard.json

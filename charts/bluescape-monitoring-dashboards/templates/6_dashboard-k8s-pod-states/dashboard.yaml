@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  dashboard-k8s-pod-states
+  json: ""
   configMapRef:
     name:  dashboard-k8s-pod-states
     key:  dashboard-k8s-pod-states.json

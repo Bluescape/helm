@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  qa-e2e-dashboard
+  json: ""
   configMapRef:
     name:  qa-e2e-dashboard
     key:  qa-e2e-dashboard.json

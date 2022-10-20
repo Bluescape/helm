@@ -7,7 +7,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name: linux-node-single-prometheus
+  json: ""
   configMapRef:
     name:  linux-node-single-prometheus
     key:  linux-node-single-prometheus.json
@@ -21,7 +21,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name: linux-node-prometheus
+  json: ""
   configMapRef:
     name:  linux-node-prometheus
     key:  linux-node-prometheus.json

@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  envoy-cluster-service-level-dashboard
+  json: ""
   configMapRef:
     name:  envoy-cluster-service-level-dashboard
     key:  envoy-cluster-service-level-dashboard.json

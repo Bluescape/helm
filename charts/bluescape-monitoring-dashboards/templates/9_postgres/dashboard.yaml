@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  postgres-dashboard
+  json: ""
   configMapRef:
     name:  postgres-dashboard
     key:  postgres-dashboard.json

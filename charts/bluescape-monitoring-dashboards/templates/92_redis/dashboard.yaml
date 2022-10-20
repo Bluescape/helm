@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  redis-dashboard
+  json: ""
   configMapRef:
     name:  redis-dashboard
     key:  redis-dashboard.json

@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  qa-k6-autogen-dashboard
+  json: ""
   configMapRef:
     name:  qa-k6-autogen-dashboard
     key:  qa-k6-autogen-dashboard.json
