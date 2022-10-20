@@ -28,6 +28,7 @@ vault_cr:
   tls_disable: false
   istio_enable: false
   local_vault_addr: "https://vault.vault.svc.cluster.local:8200"
+  setup_vault_as_cluster_secret_store: false
 
 cert_manager:
   setup_letsencrypt_prod_cluster_issuer: false
