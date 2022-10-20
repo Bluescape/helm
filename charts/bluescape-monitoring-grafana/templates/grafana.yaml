@@ -19,13 +19,13 @@ items:
         - secretRef:
             name: grafana-oidc-auth
       {{- end }}
-      {{- if ne .Values.grafana.pluginInstallString "" }}
-        - secretRef:
-            name: grafana-install-plugins
-      {{- end }}
       {{- if or (eq .Values.sync_credentials.sentry_plugin.via_external_secrets true) (eq .Values.sync_credentials.sentry_plugin.via_external_secrets_operator true) }}
         - secretRef:
             name: sentry-plugin-creds
+      {{- end }}
+      {{- if ne .Values.grafana.pluginInstallString "" }}
+        - secretRef:
+            name: grafana-install-plugins
       {{- end }}
 {{- else }}
     deployment:
@@ -35,13 +35,13 @@ items:
         - secretRef:
             name: grafana-oidc-auth
       {{- end }}
-      {{- if ne .Values.grafana.pluginInstallString "" }}
-        - secretRef:
-            name: grafana-install-plugins
-      {{- end }}
       {{- if or (eq .Values.sync_credentials.sentry_plugin.via_external_secrets true) (eq .Values.sync_credentials.sentry_plugin.via_external_secrets_operator true ) }}
         - secretRef:
             name: sentry-plugin-creds
+      {{- end }}
+      {{- if ne .Values.grafana.pluginInstallString "" }}
+        - secretRef:
+            name: grafana-install-plugins
       {{- end }}
 {{- end }}
     config:
