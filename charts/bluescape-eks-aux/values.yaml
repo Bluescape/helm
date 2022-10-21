@@ -86,3 +86,4 @@ external_secrets_operator:
   aes_edge_stack_secret_name: ""
 
   argocd_secret_oidc_vault_key: oidc
+
