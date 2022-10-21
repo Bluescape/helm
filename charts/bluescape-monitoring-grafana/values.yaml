@@ -8,11 +8,14 @@ fullnameOverride: ""
 custom_dashboards:
   enable: false
 
-external_secrets:
-  setup_grafana_oidc_secret: true
-
-sentry_plugin_creds:
-  enable_sentry_plugin_creds: true
+# User Provided credentials
+sync_credentials:
+  grafana_oidc_secret:
+    via_external_secrets: false
+    via_external_secrets_operator: false
+  sentry_plugin:
+    via_external_secrets: false
+    via_external_secrets_operator: false
 
 grafana:
   replicaCount: 1

@@ -6,7 +6,7 @@ items:
     name: "{{ .Release.Name }}-grafana"
     labels: {{- include "bluescape-monitoring-grafana.labels" . | nindent 6 }}
   spec:
-    {{- if .Values.grafana.ha_mode }}
+{{- if .Values.grafana.ha_mode }}
     deployment:
       replicas: {{ .Values.grafana.replicaCount }}
       skipCreateAdminAccount: true
@@ -15,35 +15,35 @@ items:
             name: postgres-grafana-auth
         - secretRef:
             name: grafana-admin-credentials
-        {{- if .Values.external_secrets.setup_grafana_oidc_secret }}
+      {{- if or (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets true) (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets_operator true) }}
         - secretRef:
             name: grafana-oidc-auth
-        {{- end }}
-        {{- if ne .Values.grafana.pluginInstallString "" }}
-        - secretRef:
-            name: grafana-install-plugins
-        {{- end }}
-        {{- if .Values.sentry_plugin_creds.enable_sentry_plugin_creds }}
+      {{- end }}
+      {{- if or (eq .Values.sync_credentials.sentry_plugin.via_external_secrets true) (eq .Values.sync_credentials.sentry_plugin.via_external_secrets_operator true) }}
         - secretRef:
             name: sentry-plugin-creds
-        {{- end }}
-    {{- else }}
+      {{- end }}
+      {{- if ne .Values.grafana.pluginInstallString "" }}
+        - secretRef:
+            name: grafana-install-plugins
+      {{- end }}
+{{- else }}
     deployment:
       replicas: 1
-        {{- if .Values.external_secrets.setup_grafana_oidc_secret }}
       envFrom:
+      {{- if or (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets true) (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets_operator true) }}
         - secretRef:
             name: grafana-oidc-auth
-        {{- end }}
-        {{- if ne .Values.grafana.pluginInstallString "" }}
-        - secretRef:
-            name: grafana-install-plugins
-        {{- end }}
-        {{- if .Values.sentry_plugin_creds.enable_sentry_plugin_creds }}
+      {{- end }}
+      {{- if or (eq .Values.sync_credentials.sentry_plugin.via_external_secrets true) (eq .Values.sync_credentials.sentry_plugin.via_external_secrets_operator true ) }}
         - secretRef:
             name: sentry-plugin-creds
-        {{- end }}
-    {{- end }}
+      {{- end }}
+      {{- if ne .Values.grafana.pluginInstallString "" }}
+        - secretRef:
+            name: grafana-install-plugins
+      {{- end }}
+{{- end }}
     config:
       auth:
         disable_login_form: {{ .Values.grafana.config.auth.disable_login_form }}
