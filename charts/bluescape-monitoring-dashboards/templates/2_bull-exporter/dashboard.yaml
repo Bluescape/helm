@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  bull-exporter-dashboard
+  json: ""
   configMapRef:
     name:  bull-exporter-dashboard
     key:  bull-exporter-dashboard.json

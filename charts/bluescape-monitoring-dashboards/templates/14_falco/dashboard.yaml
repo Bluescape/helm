@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  falco-dashboard
+  json: ""
   configMapRef:
     name:  falco-dashboard
     key:  falco-dashboard.json

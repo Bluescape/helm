@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  nodejs-metrics-dashboard
+  json: ""
   configMapRef:
     name:  nodejs-metrics-dashboard
     key:  nodejs-metrics-dashboard.json

@@ -7,7 +7,7 @@ metadata:
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name: analytics--compute-resources--pods-dashboard
+  json: ""
   configMapRef:
     name: analytics--compute-resources--pods-dashboard
     key: analytics--compute-resources--pods-dashboard.json

@@ -7,7 +7,7 @@ metadata:
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name: prometheus-alerts-dashboard-dashboard
+  json: ""
   configMapRef:
     name: prometheus-alerts-dashboard-dashboard
     key: prometheus-alerts-dashboard-dashboard.json

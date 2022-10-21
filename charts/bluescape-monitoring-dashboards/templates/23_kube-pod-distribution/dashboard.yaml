@@ -7,7 +7,7 @@ metadata:
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name: kubernetes-cluster-pod-distribution-report-dashboard
+  json: ""
   configMapRef:
     name: kubernetes-cluster-pod-distribution-report-dashboard
     key: kubernetes-cluster-pod-distribution-report-dashboard.json

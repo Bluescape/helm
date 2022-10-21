@@ -7,7 +7,7 @@ metadata:
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name: gen3-certificate-lifecycle-management-dashboard
+  json: ""
   configMapRef:
     name: gen3-certificate-lifecycle-management-dashboard
     key: gen3-certificate-lifecycle-management-dashboard.json

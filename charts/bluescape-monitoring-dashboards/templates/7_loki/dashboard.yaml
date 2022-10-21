@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  logging-loki-dashboard-2.0
+  json: ""
   configMapRef:
     name:  logging-loki-dashboard-2.0
     key:  loki-dashboard.json
