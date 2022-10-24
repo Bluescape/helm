@@ -1,0 +1,22 @@
+{{- if .Values.vault_cr.setup_vault_as_cluster_secret_store }}
+apiVersion: external-secrets.io/v1beta1
+kind: ClusterSecretStore
+metadata:
+  name: vault-backend-cs
+  namespace: vault
+spec:
+  provider:
+    vault:
+       caProvider:
+        type: "Secret"
+        namespace: vault
+        name: "vault-tls"
+        key: "server.crt"
+       server: "{{ .Values.vault_cr.local_vault_addr }}"
+       path: "secret"
+       version: "v2"
+       auth:
+         kubernetes:
+           mountPath: "kubernetes"
+           role: "default"
+{{- end }}

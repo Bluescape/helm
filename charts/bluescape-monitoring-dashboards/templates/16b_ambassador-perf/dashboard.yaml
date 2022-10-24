@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  ambassador-perf-dashboard
+  json: ""
   configMapRef:
     name:  ambassador-perf-dashboard
     key:  ambassador-perf-dashboard.json

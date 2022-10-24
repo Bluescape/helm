@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  horizontal-pod-scaler-dashboard
+  json: ""
   configMapRef:
     name:  horizontal-pod-scaler-dashboard
     key:  horizontal-pod-scaler-dashboard.json

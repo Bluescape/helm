@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  nginx-dashboard
+  json: ""
   configMapRef:
     name:  nginx-dashboard
     key:  nginx-dashboard.json

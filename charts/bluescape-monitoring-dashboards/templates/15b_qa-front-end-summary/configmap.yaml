@@ -467,7 +467,7 @@ data:
               ]
             },
             {
-              "alias": "$tag_test - p90",
+              "alias": "$tag_feature / $tag_test - p90",
               "datasource": {
                 "type": "influxdb",
                 "uid": "PDD2CBB03B513C6AF"
@@ -1042,7 +1042,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "qa-perf-webc",
               "value": "qa-perf-webc"
             },
@@ -1128,14 +1128,14 @@ data:
               "type": "influxdb",
               "uid": "PDD2CBB03B513C6AF"
             },
-            "definition": "show tag values with key=test WHERE $testFilter",
+            "definition": "show tag values with key=test WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"environment\" =~ /^$Environment$/",
             "hide": 0,
             "includeAll": true,
             "label": "",
             "multi": false,
             "name": "Test",
             "options": [],
-            "query": "show tag values with key=test WHERE $testFilter",
+            "query": "show tag values with key=test WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"environment\" =~ /^$Environment$/",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -1155,13 +1155,13 @@ data:
               "type": "influxdb",
               "uid": "PDD2CBB03B513C6AF"
             },
-            "definition": "show tag values with key = exe WHERE $testFilter",
+            "definition": "show tag values with key = exe WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
             "hide": 0,
             "includeAll": true,
             "multi": false,
             "name": "Process",
             "options": [],
-            "query": "show tag values with key = exe WHERE $testFilter",
+            "query": "show tag values with key = exe WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -1181,7 +1181,7 @@ data:
         ]
       },
       "time": {
-        "from": "now-1h",
+        "from": "now-12h",
         "to": "now"
       },
       "timepicker": {
@@ -1200,6 +1200,6 @@ data:
       "timezone": "",
       "title": "QA / Front-End Test Metrics Summary",
       "uid": "4OdOHPS4z",
-      "version": 5,
+      "version": 7,
       "weekStart": ""
     }

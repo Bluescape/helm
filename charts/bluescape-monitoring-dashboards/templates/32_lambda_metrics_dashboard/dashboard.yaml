@@ -7,7 +7,7 @@ metadata:
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name: aws-lambda-functions-dashboard
+  json: ""
   configMapRef:
     name: aws-lambda-functions-dashboard
     key: aws-lambda-functions-dashboard.json

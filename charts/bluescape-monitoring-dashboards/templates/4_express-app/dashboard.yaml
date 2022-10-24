@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  template-dashboard
+  json: ""
   configMapRef:
     name:  express-app-dashboard
     key:  express-app-dashboard.json

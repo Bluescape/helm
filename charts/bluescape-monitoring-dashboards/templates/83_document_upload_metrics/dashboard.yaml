@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  name:  gen3-document-upload-metrics-dashboard
+  json: ""
   configMapRef:
     name:  gen3-document-upload-metrics-dashboard
     key:  gen3-document-upload-metrics-dashboard.json
