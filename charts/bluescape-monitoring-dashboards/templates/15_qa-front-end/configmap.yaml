@@ -12,97 +12,144 @@ data:
         "list": [
           {
             "builtIn": 1,
-            "datasource": "-- Grafana --",
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
             "enable": true,
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
             "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
             "type": "dashboard"
           }
         ]
       },
       "editable": true,
-      "gnetId": null,
+      "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 8,
-      "iteration": 1639425984720,
+      "id": 10,
       "links": [],
+      "liveNow": false,
       "panels": [
         {
           "collapsed": false,
-          "datasource": null,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "gridPos": {
             "h": 1,
             "w": 24,
             "x": 0,
             "y": 0
           },
-          "id": 82,
+          "id": 64,
           "panels": [],
-          "title": "Test Results",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "Test Duration",
           "type": "row"
         },
         {
-          "cacheTimeout": null,
-          "datasource": "InfluxDB - E2E",
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P75A0F5E7D13DC563"
+          },
           "fieldConfig": {
             "defaults": {
-              "custom": {},
-              "mappings": [
-                {
-                  "id": 0,
-                  "op": "=",
-                  "text": "N/A",
-                  "type": 1,
-                  "value": "null"
-                }
-              ],
-              "nullValueMode": "connected",
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "none"
+              "links": []
             },
             "overrides": []
           },
+          "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
-            "h": 3,
+            "h": 13,
             "w": 24,
             "x": 0,
             "y": 1
           },
-          "id": 52,
-          "interval": null,
-          "links": [],
-          "maxDataPoints": 100,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "none",
-            "justifyMode": "center",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "sum"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
+          "hiddenSeries": false,
+          "id": 45,
+          "legend": {
+            "alignAsTable": true,
+            "avg": true,
+            "current": false,
+            "max": true,
+            "min": true,
+            "show": true,
+            "total": false,
+            "values": true
           },
-          "pluginVersion": "7.2.2",
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "connected",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "9.1.4",
+          "pointradius": 2,
+          "points": true,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
           "targets": [
             {
-              "groupBy": [],
+              "alias": "$tag_test",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "P75A0F5E7D13DC563"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "uuid"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                }
+              ],
               "measurement": "test_durations",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT count(value) FROM test_durations WHERE $testFilter AND $timeFilter",
+              "query": "SELECT value FROM test_durations WHERE $testFilter AND $timeFilter GROUP BY $testGroup",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
@@ -113,10 +160,6 @@ data:
                       "value"
                     ],
                     "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "count"
                   }
                 ]
               ],
@@ -147,885 +190,48 @@ data:
               ]
             }
           ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Number of Tests Included",
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "aliasColors": {},
-          "bars": true,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "InfluxDB - E2E",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "align": null
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 0,
-            "y": 4
-          },
-          "hiddenSeries": false,
-          "id": 86,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": false,
-          "linewidth": 1,
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.2.2",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {}
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "$tag_environment - $tag_product - Passed",
-              "groupBy": [
-                {
-                  "params": [
-                    "uuid"
-                  ],
-                  "type": "tag"
-                }
-              ],
-              "hide": false,
-              "measurement": "test_results",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT passed,failed,skipped,pending FROM \"test_results\" WHERE $timeFilter AND $testRunFilter GROUP BY uuid,environment,product,process",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "table",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "passed"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "sum"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
-          "title": "",
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "transformations": [
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "uuid": true
-                },
-                "indexByName": {},
-                "renameByName": {
-                  "failed": "Failed",
-                  "passed": "Passed",
-                  "pending": "Pending",
-                  "skipped": "Skipped"
-                }
-              }
-            }
-          ],
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "series",
-            "name": null,
-            "show": true,
-            "values": [
-              "total"
-            ]
-          },
-          "yaxes": [
-            {
-              "decimals": 0,
-              "format": "short",
-              "label": "# of Tests",
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "decimals": 0,
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "InfluxDB - E2E",
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "align": null
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byRegexp",
-                  "options": "test_results.passed.*"
-                },
-                "properties": [
-                  {
-                    "id": "displayName",
-                    "value": "Passed"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byRegexp",
-                  "options": "test_results.failed.*"
-                },
-                "properties": [
-                  {
-                    "id": "displayName",
-                    "value": "Failed"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byRegexp",
-                  "options": "test_results.skipped.*"
-                },
-                "properties": [
-                  {
-                    "id": "displayName",
-                    "value": "Skipped"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byRegexp",
-                  "options": "test_results.pending.*"
-                },
-                "properties": [
-                  {
-                    "id": "displayName",
-                    "value": "Pending"
-                  }
-                ]
-              }
-            ]
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
-            "y": 4
-          },
-          "hiddenSeries": false,
-          "id": 89,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "hideEmpty": false,
-            "hideZero": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null as zero",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.2.2",
-          "pointradius": 2,
-          "points": true,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {}
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "",
-              "groupBy": [
-                {
-                  "params": [
-                    "uuid"
-                  ],
-                  "type": "tag"
-                }
-              ],
-              "hide": false,
-              "measurement": "test_results",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT passed,failed,skipped,pending FROM \"test_results\" WHERE $timeFilter AND $testRunFilter",
-              "rawQuery": true,
-              "refId": "A",
-              "resultFormat": "time_series",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "passed"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "sum"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "",
+          "title": "Test Duration",
           "tooltip": {
             "shared": false,
             "sort": 0,
             "value_type": "individual"
           },
-          "transformations": [],
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
-              "decimals": 0,
-              "format": "short",
-              "label": "# of Tests",
+              "format": "ms",
               "logBase": 1,
-              "max": null,
-              "min": null,
+              "min": "0",
               "show": true
             },
             {
-              "decimals": 0,
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": false
+              "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
-          "datasource": "InfluxDB - E2E",
-          "fieldConfig": {
-            "defaults": {
-              "custom": {
-                "align": null,
-                "displayMode": "auto",
-                "filterable": false
-              },
-              "decimals": 0,
-              "mappings": [],
-              "noValue": "0",
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  }
-                ]
-              },
-              "unit": "short"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Test Run"
-                },
-                "properties": [
-                  {
-                    "id": "noValue"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Process"
-                },
-                "properties": [
-                  {
-                    "id": "noValue"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byRegexp",
-                  "options": "/(Passed|Failed|Skipped|Pending)/"
-                },
-                "properties": [
-                  {
-                    "id": "custom.displayMode",
-                    "value": "color-text"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Date"
-                },
-                "properties": [
-                  {
-                    "id": "noValue"
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 24,
-            "x": 0,
-            "y": 11
-          },
-          "id": 88,
-          "options": {
-            "frameIndex": 1,
-            "showHeader": true,
-            "sortBy": []
-          },
-          "pluginVersion": "7.2.2",
-          "targets": [
-            {
-              "groupBy": [
-                {
-                  "params": [
-                    "$__interval"
-                  ],
-                  "type": "time"
-                },
-                {
-                  "params": [
-                    "null"
-                  ],
-                  "type": "fill"
-                }
-              ],
-              "measurement": "test_results",
-              "orderByTime": "ASC",
-              "policy": "default",
-              "query": "SELECT first(startTime) as Date, sum(passed) as Passed, sum(failed) as Failed, sum(skipped) as Skipped, sum(pending) as Pending FROM \"test_results\" WHERE $timeFilter AND $testFilter GROUP BY environment,product,uuid,test_run,process fill(none)",
-              "rawQuery": true,
-              "refId": "B",
-              "resultFormat": "table",
-              "select": [
-                [
-                  {
-                    "params": [
-                      "passed"
-                    ],
-                    "type": "field"
-                  },
-                  {
-                    "params": [],
-                    "type": "mean"
-                  }
-                ]
-              ],
-              "tags": []
-            }
-          ],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "",
-          "transformations": [
-            {
-              "id": "organize",
-              "options": {
-                "excludeByName": {
-                  "Time": true,
-                  "process": false,
-                  "uuid": true
-                },
-                "indexByName": {
-                  "Date": 1,
-                  "Failed": 8,
-                  "Passed": 7,
-                  "Pending": 10,
-                  "Skipped": 9,
-                  "Time": 0,
-                  "environment": 2,
-                  "process": 4,
-                  "product": 3,
-                  "test_run": 5,
-                  "uuid": 6
-                },
-                "renameByName": {
-                  "Failed": "Failed",
-                  "Passed": "Passed",
-                  "Pending": "Pending",
-                  "Skipped": "Skipped",
-                  "environment": "Environment",
-                  "failed": "Failed",
-                  "first": "",
-                  "passed": "Passed",
-                  "pending": "Pending",
-                  "process": "Process",
-                  "product": "Product",
-                  "skipped": "Skipped",
-                  "sum": "",
-                  "sum_1": "",
-                  "sum_2": "",
-                  "sum_3": "",
-                  "test_run": "Test Run"
-                }
-              }
-            }
-          ],
-          "type": "table"
-        },
-        {
           "collapsed": true,
-          "datasource": null,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "gridPos": {
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 19
-          },
-          "id": 64,
-          "panels": [
-            {
-              "aliasColors": {},
-              "bars": false,
-              "dashLength": 10,
-              "dashes": false,
-              "datasource": "InfluxDB - E2E",
-              "fieldConfig": {
-                "defaults": {
-                  "custom": {},
-                  "links": []
-                },
-                "overrides": []
-              },
-              "fill": 1,
-              "fillGradient": 0,
-              "gridPos": {
-                "h": 13,
-                "w": 24,
-                "x": 0,
-                "y": 20
-              },
-              "hiddenSeries": false,
-              "id": 45,
-              "legend": {
-                "alignAsTable": true,
-                "avg": true,
-                "current": false,
-                "max": true,
-                "min": true,
-                "show": true,
-                "total": false,
-                "values": true
-              },
-              "lines": true,
-              "linewidth": 1,
-              "nullPointMode": "connected",
-              "options": {
-                "alertThreshold": true
-              },
-              "percentage": false,
-              "pluginVersion": "7.2.2",
-              "pointradius": 2,
-              "points": true,
-              "renderer": "flot",
-              "seriesOverrides": [],
-              "spaceLength": 10,
-              "stack": false,
-              "steppedLine": false,
-              "targets": [
-                {
-                  "alias": "$tag_test",
-                  "groupBy": [
-                    {
-                      "params": [
-                        "environment"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "feature"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "uuid"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "test"
-                      ],
-                      "type": "tag"
-                    }
-                  ],
-                  "measurement": "test_durations",
-                  "orderByTime": "ASC",
-                  "policy": "default",
-                  "query": "SELECT value FROM test_durations WHERE $testFilter AND $timeFilter GROUP BY $testGroup",
-                  "rawQuery": true,
-                  "refId": "A",
-                  "resultFormat": "time_series",
-                  "select": [
-                    [
-                      {
-                        "params": [
-                          "value"
-                        ],
-                        "type": "field"
-                      }
-                    ]
-                  ],
-                  "tags": [
-                    {
-                      "key": "feature",
-                      "operator": "=~",
-                      "value": "/^$Feature$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "test",
-                      "operator": "=~",
-                      "value": "/^$Test$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "environment",
-                      "operator": "=~",
-                      "value": "/^$Environment$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "product",
-                      "operator": "=~",
-                      "value": "/^$Product$/"
-                    }
-                  ]
-                }
-              ],
-              "thresholds": [],
-              "timeFrom": null,
-              "timeRegions": [],
-              "timeShift": null,
-              "title": "Test Duration",
-              "tooltip": {
-                "shared": false,
-                "sort": 0,
-                "value_type": "individual"
-              },
-              "type": "graph",
-              "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-              },
-              "yaxes": [
-                {
-                  "format": "ms",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": "0",
-                  "show": true
-                },
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                }
-              ],
-              "yaxis": {
-                "align": false,
-                "alignLevel": null
-              }
-            },
-            {
-              "columns": [],
-              "datasource": "InfluxDB - E2E",
-              "fieldConfig": {
-                "defaults": {
-                  "custom": {}
-                },
-                "overrides": []
-              },
-              "fontSize": "100%",
-              "gridPos": {
-                "h": 8,
-                "w": 24,
-                "x": 0,
-                "y": 33
-              },
-              "id": 78,
-              "pageSize": 5,
-              "pluginVersion": "6.5.2",
-              "showHeader": true,
-              "sort": {
-                "col": 5,
-                "desc": true
-              },
-              "styles": [
-                {
-                  "alias": "Duration",
-                  "align": "auto",
-                  "colorMode": null,
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "value",
-                  "thresholds": [],
-                  "type": "number",
-                  "unit": "ms"
-                },
-                {
-                  "alias": "",
-                  "align": "auto",
-                  "colorMode": null,
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "MMMM D, YYYY LT",
-                  "decimals": null,
-                  "mappingType": 1,
-                  "pattern": "Time",
-                  "thresholds": [],
-                  "type": "date",
-                  "unit": "dateTimeAsUS"
-                },
-                {
-                  "alias": "Ram Usage",
-                  "align": "auto",
-                  "colorMode": null,
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "uuid",
-                  "thresholds": [],
-                  "type": "hidden",
-                  "unit": "decgbytes"
-                },
-                {
-                  "alias": "",
-                  "align": "auto",
-                  "colorMode": null,
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "product",
-                  "thresholds": [],
-                  "type": "hidden",
-                  "unit": "short"
-                }
-              ],
-              "targets": [
-                {
-                  "groupBy": [
-                    {
-                      "params": [
-                        "uuid"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "null"
-                      ],
-                      "type": "fill"
-                    }
-                  ],
-                  "measurement": "/^$Product$/",
-                  "orderByTime": "ASC",
-                  "policy": "default",
-                  "query": "SELECT value FROM test_durations WHERE $testFilter AND $timeFilter GROUP BY $testGroup",
-                  "rawQuery": true,
-                  "refId": "B",
-                  "resultFormat": "table",
-                  "select": [
-                    [
-                      {
-                        "params": [
-                          "environment"
-                        ],
-                        "type": "field"
-                      }
-                    ]
-                  ],
-                  "tags": [
-                    {
-                      "key": "environment",
-                      "operator": "=~",
-                      "value": "/^$Environment$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "test",
-                      "operator": "=~",
-                      "value": "/^$Test$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "feature",
-                      "operator": "=~",
-                      "value": "/^$Feature$/"
-                    }
-                  ]
-                }
-              ],
-              "timeFrom": null,
-              "timeShift": null,
-              "title": "Test Duration Over Time",
-              "transform": "table",
-              "type": "table-old"
-            }
-          ],
-          "title": "Test Duration",
-          "type": "row"
-        },
-        {
-          "collapsed": true,
-          "datasource": null,
-          "gridPos": {
-            "h": 1,
-            "w": 24,
-            "x": 0,
-            "y": 20
+            "y": 14
           },
           "id": 49,
           "panels": [
@@ -1034,10 +240,12 @@ data:
               "bars": false,
               "dashLength": 10,
               "dashes": false,
-              "datasource": "InfluxDB - Telegraf",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
               "fieldConfig": {
                 "defaults": {
-                  "custom": {},
                   "links": []
                 },
                 "overrides": []
@@ -1048,7 +256,7 @@ data:
                 "h": 13,
                 "w": 24,
                 "x": 0,
-                "y": 3
+                "y": 2
               },
               "hiddenSeries": false,
               "id": 39,
@@ -1069,7 +277,7 @@ data:
                 "alertThreshold": true
               },
               "percentage": false,
-              "pluginVersion": "7.2.2",
+              "pluginVersion": "9.1.4",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -1080,6 +288,10 @@ data:
               "targets": [
                 {
                   "alias": "$tag_test",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "PDD2CBB03B513C6AF"
+                  },
                   "groupBy": [
                     {
                       "params": [
@@ -1167,9 +379,7 @@ data:
                 }
               ],
               "thresholds": [],
-              "timeFrom": null,
               "timeRegions": [],
-              "timeShift": null,
               "title": "RAM Usage",
               "tooltip": {
                 "shared": false,
@@ -1178,216 +388,35 @@ data:
               },
               "type": "graph",
               "xaxis": {
-                "buckets": null,
                 "mode": "time",
-                "name": null,
                 "show": true,
                 "values": []
               },
               "yaxes": [
                 {
                   "format": "decgbytes",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
                   "min": "0",
                   "show": true
                 },
                 {
                   "format": "short",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": true
                 }
               ],
               "yaxis": {
-                "align": false,
-                "alignLevel": null
+                "align": false
               }
-            },
+            }
+          ],
+          "targets": [
             {
-              "columns": [],
-              "datasource": "InfluxDB - Telegraf",
-              "fieldConfig": {
-                "defaults": {
-                  "custom": {}
-                },
-                "overrides": []
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
               },
-              "fontSize": "100%",
-              "gridPos": {
-                "h": 7,
-                "w": 24,
-                "x": 0,
-                "y": 16
-              },
-              "id": 77,
-              "pageSize": 5,
-              "pluginVersion": "6.5.2",
-              "showHeader": true,
-              "sort": {
-                "col": 0,
-                "desc": true
-              },
-              "styles": [
-                {
-                  "alias": "Unique Test Run ID",
-                  "align": "auto",
-                  "colorMode": null,
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "uuid",
-                  "thresholds": [],
-                  "type": "hidden",
-                  "unit": "short"
-                },
-                {
-                  "alias": "",
-                  "align": "auto",
-                  "colorMode": null,
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "MMMM D, YYYY LT",
-                  "decimals": null,
-                  "mappingType": 1,
-                  "pattern": "Time",
-                  "thresholds": [],
-                  "type": "date",
-                  "unit": "dateTimeAsUS"
-                },
-                {
-                  "alias": "Ram Usage",
-                  "align": "auto",
-                  "colorMode": null,
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "max",
-                  "thresholds": [],
-                  "type": "number",
-                  "unit": "decgbytes"
-                },
-                {
-                  "alias": "",
-                  "align": "auto",
-                  "colorMode": null,
-                  "colors": [
-                    "rgba(245, 54, 54, 0.9)",
-                    "rgba(237, 129, 40, 0.89)",
-                    "rgba(50, 172, 45, 0.97)"
-                  ],
-                  "dateFormat": "YYYY-MM-DD HH:mm:ss",
-                  "decimals": 2,
-                  "mappingType": 1,
-                  "pattern": "product",
-                  "thresholds": [],
-                  "type": "hidden",
-                  "unit": "short"
-                }
-              ],
-              "targets": [
-                {
-                  "groupBy": [
-                    {
-                      "params": [
-                        "uuid"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "test"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "environment"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "feature"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "null"
-                      ],
-                      "type": "fill"
-                    }
-                  ],
-                  "measurement": "procstat",
-                  "orderByTime": "ASC",
-                  "policy": "default",
-                  "query": "SELECT max(memory_usage) FROM procstat WHERE $testFilter AND $timeFilter GROUP BY $testGroup fill(null)",
-                  "rawQuery": true,
-                  "refId": "A",
-                  "resultFormat": "table",
-                  "select": [
-                    [
-                      {
-                        "params": [
-                          "memory_usage"
-                        ],
-                        "type": "field"
-                      },
-                      {
-                        "params": [],
-                        "type": "max"
-                      }
-                    ]
-                  ],
-                  "tags": [
-                    {
-                      "key": "environment",
-                      "operator": "=~",
-                      "value": "/^$Environment$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "browser",
-                      "operator": "=~",
-                      "value": "/^$Process$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "test",
-                      "operator": "=~",
-                      "value": "/^$Test$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "feature",
-                      "operator": "=~",
-                      "value": "/^$Feature$/"
-                    }
-                  ]
-                }
-              ],
-              "timeFrom": null,
-              "timeShift": null,
-              "title": "Historic Ram Usage",
-              "transform": "table",
-              "type": "table-old"
+              "refId": "A"
             }
           ],
           "title": "Memory Usage",
@@ -1395,25 +424,29 @@ data:
         },
         {
           "collapsed": true,
-          "datasource": null,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "gridPos": {
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 21
+            "y": 15
           },
           "id": 75,
           "panels": [
             {
               "aliasColors": {},
               "bars": false,
-              "cacheTimeout": null,
               "dashLength": 10,
               "dashes": false,
-              "datasource": "InfluxDB - Telegraf",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
               "fieldConfig": {
                 "defaults": {
-                  "custom": {},
                   "links": []
                 },
                 "overrides": []
@@ -1424,7 +457,7 @@ data:
                 "h": 13,
                 "w": 12,
                 "x": 0,
-                "y": 4
+                "y": 3
               },
               "hiddenSeries": false,
               "id": 72,
@@ -1449,7 +482,7 @@ data:
                 "alertThreshold": true
               },
               "percentage": false,
-              "pluginVersion": "7.2.2",
+              "pluginVersion": "9.1.4",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -1460,6 +493,10 @@ data:
               "targets": [
                 {
                   "alias": "$tag_test",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "PDD2CBB03B513C6AF"
+                  },
                   "groupBy": [
                     {
                       "params": [
@@ -1535,9 +572,7 @@ data:
                 }
               ],
               "thresholds": [],
-              "timeFrom": null,
               "timeRegions": [],
-              "timeShift": null,
               "title": "Network Upload Speed",
               "tooltip": {
                 "shared": false,
@@ -1546,45 +581,37 @@ data:
               },
               "type": "graph",
               "xaxis": {
-                "buckets": null,
                 "mode": "time",
-                "name": null,
                 "show": true,
                 "values": []
               },
               "yaxes": [
                 {
                   "format": "decbytes",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": true
                 },
                 {
                   "format": "short",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": true
                 }
               ],
               "yaxis": {
-                "align": false,
-                "alignLevel": null
+                "align": false
               }
             },
             {
               "aliasColors": {},
               "bars": false,
-              "cacheTimeout": null,
               "dashLength": 10,
               "dashes": false,
-              "datasource": "InfluxDB - Telegraf",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
               "fieldConfig": {
                 "defaults": {
-                  "custom": {},
                   "links": []
                 },
                 "overrides": []
@@ -1595,7 +622,7 @@ data:
                 "h": 13,
                 "w": 12,
                 "x": 12,
-                "y": 4
+                "y": 3
               },
               "hiddenSeries": false,
               "id": 83,
@@ -1622,7 +649,7 @@ data:
                 "alertThreshold": true
               },
               "percentage": false,
-              "pluginVersion": "7.2.2",
+              "pluginVersion": "9.1.4",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -1633,6 +660,10 @@ data:
               "targets": [
                 {
                   "alias": "$tag_test",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "PDD2CBB03B513C6AF"
+                  },
                   "groupBy": [
                     {
                       "params": [
@@ -1708,9 +739,7 @@ data:
                 }
               ],
               "thresholds": [],
-              "timeFrom": null,
               "timeRegions": [],
-              "timeShift": null,
               "title": "Network Upload Bandwidth",
               "tooltip": {
                 "shared": false,
@@ -1719,45 +748,37 @@ data:
               },
               "type": "graph",
               "xaxis": {
-                "buckets": null,
                 "mode": "time",
-                "name": null,
                 "show": true,
                 "values": []
               },
               "yaxes": [
                 {
                   "format": "decbytes",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": true
                 },
                 {
                   "format": "short",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": true
                 }
               ],
               "yaxis": {
-                "align": false,
-                "alignLevel": null
+                "align": false
               }
             },
             {
               "aliasColors": {},
               "bars": false,
-              "cacheTimeout": null,
               "dashLength": 10,
               "dashes": false,
-              "datasource": "InfluxDB - Telegraf",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
               "fieldConfig": {
                 "defaults": {
-                  "custom": {},
                   "links": []
                 },
                 "overrides": []
@@ -1768,7 +789,7 @@ data:
                 "h": 13,
                 "w": 12,
                 "x": 0,
-                "y": 17
+                "y": 16
               },
               "hiddenSeries": false,
               "id": 73,
@@ -1791,7 +812,7 @@ data:
                 "alertThreshold": true
               },
               "percentage": false,
-              "pluginVersion": "7.2.2",
+              "pluginVersion": "9.1.4",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -1802,6 +823,10 @@ data:
               "targets": [
                 {
                   "alias": "$tag_test",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "PDD2CBB03B513C6AF"
+                  },
                   "groupBy": [
                     {
                       "params": [
@@ -1883,9 +908,7 @@ data:
                 }
               ],
               "thresholds": [],
-              "timeFrom": null,
               "timeRegions": [],
-              "timeShift": null,
               "title": "Net Download Speed",
               "tooltip": {
                 "shared": false,
@@ -1894,45 +917,37 @@ data:
               },
               "type": "graph",
               "xaxis": {
-                "buckets": null,
                 "mode": "time",
-                "name": null,
                 "show": true,
                 "values": []
               },
               "yaxes": [
                 {
                   "format": "decbytes",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": true
                 },
                 {
                   "format": "short",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": true
                 }
               ],
               "yaxis": {
-                "align": false,
-                "alignLevel": null
+                "align": false
               }
             },
             {
               "aliasColors": {},
               "bars": false,
-              "cacheTimeout": null,
               "dashLength": 10,
               "dashes": false,
-              "datasource": "InfluxDB - Telegraf",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
               "fieldConfig": {
                 "defaults": {
-                  "custom": {},
                   "links": []
                 },
                 "overrides": []
@@ -1943,7 +958,7 @@ data:
                 "h": 13,
                 "w": 12,
                 "x": 12,
-                "y": 17
+                "y": 16
               },
               "hiddenSeries": false,
               "id": 84,
@@ -1970,7 +985,7 @@ data:
                 "alertThreshold": true
               },
               "percentage": false,
-              "pluginVersion": "7.2.2",
+              "pluginVersion": "9.1.4",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -1981,6 +996,10 @@ data:
               "targets": [
                 {
                   "alias": "$tag_test",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "PDD2CBB03B513C6AF"
+                  },
                   "groupBy": [
                     {
                       "params": [
@@ -2056,9 +1075,7 @@ data:
                 }
               ],
               "thresholds": [],
-              "timeFrom": null,
               "timeRegions": [],
-              "timeShift": null,
               "title": "Network Download Bandwidth",
               "tooltip": {
                 "shared": false,
@@ -2067,34 +1084,34 @@ data:
               },
               "type": "graph",
               "xaxis": {
-                "buckets": null,
                 "mode": "time",
-                "name": null,
                 "show": true,
                 "values": []
               },
               "yaxes": [
                 {
                   "format": "decbytes",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": true
                 },
                 {
                   "format": "short",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": true
                 }
               ],
               "yaxis": {
-                "align": false,
-                "alignLevel": null
+                "align": false
               }
+            }
+          ],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "refId": "A"
             }
           ],
           "title": "Network",
@@ -2102,25 +1119,29 @@ data:
         },
         {
           "collapsed": true,
-          "datasource": null,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "gridPos": {
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 22
+            "y": 16
           },
           "id": 23,
           "panels": [
             {
               "aliasColors": {},
               "bars": false,
-              "cacheTimeout": null,
               "dashLength": 10,
               "dashes": false,
-              "datasource": "InfluxDB - Telegraf",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PDD2CBB03B513C6AF"
+              },
               "fieldConfig": {
                 "defaults": {
-                  "custom": {},
                   "links": []
                 },
                 "overrides": []
@@ -2131,7 +1152,7 @@ data:
                 "h": 12,
                 "w": 24,
                 "x": 0,
-                "y": 5
+                "y": 4
               },
               "hiddenSeries": false,
               "id": 26,
@@ -2153,7 +1174,7 @@ data:
                 "alertThreshold": true
               },
               "percentage": false,
-              "pluginVersion": "7.2.2",
+              "pluginVersion": "9.1.4",
               "pointradius": 2,
               "points": false,
               "renderer": "flot",
@@ -2164,6 +1185,10 @@ data:
               "targets": [
                 {
                   "alias": "System max",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "PDD2CBB03B513C6AF"
+                  },
                   "groupBy": [
                     {
                       "params": [
@@ -2222,6 +1247,10 @@ data:
                 },
                 {
                   "alias": "$tag_test",
+                  "datasource": {
+                    "type": "influxdb",
+                    "uid": "PDD2CBB03B513C6AF"
+                  },
                   "groupBy": [
                     {
                       "params": [
@@ -2309,9 +1338,7 @@ data:
                 }
               ],
               "thresholds": [],
-              "timeFrom": null,
               "timeRegions": [],
-              "timeShift": null,
               "title": "CPU Usage",
               "tooltip": {
                 "shared": false,
@@ -2320,432 +1347,42 @@ data:
               },
               "type": "graph",
               "xaxis": {
-                "buckets": null,
                 "mode": "time",
-                "name": null,
                 "show": true,
                 "values": []
               },
               "yaxes": [
                 {
                   "format": "percent",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": true
                 },
                 {
                   "format": "ms",
-                  "label": null,
                   "logBase": 1,
-                  "max": null,
-                  "min": null,
                   "show": false
                 }
               ],
               "yaxis": {
-                "align": false,
-                "alignLevel": null
+                "align": false
               }
+            }
+          ],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "refId": "A"
             }
           ],
           "title": "CPU Usage Metrics",
           "type": "row"
-        },
-        {
-          "collapsed": true,
-          "datasource": null,
-          "gridPos": {
-            "h": 1,
-            "w": 24,
-            "x": 0,
-            "y": 23
-          },
-          "id": 37,
-          "panels": [
-            {
-              "aliasColors": {},
-              "bars": false,
-              "dashLength": 10,
-              "dashes": false,
-              "datasource": "InfluxDB - E2E",
-              "description": "",
-              "fieldConfig": {
-                "defaults": {
-                  "custom": {},
-                  "links": []
-                },
-                "overrides": []
-              },
-              "fill": 0,
-              "fillGradient": 0,
-              "gridPos": {
-                "h": 12,
-                "w": 24,
-                "x": 0,
-                "y": 6
-              },
-              "hiddenSeries": false,
-              "id": 66,
-              "legend": {
-                "alignAsTable": true,
-                "avg": false,
-                "current": true,
-                "max": false,
-                "min": false,
-                "show": true,
-                "sort": "current",
-                "sortDesc": false,
-                "total": false,
-                "values": true
-              },
-              "lines": true,
-              "linewidth": 1,
-              "nullPointMode": "connected",
-              "options": {
-                "alertThreshold": false
-              },
-              "percentage": false,
-              "pluginVersion": "7.2.2",
-              "pointradius": 2,
-              "points": false,
-              "renderer": "flot",
-              "seriesOverrides": [],
-              "spaceLength": 10,
-              "stack": false,
-              "steppedLine": false,
-              "targets": [
-                {
-                  "alias": "$tag_test - $col",
-                  "groupBy": [
-                    {
-                      "params": [
-                        "environment"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "process"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "test"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "suite"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "null"
-                      ],
-                      "type": "fill"
-                    }
-                  ],
-                  "measurement": "fps",
-                  "orderByTime": "ASC",
-                  "policy": "default",
-                  "query": "SELECT * FROM \"fps\" WHERE (\"test\" =~ /^$Test$/ AND \"process\" =~ /^$Process$/ AND \"suite\" =~ /^$Feature$/) AND $timeFilter",
-                  "rawQuery": false,
-                  "refId": "A",
-                  "resultFormat": "time_series",
-                  "select": [
-                    [
-                      {
-                        "params": [
-                          "max"
-                        ],
-                        "type": "field"
-                      }
-                    ],
-                    [
-                      {
-                        "params": [
-                          "mean"
-                        ],
-                        "type": "field"
-                      }
-                    ],
-                    [
-                      {
-                        "params": [
-                          "min"
-                        ],
-                        "type": "field"
-                      }
-                    ],
-                    [
-                      {
-                        "params": [
-                          "p90"
-                        ],
-                        "type": "field"
-                      }
-                    ],
-                    [
-                      {
-                        "params": [
-                          "p95"
-                        ],
-                        "type": "field"
-                      }
-                    ]
-                  ],
-                  "tags": [
-                    {
-                      "key": "test",
-                      "operator": "=~",
-                      "value": "/^$Test$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "process",
-                      "operator": "=~",
-                      "value": "/^$Process$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "suite",
-                      "operator": "=~",
-                      "value": "/^$Feature$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "environment",
-                      "operator": "=~",
-                      "value": "/^$Environment$/"
-                    }
-                  ]
-                }
-              ],
-              "thresholds": [],
-              "timeFrom": null,
-              "timeRegions": [],
-              "timeShift": null,
-              "title": "Instantaneous FPS",
-              "tooltip": {
-                "shared": false,
-                "sort": 0,
-                "value_type": "individual"
-              },
-              "type": "graph",
-              "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-              },
-              "yaxes": [
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                },
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                }
-              ],
-              "yaxis": {
-                "align": false,
-                "alignLevel": null
-              }
-            },
-            {
-              "aliasColors": {},
-              "bars": false,
-              "dashLength": 10,
-              "dashes": false,
-              "datasource": "InfluxDB - Telegraf",
-              "fieldConfig": {
-                "defaults": {
-                  "custom": {},
-                  "links": []
-                },
-                "overrides": []
-              },
-              "fill": 1,
-              "fillGradient": 0,
-              "gridPos": {
-                "h": 12,
-                "w": 24,
-                "x": 0,
-                "y": 18
-              },
-              "hiddenSeries": false,
-              "id": 90,
-              "legend": {
-                "alignAsTable": true,
-                "avg": true,
-                "current": false,
-                "max": true,
-                "min": true,
-                "show": true,
-                "total": false,
-                "values": true
-              },
-              "lines": true,
-              "linewidth": 1,
-              "nullPointMode": "connected",
-              "options": {
-                "alertThreshold": true
-              },
-              "percentage": false,
-              "pluginVersion": "7.2.2",
-              "pointradius": 2,
-              "points": false,
-              "renderer": "flot",
-              "seriesOverrides": [],
-              "spaceLength": 10,
-              "stack": false,
-              "steppedLine": false,
-              "targets": [
-                {
-                  "alias": "$tag_test",
-                  "groupBy": [
-                    {
-                      "params": [
-                        "1s"
-                      ],
-                      "type": "time"
-                    },
-                    {
-                      "params": [
-                        "environment"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "feature"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "test"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "uuid"
-                      ],
-                      "type": "tag"
-                    },
-                    {
-                      "params": [
-                        "null"
-                      ],
-                      "type": "fill"
-                    }
-                  ],
-                  "measurement": "nvidia_smi",
-                  "orderByTime": "ASC",
-                  "policy": "default",
-                  "query": "SELECT mean(utilization_gpu) FROM nvidia_smi WHERE $testFilter AND $timeFilter GROUP BY time(1s),$testGroup fill(null)",
-                  "rawQuery": true,
-                  "refId": "A",
-                  "resultFormat": "time_series",
-                  "select": [
-                    [
-                      {
-                        "params": [
-                          "utilization_gpu"
-                        ],
-                        "type": "field"
-                      },
-                      {
-                        "params": [],
-                        "type": "mean"
-                      }
-                    ]
-                  ],
-                  "tags": [
-                    {
-                      "key": "test",
-                      "operator": "=~",
-                      "value": "/^$Test$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "feature",
-                      "operator": "=~",
-                      "value": "/^$Feature$/"
-                    },
-                    {
-                      "condition": "AND",
-                      "key": "environment",
-                      "operator": "=~",
-                      "value": "/^$Environment$/"
-                    }
-                  ]
-                }
-              ],
-              "thresholds": [],
-              "timeFrom": null,
-              "timeRegions": [],
-              "timeShift": null,
-              "title": "GPU Usage",
-              "tooltip": {
-                "shared": false,
-                "sort": 0,
-                "value_type": "individual"
-              },
-              "type": "graph",
-              "xaxis": {
-                "buckets": null,
-                "mode": "time",
-                "name": null,
-                "show": true,
-                "values": []
-              },
-              "yaxes": [
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                },
-                {
-                  "format": "short",
-                  "label": null,
-                  "logBase": 1,
-                  "max": null,
-                  "min": null,
-                  "show": true
-                }
-              ],
-              "yaxis": {
-                "align": false,
-                "alignLevel": null
-              }
-            }
-          ],
-          "title": "GPU Usage",
-          "type": "row"
         }
       ],
       "refresh": false,
-      "schemaVersion": 26,
+      "schemaVersion": 37,
       "style": "dark",
       "tags": [
         "bluescape",
@@ -2761,11 +1398,13 @@ data:
               "text": "All",
               "value": "$__all"
             },
-            "datasource": "InfluxDB - E2E",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "PDD2CBB03B513C6AF"
+            },
             "definition": "show tag values with key = product",
             "hide": 0,
-            "includeAll": true,
-            "label": null,
+            "includeAll": false,
             "multi": false,
             "name": "Product",
             "options": [],
@@ -2775,7 +1414,6 @@ data:
             "skipUrlSync": false,
             "sort": 0,
             "tagValuesQuery": "",
-            "tags": [],
             "tagsQuery": "",
             "type": "query",
             "useTags": false
@@ -2783,15 +1421,17 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
-              "text": "All",
-              "value": "$__all"
+              "selected": false,
+              "text": "uat.alpha.dev.bluescape.io",
+              "value": "uat.alpha.dev.bluescape.io"
             },
-            "datasource": "InfluxDB - Telegraf",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "PDD2CBB03B513C6AF"
+            },
             "definition": "show tag values with key = environment",
             "hide": 0,
-            "includeAll": true,
-            "label": null,
+            "includeAll": false,
             "multi": false,
             "name": "Environment",
             "options": [],
@@ -2801,7 +1441,6 @@ data:
             "skipUrlSync": false,
             "sort": 0,
             "tagValuesQuery": "",
-            "tags": [],
             "tagsQuery": "",
             "type": "query",
             "useTags": false
@@ -2809,15 +1448,17 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "All",
               "value": "$__all"
             },
-            "datasource": "InfluxDB - Telegraf",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "PDD2CBB03B513C6AF"
+            },
             "definition": "show tag values with key = feature ",
             "hide": 0,
             "includeAll": true,
-            "label": null,
             "multi": false,
             "name": "Feature",
             "options": [],
@@ -2827,7 +1468,6 @@ data:
             "skipUrlSync": false,
             "sort": 1,
             "tagValuesQuery": "",
-            "tags": [],
             "tagsQuery": "",
             "type": "query",
             "useTags": false
@@ -2835,11 +1475,14 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "All",
               "value": "$__all"
             },
-            "datasource": "InfluxDB - Telegraf",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "PDD2CBB03B513C6AF"
+            },
             "definition": "show tag values with key=test where feature = '$Feature'",
             "hide": 0,
             "includeAll": true,
@@ -2852,28 +1495,13 @@ data:
             "regex": "",
             "skipUrlSync": false,
             "sort": 1,
-            "tagValuesQuery": "apps.$tag.*",
-            "tags": [],
             "tagsQuery": "",
             "type": "query",
             "useTags": false
           },
           {
-            "current": {
-              "selected": false,
-              "text": "product=~/^$Product/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
-              "value": "product=~/^$Product/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/"
-            },
             "hide": 2,
-            "label": null,
             "name": "testFilter",
-            "options": [
-              {
-                "selected": true,
-                "text": "product=~/^$Product/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
-                "value": "product=~/^$Product/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/"
-              }
-            ],
             "query": "product=~/^$Product/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
             "skipUrlSync": false,
             "type": "constant"
@@ -2885,11 +1513,13 @@ data:
               "text": "All",
               "value": "$__all"
             },
-            "datasource": "InfluxDB - Telegraf",
+            "datasource": {
+              "type": "influxdb",
+              "uid": "PDD2CBB03B513C6AF"
+            },
             "definition": "show tag values with key = exe",
             "hide": 0,
             "includeAll": true,
-            "label": null,
             "multi": false,
             "name": "Process",
             "options": [],
@@ -2899,48 +1529,14 @@ data:
             "skipUrlSync": false,
             "sort": 0,
             "tagValuesQuery": "",
-            "tags": [],
             "tagsQuery": "",
             "type": "query",
             "useTags": false
           },
           {
-            "current": {
-              "selected": true,
-              "text": "environment,uuid,test,feature,product",
-              "value": "environment,uuid,test,feature,product"
-            },
             "hide": 2,
-            "label": null,
             "name": "testGroup",
-            "options": [
-              {
-                "selected": true,
-                "text": "environment,uuid,test,feature,product",
-                "value": "environment,uuid,test,feature,product"
-              }
-            ],
             "query": "environment,uuid,test,feature,product",
-            "skipUrlSync": false,
-            "type": "constant"
-          },
-          {
-            "current": {
-              "selected": false,
-              "text": "product=~/^$Product/ AND \"environment\" =~ /^$Environment$/ AND \"process\" =~ /^$Process$/",
-              "value": "product=~/^$Product/ AND \"environment\" =~ /^$Environment$/ AND \"process\" =~ /^$Process$/"
-            },
-            "hide": 2,
-            "label": null,
-            "name": "testRunFilter",
-            "options": [
-              {
-                "selected": true,
-                "text": "product=~/^$Product/ AND \"environment\" =~ /^$Environment$/ AND \"process\" =~ /^$Process$/",
-                "value": "product=~/^$Product/ AND \"environment\" =~ /^$Environment$/ AND \"process\" =~ /^$Process$/"
-              }
-            ],
-            "query": "product=~/^$Product/ AND \"environment\" =~ /^$Environment$/ AND \"process\" =~ /^$Process$/",
             "skipUrlSync": false,
             "type": "constant"
           }
@@ -2966,5 +1562,6 @@ data:
       "timezone": "",
       "title": "QA / Front-End Test Metrics",
       "uid": "da9661a0ef470bae1881b0773b44df4a75135187",
-      "version": 8
+      "version": 1,
+      "weekStart": ""
     }
