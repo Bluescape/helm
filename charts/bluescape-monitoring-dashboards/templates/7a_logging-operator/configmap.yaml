@@ -15,7 +15,7 @@ data:
           "type": "grafana",
           "id": "grafana",
           "name": "Grafana",
-          "version": "8.3.3"
+          "version": "9.1.4"
         },
         {
           "type": "panel",
@@ -61,10 +61,243 @@ data:
       "gnetId": 7752,
       "graphTooltip": 0,
       "id": null,
-      "iteration": 1660941190268,
       "links": [],
       "liveNow": false,
       "panels": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "rgb(31, 120, 193)",
+                "mode": "fixed"
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "match": "null",
+                    "result": {
+                      "text": "N/A"
+                    }
+                  },
+                  "type": "special"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 3,
+            "x": 13,
+            "y": 0
+          },
+          "id": 37,
+          "links": [],
+          "maxDataPoints": 100,
+          "options": {
+            "colorMode": "none",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.1.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "1 - sum(:node_memory_MemAvailable_bytes:sum{cluster=\"$cluster\"}) / sum(kube_node_status_allocatable_memory_bytes{cluster=\"$cluster\"})",
+              "instant": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Memory Utilization",
+          "transparent": true,
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "rgb(31, 120, 193)",
+                "mode": "fixed"
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "match": "null",
+                    "result": {
+                      "text": "N/A"
+                    }
+                  },
+                  "type": "special"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 3,
+            "x": 16,
+            "y": 0
+          },
+          "id": 38,
+          "links": [],
+          "maxDataPoints": 100,
+          "options": {
+            "colorMode": "none",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.1.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(kube_pod_container_resource_requests_memory_bytes{cluster=\"$cluster\"}) / sum(kube_node_status_allocatable_memory_bytes{cluster=\"$cluster\"})",
+              "instant": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Memory Requests Commitment",
+          "transparent": true,
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "rgb(31, 120, 193)",
+                "mode": "fixed"
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "match": "null",
+                    "result": {
+                      "text": "N/A"
+                    }
+                  },
+                  "type": "special"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 2,
+            "w": 3,
+            "x": 19,
+            "y": 0
+          },
+          "id": 39,
+          "links": [],
+          "maxDataPoints": 100,
+          "options": {
+            "colorMode": "none",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.1.4",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "expr": "sum(kube_pod_container_resource_limits_memory_bytes{cluster=\"$cluster\"}) / sum(kube_node_status_allocatable_memory_bytes{cluster=\"$cluster\"})",
+              "instant": false,
+              "refId": "A"
+            }
+          ],
+          "title": "Memory Limits Commitment",
+          "transparent": true,
+          "type": "stat"
+        },
         {
           "collapsed": false,
           "datasource": {
@@ -75,10 +308,19 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 0
+            "y": 2
           },
           "id": 19,
           "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "refId": "A"
+            }
+          ],
           "title": "Aggregated Data",
           "type": "row"
         },
@@ -128,7 +370,7 @@ data:
             "h": 2,
             "w": 2,
             "x": 0,
-            "y": 1
+            "y": 3
           },
           "id": 6,
           "links": [],
@@ -147,9 +389,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(kube_pod_info{pod=~\".*fluentbit.*\",cluster=\"$cluster\"})",
               "format": "time_series",
               "intervalFactor": 1,
@@ -207,7 +453,7 @@ data:
             "h": 2,
             "w": 2,
             "x": 2,
-            "y": 1
+            "y": 3
           },
           "id": 8,
           "links": [],
@@ -226,9 +472,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(kube_pod_info{pod=~\".*fluentd.*\",pod!~\".*config.*\",cluster=\"$cluster\"})",
               "format": "time_series",
               "instant": true,
@@ -283,7 +533,7 @@ data:
             "h": 2,
             "w": 3,
             "x": 4,
-            "y": 1
+            "y": 3
           },
           "id": 29,
           "links": [],
@@ -302,9 +552,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_input_records_total[1m]))",
               "refId": "A"
             }
@@ -356,7 +610,7 @@ data:
             "h": 2,
             "w": 3,
             "x": 7,
-            "y": 1
+            "y": 3
           },
           "id": 30,
           "links": [],
@@ -375,9 +629,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_output_proc_records_total[1m]))",
               "instant": false,
               "refId": "A"
@@ -430,7 +688,7 @@ data:
             "h": 2,
             "w": 3,
             "x": 10,
-            "y": 1
+            "y": 3
           },
           "id": 25,
           "links": [],
@@ -449,9 +707,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentd_router_records_total[1m]))",
               "instant": false,
               "refId": "A"
@@ -504,7 +766,7 @@ data:
             "h": 2,
             "w": 3,
             "x": 13,
-            "y": 1
+            "y": 3
           },
           "id": 33,
           "links": [],
@@ -523,9 +785,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "1 - avg(rate(node_cpu_seconds_total{mode=\"idle\", cluster=\"$cluster\"}[1m]))",
               "instant": false,
               "refId": "A"
@@ -578,7 +844,7 @@ data:
             "h": 2,
             "w": 3,
             "x": 16,
-            "y": 1
+            "y": 3
           },
           "id": 34,
           "links": [],
@@ -597,9 +863,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(kube_pod_container_resource_requests_cpu_cores{cluster=\"$cluster\"}) / sum(kube_node_status_allocatable_cpu_cores{cluster=\"$cluster\"})",
               "instant": false,
               "refId": "A"
@@ -652,7 +922,7 @@ data:
             "h": 2,
             "w": 3,
             "x": 19,
-            "y": 1
+            "y": 3
           },
           "id": 35,
           "links": [],
@@ -671,9 +941,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(kube_pod_container_resource_limits_cpu_cores{cluster=\"$cluster\"}) / sum(kube_node_status_allocatable_cpu_cores{cluster=\"$cluster\"})",
               "instant": false,
               "refId": "A"
@@ -729,7 +1003,7 @@ data:
             "h": 2,
             "w": 2,
             "x": 0,
-            "y": 3
+            "y": 5
           },
           "id": 4,
           "links": [],
@@ -748,9 +1022,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(kube_node_status_condition{condition=\"Ready\",status=\"true\",cluster=\"$cluster\"})",
               "format": "time_series",
               "instant": true,
@@ -809,7 +1087,7 @@ data:
             "h": 2,
             "w": 2,
             "x": 2,
-            "y": 3
+            "y": 5
           },
           "id": 36,
           "links": [],
@@ -828,9 +1106,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(kube_node_status_condition{condition!=\"Ready\",status=\"true\",cluster=\"$cluster\"})",
               "format": "time_series",
               "instant": true,
@@ -886,7 +1168,7 @@ data:
             "h": 2,
             "w": 3,
             "x": 4,
-            "y": 3
+            "y": 5
           },
           "id": 24,
           "links": [],
@@ -905,9 +1187,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_input_bytes_total[5m]))",
               "refId": "A"
             }
@@ -959,7 +1245,7 @@ data:
             "h": 2,
             "w": 3,
             "x": 7,
-            "y": 3
+            "y": 5
           },
           "id": 28,
           "links": [],
@@ -978,9 +1264,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_output_proc_bytes_total[5m]))",
               "refId": "A"
             }
@@ -1032,7 +1322,7 @@ data:
             "h": 2,
             "w": 3,
             "x": 10,
-            "y": 3
+            "y": 5
           },
           "id": 32,
           "links": [],
@@ -1051,237 +1341,19 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentd_output_status_emit_records{plugin_id=~\"^(flow|clusterflow):.*:.*:(output|clusteroutput).*:.*$\"}[5m]))",
               "instant": false,
               "refId": "A"
             }
           ],
           "title": "Fluentd Output Records",
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "fixedColor": "rgb(31, 120, 193)",
-                "mode": "fixed"
-              },
-              "mappings": [
-                {
-                  "options": {
-                    "match": "null",
-                    "result": {
-                      "text": "N/A"
-                    }
-                  },
-                  "type": "special"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 2,
-            "w": 3,
-            "x": 13,
-            "y": 3
-          },
-          "id": 37,
-          "links": [],
-          "maxDataPoints": 100,
-          "options": {
-            "colorMode": "none",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "8.3.3",
-          "targets": [
-            {
-              "expr": "1 - sum(:node_memory_MemAvailable_bytes:sum{cluster=\"$cluster\"}) / sum(kube_node_status_allocatable_memory_bytes{cluster=\"$cluster\"})",
-              "instant": false,
-              "refId": "A"
-            }
-          ],
-          "title": "Memory Utilisation",
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "fixedColor": "rgb(31, 120, 193)",
-                "mode": "fixed"
-              },
-              "mappings": [
-                {
-                  "options": {
-                    "match": "null",
-                    "result": {
-                      "text": "N/A"
-                    }
-                  },
-                  "type": "special"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 2,
-            "w": 3,
-            "x": 16,
-            "y": 3
-          },
-          "id": 38,
-          "links": [],
-          "maxDataPoints": 100,
-          "options": {
-            "colorMode": "none",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "8.3.3",
-          "targets": [
-            {
-              "expr": "sum(kube_pod_container_resource_requests_memory_bytes{cluster=\"$cluster\"}) / sum(kube_node_status_allocatable_memory_bytes{cluster=\"$cluster\"})",
-              "instant": false,
-              "refId": "A"
-            }
-          ],
-          "title": "Memory Requests Commitment",
-          "transparent": true,
-          "type": "stat"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "fixedColor": "rgb(31, 120, 193)",
-                "mode": "fixed"
-              },
-              "mappings": [
-                {
-                  "options": {
-                    "match": "null",
-                    "result": {
-                      "text": "N/A"
-                    }
-                  },
-                  "type": "special"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "percentunit"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 2,
-            "w": 3,
-            "x": 19,
-            "y": 3
-          },
-          "id": 39,
-          "links": [],
-          "maxDataPoints": 100,
-          "options": {
-            "colorMode": "none",
-            "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "8.3.3",
-          "targets": [
-            {
-              "expr": "sum(kube_pod_container_resource_limits_memory_bytes{cluster=\"$cluster\"}) / sum(kube_node_status_allocatable_memory_bytes{cluster=\"$cluster\"})",
-              "instant": false,
-              "refId": "A"
-            }
-          ],
-          "title": "Memory Limits Commitment",
           "transparent": true,
           "type": "stat"
         },
@@ -1295,10 +1367,19 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 5
+            "y": 7
           },
           "id": 21,
           "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "refId": "A"
+            }
+          ],
           "title": "fluentd",
           "type": "row"
         },
@@ -1323,7 +1404,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 6
+            "y": 8
           },
           "hiddenSeries": false,
           "id": 12,
@@ -1348,7 +1429,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1358,6 +1439,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "rate(fluentd_output_status_emit_count{pod=~\"$fluentd\",plugin_id=~\"$fluentdplugin\"}[5m])",
               "format": "time_series",
               "hide": false,
@@ -1408,7 +1493,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 6
+            "y": 8
           },
           "id": 27,
           "showHeader": true,
@@ -1443,6 +1528,10 @@ data:
           ],
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "topk(5, sum(rate(fluentd_router_records_total[1m])) by (flow, id))",
               "format": "table",
               "instant": true,
@@ -1472,9 +1561,9 @@ data:
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
-            "w": 8,
+            "w": 12,
             "x": 0,
-            "y": 12
+            "y": 14
           },
           "hiddenSeries": false,
           "id": 13,
@@ -1499,7 +1588,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1509,6 +1598,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "fluentd_output_status_buffer_total_bytes{pod=~\"$fluentd\",plugin_id=~\"$fluentdplugin\"}",
               "format": "time_series",
               "hide": false,
@@ -1518,6 +1611,10 @@ data:
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "fluentd_output_status_buffer_queue_length{pod=~\"$fluentd\",plugin_id=~\"$fluentdplugin\"}",
               "interval": "",
               "legendFormat": "",
@@ -1564,7 +1661,6 @@ data:
             "type": "prometheus",
             "uid": "${datasource}"
           },
-          "description": "",
           "fieldConfig": {
             "defaults": {
               "links": []
@@ -1575,111 +1671,9 @@ data:
           "fillGradient": 0,
           "gridPos": {
             "h": 6,
-            "w": 8,
-            "x": 8,
-            "y": 12
-          },
-          "hiddenSeries": false,
-          "id": 42,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": true,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "sort": "current",
-            "sortDesc": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "8.3.3",
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "node_filesystem_size_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"} - node_filesystem_free_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"}",
-              "hide": false,
-              "interval": "",
-              "legendFormat": "Used: {{ `{{pod}}` }}",
-              "refId": "D"
-            },
-            {
-              "expr": "node_filesystem_size_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"}",
-              "interval": "",
-              "legendFormat": "Total: {{ `{{pod}}` }}",
-              "refId": "A"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Fluentd Buffer Disk",
-          "tooltip": {
-            "shared": true,
-            "sort": 2,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "$$hashKey": "object:419",
-              "format": "bytes",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "$$hashKey": "object:420",
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "gridPos": {
-            "h": 6,
-            "w": 8,
-            "x": 16,
-            "y": 12
+            "w": 12,
+            "x": 12,
+            "y": 14
           },
           "hiddenSeries": false,
           "id": 14,
@@ -1704,7 +1698,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1714,6 +1708,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentd_output_status_retry_count{pod=~\"$fluentd\",plugin_id=~\"$fluentdplugin\"}[1m])) by (pod)",
               "format": "time_series",
               "hide": false,
@@ -1723,6 +1721,10 @@ data:
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentd_output_status_num_errors{pod=~\"$fluentd\",plugin_id=~\"$fluentdplugin\"}[1m])) by (pod)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -1762,6 +1764,247 @@ data:
           }
         },
         {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 0,
+            "y": 20
+          },
+          "hiddenSeries": false,
+          "id": 46,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "9.1.4",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "editorMode": "code",
+              "expr": "node_filesystem_size_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"} - node_filesystem_free_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"}",
+              "hide": true,
+              "interval": "",
+              "legendFormat": "Used: {{ `{{pod}}` }}",
+              "range": true,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "editorMode": "code",
+              "expr": "(node_filesystem_size_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"} - node_filesystem_free_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"}) / node_filesystem_size_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"}",
+              "interval": "",
+              "legendFormat": "Total: {{ `{{pod}}` }}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Fluentd - % Buffer Disk Utilization",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:419",
+              "decimals": 2,
+              "format": "percentunit",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:420",
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "aliasColors": {
+            "Total Disk Size": "dark-red"
+          },
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${datasource}"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 6,
+            "w": 12,
+            "x": 12,
+            "y": 20
+          },
+          "hiddenSeries": false,
+          "id": 42,
+          "legend": {
+            "alignAsTable": false,
+            "avg": false,
+            "current": true,
+            "max": false,
+            "min": false,
+            "rightSide": false,
+            "show": true,
+            "sort": "current",
+            "sortDesc": true,
+            "total": false,
+            "values": true
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "9.1.4",
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [
+            {
+              "$$hashKey": "object:325",
+              "alias": "Total Disk Size",
+              "fill": 0
+            }
+          ],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "editorMode": "code",
+              "expr": "node_filesystem_size_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"} - node_filesystem_free_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"}",
+              "hide": false,
+              "interval": "",
+              "legendFormat": "Used: {{ `{{pod}}` }}",
+              "range": true,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "avg(node_filesystem_size_bytes{pod=~\"$fluentd\",mountpoint=\"/buffers\",endpoint=\"buffer-metrics\", fstype!=\"\"}) by (mountpoint)",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "Total Disk Size",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "Fluentd Buffer Disk Usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 2,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:419",
+              "format": "bytes",
+              "logBase": 1,
+              "min": "0",
+              "show": true
+            },
+            {
+              "$$hashKey": "object:420",
+              "format": "short",
+              "logBase": 1,
+              "show": true
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
           "collapsed": false,
           "datasource": {
             "type": "prometheus",
@@ -1771,10 +2014,19 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 18
+            "y": 26
           },
           "id": 17,
           "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
+              "refId": "A"
+            }
+          ],
           "title": "fluentbit",
           "type": "row"
         },
@@ -1799,7 +2051,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 19
+            "y": 27
           },
           "hiddenSeries": false,
           "id": 2,
@@ -1824,7 +2076,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1834,6 +2086,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_input_bytes_total{pod=~\"$fluentbit\"}[5m])) by (pod, name)",
               "format": "time_series",
               "hide": false,
@@ -1893,7 +2149,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 19
+            "y": 27
           },
           "hiddenSeries": false,
           "id": 9,
@@ -1918,7 +2174,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -1928,6 +2184,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_output_proc_bytes_total{pod=~\"$fluentbit\"}[5m])) by (pod, name)",
               "format": "time_series",
               "hide": false,
@@ -1988,7 +2248,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 25
+            "y": 33
           },
           "hiddenSeries": false,
           "id": 40,
@@ -2013,7 +2273,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -2023,6 +2283,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_input_records_total{pod=~\"$fluentbit\"}[5m])) by (pod, name)",
               "format": "time_series",
               "hide": false,
@@ -2082,7 +2346,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 25
+            "y": 33
           },
           "hiddenSeries": false,
           "id": 41,
@@ -2107,7 +2371,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -2117,6 +2381,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_output_proc_records_total{pod=~\"$fluentbit\"}[5m])) by (pod, name)",
               "format": "time_series",
               "hide": false,
@@ -2177,7 +2445,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 31
+            "y": 39
           },
           "hiddenSeries": false,
           "id": 11,
@@ -2198,8 +2466,11 @@ data:
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -2209,6 +2480,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_output_retries_total{pod=~\"$fluentbit\"}[1m])) by (pod, name)",
               "format": "time_series",
               "hide": false,
@@ -2217,6 +2492,10 @@ data:
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_output_retries_failed_total{pod=~\"$fluentbit\"}[1m])) by (pod, name)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -2280,7 +2559,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 31
+            "y": 39
           },
           "hiddenSeries": false,
           "id": 10,
@@ -2301,8 +2580,11 @@ data:
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.1.4",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -2312,6 +2594,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_output_errors_total{pod=~\"$fluentbit\"}[1m])) by (pod, name)",
               "format": "time_series",
               "hide": false,
@@ -2372,7 +2658,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 37
+            "y": 45
           },
           "hiddenSeries": false,
           "id": 43,
@@ -2404,6 +2690,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_output_dropped_records_total{pod=~\"$fluentbit\"}[5m])) by (pod, name)",
               "format": "time_series",
               "hide": false,
@@ -2467,7 +2757,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 37
+            "y": 45
           },
           "hiddenSeries": false,
           "id": 44,
@@ -2499,6 +2789,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${datasource}"
+              },
               "expr": "sum(rate(fluentbit_output_retried_records_total{pod=~\"$fluentbit\"}[5m])) by (pod, name)",
               "format": "time_series",
               "hide": false,
@@ -2543,7 +2837,7 @@ data:
         }
       ],
       "refresh": "5s",
-      "schemaVersion": 34,
+      "schemaVersion": 37,
       "style": "dark",
       "tags": [],
       "templating": {
@@ -2702,7 +2996,7 @@ data:
       },
       "timezone": "",
       "title": "Logging - Logging-operator Dashboard (fluentbit / fluentd)",
-      "uid": "bNn5LUtiz",
+      "uid": "1810324a6e22410bfb961efaca3361f90d55af36",
       "version": 1,
       "weekStart": ""
     }
