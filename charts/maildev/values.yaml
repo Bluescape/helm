@@ -17,10 +17,10 @@ fullnameOverride: ""
 services:
   http:
     type: ClusterIP
-    port: 80
+    port: 1080
   smtp:
     type: NodePort
-    port: 25
+    port: 1025
     # nodePort can be set to specify the node port used, or leave blank to get a random node port
     nodePort:
 
