@@ -1242,6 +1242,28 @@ entries:
     version: 0.3.1
   lacework-agent:
   - apiVersion: v1
+    appVersion: "1.2"
+    created: "2022-11-07T14:21:21.512403882Z"
+    description: Lacework Agent
+    digest: 347aa474a338e91f397e2cf62cc76ac6cd4637374fd44318e59a306832a9ce6c
+    home: https://www.lacework.com
+    icon: https://www.lacework.com/wp-content/uploads/2019/07/Lacework_Logo_color_2019.svg
+    keywords:
+    - monitoring
+    - security
+    - run-time
+    - metric
+    - troubleshooting
+    maintainers:
+    - email: jim.conner@bluescape.com
+      name: Jim Conner
+    - email: info@lacework.net
+      name: lacework-support
+    name: lacework-agent
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/lacework-agent-6.1.2/lacework-agent-6.1.2.tgz
+    version: 6.1.2
+  - apiVersion: v1
     appVersion: "1.0"
     created: "2022-05-19T22:04:04.501306231Z"
     description: Lacework Agent
@@ -1535,4 +1557,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2022-11-04T20:47:25.672832318Z"
+generated: "2022-11-07T14:21:21.512779298Z"
