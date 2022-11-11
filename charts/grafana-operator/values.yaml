@@ -1,0 +1,371 @@
+## Default values for grafana-operator.
+## This is a YAML-formatted file.
+## Declare variables to be passed into your templates.
+
+## Global Docker image parameters
+## Please, note that this will override the image parameters, including dependencies, configured to use the global value
+## Current available global Docker image parameters: imageRegistry, imagePullSecrets
+##
+# global:
+#   imageRegistry: myRegistryName
+#   imagePullSecrets:
+#     - myRegistryKeySecretName
+
+## String to partially override metallb.fullname include (will maintain the release name)
+##
+# nameOverride:
+
+## String to fully override metallb.fullname template
+##
+# fullnameOverride:
+
+## Number of grafana-operator Pod replicas
+##
+replicaCount: 1
+
+## Set up update strategy for Grafana installation. Set to Recreate if you use persistent volume that cannot be mounted by more than one pods to makesure the pods is destroyed first.
+## ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#strategy
+## Example:
+## updateStrategy:
+##  type: RollingUpdate
+##  rollingUpdate:
+##    maxSurge: 25%
+##    maxUnavailable: 25%
+##
+updateStrategy:
+  type: Recreate
+
+## Deploy CRDs
+##
+createCustomResource: true
+
+customResourceGroupRemap:
+  enabled: false
+  newGroup: "" # name of the new group to map the monitoring.coreos.com to
+
+image:
+  ## TODO change to original repo after release of UID fixes
+  registry: quay.io
+  repository: grafana-operator/grafana-operator
+  tag: v3.10.4
+  ## Specify a imagePullPolicy
+  ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
+  ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: IfNotPresent
+  ## Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  ##
+  # pullSecrets:
+  #   - myRegistryKeySecretName
+
+args:
+  ## If one of these options is set a clusterRole and clusterRoleBinding is created to
+  ## ensure that the operator is able to get data from other namespaces.
+  scanAllNamespaces: false
+  scanNamespaces: []
+
+
+grafana:
+  image:
+    registry: docker.io
+    repository: grafana/grafana
+    tag: 7.5.7
+  deployment:
+    annotations: {}
+    labels: {}
+    nodeSelector: {}
+    tolerations: []
+    affinity: {}
+    envFrom: []
+#      - configMapRef:
+#          name: grafana-custom-config
+    skipCreateAdminAccount: false
+    priorityClassName: ""
+    securityContext: {}
+#      runAsUser: 472
+#      runAsGroup: 2000
+#      fsGroup: 2000
+    strategy: {}
+
+grafanaPluginInit:
+  image:
+    registry: quay.io
+    repository: integreatly/grafana_plugins_init
+    tag: 0.0.3
+
+#Enable Default Dashboards
+defaultDashboards:
+  enabled: false
+#Enable kubelet Dashboard
+  kubelet:
+    enabled: true
+#Enable prometheus Dashboard
+  prometheus:
+    prometheusSpec:
+      remoteWriteDashboards:
+        enabled: true
+
+  statefulset:
+    enabled: true
+
+  scheduler:
+    enabled: true
+
+  proxy:
+    enabled: true
+
+  prometheus_remote_write:
+    enabled: true
+
+  pod_total:
+    enabled: true
+
+  persistentvolumesusage:
+    enabled: true
+
+  nodes:
+    enabled: true
+
+  node_rsrc_use:
+    enabled: true
+
+  node_cluster_rsrc_use:
+    enabled: true
+
+  namespace_by_workload:
+    enabled: true
+
+  namespace_by_pod:
+    enabled: true
+
+  workload_total:
+    enabled: true
+
+  k8s_resources_workloads_namespace:
+    enabled: true
+
+  k8s_resources_workloads_pod:
+    enabled: true
+
+  k8s_resources_workload:
+    enabled: true
+
+  k8s_resources_pod:
+    enabled: true
+
+  k8s_resources_node:
+    enabled: true
+
+  k8s_resources_namespace:
+    enabled: true
+
+  k8s_resources_cluster:
+    enabled: true
+
+  etcd:
+    enabled: true
+
+  controller_manager:
+    enabled: true
+
+  cluster_total:
+    enabled: true
+
+  apiserver:
+    enabled: true
+
+  logging_dashboard:
+    enabled: true
+    plugins:
+      - name: "grafana-piechart-panel"
+        version: "1.6.1"
+      - name: "grafana-clock-panel"
+        version: "1.1.1"
+
+  thanos:
+    bucket_replicate:
+      enabled: false
+
+    compact:
+      enabled: false
+
+    overview:
+      enabled: false
+
+    query:
+      enabled: false
+
+    receive:
+      enabled: false
+
+    rule:
+      enabled: false
+
+    sidecar:
+      enabled: false
+
+    store:
+      enabled: false
+
+#Enable Default Grafana Instance
+defaultDeployment:
+  enabled: false
+
+  # Don't use ingress to communicate with Grafana
+  client:
+    preferService: true
+
+  ingress:
+    enabled: false
+    tlsEnabled: false
+    tlsSecretName: ""
+    annotations: {}
+    hostname: ""
+    path: "/"
+
+  service:
+    type: ClusterIP
+    annotations: {}
+  config:
+    log:
+      mode: console
+      level: warn
+
+    server:
+      root_url: ""
+      serve_from_sub_path: false
+
+    security:
+      admin_user: "root"
+      admin_password: "secret"
+      allow_embedding: false
+
+    auth:
+      disable_login_form: false
+      disable_signout_menu: true
+
+    auth.anonymous:
+      enabled: true
+
+  dataStorage: {}
+#    accessModes:
+#    - ReadWriteOnce
+#    size: "10Gi"
+
+  resources: {}
+  readinessProbe:
+    initialDelaySeconds: 10
+    timeoutSeconds: 1
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
+
+  livenessProbe:
+    initialDelaySeconds: 60
+    timeoutSeconds: 30
+    failureThreshold: 10
+    periodSeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
+
+
+defaultDatasouce:
+  enabled: false
+  datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://monitor-prometheus-operato-prometheus:9090
+    isDefault: true
+    version: 1
+    editable: true
+    jsonData:
+      tlsSkipVerify: true
+      timeInterval: "5s"
+
+
+
+rbac:
+  # create specifies whether to install and use RBAC rules.
+  create: true
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+## Pod securityContext
+## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
+##
+securityContext:
+  enabled: true
+  runAsUser: 1001
+  runAsGroup: 1001
+  fsGroup: 1001
+  supplementalGroups: []
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+## Node labels for pod assignment
+## Ref: https://kubernetes.io/docs/user-guide/node-selection/
+##
+nodeSelector: {}
+
+## Tolerations for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+##
+tolerations: []
+
+## Affinity for pod assignment
+## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+##
+affinity: {}
+
+## Pod annotations
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+##
+podAnnotations: {}
+
+prometheus:
+  # Prometheus Operator service monitors
+  serviceMonitor:
+    # enable support for Prometheus Operator
+    enabled: false
+    # Job label for scrape target
+    jobLabel: app.kubernetes.io/name
+    # Scrape interval. If not set, the Prometheus default scrape interval is used.
+    interval: ""
+    metricRelabelings: []
+    relabelings: []
+
+## Liveness and readiness probe values
+## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+##
+livenessProbe:
+  enabled: true
+  failureThreshold: 3
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 1
+readinessProbe:
+  enabled: true
+  failureThreshold: 3
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 1
