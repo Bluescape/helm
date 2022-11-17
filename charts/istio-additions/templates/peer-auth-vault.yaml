@@ -1,4 +1,4 @@
-{{- if .Values.istio.peerauthentication.setup_vault.enabled }}
+{{- if .Values.istio.peerAuthentication.setup_vault.enabled }}
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
@@ -11,5 +11,5 @@ metadata:
     {{- include "istio-additions.labels" . | nindent 4 }}
 spec:
   mtls:
-    mode: {{ .Values.istio.peerauthentication.setup_vault.mode }}
+    mode: {{ .Values.istio.peerAuthentication.setup_vault.mode }}
 {{- end }}

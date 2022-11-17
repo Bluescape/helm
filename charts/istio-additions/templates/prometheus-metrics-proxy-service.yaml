@@ -1,4 +1,4 @@
-{{- if .Values.istio.serviceMonitor.enabled }}
+{{- if .Values.istio.prometheusMetricsProxy.enabled }}
 # Haproxy Proxy Config
 apiVersion: v1
 kind: ConfigMap

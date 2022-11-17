@@ -1,4 +1,4 @@
-{{- if .Values.istio.peerauthentication.setup_bitnami_redis.enabled }}
+{{- if .Values.istio.peerAuthentication.setup_bitnami_redis.enabled }}
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
@@ -11,5 +11,5 @@ metadata:
     {{- include "istio-additions.labels" . | nindent 4 }}
 spec:
   mtls:
-    mode: {{ .Values.istio.peerauthentication.setup_bitnami_redis.mode }}
+    mode: {{ .Values.istio.peerAuthentication.setup_bitnami_redis.mode }}
 {{- end }}
