@@ -9,7 +9,7 @@ spec:
   istio_namespace: "istio-system"
   api:
     namespaces:
-      label_selector: kiali-enabled=true
+      label_selector_include: "kiali-enabled=true"
   auth:
     strategy: anonymous
   deployment:
