@@ -1,0 +1,15 @@
+## Reference : https://www.getambassador.io/docs/edge-stack/latest/topics/running/tls/
+{{- if .Values.edge_stack.setup_tlscontext.enabled }}
+apiVersion: getambassador.io/v2
+kind: TLSContext
+metadata:
+  name: istio-upstream
+  namespace: edge-stack
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
+  labels:
+    {{- include "istio-additions.labels" . | nindent 4 }}
+spec:
+  secret: istio-certs   # This secret name tracks the Istio certificates read from /etc/istio-certs
+  alpn_protocols: istio
+{{- end }}
