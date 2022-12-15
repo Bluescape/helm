@@ -2,7 +2,15 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-## Ambassador configuration(s) for ServiceMesh
+## edge-stack configuration(s) for ServiceMesh (Used exclusively for packaging)
+edge_stack:
+  setup_tracingservice:
+    enabled: false
+    tracing_uri: 'jaeger-aio-collector.istio-system.svc.cluster.local:9411'
+  setup_tlscontext:
+    enabled: false
+
+## Ambassador configuration(s) for ServiceMesh (To be deprecated, after K8s 1.23+, generated at runtime in TF)
 ambassador:
   setup_tracingservice:
     enabled: false
