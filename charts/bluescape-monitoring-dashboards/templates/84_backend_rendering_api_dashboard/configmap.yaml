@@ -46,12 +46,37 @@ data:
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "thresholds"
+                "mode": "palette-classic"
               },
               "custom": {
-                "align": "auto",
-                "displayMode": "auto",
-                "inspect": false
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
               },
               "mappings": [],
               "thresholds": {
@@ -68,20 +93,7 @@ data:
                 ]
               }
             },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "labels"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 643
-                  }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 8,
@@ -91,15 +103,16 @@ data:
           },
           "id": 9,
           "options": {
-            "footer": {
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
             },
-            "showHeader": true,
-            "sortBy": []
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
           },
           "pluginVersion": "9.1.4",
           "targets": [
@@ -116,7 +129,7 @@ data:
             }
           ],
           "title": "Backend Rendering - captureRender timeouts",
-          "type": "table"
+          "type": "timeseries"
         },
         {
           "datasource": {
@@ -601,13 +614,13 @@ data:
         ]
       },
       "time": {
-        "from": "2022-12-09T08:31:08.517Z",
-        "to": "2022-12-10T05:07:37.317Z"
+        "from": "2022-12-02T18:30:00.000Z",
+        "to": "2022-12-15T18:29:59.000Z"
       },
       "timepicker": {},
       "timezone": "",
       "title": "Backend Rendering API",
       "uid": "4AUVuBK4z",
-      "version": 19,
+      "version": 20,
       "weekStart": ""
     }
