@@ -189,12 +189,12 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 8,
+            "h": 9,
             "w": 12,
             "x": 12,
             "y": 0
           },
-          "id": 10,
+          "id": 7,
           "options": {
             "legend": {
               "calcs": [],
@@ -207,7 +207,6 @@ data:
               "sort": "none"
             }
           },
-          "pluginVersion": "9.1.4",
           "targets": [
             {
               "datasource": {
@@ -215,13 +214,12 @@ data:
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(count_over_time({component=\"browser-service\"} |= \"Backend Rendering\" |= \"captureRender: timeout occurred\" [1h]))",
-              "hide": false,
+              "expr": "sum(count_over_time({ component=\"browser-service\" } |~\"\\\"level\\\":60\" [1h]))",
               "queryType": "range",
               "refId": "A"
             }
           ],
-          "title": "Backend Rendering - captureRender timeouts",
+          "title": "Browser-service, errors level 60",
           "type": "timeseries"
         },
         {
@@ -324,37 +322,12 @@ data:
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "palette-classic"
+                "mode": "thresholds"
               },
               "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
+                "align": "auto",
+                "displayMode": "auto",
+                "inspect": false
               },
               "mappings": [],
               "thresholds": {
@@ -374,24 +347,23 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 9,
+            "h": 8,
             "w": 12,
             "x": 12,
-            "y": 8
+            "y": 9
           },
-          "id": 7,
+          "id": 4,
           "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
             },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
+            "showHeader": true
           },
+          "pluginVersion": "9.1.4",
           "targets": [
             {
               "datasource": {
@@ -399,13 +371,13 @@ data:
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(count_over_time({ component=\"browser-service\" } |~\"\\\"level\\\":60\" [1h]))",
+              "expr": "{component=\"browser-service\"} |~\"level\\\":[5,6]0\"",
               "queryType": "range",
               "refId": "A"
             }
           ],
-          "title": "Browser-service, errors level 60",
-          "type": "timeseries"
+          "title": "Browser Service errors (level 50 and 60)",
+          "type": "table"
         },
         {
           "datasource": {
@@ -497,71 +469,6 @@ data:
           ],
           "title": "Browser-service, errors level 50",
           "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "loki",
-            "uid": "${datasource}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "custom": {
-                "align": "auto",
-                "displayMode": "auto",
-                "inspect": false
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green",
-                    "value": null
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              }
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 12,
-            "y": 17
-          },
-          "id": 4,
-          "options": {
-            "footer": {
-              "fields": "",
-              "reducer": [
-                "sum"
-              ],
-              "show": false
-            },
-            "showHeader": true
-          },
-          "pluginVersion": "9.1.4",
-          "targets": [
-            {
-              "datasource": {
-                "type": "loki",
-                "uid": "${datasource}"
-              },
-              "editorMode": "code",
-              "expr": "{component=\"browser-service\"} |~\"level\\\":[5,6]0\"",
-              "queryType": "range",
-              "refId": "A"
-            }
-          ],
-          "title": "Browser Service errors (level 50 and 60)",
-          "type": "table"
         }
       ],
       "refresh": false,
