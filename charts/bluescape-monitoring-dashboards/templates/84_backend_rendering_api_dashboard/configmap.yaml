@@ -115,7 +115,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Backend Rendering - captureRender timeouts, last hour",
+          "title": "Backend Rendering - captureRender timeouts",
           "type": "table"
         },
         {
@@ -208,7 +208,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Backend Rendering - captureRender timeouts, last hour",
+          "title": "Backend Rendering - captureRender timeouts",
           "type": "timeseries"
         },
         {
@@ -300,7 +300,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Backend Rendering - Render Success - Last 1 hour",
+          "title": "Backend Rendering - Render Success",
           "type": "timeseries"
         },
         {
@@ -391,7 +391,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Browser-service, errors level 60, last 1 hour",
+          "title": "Browser-service, errors level 60",
           "type": "timeseries"
         },
         {
@@ -482,7 +482,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Browser-service, errors level 50, last 1 hour",
+          "title": "Browser-service, errors level 50",
           "type": "timeseries"
         },
         {
@@ -551,6 +551,7 @@ data:
           "type": "table"
         }
       ],
+      "refresh": false,
       "schemaVersion": 37,
       "style": "dark",
       "tags": [],
@@ -558,7 +559,7 @@ data:
         "list": [
           {
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "loki-stg1",
               "value": "loki-stg1"
             },
@@ -600,13 +601,13 @@ data:
         ]
       },
       "time": {
-        "from": "now-2d",
-        "to": "now"
+        "from": "2022-12-09T08:31:08.517Z",
+        "to": "2022-12-10T05:07:37.317Z"
       },
       "timepicker": {},
       "timezone": "",
       "title": "Backend Rendering API",
       "uid": "4AUVuBK4z",
-      "version": 17,
+      "version": 19,
       "weekStart": ""
     }
