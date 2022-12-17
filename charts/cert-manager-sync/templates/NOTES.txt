@@ -1,0 +1,12 @@
+If IRSA is not properly set up, this controller will not be able to authenticate with AWS
+certificate manager or AWS secrets manager. Please see the documentation for how to set
+that up.
+
+Please take a look at the certificate-manager-sample.yaml file to learn how to properly
+annotate the cert-manager certificate manifest correctly for secrets to inherit the
+correct annotations for cert-manager-sync to properly sync them to AWS.
+
+Note that this tool is a run candidate (beta) and may need bugfixes. Please report
+any bugs to the Bluescape SRE team by creating a Jira ticket to the SRE project.
+
+Bluescape SRE Team
