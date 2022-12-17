@@ -861,6 +861,17 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/cdata-0.1.0/cdata-0.1.0.tgz
     version: 0.1.0
+  cert-manager-sync:
+  - apiVersion: v2
+    appVersion: 0.0.1-amd64
+    created: "2022-12-17T00:34:13.569073881Z"
+    description: Helm chart to install cert-manager-sync controller
+    digest: 6dbe8e71fdd1a6193423e8032917814982e147337f74453ea042dec530d905b5
+    name: cert-manager-sync
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/cert-manager-sync-0.1.0/cert-manager-sync-0.1.0.tgz
+    version: 0.1.0
   contour:
   - annotations:
       category: Infrastructure
@@ -1641,4 +1652,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2022-12-16T09:20:01.406751463Z"
+generated: "2022-12-17T00:34:13.569465832Z"
