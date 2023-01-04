@@ -33,7 +33,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 70,
+      "id": 53,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -164,6 +164,14 @@ data:
                   {
                     "params": [
                       "max"
+                    ],
+                    "type": "field"
+                  }
+                ],
+                [
+                  {
+                    "params": [
+                      "mean"
                     ],
                     "type": "field"
                   }
@@ -378,6 +386,14 @@ data:
                 [
                   {
                     "params": [
+                      "mean"
+                    ],
+                    "type": "field"
+                  }
+                ],
+                [
+                  {
+                    "params": [
                       "min"
                     ],
                     "type": "field"
@@ -450,6 +466,216 @@ data:
           "title": "CPU Usage",
           "transformations": [],
           "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "PBB3B880A3FC93816"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 24,
+                "gradientMode": "opacity",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "always",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "max": 65,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 12,
+            "x": 0,
+            "y": 12
+          },
+          "id": 56,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "range"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.1.4",
+          "targets": [
+            {
+              "alias": "$tag_feature / $tag_test - $col",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PBB3B880A3FC93816"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "fps",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT max(memory_usage) FROM procstat WHERE tool='performanceHelper' AND $testFilter AND exe=~/^$Process$/ AND $timeFilter GROUP BY time(1s),$testGroup fill(none)",
+              "rawQuery": false,
+              "refId": "Max",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "max"
+                    ],
+                    "type": "field"
+                  }
+                ],
+                [
+                  {
+                    "params": [
+                      "mean"
+                    ],
+                    "type": "field"
+                  }
+                ],
+                [
+                  {
+                    "params": [
+                      "min"
+                    ],
+                    "type": "field"
+                  }
+                ],
+                [
+                  {
+                    "params": [
+                      "p99"
+                    ],
+                    "type": "field"
+                  }
+                ],
+                [
+                  {
+                    "params": [
+                      "p95"
+                    ],
+                    "type": "field"
+                  }
+                ],
+                [
+                  {
+                    "params": [
+                      "p90"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                }
+              ]
+            }
+          ],
+          "title": "Workspace FPS",
+          "transformations": [],
+          "type": "timeseries"
         }
       ],
       "refresh": "10s",
@@ -492,7 +718,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": false,
+              "selected": true,
               "text": "uat.alpha.dev.bluescape.io",
               "value": "uat.alpha.dev.bluescape.io"
             },
