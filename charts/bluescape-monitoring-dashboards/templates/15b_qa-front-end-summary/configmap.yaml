@@ -53,6 +53,175 @@ data:
                 "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
+                "barAlignment": -1,
+                "drawStyle": "line",
+                "fillOpacity": 24,
+                "gradientMode": "opacity",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "always",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "s"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 12,
+            "x": 0,
+            "y": 0
+          },
+          "id": 57,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "range"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.1.4",
+          "targets": [
+            {
+              "alias": "$tag_feature / $tag_test ",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PBB3B880A3FC93816"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "test_duration.seconds",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT max(memory_usage) FROM procstat WHERE tool='performanceHelper' AND $testFilter AND exe=~/^$Process$/ AND $timeFilter GROUP BY time(1s),$testGroup fill(none)",
+              "rawQuery": false,
+              "refId": "Max",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "value"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                }
+              ]
+            }
+          ],
+          "title": "Test Duration",
+          "transformations": [],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "PBB3B880A3FC93816"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
                 "fillOpacity": 24,
@@ -102,9 +271,9 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 12,
+            "h": 11,
             "w": 12,
-            "x": 0,
+            "x": 12,
             "y": 0
           },
           "id": 1,
@@ -317,10 +486,10 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 12,
+            "h": 11,
             "w": 12,
-            "x": 12,
-            "y": 0
+            "x": 0,
+            "y": 11
           },
           "id": 55,
           "options": {
@@ -533,10 +702,10 @@ data:
             "overrides": []
           },
           "gridPos": {
-            "h": 12,
+            "h": 11,
             "w": 12,
-            "x": 0,
-            "y": 12
+            "x": 12,
+            "y": 11
           },
           "id": 56,
           "options": {
@@ -691,8 +860,8 @@ data:
             "allValue": "*",
             "current": {
               "selected": true,
-              "text": "qa-perf-webc",
-              "value": "qa-perf-webc"
+              "text": "qa-e2e-webc",
+              "value": "qa-e2e-webc"
             },
             "datasource": {
               "type": "influxdb",
@@ -718,7 +887,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "uat.alpha.dev.bluescape.io",
               "value": "uat.alpha.dev.bluescape.io"
             },
@@ -829,7 +998,7 @@ data:
         ]
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-7d",
         "to": "now"
       },
       "timepicker": {
@@ -848,6 +1017,6 @@ data:
       "timezone": "",
       "title": "QA / Front-End Test Metrics Summary",
       "uid": "39c3e8153e33b5e2ed8d786a3614369123a52355",
-      "version": 1,
+      "version": 2,
       "weekStart": ""
     }
