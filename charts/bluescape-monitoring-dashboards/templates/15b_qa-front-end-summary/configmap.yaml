@@ -583,7 +583,7 @@ data:
                 }
               ],
               "hide": false,
-              "measurement": "fps",
+              "measurement": "frames.fps",
               "orderByTime": "ASC",
               "policy": "default",
               "query": "SELECT max(memory_usage) FROM procstat WHERE tool='performanceHelper' AND $testFilter AND exe=~/^$Process$/ AND $timeFilter GROUP BY time(1s),$testGroup fill(none)",
