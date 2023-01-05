@@ -11,4 +11,3 @@ spec:
   configMapRef:
     name: backend-rendering-api-dashboard
     key: backend-rendering-api-dashboard.json
-  name: backend-rendering-api-dashboard
