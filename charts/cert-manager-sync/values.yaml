@@ -28,7 +28,7 @@ serviceAccount:
 # There is no need to put this in the annotations above.
 # This entry will automatically put the IRSA ARN property in the annoations
 # This is a required field. Use of IRSA is mandatory
-serviceAccountIrsaArn: "arn:aws:iam::429863676324:role/cert-manager-sync-POC"
+serviceAccountIrsaArn: "arn:aws:iam::<account ID>:role/<role name>"
 
 podAnnotations: {}
 
