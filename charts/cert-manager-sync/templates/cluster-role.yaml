@@ -1,0 +1,27 @@
+# use the following for non-namespace scoped syncing
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "cert-manager-sync.name" .}}
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "watch", "list", "create", "update", "patch", "delete"]
+- apiGroups: [""]
+  resources: ["namespaces"]
+  verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ include "cert-manager-sync.name" .}}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "cert-manager-sync.serviceAccountName" . }}
+  namespace: {{ .Values.clusterRoleBinding.namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ include "cert-manager-sync.name" .}}
+  apiGroup: rbac.authorization.k8s.io

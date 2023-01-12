@@ -13,6 +13,8 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+clusterRoleBinding:
+  namespace: cert-manager
 
 serviceAccount:
   # Specifies whether a service account should be created
