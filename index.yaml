@@ -1522,6 +1522,41 @@ entries:
         - Apache-2.0
     apiVersion: v2
     appVersion: 2022.12.12
+    created: "2023-01-13T14:28:01.238639923Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: MinIO(R) is an object storage server, compatible with Amazon S3 cloud
+      storage service, mainly used for storing unstructured data (such as photos,
+      videos, log files, etc.).
+    digest: d59a3204df98eae3da2e4db6d6a08c860ffbe053802607b9ebac8e57b864d1a3
+    home: https://github.com/bitnami/charts/tree/main/bitnami/minio
+    icon: https://bitnami.com/assets/stacks/minio/img/minio-stack-220x234.png
+    keywords:
+    - minio
+    - storage
+    - object-storage
+    - s3
+    - cluster
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    name: minio
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/minio
+    - https://min.io
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/minio-11.10.25/minio-11.10.25.tgz
+    version: 11.10.25
+  - annotations:
+      category: Infrastructure
+      licenses: |
+        - Apache-2.0
+    apiVersion: v2
+    appVersion: 2022.12.12
     created: "2023-01-13T12:12:48.929548284Z"
     dependencies:
     - name: common
@@ -1773,4 +1808,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-01-13T12:12:48.930261884Z"
+generated: "2023-01-13T14:28:01.239532683Z"
