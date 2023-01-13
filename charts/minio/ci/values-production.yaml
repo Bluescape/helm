@@ -5,7 +5,8 @@ volumePermissions:
   enabled: true
 
 mode: distributed
-useCredentialsFile: true
+auth:
+  useCredentialsFiles: true
 disableWebUI: false
 
 podAnnotations:
