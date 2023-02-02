@@ -101,7 +101,11 @@ items:
       hostname: "grafana.{{ .Values.grafana.domain_name }}"
       {{- if or .Values.grafana.ingress.tls }}
       tlsEnabled: true
+      {{- if ne .Values.grafana.ingress.tlsSecretName "" }}
       tlsSecretName: "grafana.{{ .Values.grafana.domain_name }}"
+      {{- else }}
+      tlsSecretName: "{{ .Values.ingress.tlsSecretName }}"
+      {{- end }}
       {{- end }}
       annotations:
         {{- range $key, $value := .Values.grafana.ingress.annotations }}
