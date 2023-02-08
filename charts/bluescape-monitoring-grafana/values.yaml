@@ -59,5 +59,4 @@ grafana:
   ingress:
     enabled: false
     tls: false
-    tlsSecretName: ""
     annotations: {}
