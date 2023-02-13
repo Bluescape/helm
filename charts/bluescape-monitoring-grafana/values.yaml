@@ -22,6 +22,8 @@ grafana:
   domain_name: example.io
   cluster_id: example
   baseImage: grafana/grafana:8.3.3
+  env: []
+#    - GF_FEATURE_TOGGLES_ENABLE: traceToMetrics,tempoApmTable,traceqlEditor
 
   # Used to pass GF_INSTALL_PLUGINS env var to grafana to install additional plugins on start:
   # https://github.com/grafana-operator/grafana-operator/blob/master/documentation/plugins.md
