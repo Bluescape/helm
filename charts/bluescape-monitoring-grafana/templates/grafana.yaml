@@ -15,6 +15,10 @@ items:
             name: postgres-grafana-auth
         - secretRef:
             name: grafana-admin-credentials
+      {{- if gt (len .Values.grafana.env) 0 }}
+        - secretRef:
+            name: "{{ .Release.Name }}-grafana-env-vars"
+      {{- end }}
       {{- if or (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets true) (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets_operator true) }}
         - secretRef:
             name: grafana-oidc-auth
@@ -31,6 +35,10 @@ items:
     deployment:
       replicas: 1
       envFrom:
+      {{- if gt (len .Values.grafana.env) 0 }}
+        - secretRef:
+            name: "{{ .Release.Name }}-grafana-env-vars"
+      {{- end }}
       {{- if or (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets true) (eq .Values.sync_credentials.grafana_oidc_secret.via_external_secrets_operator true) }}
         - secretRef:
             name: grafana-oidc-auth
