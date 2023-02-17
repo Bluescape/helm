@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ambassador-stats-dashboard
-  namespace: grafana
+
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 data:

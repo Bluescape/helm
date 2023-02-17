@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gen3-document-upload-metrics-dashboard
-  namespace: grafana
+
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 data:
