@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: custom-upstream-5xx-4xx-errors-rpm-dashboard
-  namespace: grafana
+
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 data:

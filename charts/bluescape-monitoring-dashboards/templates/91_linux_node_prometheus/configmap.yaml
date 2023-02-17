@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: linux-node-single-prometheus
-  namespace: grafana
+
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 data:
@@ -1129,7 +1129,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: linux-node-prometheus
-  namespace: grafana
+
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 data:
