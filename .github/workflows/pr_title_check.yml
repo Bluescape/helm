@@ -1,9 +1,0 @@
-name: Validate PR
-
-on:
-  pull_request:
-    types: [opened, synchronize, edited]
-
-jobs:
-  validate_pr:
-    uses: bluescape/reusable-github-workflows/.github/workflows/validate_pr.yml@v1
