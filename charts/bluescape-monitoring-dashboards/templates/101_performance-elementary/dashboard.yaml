@@ -1,0 +1,12 @@
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: performance--elementary-dashboard
+  labels:
+     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  json: ""
+  configMapRef:
+    name: performance--elementary-dashboard
+    key: performance--elementary-dashboard.json
