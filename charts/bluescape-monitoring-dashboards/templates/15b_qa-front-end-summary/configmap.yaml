@@ -33,7 +33,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 73,
+      "id": 64,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -88,8 +88,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -257,8 +256,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -272,7 +270,7 @@ data:
           },
           "gridPos": {
             "h": 11,
-            "w": 12,
+            "w": 24,
             "x": 0,
             "y": 11
           },
@@ -447,9 +445,9 @@ data:
           },
           "gridPos": {
             "h": 11,
-            "w": 12,
-            "x": 12,
-            "y": 11
+            "w": 24,
+            "x": 0,
+            "y": 22
           },
           "id": 1,
           "options": {
@@ -608,8 +606,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -623,9 +620,9 @@ data:
           },
           "gridPos": {
             "h": 11,
-            "w": 12,
+            "w": 24,
             "x": 0,
-            "y": 22
+            "y": 33
           },
           "id": 56,
           "options": {
@@ -777,8 +774,7 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green",
-                    "value": null
+                    "color": "green"
                   },
                   {
                     "color": "red",
@@ -792,9 +788,9 @@ data:
           },
           "gridPos": {
             "h": 11,
-            "w": 12,
-            "x": 12,
-            "y": 22
+            "w": 24,
+            "x": 0,
+            "y": 44
           },
           "id": 60,
           "options": {
@@ -908,7 +904,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "qa-perf-webc - frontend",
               "value": "qa-perf-webc - frontend"
             },
@@ -962,7 +958,7 @@ data:
           },
           {
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "All",
               "value": "$__all"
             },
@@ -1048,8 +1044,8 @@ data:
             "allValue": "*",
             "current": {
               "selected": true,
-              "text": "max",
-              "value": "max"
+              "text": "mean",
+              "value": "mean"
             },
             "hide": 0,
             "includeAll": false,
@@ -1057,12 +1053,12 @@ data:
             "name": "Calculation",
             "options": [
               {
-                "selected": true,
+                "selected": false,
                 "text": "max",
                 "value": "max"
               },
               {
-                "selected": false,
+                "selected": true,
                 "text": "mean",
                 "value": "mean"
               },
@@ -1114,7 +1110,7 @@ data:
       "timezone": "",
       "title": "QA / Front-End Test Metrics Summary",
       "uid": "39c3e8153e33b5e2ed8d786a3614369123a52355",
-      "version": 2,
+      "version": 6,
       "weekStart": ""
     }
 
