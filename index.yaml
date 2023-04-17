@@ -1265,6 +1265,32 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/edge-stack-7.3.2/edge-stack-7.3.2.tgz
     version: 7.3.2
+  enroute:
+  - apiVersion: v2
+    appVersion: v1.0.0
+    created: "2023-04-17T15:10:16.402788506Z"
+    description: EnRoute API Gateway
+    digest: 4b796273b10726506efc9411a3c7a27870b5c3700f1ad3aa4895bccec5777d94
+    home: https://getenroute.io/
+    icon: https://getenroute.io/favicon.ico
+    keywords:
+    - api gateway
+    - EnRoute - Envoy Route Controller
+    - Saaras
+    - envoy
+    - ingress
+    maintainers:
+    - email: contact@saaras.io
+      name: contact
+    name: enroute
+    sources:
+    - https://github.com/saarasio/enroute
+    - https://getenroute.io
+    - https://github.com/envoyproxy/envoy
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/enroute-0.8.1/enroute-0.8.1.tgz
+    version: 0.8.1
   external-dns:
   - annotations:
       category: DeveloperTools
@@ -1910,4 +1936,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-03-30T15:40:45.357763734Z"
+generated: "2023-04-17T15:10:16.40334271Z"
