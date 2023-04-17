@@ -1,0 +1,21 @@
+apiVersion: v2
+appVersion: v1.0.0
+description: EnRoute API Gateway
+home: https://getenroute.io/
+icon: https://getenroute.io/favicon.ico
+keywords:
+- api gateway
+- EnRoute - Envoy Route Controller
+- Saaras
+- envoy
+- ingress
+maintainers:
+- email: contact@saaras.io
+  name: contact
+name: enroute
+sources:
+- https://github.com/saarasio/enroute
+- https://getenroute.io
+- https://github.com/envoyproxy/envoy
+type: application
+version: 0.8.1
