@@ -1,0 +1,156 @@
+# Default values for enroute.
+
+replicaCount: 1
+
+images:
+  enrouteService:
+    repository: saarasio/enroute-gwi
+    tag: ~ # Chart.appVersion is used
+    pullPolicy: Always
+  redis:
+    repository: redis
+    tag: 7.0.10
+    pullPolicy: Always
+  envoy:
+    repository: envoyproxy/envoy
+    tag: v1.23.0
+    pullPolicy: Always
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: "enroute"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+service:
+  annotations: {}
+
+  externalTrafficPolicy:
+
+  type: LoadBalancer
+
+  useProxyProtocol: false
+
+  ports:
+    - port: 80
+      name: http
+      protocol: TCP
+      targetPort: 8080
+    - port: 443
+      name: https
+      protocol: TCP
+      targetPort: 8443
+
+# Backward compatibility
+enrouteService:
+  rbac:
+    create: false
+
+podAnnotations:
+  prometheus.io/path: /stats/prometheus
+  prometheus.io/port: "8002"
+  prometheus.io/scrape: "true"
+
+istioPodAnnotations:
+  proxy.istio.io/config: |
+    proxyMetadata:
+      OUTPUT_CERTS: /etc/istio-certs
+  sidecar.istio.io/userVolumeMount: '[{"name": "istio-certs", "mountPath": "/etc/istio-certs"}]'
+  traffic.sidecar.istio.io/includeInboundPorts: ''
+  traffic.sidecar.istio.io/includeOutboundIPRanges: ''
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext:
+  # capabilities:
+  #   drop:
+  #   - ALL
+  readOnlyRootFilesystem: true
+  privileged: false
+  # runAsNonRoot: true
+  # runAsUser: 1000
+  # allowPrivilegeEscalation: false
+
+resources:
+  enrouteService: {}
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  redis: {}
+  envoy: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity:
+  # This is the default policy
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: enroute
+          topologyKey: kubernetes.io/hostname
+
+##########
+# CUSTOM #
+##########
+
+livenessProbe:
+  timeoutSeconds: 2
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+
+readinessProbe:
+  timeoutSeconds: 2
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  failureThreshold: 3
+  successThreshold: 1
+
+enrouteConfigScope: "enroute0"
+
+# -- One of ["trace", "debug", "info", "error"]
+envoySettings:
+  logLevel: "debug"
+
+# -- When enabled, setup resources need to run OPA
+opa:
+  enable: false
+
+istio:
+   enable: false
+   strictmtls: false

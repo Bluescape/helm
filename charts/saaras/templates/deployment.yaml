@@ -1,0 +1,328 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "enroute.fullname" . }}
+  labels:
+    {{- include "enroute.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "enroute.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.istio.enable }}
+      {{- with .Values.istioPodAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      labels:
+        {{- include "enroute.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "enroute.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        {{- if .Values.opa.enable }}
+        # OPA CONTAINER
+        - name: opa-envoy
+          image: openpolicyagent/opa:latest-envoy
+          securityContext:
+            runAsUser: 1111
+          volumeMounts:
+            - readOnly: true
+              mountPath: /policy
+              name: opa-policy
+            - readOnly: true
+              mountPath: /config
+              name: opa-envoy-config
+          args:
+            - "run"
+            - "--server"
+            - "--config-file=/config/config.yaml"
+            - "--addr=127.0.0.1:8181"
+            - "--diagnostic-addr=0.0.0.0:8282"
+            - "--ignore=.*"
+            - "/policy/policy.rego"
+          livenessProbe:
+            httpGet:
+              path: /health?plugins
+              scheme: HTTP
+              port: 8282
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /health?plugins
+              scheme: HTTP
+              port: 8282
+            initialDelaySeconds: 6
+            periodSeconds: 5
+        {{- end }}
+        # ENROUTE CONTAINER
+        - image: "{{ .Values.images.enrouteService.repository }}:{{ .Values.images.enrouteService.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.images.enrouteService.pullPolicy }}
+          name: enroute
+          ports:
+            - containerPort: 6060
+              name: debug-port
+          command: ["/bin/enroute"]
+          args:
+            - serve
+            - --incluster
+            - --envoy-service-http-port
+            - "8080"
+            - --envoy-service-https-port
+            - "8443"
+            - --mode-ingress
+            - --enable-ratelimit
+            - --enroute-config-scope
+            - {{ .Values.enrouteConfigScope }}
+            {{- if .Values.service.useProxyProtocol }}
+            - --use-proxy-protocol
+            {{- end }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          volumeMounts:
+            - name: enroute-config
+              mountPath: /config
+            - name: enroute-wasm
+              mountPath: /wasm
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources.enrouteService | nindent 12 }}
+  {{- if .Values.istio.enable }}
+        # ISTIO Cert Server
+        - name: cert-server
+          image: saarasio/cert-server:v0.1.0
+          command:
+            - /usr/local/bin/cert-server
+          args:
+            - '--port'
+            - '8005'
+            - '--loglevel'
+            - info
+          ports:
+            - name: tcp
+              containerPort: 8005
+              protocol: TCP
+          resources: {}
+          volumeMounts:
+            - name: istio-certs
+              mountPath: /etc/istio-certs/
+            - name: enroute-config
+              mountPath: /config
+          imagePullPolicy: Always
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+   {{- end }}
+        # REDIS CONTAINER
+        - image: "{{ .Values.images.redis.repository }}:{{ .Values.images.redis.tag | default "latest" }}"
+          imagePullPolicy: {{ .Values.images.redis.pullPolicy }}
+          name: redis
+          command: ["redis-server"]
+          args:
+            - --port
+            - "6379"
+            - --loglevel
+            - verbose
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources.redis | nindent 12 }}
+        # ENVOY CONTAINER
+        - image: "{{ .Values.images.envoy.repository }}:{{ .Values.images.envoy.tag | default "latest" }}"
+          imagePullPolicy: {{ .Values.images.envoy.pullPolicy }}
+          name: envoy
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 8443
+              name: https
+          command: ["envoy"]
+          args:
+            - --config-path /config/enroute.json
+            - --service-cluster $(ENROUTE_NAMESPACE)
+            - --service-node $(ENVOY_POD_NAME)
+            - --log-level {{ .Values.envoySettings.logLevel }}
+          env:
+            - name: ENROUTE_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: ENVOY_POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8000
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          volumeMounts:
+            - name: enroute-config
+              mountPath: /config
+            - name: enroute-wasm
+              mountPath: /wasm
+          lifecycle:
+            preStop:
+              exec:
+                command: ["wget", "-qO-", "--post-data=''", "http://localhost:9001/healthcheck/fail"]
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          resources:
+            {{- toYaml .Values.resources.envoy | nindent 12 }}
+      initContainers:
+        - image: "{{ .Values.images.enrouteService.repository }}:{{ .Values.images.enrouteService.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.images.enrouteService.pullPolicy }}
+          name: envoy-initconfig
+          command: ["/bin/enroute"]
+          args:
+            - bootstrap
+            - /config/enroute.json
+          volumeMounts:
+            - name: enroute-config
+              mountPath: /config
+            - name: enroute-wasm
+              mountPath: /wasm
+          env:
+            - name: ENROUTE_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+      volumes:
+  {{- if .Values.opa.enable }}
+        - name: opa-policy
+          configMap:
+            name: opa-policy
+        - name: opa-envoy-config
+          configMap:
+            name: opa-envoy-config
+   {{- end }}
+  {{- if .Values.istio.enable }}
+        - name: istio-certs
+          emptyDir:
+            medium: Memory
+   {{- end }}
+        - name: enroute-config
+          emptyDir: {}
+        - name: enroute-wasm
+          emptyDir: {}
+      dnsPolicy: ClusterFirst
+      terminationGracePeriodSeconds: 30
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- if .Values.opa.enable }}
+# OPA Config
+---
+############################################################
+# Example configuration to bootstrap OPA-Envoy sidecars.
+# https://www.openpolicyagent.org/docs/edge/envoy-introduction/
+############################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: opa-envoy-config
+  namespace: enroutedemo
+data:
+  config.yaml: |
+    plugins:
+      envoy_ext_authz_grpc:
+        addr: :9191
+        path: envoy/authz/allow
+        dry-run: false
+        enable-reflection: true
+    decision_logs:
+      console: true
+---
+############################################################
+# Example policy to enforce into OPA-Envoy sidecars.
+############################################################
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: opa-policy
+  namespace: enroutedemo
+data:
+  policy.rego: |
+    package envoy.authz
+
+    default allow := false
+
+    allow {
+        is_method_post
+        is_path_post
+        claims["scope"] == "write:finance"
+    }
+
+    is_method_post {
+        input.attributes.request.http.method == "POST"
+    }
+
+    is_path_post{
+        input.attributes.request.http.path == "/post"
+    }
+
+    claims := payload {
+        # This statement invokes the built-in function `io.jwt.decode` passing the
+        # parsed bearer_token as a parameter. The `io.jwt.decode` function returns an
+        # array:
+        #
+        #    [header, payload, signature]
+        #
+        # In Rego, you can pattern match values using the `=` and `:=` operators. This
+        # example pattern matches on the result to obtain the JWT payload.
+        [_, payload, _] := io.jwt.decode(bearer_token)
+    }
+
+    bearer_token := t {
+        # Bearer tokens are contained inside of the HTTP Authorization header. This rule
+        # parses the header and extracts the Bearer token value. If no Bearer token is
+        # provided, the `bearer_token` value is undefined.
+        v := input.attributes.request.http.headers.authorization
+        startswith(v, "Bearer ")
+        t := substring(v, count("Bearer "), -1)
+    }
+
+{{- end }}

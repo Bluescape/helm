@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "enroute.fullname" . }}
+  labels:
+    {{- include "enroute.labels" . | nindent 4 }}
+  {{- if .Values.service.annotations }}
+  annotations:
+    {{- range $key, $value := .Values.service.annotations }}
+      {{ $key }}: {{ $value | quote }}
+    {{- end }}
+  {{- end }}
+spec:
+  ports:
+    {{- range .Values.service.ports }}
+    - name: {{ .name }}
+      port: {{ int .port }}
+      {{- if .targetPort }}
+      targetPort: {{ int .targetPort }}
+      {{- end }}
+      {{- if .nodePort }}
+      nodePort: {{ int .nodePort }}
+      {{- end }}
+      {{- if .protocol }}
+      protocol: {{ .protocol }}
+      {{- end }}
+    {{- end }}
+  selector:
+    {{- include "enroute.selectorLabels" . | nindent 4 }}
+  type: LoadBalancer
