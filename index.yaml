@@ -1815,6 +1815,40 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/mongodb-10.26.4/mongodb-10.26.4.tgz
     version: 10.26.4
+  mysql:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 8.0.29
+    created: "2023-04-24T17:20:36.834776956Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: MySQL is a fast, reliable, scalable, and easy to use open source
+      relational database system. Designed to handle mission-critical, heavy-load
+      production applications.
+    digest: 2e405f31c190f227f7f557f03289905c02fed258ee506aaccef0b3b4434e52ff
+    home: https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    icon: https://bitnami.com/assets/stacks/mysql/img/mysql-stack-220x234.png
+    keywords:
+    - mysql
+    - database
+    - sql
+    - cluster
+    - high availability
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: mysql
+    sources:
+    - https://github.com/bitnami/bitnami-docker-mysql
+    - https://mysql.com
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/mysql-8.9.6/mysql-8.9.6.tgz
+    version: 8.9.6
   n8n:
   - apiVersion: v2
     appVersion: latest
@@ -1936,4 +1970,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-04-17T15:10:16.40334271Z"
+generated: "2023-04-24T17:20:36.835327628Z"
