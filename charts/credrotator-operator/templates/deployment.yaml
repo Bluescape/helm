@@ -1,0 +1,81 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "credrotator-operator.fullname" . }}
+  labels:
+    {{- include "credrotator-operator.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "credrotator-operator.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "credrotator-operator.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "credrotator-operator.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.podEnvironment.env }}
+          env:
+            - name: LOG_LEVEL
+              value: info
+            - name: DEBUG_HTTP
+              value: "false"
+            - name: DB_SHIM_ADDR
+              value: db-shim-service.credentialrotation.svc.cluster.local
+{{- range $envVar := .Values.podEnvironment.env }}
+            {{- if eq $envVar.name "DB_SHIM_IMAGE" }}
+            - name: {{ $envVar.name }}
+              value: {{ required "DB_SHIM_IMAGE pod environment variable is required" $envVar.value }}
+            {{- else }}
+            - name: {{ $envVar.name }}
+              value: {{ $envVar.value | default "" | quote }}
+            {{- end }}
+{{- end }}
+{{- end }}
+          command:
+          - bin/operator
+          ports:
+            - name: metrics
+              containerPort: 9100
+              protocol: TCP
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "kill TERM 1"]
+            {{- with .Values.resources }}
+            resources:
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+

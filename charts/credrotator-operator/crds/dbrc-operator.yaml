@@ -1,0 +1,210 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: rotatedcredentials.sretools.bluescape.io
+  # https://github.io/kubernetes/enhancements/blob/master/keps/sig-api-machinery/2337-k8s.io-group-protection/README.md
+  annotations:
+    "api-approved.kubernetes.io": "unapproved, experimentalal-only; please get an approval from Kubernetes API reviewers if you're trying to develop a..."
+spec:
+  group: sretools.bluescape.io
+  names:
+    kind: RotatedCredential
+    singular: rotatedcredential
+    plural: rotatedcredentials
+    shortNames:
+    - dbrc
+    - dbrcs
+  scope: Namespaced
+  versions:
+  - name: v1
+    served: true
+    storage: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            required:
+            - db_type
+# until there's a more concrete way to reference the environment
+# name used in vault, I'm going to stick with this.
+            - cluster_name
+            - rotation_pod
+            properties:
+              db_shim_image:
+                type: string
+              db_type:
+                type: string
+                enum: ['mysql','postgres','mongodb']
+                default: 'mysql'
+              db_shim_addr:
+                type: string
+                default: 'http://db-shim-service'
+              cluster_name:
+                type: string
+              credentials:
+                type: object
+                properties:
+                  vault_addr:
+                    type: string
+                    default: https://vault.vault:8200
+                  admin:
+                    type: object
+                    properties:
+                      vault_path:
+                        type: string
+                      root_username:
+                        type: string
+                      root_password:
+                        type: string
+                    required:
+                    - vault_path
+                  user:
+                    type: object
+                    properties:
+                      vault_path:
+                        type: string
+                      vault_username:
+                        type: string
+                      vault_password:
+                        type: string
+                    required:
+                    - vault_path
+                required:
+                - vault_addr
+#             rotate_lead_time:
+#               type: string
+#               default: "14d"
+              force_rotation:
+                type: boolean
+                default: false
+              password_matchre_rule:
+                x-kubernetes-preserve-unknown-fields: true
+                type: string
+                default: '[\d\w\-\._]+'
+              password_byte_count:
+                type: integer
+                default: 32
+                minimum: 15
+                maximum: 256
+              cronjob_name:
+                type: string
+              two_phase_rotation:
+                type: object
+                properties:
+                  enabled:
+                    type: boolean
+                    default: true
+                  active_username:
+                    type: string
+                    default: a-user
+                  inactive_username:
+                    type: string
+                    default: i-user
+              rotation_pod:
+                type: object
+                properties:
+                  annotations:
+                    type: array
+                    items:
+                      type: string
+                  serviceAccountName:
+                    type: string
+                    default: "credentialrotation"
+                  image:
+                    type: string
+                  tag:
+                    type: string
+                  imagePullSecrets:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          default: "regcred"
+                  imagePullPolicy:
+                    type: string
+                    default: "Always"
+                  env:
+                    type: array
+                    items:
+                      type: object
+                      name:
+                        type: string
+                      value:
+                        type: string
+                required:
+                - image
+                - tag
+          status:
+            type: object
+            properties:
+              # name of the cluster
+              cluster_name:
+                type: string
+              # type of database (db, postgres, mongo)
+              db_type:
+                type: string
+              # the username to be changed extracted from vault
+              username:
+                type: string
+              # data base hostname where rotated user creds reside
+              db_hostname:
+                type: string
+              # the phase currently running in control loop
+              phase:
+                type: string
+              # timestamp recorded in database of last rotation
+              # note: this value is sourced from the database not the operator
+              last_rotation:
+                type: string
+              # timestamp calculated by days-to-expire + lastRotated
+              next_rotation_eligible:
+                type: string
+              # Actual expiration
+              expiration:
+                type: string
+              cronjob_name:
+                type: string
+    subresources:
+      status: {}
+    additionalPrinterColumns:
+      - name: Cluster Name
+        type: string
+        description: The cluster name from Vault's perspective (vault path cluster name string)
+        jsonPath: .spec.cluster_name
+      - name: DB Type
+        type: string
+        description: The database type
+        jsonPath: .spec.db_type
+      - name: DB Username Key
+        type: string
+        description: The username to be rotated
+        jsonPath: .status.username
+      - name: DB Hostname
+        type: string
+        description: The database hostname/instance on which the user getting rotated resides
+        jsonPath: .status.db_hostname
+      - name: Phase
+        type: string
+        description: Date of the last time credentials were rotated
+        jsonPath: .status.phase
+      - name: Last Rotation
+        type: string
+        description: Date of the last time credentials were rotated
+        jsonPath: .status.last_rotation
+      - name: Next Rotation Eligibility
+        type: string
+        description: Date of next eligible rotation
+        jsonPath: .status.next_rotation_eligible
+      - name: Expiration
+        type: string
+        description: Actual credential expiration
+        jsonPath: .status.expiration
+      - name: Cronjob Name
+        type: string
+        description: Cronjob name
+        jsonPath: .status.cronjob_name

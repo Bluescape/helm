@@ -1,0 +1,22 @@
+{{- if .Values.dbShimConfigMap }}
+{{- if .Values.dbShimConfigMap.create }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "credrotator-operator.fullname" . }}-db-shim
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "credrotator-operator.labels" . | nindent 4 }}
+    shim-cm: credrotate-db-shim
+  {{- with .Values.dbShimConfigMap.cmAnnotations }}
+  annotations:
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+data:
+  {{- with .Values.dbShimConfigMap.podAnnotations }}
+  annotations: |
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+{{- end }}
+{{- end }}
