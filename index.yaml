@@ -1279,6 +1279,31 @@ entries:
   enroute:
   - apiVersion: v2
     appVersion: v1.0.0
+    created: "2023-05-04T17:18:48.281237077Z"
+    description: EnRoute API Gateway
+    digest: 2fd68ebf17aa7725e7563392274a6697ebdaf95508d3db1a5d7ad23f275203f2
+    home: https://getenroute.io/
+    icon: https://getenroute.io/favicon.ico
+    keywords:
+    - api gateway
+    - EnRoute - Envoy Route Controller
+    - Saaras
+    - envoy
+    - ingress
+    maintainers:
+    - email: contact@saaras.io
+      name: contact
+    name: enroute
+    sources:
+    - https://github.com/saarasio/enroute
+    - https://getenroute.io
+    - https://github.com/envoyproxy/envoy
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/enroute-0.8.2/enroute-0.8.2.tgz
+    version: 0.8.2
+  - apiVersion: v2
+    appVersion: v1.0.0
     created: "2023-04-17T15:10:16.402788506Z"
     description: EnRoute API Gateway
     digest: 4b796273b10726506efc9411a3c7a27870b5c3700f1ad3aa4895bccec5777d94
@@ -1981,4 +2006,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-04-27T00:41:07.330120287Z"
+generated: "2023-05-04T17:18:48.281775481Z"
