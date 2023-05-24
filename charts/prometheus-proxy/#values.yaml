@@ -1,9 +1,0 @@
-# Default values for istio-monitoring
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-## Istio
-istio:
-  ### Custom ha proxy for scraping metrics in a Custom CNI setup
-  prometheusMetricsProxy:
-    enabled: false
