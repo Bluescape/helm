@@ -1,0 +1,122 @@
+{{- if .Values.istio.prometheusMetricsProxy.enabled }}
+# Haproxy Proxy Config
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-metrics-proxy-cm
+  namespace: monitoring
+  labels:
+    {{- include "istio-monitoring.labels" . | nindent 4 }}
+data:
+  haproxy.cfg: |+
+    global
+      # log /dev/log  local0
+      # log /dev/log  local1 notice
+      log stdout local0
+      log stdout local1 notice
+      daemon
+
+    defaults
+      log  global
+      mode  tcp
+      option  tcplog
+      option  dontlognull
+            timeout connect 5000
+            timeout client  50000
+            timeout server  50000
+
+    frontend _haproxy_frontend
+        bind *:9090
+        mode http
+        default_backend _prometheus_backend
+
+    backend _prometheus_backend
+        mode http
+        ##### START: Prometheus Service Endpoint
+        server prometheus kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090 check
+        ##### END : Prometheus Service Endpoint
+---
+# haproxy for proxying to prometheus endpoints.
+# Key Points :
+#      dnsPolicy: ClusterFirstWithHostNet
+#      hostNetwork: true
+# Note : This is outside the reach of the operator.
+#
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: prometheus-metrics-proxy
+  namespace: monitoring
+  labels:
+    {{- include "istio-monitoring.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app: prometheus-metrics-proxy
+  template:
+    metadata:
+      labels:
+        app: prometheus-metrics-proxy
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: dedicated
+                    operator: In
+                    values:
+                      - utility
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - utility
+              topologyKey: topology.kubernetes.io/zone
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: utility
+          effect: NoSchedule
+      containers:
+      - image: haproxy:latest
+        imagePullPolicy: Always
+        name: prometheus-metrics-proxy
+        volumeMounts:
+        - mountPath: /usr/local/etc/haproxy
+          name: haproxy-vol
+      dnsConfig: {}
+      dnsPolicy: ClusterFirstWithHostNet
+      hostNetwork: true
+      restartPolicy: Always
+      volumes:
+      - configMap:
+          defaultMode: 0777
+          name: prometheus-metrics-proxy-cm
+          optional: false
+        name: haproxy-vol
+---
+# Service resource pointing to the haproxy.
+# In Lens select Cluster > Settings > Metrics > Prometheus > Prometheus Operator.
+# Then set Prometheus > Service Address to "monitoring/prometheus-metrics-proxy-service:9090"
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-metrics-proxy-service
+  namespace: monitoring
+  labels:
+    {{- include "istio-monitoring.labels" . | nindent 4 }}
+spec:
+  clusterIP: None
+  type: ClusterIP
+  ports:
+  - name: prometheus
+    port: 9090
+    protocol: TCP
+    targetPort: 9090
+  selector:
+    app: prometheus-metrics-proxy
+{{- end }}
