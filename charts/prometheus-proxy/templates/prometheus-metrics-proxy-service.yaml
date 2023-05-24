@@ -6,7 +6,7 @@ metadata:
   name: prometheus-metrics-proxy-cm
   namespace: monitoring
   labels:
-    {{- include "istio-additions.labels" . | nindent 4 }}
+    {{- include "prometheus-proxy.labels" . | nindent 4 }}
 data:
   haproxy.cfg: |+
     global
@@ -22,7 +22,7 @@ data:
       option  tcplog
       option  dontlognull
             timeout connect 5000
-            timeout client  50000 
+            timeout client  50000
             timeout server  50000
 
     frontend _haproxy_frontend
@@ -37,7 +37,7 @@ data:
         ##### END : Prometheus Service Endpoint
 ---
 # haproxy for proxying to prometheus endpoints.
-# Key Points : 
+# Key Points :
 #      dnsPolicy: ClusterFirstWithHostNet
 #      hostNetwork: true
 # Note : This is outside the reach of the operator.
@@ -48,7 +48,7 @@ metadata:
   name: prometheus-metrics-proxy
   namespace: monitoring
   labels:
-    {{- include "istio-additions.labels" . | nindent 4 }}
+    {{- include "prometheus-proxy.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
@@ -99,8 +99,8 @@ spec:
           optional: false
         name: haproxy-vol
 ---
-# Service resource pointing to the haproxy. 
-# In Lens select Cluster > Settings > Metrics > Prometheus > Prometheus Operator. 
+# Service resource pointing to the haproxy.
+# In Lens select Cluster > Settings > Metrics > Prometheus > Prometheus Operator.
 # Then set Prometheus > Service Address to "monitoring/prometheus-metrics-proxy-service:9090"
 apiVersion: v1
 kind: Service
@@ -108,7 +108,7 @@ metadata:
   name: prometheus-metrics-proxy-service
   namespace: monitoring
   labels:
-    {{- include "istio-additions.labels" . | nindent 4 }}
+    {{- include "prometheus-proxy.labels" . | nindent 4 }}
 spec:
   clusterIP: None
   type: ClusterIP

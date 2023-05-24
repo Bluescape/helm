@@ -23,9 +23,6 @@ istio:
   ### ServiceMonitor configuration(s)
   serviceMonitor:
     enabled: false
-  ### Custom proxy for scraping metrics in a Custom CNI setup
-  prometheusMetricsProxy:
-    enabled: false
   ### Enable PeerAuthentication for auxiliary components
   peerAuthentication:
     setup_vault:
