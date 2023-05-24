@@ -1508,6 +1508,16 @@ entries:
   istio-additions:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-05-24T22:14:13.332799041Z"
+    description: A Helm chart for Kubernetes
+    digest: cd4fe167b1955364b60beb610269abe12f2cf8660ca19e220d70fa64287adfcb
+    name: istio-additions
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/istio-additions-0.2.5/istio-additions-0.2.5.tgz
+    version: 0.2.5
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-05-24T20:31:33.972675016Z"
     description: A Helm chart for Kubernetes
     digest: 080af4a8d3d74b4de63457eb326a6a1dba250699c786580546a0ea422846967f
@@ -2008,6 +2018,16 @@ entries:
   prometheus-proxy:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2023-05-24T22:14:13.479662339Z"
+    description: A Helm chart for Kubernetes
+    digest: dd713131336cf174072324667d8228ddd5ce9aeae906b605cc00ec1a0694204c
+    name: prometheus-proxy
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/prometheus-proxy-0.2.0/prometheus-proxy-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2023-05-24T21:25:29.814615632Z"
     description: A Helm chart for Kubernetes
     digest: b6f8c12575e0621939d788fb1038dd4ed0e2e9162a5afc3af0e2b521e28e1d8e
@@ -2103,4 +2123,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-05-24T21:25:29.815731241Z"
+generated: "2023-05-24T22:14:13.480233037Z"
