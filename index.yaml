@@ -2008,6 +2008,16 @@ entries:
   prometheus-proxy:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2023-05-24T21:25:29.814615632Z"
+    description: A Helm chart for Kubernetes
+    digest: b6f8c12575e0621939d788fb1038dd4ed0e2e9162a5afc3af0e2b521e28e1d8e
+    name: prometheus-proxy
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/prometheus-proxy-0.2.0-alpha/prometheus-proxy-0.2.0-alpha.tgz
+    version: 0.2.0-alpha
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2023-05-24T20:57:54.873120169Z"
     description: A Helm chart for Kubernetes
     digest: 081f311bff6451018bc0044ccb1483cb2800c7cb16f555e8bd30547ef012a9ca
@@ -2093,4 +2103,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-05-24T20:57:54.873869681Z"
+generated: "2023-05-24T21:25:29.815731241Z"
