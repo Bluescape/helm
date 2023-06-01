@@ -33,11 +33,12 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 64,
+      "id": 65,
       "links": [],
       "liveNow": false,
       "panels": [
         {
+          "collapsed": false,
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
@@ -65,59 +66,91 @@ data:
           "type": "row"
         },
         {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
           "datasource": {
             "type": "influxdb",
             "uid": "P4D93D918B688DFDB"
           },
           "fieldConfig": {
             "defaults": {
-              "links": []
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 10,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "smooth",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "always",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
             },
             "overrides": []
           },
-          "fill": 1,
-          "fillGradient": 0,
           "gridPos": {
-            "h": 9,
-            "w": 12,
+            "h": 10,
+            "w": 24,
             "x": 0,
             "y": 1
           },
-          "hiddenSeries": false,
           "id": 2,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": true,
-            "max": true,
-            "min": true,
-            "rightSide": false,
-            "show": true,
-            "total": true,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "nullPointMode": "null",
           "options": {
-            "alertThreshold": true
+            "legend": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": false,
+              "sortBy": "Last *",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
           },
-          "percentage": false,
           "pluginVersion": "9.3.6",
-          "pointradius": 2,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
           "targets": [
             {
-              "alias": "$tag_feature: $tag_test",
+              "alias": "$tag_feature: $tag_test - $col",
               "datasource": {
                 "type": "influxdb",
                 "uid": "P4D93D918B688DFDB"
@@ -139,7 +172,7 @@ data:
               "measurement": "/^$Measurement$/",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT value FROM /^$Measurement$/ WHERE $testFilter AND $timeFilter GROUP BY $groupFilter fill(null)",
+              "query": "SELECT * FROM /^$Measurement$/ WHERE $testFilter AND $timeFilter GROUP BY $groupFilter",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
@@ -166,34 +199,7 @@ data:
               ]
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
-          "tooltip": {
-            "shared": false,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            },
-            {
-              "format": "short",
-              "logBase": 1,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
+          "type": "timeseries"
         },
         {
           "datasource": {
@@ -202,11 +208,15 @@ data:
           },
           "fieldConfig": {
             "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
               "custom": {
-                "align": "left",
+                "align": "auto",
                 "displayMode": "auto",
                 "inspect": false
               },
+              "links": [],
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
@@ -220,17 +230,18 @@ data:
                     "value": 80
                   }
                 ]
-              }
+              },
+              "unit": "short"
             },
             "overrides": []
           },
           "gridPos": {
             "h": 9,
-            "w": 12,
-            "x": 12,
-            "y": 1
+            "w": 24,
+            "x": 0,
+            "y": 11
           },
-          "id": 50,
+          "id": 37,
           "options": {
             "footer": {
               "fields": "",
@@ -250,6 +261,7 @@ data:
           "pluginVersion": "9.3.6",
           "targets": [
             {
+              "alias": "$tag_feature: $tag_test - $col",
               "datasource": {
                 "type": "influxdb",
                 "uid": "P4D93D918B688DFDB"
@@ -268,9 +280,10 @@ data:
                   "type": "fill"
                 }
               ],
+              "measurement": "/^$Measurement$/",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT value FROM /^$Measurement$/ WHERE $testFilter AND $timeFilter GROUP BY $groupFilter",
+              "query": "SELECT * FROM /^$Measurement$/ WHERE $testFilter AND $timeFilter GROUP BY $groupFilter",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "table",
@@ -288,18 +301,24 @@ data:
                   }
                 ]
               ],
-              "tags": []
+              "tags": [
+                {
+                  "key": "$testFilter",
+                  "operator": "<>",
+                  "value": "select tag value"
+                }
+              ]
             }
           ],
-          "title": "Historic data",
           "type": "table"
         }
       ],
-      "refresh": "5s",
+      "refresh": "10s",
       "schemaVersion": 37,
       "style": "dark",
       "tags": [
         "bluescape",
+        "k8s",
         "qa"
       ],
       "templating": {
@@ -308,51 +327,20 @@ data:
             "allValue": "*",
             "current": {
               "selected": true,
-              "text": [
-                "stgperf.bluescape.com"
-              ],
-              "value": [
-                "stgperf.bluescape.com"
-              ]
+              "text": "staging.alpha.dev.bluescape.io",
+              "value": "staging.alpha.dev.bluescape.io"
             },
             "datasource": {
               "type": "influxdb",
               "uid": "P4D93D918B688DFDB"
             },
-            "definition": "show tag values with key = environment",
-            "hide": 0,
-            "includeAll": false,
-            "multi": true,
-            "name": "Environment",
-            "options": [],
-            "query": "show tag values with key = environment",
-            "refresh": 1,
-            "regex": "",
-            "skipUrlSync": false,
-            "sort": 0,
-            "tagValuesQuery": "",
-            "tagsQuery": "",
-            "type": "query",
-            "useTags": false
-          },
-          {
-            "allValue": "*",
-            "current": {
-              "selected": true,
-              "text": "All",
-              "value": "$__all"
-            },
-            "datasource": {
-              "type": "influxdb",
-              "uid": "P4D93D918B688DFDB"
-            },
-            "definition": "show tag values with key = feature where environment = /^$Environment$/",
+            "definition": "show tag values with key = environment where $timeFilter",
             "hide": 0,
             "includeAll": false,
             "multi": false,
-            "name": "Feature",
+            "name": "Environment",
             "options": [],
-            "query": "show tag values with key = feature where environment = /^$Environment$/",
+            "query": "show tag values with key = environment where $timeFilter",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -373,13 +361,13 @@ data:
               "type": "influxdb",
               "uid": "P4D93D918B688DFDB"
             },
-            "definition": "show tag values with key = test where feature = /^$Feature$/",
+            "definition": "show tag values with key = feature where environment =~ /^$Environment$/",
             "hide": 0,
             "includeAll": true,
             "multi": false,
-            "name": "Test",
+            "name": "Feature",
             "options": [],
-            "query": "show tag values with key = test where feature = /^$Feature$/",
+            "query": "show tag values with key = feature where environment =~ /^$Environment$/",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -392,7 +380,34 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
+              "text": "All",
+              "value": "$__all"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "P4D93D918B688DFDB"
+            },
+            "definition": "show tag values with key = test where environment = /^$Environment$/ AND feature = /^$Feature$/ ",
+            "hide": 0,
+            "includeAll": true,
+            "multi": false,
+            "name": "Test",
+            "options": [],
+            "query": "show tag values with key = test where environment = /^$Environment$/ AND feature = /^$Feature$/ ",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": false,
               "text": [
                 "All"
               ],
@@ -404,17 +419,17 @@ data:
               "type": "influxdb",
               "uid": "P4D93D918B688DFDB"
             },
-            "definition": "show measurements where environment = /^$Environment$/ AND feature = /^$Feature$/ AND test = /^$Test$/",
+            "definition": "show measurements where $testFilter AND $timeFilter",
             "hide": 0,
             "includeAll": true,
             "multi": true,
             "name": "Measurement",
             "options": [],
-            "query": "show measurements where environment = /^$Environment$/ AND feature = /^$Feature$/ AND test = /^$Test$/",
-            "refresh": 1,
-            "regex": "",
+            "query": "show measurements where $testFilter AND $timeFilter",
+            "refresh": 2,
+            "regex": "/^(?!checks)/",
             "skipUrlSync": false,
-            "sort": 0,
+            "sort": 1,
             "tagValuesQuery": "",
             "tagsQuery": "",
             "type": "query",
@@ -437,7 +452,7 @@ data:
         ]
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-6h",
         "to": "now"
       },
       "timepicker": {
@@ -456,6 +471,6 @@ data:
       "timezone": "",
       "title": "QA / Back-End Test Metrics",
       "uid": "7414d6da2a2b21e3daf496a5284867811d18ff09",
-      "version": 2,
+      "version": 5,
       "weekStart": ""
     }
