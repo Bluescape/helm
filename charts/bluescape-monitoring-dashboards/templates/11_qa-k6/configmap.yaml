@@ -33,7 +33,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 65,
+      "id": 22,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -318,29 +318,51 @@ data:
       "style": "dark",
       "tags": [
         "bluescape",
-        "k8s",
         "qa"
       ],
       "templating": {
         "list": [
           {
-            "allValue": "*",
             "current": {
               "selected": true,
-              "text": "staging.alpha.dev.bluescape.io",
-              "value": "staging.alpha.dev.bluescape.io"
+              "text": "qa-perf-collab",
+              "value": "qa-perf-collab"
             },
             "datasource": {
               "type": "influxdb",
               "uid": "P4D93D918B688DFDB"
             },
-            "definition": "show tag values with key = environment where $timeFilter",
+            "definition": "show tag values with key = package",
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "Package",
+            "options": [],
+            "query": "show tag values with key = package",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          },
+          {
+            "allValue": "*",
+            "current": {
+              "selected": true,
+              "text": "stgperf.bluescape.com",
+              "value": "stgperf.bluescape.com"
+            },
+            "datasource": {
+              "type": "influxdb",
+              "uid": "P4D93D918B688DFDB"
+            },
+            "definition": "show tag values with key = environment where package=$Package AND $timeFilter",
             "hide": 0,
             "includeAll": false,
             "multi": false,
             "name": "Environment",
             "options": [],
-            "query": "show tag values with key = environment where $timeFilter",
+            "query": "show tag values with key = environment where package=$Package AND $timeFilter",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -353,7 +375,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": false,
+              "selected": true,
               "text": "All",
               "value": "$__all"
             },
@@ -361,13 +383,13 @@ data:
               "type": "influxdb",
               "uid": "P4D93D918B688DFDB"
             },
-            "definition": "show tag values with key = feature where environment =~ /^$Environment$/",
+            "definition": "show tag values with key = feature where package=$Package AND environment = $Environment",
             "hide": 0,
             "includeAll": true,
             "multi": false,
             "name": "Feature",
             "options": [],
-            "query": "show tag values with key = feature where environment =~ /^$Environment$/",
+            "query": "show tag values with key = feature where package=$Package AND environment = $Environment",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -380,7 +402,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": false,
+              "selected": true,
               "text": "All",
               "value": "$__all"
             },
@@ -388,13 +410,13 @@ data:
               "type": "influxdb",
               "uid": "P4D93D918B688DFDB"
             },
-            "definition": "show tag values with key = test where environment = /^$Environment$/ AND feature = /^$Feature$/ ",
+            "definition": "show tag values with key = test where package = $Package AND environment = $Environment AND feature = $Feature",
             "hide": 0,
             "includeAll": true,
             "multi": false,
             "name": "Test",
             "options": [],
-            "query": "show tag values with key = test where environment = /^$Environment$/ AND feature = /^$Feature$/ ",
+            "query": "show tag values with key = test where package = $Package AND environment = $Environment AND feature = $Feature",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -407,7 +429,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": false,
+              "selected": true,
               "text": [
                 "All"
               ],
@@ -438,21 +460,21 @@ data:
           {
             "hide": 2,
             "name": "testFilter",
-            "query": "\"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
+            "query": "package=~/^$Package/ AND \"environment\" =~ /^$Environment$/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/",
             "skipUrlSync": false,
             "type": "constant"
           },
           {
             "hide": 2,
             "name": "groupFilter",
-            "query": "environment,test,feature",
+            "query": "environment,feature,test",
             "skipUrlSync": false,
             "type": "constant"
           }
         ]
       },
       "time": {
-        "from": "now-6h",
+        "from": "now-3h",
         "to": "now"
       },
       "timepicker": {
@@ -471,6 +493,6 @@ data:
       "timezone": "",
       "title": "QA / Back-End Test Metrics",
       "uid": "7414d6da2a2b21e3daf496a5284867811d18ff09",
-      "version": 5,
+      "version": 1,
       "weekStart": ""
     }
