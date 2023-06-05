@@ -43,6 +43,7 @@ rules:
     - gatewayclasses
     - gateways
     - httproutes
+    - udproutes
     - referencegrants
     - tlsroutes
     verbs:
@@ -55,6 +56,7 @@ rules:
     - gatewayclasses/status
     - gateways/status
     - httproutes/status
+    - udproutes/status
     - tlsroutes/status
     verbs:
     - update
@@ -66,6 +68,7 @@ rules:
       - serviceroutes
       - globalconfigs
       - httpfilters
+      - udpfilters
       - routefilters
       - tlscertificatedelegations
     verbs:
