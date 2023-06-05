@@ -33,7 +33,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 64,
+      "id": 25,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -55,7 +55,7 @@ data:
                 "axisPlacement": "auto",
                 "barAlignment": -1,
                 "drawStyle": "line",
-                "fillOpacity": 24,
+                "fillOpacity": 0,
                 "gradientMode": "opacity",
                 "hideFrom": {
                   "legend": false,
@@ -88,7 +88,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -115,7 +116,9 @@ data:
               ],
               "displayMode": "table",
               "placement": "bottom",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
             },
             "tooltip": {
               "mode": "single",
@@ -203,6 +206,7 @@ data:
           ],
           "title": "Test Duration",
           "transformations": [],
+          "transparent": true,
           "type": "timeseries"
         },
         {
@@ -223,7 +227,7 @@ data:
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 24,
+                "fillOpacity": 0,
                 "gradientMode": "opacity",
                 "hideFrom": {
                   "legend": false,
@@ -256,7 +260,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -283,7 +288,9 @@ data:
               ],
               "displayMode": "table",
               "placement": "bottom",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
             },
             "tooltip": {
               "mode": "single",
@@ -377,6 +384,7 @@ data:
           ],
           "title": "CPU Usage",
           "transformations": [],
+          "transparent": true,
           "type": "timeseries"
         },
         {
@@ -397,7 +405,7 @@ data:
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 24,
+                "fillOpacity": 0,
                 "gradientMode": "opacity",
                 "hideFrom": {
                   "legend": false,
@@ -458,7 +466,9 @@ data:
               ],
               "displayMode": "table",
               "placement": "bottom",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
             },
             "tooltip": {
               "mode": "single",
@@ -552,6 +562,7 @@ data:
           ],
           "title": "Memory Usage",
           "transformations": [],
+          "transparent": true,
           "type": "timeseries"
         },
         {
@@ -572,8 +583,8 @@ data:
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 24,
-                "gradientMode": "opacity",
+                "fillOpacity": 0,
+                "gradientMode": "none",
                 "hideFrom": {
                   "legend": false,
                   "tooltip": false,
@@ -595,7 +606,7 @@ data:
                   "mode": "none"
                 },
                 "thresholdsStyle": {
-                  "mode": "off"
+                  "mode": "dashed+area"
                 }
               },
               "links": [],
@@ -606,11 +617,16 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "dark-red",
+                    "value": null
                   },
                   {
-                    "color": "red",
-                    "value": 80
+                    "color": "orange",
+                    "value": 30
+                  },
+                  {
+                    "color": "dark-green",
+                    "value": 50
                   }
                 ]
               },
@@ -633,7 +649,9 @@ data:
               ],
               "displayMode": "table",
               "placement": "bottom",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": false
             },
             "tooltip": {
               "mode": "single",
@@ -721,6 +739,7 @@ data:
           ],
           "title": "Workspace FPS",
           "transformations": [],
+          "transparent": true,
           "type": "timeseries"
         },
         {
@@ -741,7 +760,7 @@ data:
                 "axisPlacement": "auto",
                 "barAlignment": 0,
                 "drawStyle": "line",
-                "fillOpacity": 24,
+                "fillOpacity": 0,
                 "gradientMode": "opacity",
                 "hideFrom": {
                   "legend": false,
@@ -764,7 +783,7 @@ data:
                   "mode": "none"
                 },
                 "thresholdsStyle": {
-                  "mode": "off"
+                  "mode": "dashed+area"
                 }
               },
               "links": [],
@@ -774,11 +793,16 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 20
                   },
                   {
                     "color": "red",
-                    "value": 80
+                    "value": 33
                   }
                 ]
               },
@@ -801,7 +825,9 @@ data:
               ],
               "displayMode": "table",
               "placement": "bottom",
-              "showLegend": true
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
             },
             "tooltip": {
               "mode": "single",
@@ -889,6 +915,7 @@ data:
           ],
           "title": "Workspace Frame Time",
           "transformations": [],
+          "transparent": true,
           "type": "timeseries"
         }
       ],
@@ -1009,7 +1036,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": false,
+              "selected": true,
               "text": "All",
               "value": "$__all"
             },
@@ -1110,7 +1137,6 @@ data:
       "timezone": "",
       "title": "QA / Front-End Test Metrics Summary",
       "uid": "39c3e8153e33b5e2ed8d786a3614369123a52355",
-      "version": 6,
+      "version": 2,
       "weekStart": ""
     }
-
