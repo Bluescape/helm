@@ -33,7 +33,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 22,
+      "id": 15,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -172,7 +172,7 @@ data:
               "measurement": "/^$Measurement$/",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT * FROM /^$Measurement$/ WHERE $testFilter AND $timeFilter GROUP BY $groupFilter",
+              "query": "SELECT * FROM /^$Measurement$/ WHERE package=~/^$Package$/ AND environment =~ /^$Environment$/ AND feature =~ /^$Feature$/ AND test =~ /^$Test$/ AND $timeFilter GROUP BY $groupFilter",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "time_series",
@@ -283,7 +283,7 @@ data:
               "measurement": "/^$Measurement$/",
               "orderByTime": "ASC",
               "policy": "default",
-              "query": "SELECT * FROM /^$Measurement$/ WHERE $testFilter AND $timeFilter GROUP BY $groupFilter",
+              "query": "SELECT * FROM /^$Measurement$/ WHERE package=~/^$Package$/ AND environment =~ /^$Environment$/ AND feature =~ /^$Feature$/ AND test =~ /^$Test$/ AND $timeFilter GROUP BY $groupFilter",
               "rawQuery": true,
               "refId": "A",
               "resultFormat": "table",
@@ -313,7 +313,7 @@ data:
           "type": "table"
         }
       ],
-      "refresh": "10s",
+      "refresh": false,
       "schemaVersion": 37,
       "style": "dark",
       "tags": [
@@ -324,7 +324,7 @@ data:
         "list": [
           {
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "qa-perf-collab",
               "value": "qa-perf-collab"
             },
@@ -356,13 +356,13 @@ data:
               "type": "influxdb",
               "uid": "P4D93D918B688DFDB"
             },
-            "definition": "show tag values with key = environment where package=$Package AND $timeFilter",
+            "definition": "show tag values with key = environment where package =~ /^$Package$/ AND $timeFilter",
             "hide": 0,
             "includeAll": false,
             "multi": false,
             "name": "Environment",
             "options": [],
-            "query": "show tag values with key = environment where package=$Package AND $timeFilter",
+            "query": "show tag values with key = environment where package =~ /^$Package$/ AND $timeFilter",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -383,13 +383,13 @@ data:
               "type": "influxdb",
               "uid": "P4D93D918B688DFDB"
             },
-            "definition": "show tag values with key = feature where package=$Package AND environment = $Environment",
+            "definition": "show tag values with key = feature where package =~ /^$Package$/ AND environment =~ /^$Environment$/",
             "hide": 0,
             "includeAll": true,
             "multi": false,
             "name": "Feature",
             "options": [],
-            "query": "show tag values with key = feature where package=$Package AND environment = $Environment",
+            "query": "show tag values with key = feature where package =~ /^$Package$/ AND environment =~ /^$Environment$/",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -402,7 +402,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "All",
               "value": "$__all"
             },
@@ -410,13 +410,13 @@ data:
               "type": "influxdb",
               "uid": "P4D93D918B688DFDB"
             },
-            "definition": "show tag values with key = test where package = $Package AND environment = $Environment AND feature = $Feature",
+            "definition": "show tag values with key = test where package =~ /^$Package$/ AND environment =~ /^$Environment$/ AND feature =~ /^$Feature$/",
             "hide": 0,
             "includeAll": true,
             "multi": false,
             "name": "Test",
             "options": [],
-            "query": "show tag values with key = test where package = $Package AND environment = $Environment AND feature = $Feature",
+            "query": "show tag values with key = test where package =~ /^$Package$/ AND environment =~ /^$Environment$/ AND feature =~ /^$Feature$/",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
@@ -441,13 +441,13 @@ data:
               "type": "influxdb",
               "uid": "P4D93D918B688DFDB"
             },
-            "definition": "show measurements where $testFilter AND $timeFilter",
+            "definition": "show measurements where package=~/^$Package$/ AND environment =~ /^$Environment$/ AND feature =~ /^$Feature$/ AND test =~ /^$Test$/",
             "hide": 0,
             "includeAll": true,
             "multi": true,
             "name": "Measurement",
             "options": [],
-            "query": "show measurements where $testFilter AND $timeFilter",
+            "query": "show measurements where package=~/^$Package$/ AND environment =~ /^$Environment$/ AND feature =~ /^$Feature$/ AND test =~ /^$Test$/",
             "refresh": 2,
             "regex": "/^(?!checks)/",
             "skipUrlSync": false,
@@ -459,15 +459,8 @@ data:
           },
           {
             "hide": 2,
-            "name": "testFilter",
-            "query": "package=~/^$Package/ AND \"environment\" =~ /^$Environment$/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/",
-            "skipUrlSync": false,
-            "type": "constant"
-          },
-          {
-            "hide": 2,
             "name": "groupFilter",
-            "query": "environment,feature,test",
+            "query": "package,environment,feature,test",
             "skipUrlSync": false,
             "type": "constant"
           }
