@@ -13,7 +13,10 @@ data:
         "list": [
           {
             "builtIn": 1,
-            "datasource": "-- Grafana --",
+            "datasource": {
+              "type": "datasource",
+              "uid": "grafana"
+            },
             "enable": true,
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
@@ -31,44 +34,19 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 66,
-      "iteration": 1654800223012,
+      "id": 77,
       "links": [],
       "liveNow": false,
       "panels": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
+                "mode": "thresholds"
               },
               "mappings": [],
               "thresholds": {
@@ -95,43 +73,49 @@ data:
           },
           "id": 7,
           "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom"
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
             },
-            "tooltip": {
-              "mode": "single"
-            }
+            "textMode": "auto"
           },
+          "pluginVersion": "9.3.6",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "exemplar": true,
-              "expr": "sum by (container) (kube_pod_status_phase{namespace=\"$namespace\", phase=\"Running\", pod=~\"analytics-.*\"} * on(pod) group_left(container) kube_pod_container_info{namespace=\"$namespace\", pod=~\"analytics-.*\"} )",
+              "expr": "sum by (container) (kube_pod_status_phase{namespace=\"$namespace\", phase=\"Running\", pod=~\"analytics-.*\"} * on(pod) group_right(container) kube_pod_container_info{namespace=\"$namespace\", pod=~\"analytics-.*\"} )",
               "format": "time_series",
               "instant": false,
               "interval": "",
-              "legendFormat": "{{ `{{ container }}` }}",
+              "legendFormat": "{{ container }}",
               "refId": "A"
             }
           ],
           "title": "No. of Running Pods",
-          "type": "timeseries"
+          "type": "stat"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
                 "mode": "thresholds"
-              },
-              "custom": {
-                "align": "auto",
-                "displayMode": "auto"
               },
               "mappings": [],
               "thresholds": {
@@ -148,56 +132,7 @@ data:
                 ]
               }
             },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Container"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 349
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "pod"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 465
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "container_id"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 161
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "container"
-                },
-                "properties": [
-                  {
-                    "id": "custom.width",
-                    "value": 363
-                  }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 11,
@@ -207,25 +142,29 @@ data:
           },
           "id": 5,
           "options": {
-            "footer": {
-              "fields": "",
-              "reducer": [
-                "sum"
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
               ],
-              "show": false
+              "fields": "",
+              "values": false
             },
-            "showHeader": true,
-            "sortBy": []
+            "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "exemplar": false,
-              "expr": "sum by (container) (kube_pod_status_phase{namespace=\"$namespace\", phase=\"Running\", pod=~\"analytics-.*\"} * on(pod) group_left(container) kube_pod_container_info{namespace=\"$namespace\", pod=~\"analytics-.*\"} )",
+              "expr": "sum by (container) (kube_pod_status_phase{namespace=\"$namespace\", phase=\"Running\", pod=~\"analytics-.*\"} * on(pod) group_right(container) kube_pod_container_info{namespace=\"$namespace\", pod=~\"analytics-.*\"} )",
               "format": "table",
               "hide": false,
               "instant": true,
@@ -261,15 +200,21 @@ data:
               }
             }
           ],
-          "type": "table"
+          "type": "stat"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
@@ -326,10 +271,12 @@ data:
             "legend": {
               "calcs": [],
               "displayMode": "list",
-              "placement": "bottom"
+              "placement": "bottom",
+              "showLegend": true
             },
             "tooltip": {
-              "mode": "single"
+              "mode": "single",
+              "sort": "none"
             }
           },
           "targets": [
@@ -341,7 +288,7 @@ data:
               "exemplar": true,
               "expr": "sum (rate (container_cpu_usage_seconds_total{namespace=\"$namespace\", container=~\"analytics-.*\"}[1m])) by (container)",
               "interval": "",
-              "legendFormat": "{{ `{{ container }}` }}",
+              "legendFormat": "{{ container }}",
               "refId": "A"
             }
           ],
@@ -349,12 +296,18 @@ data:
           "type": "timeseries"
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
               "color": {
                 "mode": "palette-classic"
               },
               "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
                 "axisLabel": "",
                 "axisPlacement": "auto",
                 "barAlignment": 0,
@@ -411,10 +364,12 @@ data:
             "legend": {
               "calcs": [],
               "displayMode": "list",
-              "placement": "bottom"
+              "placement": "bottom",
+              "showLegend": true
             },
             "tooltip": {
-              "mode": "single"
+              "mode": "single",
+              "sort": "none"
             }
           },
           "targets": [
@@ -427,7 +382,7 @@ data:
               "expr": "sum(\n    container_memory_working_set_bytes{namespace=\"$namespace\", container!=\"\", image!=\"\"}\n  * on(namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"$namespace\", workload=~\"analytics-.*\"}\n) by (container)",
               "instant": false,
               "interval": "",
-              "legendFormat": "{{ `{{ container }}` }}",
+              "legendFormat": "{{ container }}",
               "refId": "A"
             }
           ],
@@ -435,8 +390,8 @@ data:
           "type": "timeseries"
         }
       ],
-      "refresh": "5s",
-      "schemaVersion": 34,
+      "refresh": "",
+      "schemaVersion": 37,
       "style": "dark",
       "tags": [],
       "templating": {
@@ -444,8 +399,8 @@ data:
           {
             "current": {
               "selected": true,
-              "text": "uat",
-              "value": "uat"
+              "text": "gstg1",
+              "value": "gstg1"
             },
             "hide": 0,
             "includeAll": false,
@@ -454,7 +409,7 @@ data:
             "name": "namespace",
             "options": [
               {
-                "selected": true,
+                "selected": false,
                 "text": "uat",
                 "value": "uat"
               },
@@ -467,9 +422,29 @@ data:
                 "selected": false,
                 "text": "us",
                 "value": "us"
+              },
+              {
+                "selected": true,
+                "text": "gstg1",
+                "value": "gstg1"
+              },
+              {
+                "selected": false,
+                "text": "gov",
+                "value": "gov"
+              },
+              {
+                "selected": false,
+                "text": "dod",
+                "value": "dod"
+              },
+              {
+                "selected": false,
+                "text": "andromeda",
+                "value": "andromeda"
               }
             ],
-            "query": "uat,stg1,us,gdev1,gstg1,dod,gov",
+            "query": "uat,stg1,us,gstg1,gov,dod,andromeda",
             "queryValue": "",
             "skipUrlSync": false,
             "type": "custom"
@@ -483,7 +458,7 @@ data:
       "timepicker": {},
       "timezone": "",
       "title": "Analytics / Compute Resources / Pods",
-      "uid": "qqv557j7z",
-      "version": 35,
+      "uid": "7a7c311b7bebc8404d86f514db63dad3e219290c",
+      "version": 2,
       "weekStart": ""
     }
