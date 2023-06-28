@@ -428,7 +428,7 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
            },
-           "expr": "kube_hpa_status_current_replicas{job=\"kube-state-metrics\", hpa=\"$hpa\",namespace=\"$namespace\"}",
+           "expr": "kube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\", horizontalpodautoscaler=\"$hpa\",namespace=\"$namespace\"}",
            "format": "time_series",
            "intervalFactor": 2,
            "legendFormat": "Running",
@@ -439,7 +439,7 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
            },
-           "expr": "kube_hpa_spec_max_replicas{job=\"kube-state-metrics\", hpa=\"$hpa\",namespace=\"$namespace\"}",
+           "expr": "kube_horizontalpodautoscaler_spec_max_replicas{job=\"kube-state-metrics\", horizontalpodautoscaler=\"$hpa\",namespace=\"$namespace\"}",
            "format": "time_series",
            "instant": false,
            "intervalFactor": 2,
@@ -451,7 +451,7 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
            },
-           "expr": "kube_hpa_spec_min_replicas{job=\"kube-state-metrics\", hpa=\"$hpa\",namespace=\"$namespace\"}",
+           "expr": "kube_horizontalpodautoscaler_spec_min_replicas{job=\"kube-state-metrics\", horizontalpodautoscaler=\"$hpa\",namespace=\"$namespace\"}",
            "format": "time_series",
            "instant": false,
            "intervalFactor": 2,
@@ -609,4 +609,4 @@ data:
      "uid": "b5bcad455989f18fe946c4fbcdde9f2befd0355f",
      "version": 1,
      "weekStart": ""
-   }
+    }

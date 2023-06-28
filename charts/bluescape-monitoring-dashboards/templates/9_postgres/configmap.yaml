@@ -864,7 +864,7 @@ data:
               "hide": false,
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "{{ state }}",
+              "legendFormat": "Total",
               "refId": "A"
             },
             {
@@ -983,7 +983,7 @@ data:
               "hide": true,
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "{{ datname }}",
+              "legendFormat": "NumBackends",
               "refId": "A"
             },
             {
@@ -1009,7 +1009,7 @@ data:
               "hide": false,
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "{{ datname }}",
+              "legendFormat": "{NumBackends",
               "refId": "C"
             }
           ],
@@ -1634,7 +1634,7 @@ data:
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "{{ state }}",
+              "legendFormat": "",
               "metric": "pg_stat_activity_max_tx_duration",
               "refId": "A",
               "step": 2
@@ -1755,7 +1755,7 @@ data:
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "{{ datname }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -1856,7 +1856,7 @@ data:
               "hide": false,
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "{{ datname }}",
+              "legendFormat": "",
               "refId": "A"
             },
             {
@@ -1869,7 +1869,7 @@ data:
               "hide": true,
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "increase {{datname}}",
+              "legendFormat": "increase",
               "refId": "B"
             }
           ],
@@ -2207,7 +2207,7 @@ data:
               ],
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "{{mode}} - {{datname}}",
+              "legendFormat": "",
               "measurement": "postgresql",
               "policy": "default",
               "refId": "A",
@@ -2362,7 +2362,7 @@ data:
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "Read {{datname}}",
+              "legendFormat": "Read",
               "refId": "A"
             },
             {
@@ -2374,7 +2374,7 @@ data:
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "Write {{datname}}",
+              "legendFormat": "Write",
               "refId": "B"
             }
           ],
@@ -3026,7 +3026,7 @@ data:
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "Cache hit rate {{datname}}",
+              "legendFormat": "Cache hit rate",
               "refId": "B"
             }
           ],
@@ -3310,7 +3310,7 @@ data:
               "format": "time_series",
               "interval": "$interval",
               "intervalFactor": 1,
-              "legendFormat": "{{ mode }}",
+              "legendFormat": "",
               "refId": "A"
             },
             {
