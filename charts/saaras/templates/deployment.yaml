@@ -76,6 +76,10 @@ spec:
           ports:
             - containerPort: 6060
               name: debug-port
+            - containerPort: 8002
+              name: metrics-envoy
+            - containerPort: 8000
+              name: metrics-enroute
           command: ["/bin/enroute"]
           args:
             - serve
