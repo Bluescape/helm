@@ -18,4 +18,4 @@ sources:
 - https://getenroute.io
 - https://github.com/envoyproxy/envoy
 type: application
-version: 0.8.4-c-preRelease2
+version: 0.8.4-c-preRelease3
