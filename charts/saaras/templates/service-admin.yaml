@@ -4,12 +4,6 @@ metadata:
   name: enroute-admin
   labels:
     {{- include "enroute.labels" . | nindent 4 }}
-  {{- if .Values.service.annotations }}
-  annotations:
-    {{- range $key, $value := .Values.service.annotations }}
-      {{ $key }}: {{ $value | quote }}
-    {{- end }}
-  {{- end }}
 spec:
   ports:
     - name: metrics-envoy
