@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: enroute-admin
+  labels:
+    service: enroute-admin
+    app: enroute
+spec:
+  ports:
+    - name: metrics-envoy
+      port: 8002
+      targetPort: metrics-envoy
+      protocol: TCP
+    - name: metrics-enroute
+      port: 8000
+      targetPort: metrics-enroute
+      protocol: TCP
+  selector:
+    {{- include "enroute.selectorLabels" . | nindent 4 }}
+  type: ClusterIP
