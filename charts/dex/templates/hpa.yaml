@@ -1,0 +1,44 @@
+{{- if .Values.autoscaling.enabled }}
+{{- if semverCompare ">=1.23-0" .Capabilities.KubeVersion.GitVersion -}}
+apiVersion: autoscaling/v2
+{{- else -}}
+apiVersion: autoscaling/v2beta1
+{{- end }}
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "dex.fullname" . }}
+  labels:
+    {{- include "dex.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "dex.fullname" . }}
+  minReplicas: {{ .Values.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.autoscaling.targetMemory }}
+    - type: Resource
+      resource:
+        name: memory
+        {{- if semverCompare "<1.23-0" .Capabilities.KubeVersion.GitVersion -}}
+        targetAverageUtilization: { { .Values.autoscaling.targetMemory } }
+        {{- else }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.autoscaling.targetMemory }}
+        {{- end }}
+    {{- end }}
+    {{- if .Values.autoscaling.targetCPU }}
+    - type: Resource
+      resource:
+        name: cpu
+        {{- if semverCompare "<1.23-0" .Capabilities.KubeVersion.GitVersion -}}
+        targetAverageUtilization: { { .Values.autoscaling.targetCPU }}
+        {{- else }}
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.autoscaling.targetCPU }}
+        {{- end }}
+    {{- end }}
+{{- end }}
