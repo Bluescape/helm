@@ -12,25 +12,30 @@ data:
         "list": [
           {
             "builtIn": 1,
-            "datasource": "Cortex",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
             "enable": true,
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
             "name": "Annotations & Alerts",
             "type": "dashboard"
           }
-        ]
+        ]  
       },
       "editable": true,
-      "gnetId": null,
+      "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 25,
-      "iteration": 1605710385498,
+      "id": 3,
       "links": [],
+      "liveNow": false,
       "panels": [
         {
           "collapsed": false,
-          "datasource": "Cortex",
+          "datasource": {
+            "uid": "Cortex"
+          },
           "gridPos": {
             "h": 1,
             "w": 24,
@@ -39,6 +44,14 @@ data:
           },
           "id": 56,
           "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "uid": "Cortex"
+              },
+              "refId": "A"
+            }
+          ],
           "title": "Worker Queue Metrics",
           "type": "row"
         },
@@ -47,13 +60,15 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Cortex",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "editable": true,
           "error": false,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -80,8 +95,6 @@ data:
             "min": false,
             "rightSide": false,
             "show": true,
-            "sideWidth": null,
-            "sort": null,
             "sortDesc": false,
             "total": false,
             "values": false
@@ -94,24 +107,26 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "repeat": null,
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "datasource": "Cortex",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(bull_queue_waiting) by (prefix, queue)",
               "format": "time_series",
               "instant": false,
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{ printf "{{ queue }}" }}",
+              "legendFormat": "",
               "metric": "",
               "refId": "A",
               "step": 10,
@@ -119,9 +134,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Waiting Jobs by Queue",
           "tooltip": {
             "msResolution": true,
@@ -132,35 +145,26 @@ data:
           "transparent": true,
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
-              "decimals": null,
               "format": "ops",
-              "label": null,
               "logBase": 1,
-              "max": null,
               "min": 0,
               "show": true
             },
             {
-              "decimals": null,
               "format": "ops",
-              "label": null,
               "logBase": 1,
-              "max": null,
               "min": 0,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -168,13 +172,14 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Cortex",
-          "description": null,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "editable": true,
           "error": false,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -201,8 +206,6 @@ data:
             "min": false,
             "rightSide": false,
             "show": true,
-            "sideWidth": null,
-            "sort": null,
             "sortDesc": false,
             "total": false,
             "values": false
@@ -215,24 +218,26 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "repeat": null,
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "datasource": "Cortex",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "max(bull_queue_failed) by (queue)",
               "format": "time_series",
               "instant": false,
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{ printf "{{ queue }}" }}",
+              "legendFormat": "",
               "metric": "",
               "refId": "A",
               "step": 10,
@@ -240,9 +245,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Failures By Queue",
           "tooltip": {
             "msResolution": true,
@@ -253,35 +256,26 @@ data:
           "transparent": true,
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
-              "decimals": null,
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
               "min": 0,
               "show": true
             },
             {
-              "decimals": null,
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
               "min": 0,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -289,13 +283,14 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Cortex",
-          "description": null,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "editable": true,
           "error": false,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -322,8 +317,6 @@ data:
             "min": false,
             "rightSide": false,
             "show": true,
-            "sideWidth": null,
-            "sort": null,
             "sortDesc": false,
             "total": false,
             "values": false
@@ -336,24 +329,26 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "repeat": null,
           "seriesOverrides": [],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "datasource": "Cortex",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(bull_queue_complete_duration { quantile = \"0.9\" }) by (prefix, queue)",
               "format": "time_series",
               "instant": false,
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "{{ printf "{{ queue }}" }}",
+              "legendFormat": "",
               "metric": "",
               "refId": "A",
               "step": 10,
@@ -361,9 +356,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Job Duration 90th Percentile",
           "tooltip": {
             "msResolution": true,
@@ -374,35 +367,26 @@ data:
           "transparent": true,
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
-              "decimals": null,
               "format": "ms",
-              "label": null,
               "logBase": 1,
-              "max": null,
               "min": 0,
               "show": true
             },
             {
-              "decimals": null,
               "format": "ms",
-              "label": null,
               "logBase": 1,
-              "max": null,
               "min": 0,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -410,13 +394,15 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Cortex",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "description": "",
           "editable": true,
           "error": false,
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -443,8 +429,6 @@ data:
             "min": false,
             "rightSide": false,
             "show": true,
-            "sideWidth": null,
-            "sort": null,
             "sortDesc": false,
             "total": false,
             "values": false
@@ -458,19 +442,12 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
           "repeat": "queue",
           "repeatDirection": "h",
-          "scopedVars": {
-            "queue": {
-              "selected": true,
-              "text": "Downscale Images",
-              "value": "Downscale Images"
-            }
-          },
           "seriesOverrides": [
             {
               "alias": "Complete Rate",
@@ -486,7 +463,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "datasource": "Cortex",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(rate(bull_queue_completed{queue=\"$queue\"}[5m])) * 60",
               "format": "time_series",
               "instant": false,
@@ -499,7 +479,10 @@ data:
               "target": ""
             },
             {
-              "datasource": "Cortex",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(rate(bull_queue_failed{queue=\"$queue\"}[5m])) * 60",
               "format": "time_series",
               "instant": false,
@@ -512,7 +495,10 @@ data:
               "target": ""
             },
             {
-              "datasource": "Cortex",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(bull_queue_active{queue=\"$queue\"})",
               "format": "time_series",
               "instant": false,
@@ -525,7 +511,10 @@ data:
               "target": ""
             },
             {
-              "datasource": "Cortex",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(bull_queue_waiting{queue=\"$queue\"})",
               "format": "time_series",
               "instant": false,
@@ -538,7 +527,10 @@ data:
               "target": ""
             },
             {
-              "datasource": "Cortex",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(bull_queue_delayed{queue=\"$queue\"})",
               "format": "time_series",
               "instant": false,
@@ -551,7 +543,10 @@ data:
               "target": ""
             },
             {
-              "datasource": "Cortex",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(bull_queue_failed{queue=\"$queue\"})",
               "format": "time_series",
               "instant": false,
@@ -565,9 +560,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "$queue Job States",
           "tooltip": {
             "msResolution": true,
@@ -578,458 +571,51 @@ data:
           "transparent": true,
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
-              "decimals": null,
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
               "min": 0,
               "show": true
             },
             {
-              "decimals": null,
               "format": "opm",
-              "label": null,
               "logBase": 1,
-              "max": null,
               "min": 0,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Cortex",
-          "description": "",
-          "editable": true,
-          "error": false,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "grid": {},
-          "gridPos": {
-            "h": 7,
-            "w": 8,
-            "x": 8,
-            "y": 15
-          },
-          "hiddenSeries": false,
-          "id": 88,
-          "isNew": true,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "hideEmpty": false,
-            "hideZero": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "sideWidth": null,
-            "sort": null,
-            "sortDesc": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "maxPerRow": 3,
-          "nullPointMode": "connected",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.2.2",
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeatDirection": "h",
-          "repeatIteration": 1605710385498,
-          "repeatPanelId": 3,
-          "scopedVars": {
-            "queue": {
-              "selected": true,
-              "text": "Rasterize MSDOC Documents",
-              "value": "Rasterize MSDOC Documents"
-            }
-          },
-          "seriesOverrides": [
-            {
-              "alias": "Complete Rate",
-              "yaxis": 2
-            },
-            {
-              "alias": "Fail Rate",
-              "yaxis": 2
-            }
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": "Cortex",
-              "expr": "sum(rate(bull_queue_completed{queue=\"$queue\"}[5m])) * 60",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Complete Rate",
-              "metric": "",
-              "refId": "A",
-              "step": 10,
-              "target": ""
-            },
-            {
-              "datasource": "Cortex",
-              "expr": "sum(rate(bull_queue_failed{queue=\"$queue\"}[5m])) * 60",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Fail Rate",
-              "metric": "",
-              "refId": "B",
-              "step": 10,
-              "target": ""
-            },
-            {
-              "datasource": "Cortex",
-              "expr": "sum(bull_queue_active{queue=\"$queue\"})",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Active",
-              "metric": "",
-              "refId": "C",
-              "step": 10,
-              "target": ""
-            },
-            {
-              "datasource": "Cortex",
-              "expr": "sum(bull_queue_waiting{queue=\"$queue\"})",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Waiting",
-              "metric": "",
-              "refId": "D",
-              "step": 10,
-              "target": ""
-            },
-            {
-              "datasource": "Cortex",
-              "expr": "sum(bull_queue_delayed{queue=\"$queue\"})",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Delayed",
-              "metric": "",
-              "refId": "E",
-              "step": 10,
-              "target": ""
-            },
-            {
-              "datasource": "Cortex",
-              "expr": "sum(bull_queue_failed{queue=\"$queue\"})",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Failed",
-              "metric": "",
-              "refId": "F",
-              "step": 10,
-              "target": ""
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "$queue Job States",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": null,
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": true
-            },
-            {
-              "decimals": null,
-              "format": "opm",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": "Cortex",
-          "description": "",
-          "editable": true,
-          "error": false,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {},
-              "links": []
-            },
-            "overrides": []
-          },
-          "fill": 1,
-          "fillGradient": 0,
-          "grid": {},
-          "gridPos": {
-            "h": 7,
-            "w": 8,
-            "x": 16,
-            "y": 15
-          },
-          "hiddenSeries": false,
-          "id": 89,
-          "isNew": true,
-          "legend": {
-            "alignAsTable": false,
-            "avg": false,
-            "current": false,
-            "hideEmpty": false,
-            "hideZero": false,
-            "max": false,
-            "min": false,
-            "rightSide": false,
-            "show": true,
-            "sideWidth": null,
-            "sort": null,
-            "sortDesc": false,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 2,
-          "links": [],
-          "maxPerRow": 3,
-          "nullPointMode": "connected",
-          "options": {
-            "alertThreshold": true
-          },
-          "percentage": false,
-          "pluginVersion": "7.2.2",
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeatDirection": "h",
-          "repeatIteration": 1605710385498,
-          "repeatPanelId": 3,
-          "scopedVars": {
-            "queue": {
-              "selected": true,
-              "text": "Rasterize PDF Documents",
-              "value": "Rasterize PDF Documents"
-            }
-          },
-          "seriesOverrides": [
-            {
-              "alias": "Complete Rate",
-              "yaxis": 2
-            },
-            {
-              "alias": "Fail Rate",
-              "yaxis": 2
-            }
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": "Cortex",
-              "expr": "sum(rate(bull_queue_completed{queue=\"$queue\"}[5m])) * 60",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Complete Rate",
-              "metric": "",
-              "refId": "A",
-              "step": 10,
-              "target": ""
-            },
-            {
-              "datasource": "Cortex",
-              "expr": "sum(rate(bull_queue_failed{queue=\"$queue\"}[5m])) * 60",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Fail Rate",
-              "metric": "",
-              "refId": "B",
-              "step": 10,
-              "target": ""
-            },
-            {
-              "datasource": "Cortex",
-              "expr": "sum(bull_queue_active{queue=\"$queue\"})",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Active",
-              "metric": "",
-              "refId": "C",
-              "step": 10,
-              "target": ""
-            },
-            {
-              "datasource": "Cortex",
-              "expr": "sum(bull_queue_waiting{queue=\"$queue\"})",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Waiting",
-              "metric": "",
-              "refId": "D",
-              "step": 10,
-              "target": ""
-            },
-            {
-              "datasource": "Cortex",
-              "expr": "sum(bull_queue_delayed{queue=\"$queue\"})",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Delayed",
-              "metric": "",
-              "refId": "E",
-              "step": 10,
-              "target": ""
-            },
-            {
-              "datasource": "Cortex",
-              "expr": "sum(bull_queue_failed{queue=\"$queue\"})",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "Failed",
-              "metric": "",
-              "refId": "F",
-              "step": 10,
-              "target": ""
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeRegions": [],
-          "timeShift": null,
-          "title": "$queue Job States",
-          "tooltip": {
-            "msResolution": true,
-            "shared": true,
-            "sort": 0,
-            "value_type": "cumulative"
-          },
-          "transparent": true,
-          "type": "graph",
-          "xaxis": {
-            "buckets": null,
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "decimals": null,
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": true
-            },
-            {
-              "decimals": null,
-              "format": "opm",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": 0,
-              "show": true
-            }
-          ],
-          "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
           "collapsed": false,
-          "datasource": null,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "gridPos": {
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 22
+            "y": 78
           },
           "id": 87,
           "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "refId": "A"
+            }
+          ],
           "title": "Worker Internal Metrics",
           "type": "row"
         },
@@ -1045,10 +631,12 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Cortex",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1059,7 +647,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 23
+            "y": 79
           },
           "hiddenSeries": false,
           "id": 59,
@@ -1079,7 +667,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1089,25 +677,39 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
               "expr": "avg(irate(msdoc_request_counter[1m])) by (app)",
               "legendFormat": "Requests",
+              "range": true,
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
               "expr": " avg(irate(msdoc_success_count[1m])) by (app)",
               "legendFormat": "Success",
+              "range": true,
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "avg(irate(msdoc_failure_count[1m])) by (app)",
               "legendFormat": "Failure",
               "refId": "C"
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "MSDoc Converter Requests",
           "tooltip": {
             "shared": true,
@@ -1116,33 +718,24 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1157,10 +750,12 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Cortex",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1171,7 +766,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 23
+            "y": 79
           },
           "hiddenSeries": false,
           "id": 52,
@@ -1191,7 +786,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1201,25 +796,41 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg(irate(aws_request_count[1m])) by (app)",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "avg(irate(worker_aws_request_count[1m])) by (app)",
               "legendFormat": "Requests",
+              "range": true,
               "refId": "A"
             },
             {
-              "expr": "avg(irate(aws_success[1m])) by (app)",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "avg(irate(worker_aws_success[1m])) by (app)",
               "legendFormat": "Success",
+              "range": true,
               "refId": "B"
             },
             {
-              "expr": "avg(irate(aws_failure[1m])) by (app)",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "avg(irate(worker_aws_failure[1m])) by (app)",
               "legendFormat": "Failure",
+              "range": true,
               "refId": "C"
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "AWS S3 Storage Service Requests",
           "tooltip": {
             "shared": true,
@@ -1228,33 +839,24 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1262,10 +864,12 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Cortex",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1276,7 +880,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 0,
-            "y": 29
+            "y": 85
           },
           "hiddenSeries": false,
           "id": 48,
@@ -1300,7 +904,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1310,6 +914,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "nodejs_eventloop_lag_seconds{service=~\"worker\"}",
               "instant": false,
               "interval": "",
@@ -1318,9 +926,7 @@ data:
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Node.JS Event Loop Lag",
           "tooltip": {
             "shared": true,
@@ -1329,33 +935,24 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "s",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         },
         {
@@ -1363,10 +960,12 @@ data:
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Cortex",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
           "fieldConfig": {
             "defaults": {
-              "custom": {},
               "links": []
             },
             "overrides": []
@@ -1377,7 +976,7 @@ data:
             "h": 6,
             "w": 12,
             "x": 12,
-            "y": 29
+            "y": 85
           },
           "hiddenSeries": false,
           "id": 60,
@@ -1401,7 +1000,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1411,16 +1010,20 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "avg((nodejs_heap_space_size_used_bytes{service=~\"worker\"} \n/ nodejs_heap_space_size_total_bytes{service=~\"worker\"}) * 100)",
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "avg((nodejs_heap_space_size_used_bytes{service=~\"worker\"})) / avg((nodejs_heap_space_size_total_bytes{service=~\"worker\"}))*100",
               "interval": "",
               "legendFormat": "",
+              "range": true,
               "refId": "B"
             }
           ],
           "thresholds": [],
-          "timeFrom": null,
           "timeRegions": [],
-          "timeShift": null,
           "title": "Node.JS % Heap Space Usage",
           "tooltip": {
             "shared": true,
@@ -1429,16 +1032,13 @@ data:
           },
           "type": "graph",
           "xaxis": {
-            "buckets": null,
             "mode": "time",
-            "name": null,
             "show": true,
             "values": []
           },
           "yaxes": [
             {
               "format": "percent",
-              "label": null,
               "logBase": 1,
               "max": "100",
               "min": "0",
@@ -1446,21 +1046,17 @@ data:
             },
             {
               "format": "short",
-              "label": null,
               "logBase": 1,
-              "max": null,
-              "min": null,
               "show": true
             }
           ],
           "yaxis": {
-            "align": false,
-            "alignLevel": null
+            "align": false
           }
         }
       ],
       "refresh": "10s",
-      "schemaVersion": 26,
+      "schemaVersion": 37,
       "style": "dark",
       "tags": [
         "bluescape",
@@ -1469,62 +1065,35 @@ data:
       "templating": {
         "list": [
           {
-            "allValue": null,
             "current": {
               "selected": true,
-              "tags": [],
               "text": [
-                "Downscale Images",
-                "Rasterize MSDOC Documents",
-                "Rasterize PDF Documents"
+                "All"
               ],
               "value": [
-                "Downscale Images",
-                "Rasterize MSDOC Documents",
-                "Rasterize PDF Documents"
+                "$__all"
               ]
             },
-            "datasource": "Cortex",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
             "definition": "label_values(queue)",
             "hide": 0,
             "includeAll": true,
             "label": "Queue",
             "multi": true,
             "name": "queue",
-            "options": [
-              {
-                "selected": false,
-                "text": "All",
-                "value": "$__all"
-              },
-              {
-                "selected": true,
-                "text": "Downscale Images",
-                "value": "Downscale Images"
-              },
-              {
-                "selected": false,
-                "text": "Downscale Images (Internal)",
-                "value": "Downscale Images (Internal)"
-              },
-              {
-                "selected": true,
-                "text": "Rasterize MSDOC Documents",
-                "value": "Rasterize MSDOC Documents"
-              },
-              {
-                "selected": true,
-                "text": "Rasterize PDF Documents",
-                "value": "Rasterize PDF Documents"
-              }
-            ],
-            "query": "label_values(queue)",
-            "refresh": 0,
+            "options": [],
+            "query": {
+              "query": "label_values(queue)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
             "sort": 0,
             "tagValuesQuery": "",
-            "tags": [],
             "tagsQuery": "",
             "type": "query",
             "useTags": false
@@ -1551,6 +1120,7 @@ data:
       },
       "timezone": "",
       "title": "Application / Worker Dashboard",
-      "uid": "CyuhKyQWz",
-      "version": 1
+      "uid": "0bd5a8b274b4c3b03379c3b76c6b436ab8d5c6aa",
+      "version": 14,
+      "weekStart": ""
     }
