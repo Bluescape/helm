@@ -369,7 +369,7 @@ data:
               "expr": "probe_success",
               "instant": true,
               "interval": "",
-              "legendFormat": "{{ group }}-{{ instance }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -865,7 +865,7 @@ data:
               "instant": false,
               "interval": "${interval}",
               "intervalFactor": 1,
-              "legendFormat": "{{ container }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -964,7 +964,7 @@ data:
               },
               "expr": "sum((container_memory_usage_bytes{node=~\"${node_name:regex}\", container=~\"${container_name:regex}\", namespace=~\"${namespace:regex}\"})/1024/1024) by (container)",
               "interval": "${interval}",
-              "legendFormat": "{{ container }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -1059,7 +1059,7 @@ data:
               },
               "expr": "(sum(rate(container_fs_writes_bytes_total{pod=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[1m])) by (container))/1024",
               "interval": "${interval}",
-              "legendFormat": "{{ container }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -1156,7 +1156,7 @@ data:
               },
               "expr": "(sum(rate(container_fs_reads_bytes_total{container=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[1m])) by (container))/1024",
               "interval": "${interval}",
-              "legendFormat": "{{container}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -1258,7 +1258,7 @@ data:
               },
               "expr": "(sum(rate(container_network_transmit_bytes_total{pod=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[5m])) by (namespace))/1024",
               "interval": "${interval}",
-              "legendFormat": "{{ namespace }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -1360,7 +1360,7 @@ data:
               },
               "expr": "(sum(rate(container_network_receive_bytes_total{pod=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[5m])) by (namespace))/1024",
               "interval": "${interval}",
-              "legendFormat": "{{ namespace }}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],

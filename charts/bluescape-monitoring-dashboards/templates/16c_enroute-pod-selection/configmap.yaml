@@ -2004,7 +2004,7 @@ data:
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "{{envoy_cluster_name}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -2107,7 +2107,7 @@ data:
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "{{envoy_cluster_name}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -2207,7 +2207,7 @@ data:
               "instant": true,
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "{{envoy_cluster_name}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -2276,7 +2276,7 @@ data:
               "expr": "avg(envoy_cluster_update_failure) by (envoy_cluster_name)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{envoy_cluster_name}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -2373,7 +2373,7 @@ data:
               "format": "time_series",
               "interval": "",
               "intervalFactor": 1,
-              "legendFormat": "{{envoy_cluster_name}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],

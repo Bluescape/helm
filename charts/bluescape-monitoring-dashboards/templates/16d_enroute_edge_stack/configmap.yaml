@@ -125,7 +125,7 @@ data:
               "hide": false,
               "instant": true,
               "intervalFactor": 1,
-              "legendFormat": "{{version}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -341,7 +341,7 @@ data:
               },
               "editorMode": "code",
               "expr": " ambassador_edge_stack_go_memstats_alloc_bytes{namespace=~\"$namespace\", pod=~\"$pod\"}",
-              "legendFormat": "{{pod}}",
+              "legendFormat": "",
               "range": true,
               "refId": "A"
             }

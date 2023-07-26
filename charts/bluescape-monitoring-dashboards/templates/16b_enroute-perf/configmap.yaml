@@ -1939,7 +1939,7 @@ data:
               "expr": "sum(envoy_cluster_upstream_cx_active) by (envoy_cluster_name)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{envoy_cluster_name}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -2039,7 +2039,7 @@ data:
               "expr": "sum(envoy_cluster_upstream_cx_connect_fail) by (envoy_cluster_name)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{envoy_cluster_name}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -2136,7 +2136,7 @@ data:
               "format": "table",
               "instant": true,
               "intervalFactor": 1,
-              "legendFormat": "{{envoy_cluster_name}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -2205,7 +2205,7 @@ data:
               "expr": "avg(envoy_cluster_update_failure) by (envoy_cluster_name)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{envoy_cluster_name}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
@@ -2301,7 +2301,7 @@ data:
               "expr": "max(envoy_cluster_upstream_cx_destroy_with_active_rq) by (envoy_cluster_name)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{envoy_cluster_name}}",
+              "legendFormat": "",
               "refId": "A"
             }
           ],
