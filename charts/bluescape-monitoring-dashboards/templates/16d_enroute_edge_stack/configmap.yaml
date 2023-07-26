@@ -2,12 +2,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ambassador-edge-stack-dashboard
+  name: enroute-edge-stack-dashboard
 
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 data:
-  ambassador-edge-stack-dashboard.json: |-
+  enroute-edge-stack-dashboard.json: |-
     {
       "annotations": {
         "list": [
@@ -22,7 +22,7 @@ data:
           }
         ]
       },
-      "description": "Ambassador Edge Stack dashboard for Prometheus",
+      "description": "Enroute Edge Stack dashboard for Prometheus",
       "editable": true,
       "fiscalYearStartMonth": 0,
       "gnetId": 13758,
