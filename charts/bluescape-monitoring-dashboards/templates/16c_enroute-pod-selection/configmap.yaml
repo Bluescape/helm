@@ -2,12 +2,12 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ambassador--performance-metrics-by-pod-dashboard
+  name: enroute--performance-metrics-by-pod-dashboard
 
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 data:
-  ambassador--performance-metrics-by-pod-dashboard.json: |-
+  enroute--performance-metrics-by-pod-dashboard.json: |-
     {
       "annotations": {
         "list": [
@@ -22,7 +22,7 @@ data:
           }
         ]
       },
-      "description": "Ambassador dashboard for Prometheus (Performance)",
+      "description": "Enroute dashboard for Prometheus (Performance)",
       "editable": true,
       "gnetId": 10850,
       "graphTooltip": 0,
