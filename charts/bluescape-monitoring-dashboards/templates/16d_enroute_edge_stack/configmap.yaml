@@ -13,7 +13,10 @@ data:
         "list": [
           {
             "builtIn": 1,
-            "datasource": "Prometheus",
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
             "enable": true,
             "hide": true,
             "iconColor": "rgba(0, 211, 255, 1)",
@@ -27,8 +30,7 @@ data:
       "fiscalYearStartMonth": 0,
       "gnetId": 13758,
       "graphTooltip": 0,
-      "id": 68,
-      "iteration": 1656058023155,
+      "id": 51,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -46,6 +48,15 @@ data:
           },
           "id": 34,
           "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "refId": "A"
+            }
+          ],
           "title": "Ambassador - Control Plane",
           "type": "row"
         },
@@ -101,16 +112,20 @@ data:
             },
             "textMode": "name"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.3.6",
           "repeatDirection": "h",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "ambassador_diagnostics_info{namespace=~\"$namespace\"}",
               "format": "time_series",
               "hide": false,
               "instant": true,
               "intervalFactor": 1,
-              "legendFormat": "{{ `{{version}}` }}",
+              "legendFormat": "{{version}}",
               "refId": "A"
             }
           ],
@@ -162,6 +177,8 @@ data:
           "links": [],
           "options": {
             "displayMode": "lcd",
+            "minVizHeight": 10,
+            "minVizWidth": 0,
             "orientation": "vertical",
             "reduceOptions": {
               "calcs": [
@@ -172,41 +189,66 @@ data:
             },
             "showUnfilled": true
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.3.6",
           "repeat": "pod",
           "repeatDirection": "v",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
               "expr": "ambassador_reconfiguration_time_seconds{namespace=~\"$namespace\", pod=~\"$pod\"}",
               "instant": false,
               "legendFormat": "Reconfiguration",
               "refId": "C"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "ambassador_fetcher_time_seconds{namespace=~\"$namespace\", pod=~\"$pod\"}",
               "instant": false,
               "legendFormat": "Fetcher",
               "refId": "E"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "ambassador_aconf_time_seconds{namespace=~\"$namespace\", pod=~\"$pod\"}",
               "instant": false,
               "legendFormat": "AConf",
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "ambassador_ir_time_seconds{namespace=~\"$namespace\", pod=~\"$pod\"}",
               "instant": false,
               "legendFormat": "IR",
               "refId": "F"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "ambassador_econf_time_seconds{namespace=~\"$namespace\", pod=~\"$pod\"}",
               "instant": false,
               "legendFormat": "EConf",
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "ambassador_diagnostics_time_seconds{namespace=~\"$namespace\", pod=~\"$pod\"}",
               "instant": false,
               "legendFormat": "Diagnostics",
@@ -215,102 +257,6 @@ data:
           ],
           "title": "Last control plane operation time ($pod)",
           "type": "bargauge"
-        },
-        {
-          "collapsed": true,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "gridPos": {
-            "h": 1,
-            "w": 24,
-            "x": 0,
-            "y": 31
-          },
-          "id": 38,
-          "panels": [
-            {
-              "aliasColors": {},
-              "bars": false,
-              "dashLength": 10,
-              "dashes": false,
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "fill": 1,
-              "fillGradient": 0,
-              "gridPos": {
-                "h": 7,
-                "w": 24,
-                "x": 0,
-                "y": 2
-              },
-              "id": 40,
-              "legend": {
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "show": true,
-                "total": false,
-                "values": false
-              },
-              "lines": true,
-              "linewidth": 1,
-              "nullPointMode": "null",
-              "options": {
-                "dataLinks": []
-              },
-              "percentage": false,
-              "pointradius": 2,
-              "points": false,
-              "renderer": "flot",
-              "seriesOverrides": [],
-              "spaceLength": 10,
-              "stack": false,
-              "steppedLine": false,
-              "targets": [
-                {
-                  "expr": " ambassador_edge_stack_go_memstats_alloc_bytes{namespace=~\"$namespace\", pod=~\"$pod\"}",
-                  "legendFormat": "{{ `{{pod}}` }}",
-                  "refId": "A"
-                }
-              ],
-              "thresholds": [],
-              "timeRegions": [],
-              "title": "amb-sidecar memory usage",
-              "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-              },
-              "type": "graph",
-              "xaxis": {
-                "mode": "time",
-                "show": true,
-                "values": []
-              },
-              "yaxes": [
-                {
-                  "format": "decbytes",
-                  "logBase": 1,
-                  "show": true
-                },
-                {
-                  "format": "none",
-                  "logBase": 1,
-                  "show": false
-                }
-              ],
-              "yaxis": {
-                "align": false
-              }
-            }
-          ],
-          "title": "Ambassador Edge Stack",
-          "type": "row"
         },
         {
           "collapsed": false,
@@ -322,10 +268,139 @@ data:
             "h": 1,
             "w": 24,
             "x": 0,
-            "y": 32
+            "y": 6
+          },
+          "id": 38,
+          "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "Ambassador Edge Stack",
+          "type": "row"
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "dashLength": 10,
+          "dashes": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
+          "fill": 1,
+          "fillGradient": 0,
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 7
+          },
+          "hiddenSeries": false,
+          "id": 40,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
+          "percentage": false,
+          "pluginVersion": "9.3.6",
+          "pointradius": 2,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "spaceLength": 10,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": " ambassador_edge_stack_go_memstats_alloc_bytes{namespace=~\"$namespace\", pod=~\"$pod\"}",
+              "legendFormat": "{{pod}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "thresholds": [],
+          "timeRegions": [],
+          "title": "amb-sidecar memory usage",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "$$hashKey": "object:111",
+              "format": "decbytes",
+              "logBase": 1,
+              "show": true
+            },
+            {
+              "$$hashKey": "object:112",
+              "format": "none",
+              "logBase": 1,
+              "show": false
+            }
+          ],
+          "yaxis": {
+            "align": false
+          }
+        },
+        {
+          "collapsed": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 14
           },
           "id": 22,
           "panels": [],
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "refId": "A"
+            }
+          ],
           "title": "Ambassador - Envoy Data Plane",
           "type": "row"
         },
@@ -350,8 +425,9 @@ data:
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 33
+            "y": 15
           },
+          "hiddenSeries": false,
           "id": 30,
           "legend": {
             "avg": false,
@@ -366,8 +442,11 @@ data:
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -377,13 +456,23 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
               "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"2\"}[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
               "legendFormat": "2xx",
+              "range": true,
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"3\"}[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -391,6 +480,10 @@ data:
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"4\"}[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -398,6 +491,10 @@ data:
               "refId": "C"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"5\"}[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -421,12 +518,14 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:192",
               "format": "short",
               "label": "RPM",
               "logBase": 1,
               "show": true
             },
             {
+              "$$hashKey": "object:193",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -457,8 +556,9 @@ data:
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 41
+            "y": 23
           },
+          "hiddenSeries": false,
           "id": 20,
           "legend": {
             "avg": false,
@@ -473,8 +573,11 @@ data:
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -484,6 +587,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"2\"}[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -491,6 +598,10 @@ data:
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"3\"}[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -498,6 +609,10 @@ data:
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"4\"}[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -505,6 +620,10 @@ data:
               "refId": "C"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"5\"}[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -564,8 +683,9 @@ data:
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 49
+            "y": 31
           },
+          "hiddenSeries": false,
           "id": 26,
           "legend": {
             "avg": false,
@@ -580,8 +700,11 @@ data:
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -591,6 +714,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "histogram_quantile(0.95, sum(rate(envoy_http_downstream_cx_length_ms_bucket[5m])) by (le))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -598,6 +725,10 @@ data:
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "histogram_quantile(0.9, sum(rate(envoy_http_downstream_cx_length_ms_bucket[5m])) by (le))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -605,6 +736,10 @@ data:
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "histogram_quantile(0.5, sum(rate(envoy_http_downstream_cx_length_ms_bucket[5m])) by (le))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -664,8 +799,9 @@ data:
             "h": 8,
             "w": 18,
             "x": 0,
-            "y": 57
+            "y": 39
           },
+          "hiddenSeries": false,
           "id": 28,
           "legend": {
             "avg": false,
@@ -680,8 +816,11 @@ data:
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
           "percentage": false,
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -691,6 +830,10 @@ data:
           "steppedLine": false,
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(increase(envoy_http_downstream_cx_http1_active[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -698,6 +841,10 @@ data:
               "refId": "A"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(increase(envoy_http_downstream_cx_http2_active_active[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -705,6 +852,10 @@ data:
               "refId": "B"
             },
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "sum(increase(envoy_http_downstream_cx_upgrades_active[1m]))",
               "format": "time_series",
               "intervalFactor": 1,
@@ -785,7 +936,7 @@ data:
             "h": 8,
             "w": 6,
             "x": 18,
-            "y": 57
+            "y": 39
           },
           "id": 32,
           "links": [],
@@ -804,9 +955,13 @@ data:
             },
             "textMode": "auto"
           },
-          "pluginVersion": "8.3.3",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
               "expr": "avg(envoy_cluster_manager_active_clusters)",
               "format": "time_series",
               "intervalFactor": 1,
@@ -818,7 +973,7 @@ data:
         }
       ],
       "refresh": "30s",
-      "schemaVersion": 34,
+      "schemaVersion": 37,
       "style": "dark",
       "tags": [
         "ambassador"
@@ -917,8 +1072,8 @@ data:
         ]
       },
       "timezone": "",
-      "title": "Ambassador Edge Stack",
-      "uid": "AJieHz4Mz",
-      "version": 2,
+      "title": "Enroute Edge Stack",
+      "uid": "9a8614d5f37e2445c762f98f666ca58173b3a67d",
+      "version": 5,
       "weekStart": ""
     }
