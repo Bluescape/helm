@@ -13,7 +13,8 @@ data:
               {
                 "builtIn": 1,
                 "datasource": {
-                  "uid": "$Source"
+                  "type": "prometheus",
+                  "uid": "PBFA97CFB590B2093"
                 },
                 "enable": true,
                 "hide": true,
@@ -26,7 +27,7 @@ data:
           "editable": true,
           "fiscalYearStartMonth": 0,
           "graphTooltip": 0,
-          "id": 15,
+          "id": 32,
           "links": [],
           "liveNow": false,
           "panels": [
@@ -136,8 +137,7 @@ data:
               "dashLength": 10,
               "dashes": false,
               "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$Source"
               },
               "fieldConfig": {
                 "defaults": {
@@ -184,8 +184,7 @@ data:
               "targets": [
                 {
                   "datasource": {
-                    "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$Source"
                   },
                   "expr": "sum(pending_jobs_count{namespace=~\"${namespace}\"}) by (pod, namespace)",
                   "legendFormat": "",
@@ -382,8 +381,7 @@ data:
               "dashLength": 10,
               "dashes": false,
               "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$Source"
               },
               "fieldConfig": {
                 "defaults": {
@@ -428,8 +426,7 @@ data:
               "targets": [
                 {
                   "datasource": {
-                    "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$Source"
                   },
                   "expr": "avg(irate(msdoc_request_counter{namespace=~\"${namespace}\"}[1m])) by (service)",
                   "legendFormat": "Requests",
@@ -437,8 +434,7 @@ data:
                 },
                 {
                   "datasource": {
-                    "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$Source"
                   },
                   "expr": " avg(irate(msdoc_success_count{namespace=~\"${namespace}\"}[1m])) by (service)",
                   "legendFormat": "Success",
@@ -446,8 +442,7 @@ data:
                 },
                 {
                   "datasource": {
-                    "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$Source"
                   },
                   "expr": "avg(irate(msdoc_failure_count{namespace=~\"${namespace}\"}[1m])) by (service)",
                   "legendFormat": "Failure",
@@ -498,7 +493,7 @@ data:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "$Source"
+                "uid": "PBFA97CFB590B2093"
               },
               "fieldConfig": {
                 "defaults": {
@@ -543,7 +538,8 @@ data:
               "targets": [
                 {
                   "datasource": {
-                    "uid": "$Source"
+                    "type": "prometheus",
+                    "uid": "PBFA97CFB590B2093"
                   },
                   "editorMode": "code",
                   "expr": "avg(irate(worker_aws_request_count{namespace=~\"${namespace}\"}[1m])) by (service)",
@@ -553,7 +549,8 @@ data:
                 },
                 {
                   "datasource": {
-                    "uid": "$Source"
+                    "type": "prometheus",
+                    "uid": "PBFA97CFB590B2093"
                   },
                   "editorMode": "code",
                   "expr": "avg(irate(worker_aws_success{namespace=~\"${namespace}\"}[1m])) by (service)",
@@ -563,7 +560,8 @@ data:
                 },
                 {
                   "datasource": {
-                    "uid": "$Source"
+                    "type": "prometheus",
+                    "uid": "PBFA97CFB590B2093"
                   },
                   "editorMode": "code",
                   "expr": "avg(irate(worker_aws_failure{namespace=~\"${namespace}\"}[1m])) by (service)",
@@ -754,7 +752,7 @@ data:
                     "uid": "PBFA97CFB590B2093"
                   },
                   "editorMode": "code",
-                  "expr": "(avg(nodejs_heap_space_size_used_bytes{service=\"worker\", namespace=~\"${namespace}\"}) \n/ (avg(nodejs_heap_space_size_total_bytes{service=\"worker\", namespace=~\"${namespace}\"})) * 100) ",
+                  "expr": "avg(nodejs_heap_space_size_used_bytes{service=\"worker\", namespace=~\"${namespace}\"}) \n/ (avg(nodejs_heap_space_size_total_bytes{service=\"worker\", namespace=~\"${namespace}\"})) * 100",
                   "legendFormat": "",
                   "range": true,
                   "refId": "B"
@@ -795,8 +793,7 @@ data:
             {
               "columns": [],
               "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$Source"
               },
               "fontSize": "100%",
               "gridPos": {
@@ -878,8 +875,7 @@ data:
               "targets": [
                 {
                   "datasource": {
-                    "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$Source"
                   },
                   "expr": "sum(kube_pod_container_status_restarts_total{container=~\"worker\", namespace=~\"${namespace}\"}) by (namespace)",
                   "format": "table",
@@ -889,8 +885,7 @@ data:
                 },
                 {
                   "datasource": {
-                    "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$Source"
                   },
                   "expr": "sum(kube_pod_container_status_restarts_total{container=~\"msdoc-converter\", namespace=~\"${namespace}\"}) by (namespace)",
                   "format": "table",
@@ -1135,7 +1130,7 @@ data:
                   },
                   "expr": "count(kube_pod_info{pod=~\".*worker.*\", namespace=~\"${namespace}\"}) by (node)",
                   "instant": true,
-                  "",
+                  "legendFormat": "",
                   "refId": "A"
                 }
               ],
@@ -1379,7 +1374,7 @@ data:
                     "uid": "$Source"
                   },
                   "expr": "time() - node_boot_time_seconds{node_name=~'${node_name}'} and on(node_name) (kube_pod_info{pod=~\".*worker.*\", namespace=~\"${namespace}\"})",
-                  "",
+                  "legendFormat": "",
                   "refId": "B"
                 }
               ],
@@ -2028,19 +2023,13 @@ data:
                   "datasource": {
                     "uid": "$Source"
                   },
-                  "fieldConfig": {
-                    "defaults": {
-                      "links": []
-                    },
-                    "overrides": []
-                  },
                   "fill": 1,
                   "fillGradient": 0,
                   "gridPos": {
                     "h": 6,
                     "w": 24,
                     "x": 0,
-                    "y": 65
+                    "y": 61
                   },
                   "hiddenSeries": false,
                   "id": 39,
@@ -2062,10 +2051,9 @@ data:
                   "links": [],
                   "nullPointMode": "null",
                   "options": {
-                    "alertThreshold": true
+                    "dataLinks": []
                   },
                   "percentage": false,
-                  "pluginVersion": "9.3.6",
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
@@ -2122,19 +2110,13 @@ data:
                   "datasource": {
                     "uid": "$Source"
                   },
-                  "fieldConfig": {
-                    "defaults": {
-                      "links": []
-                    },
-                    "overrides": []
-                  },
                   "fill": 1,
                   "fillGradient": 0,
                   "gridPos": {
                     "h": 6,
                     "w": 24,
                     "x": 0,
-                    "y": 71
+                    "y": 67
                   },
                   "hiddenSeries": false,
                   "id": 40,
@@ -2156,10 +2138,9 @@ data:
                   "links": [],
                   "nullPointMode": "null",
                   "options": {
-                    "alertThreshold": true
+                    "dataLinks": []
                   },
                   "percentage": false,
-                  "pluginVersion": "9.3.6",
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
@@ -2243,19 +2224,13 @@ data:
                   "datasource": {
                     "uid": "$Source"
                   },
-                  "fieldConfig": {
-                    "defaults": {
-                      "links": []
-                    },
-                    "overrides": []
-                  },
                   "fill": 1,
                   "fillGradient": 0,
                   "gridPos": {
                     "h": 5,
                     "w": 24,
                     "x": 0,
-                    "y": 66
+                    "y": 74
                   },
                   "hiddenSeries": false,
                   "id": 4,
@@ -2278,10 +2253,9 @@ data:
                   "links": [],
                   "nullPointMode": "null",
                   "options": {
-                    "alertThreshold": true
+                    "dataLinks": []
                   },
                   "percentage": false,
-                  "pluginVersion": "9.3.6",
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
@@ -2343,19 +2317,13 @@ data:
                     "uid": "$Source"
                   },
                   "decimals": 2,
-                  "fieldConfig": {
-                    "defaults": {
-                      "links": []
-                    },
-                    "overrides": []
-                  },
                   "fill": 1,
                   "fillGradient": 0,
                   "gridPos": {
                     "h": 5,
                     "w": 24,
                     "x": 0,
-                    "y": 71
+                    "y": 79
                   },
                   "hiddenSeries": false,
                   "id": 10,
@@ -2378,10 +2346,9 @@ data:
                   "links": [],
                   "nullPointMode": "null",
                   "options": {
-                    "alertThreshold": true
+                    "dataLinks": []
                   },
                   "percentage": false,
-                  "pluginVersion": "9.3.6",
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
@@ -2438,19 +2405,13 @@ data:
                   "datasource": {
                     "uid": "$Source"
                   },
-                  "fieldConfig": {
-                    "defaults": {
-                      "links": []
-                    },
-                    "overrides": []
-                  },
                   "fill": 1,
                   "fillGradient": 0,
                   "gridPos": {
                     "h": 5,
                     "w": 24,
                     "x": 0,
-                    "y": 76
+                    "y": 84
                   },
                   "hiddenSeries": false,
                   "id": 12,
@@ -2473,10 +2434,9 @@ data:
                   "links": [],
                   "nullPointMode": "null",
                   "options": {
-                    "alertThreshold": true
+                    "dataLinks": []
                   },
                   "percentage": false,
-                  "pluginVersion": "9.3.6",
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
@@ -2533,19 +2493,13 @@ data:
                   "datasource": {
                     "uid": "$Source"
                   },
-                  "fieldConfig": {
-                    "defaults": {
-                      "links": []
-                    },
-                    "overrides": []
-                  },
                   "fill": 1,
                   "fillGradient": 0,
                   "gridPos": {
                     "h": 5,
                     "w": 24,
                     "x": 0,
-                    "y": 81
+                    "y": 89
                   },
                   "hiddenSeries": false,
                   "id": 14,
@@ -2566,10 +2520,9 @@ data:
                   "links": [],
                   "nullPointMode": "null",
                   "options": {
-                    "alertThreshold": true
+                    "dataLinks": []
                   },
                   "percentage": false,
-                  "pluginVersion": "9.3.6",
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
@@ -2653,19 +2606,13 @@ data:
                   "datasource": {
                     "uid": "$Source"
                   },
-                  "fieldConfig": {
-                    "defaults": {
-                      "links": []
-                    },
-                    "overrides": []
-                  },
                   "fill": 1,
                   "fillGradient": 0,
                   "gridPos": {
                     "h": 5,
                     "w": 24,
                     "x": 0,
-                    "y": 67
+                    "y": 95
                   },
                   "hiddenSeries": false,
                   "id": 19,
@@ -2688,10 +2635,9 @@ data:
                   "links": [],
                   "nullPointMode": "null",
                   "options": {
-                    "alertThreshold": true
+                    "dataLinks": []
                   },
                   "percentage": false,
-                  "pluginVersion": "9.3.6",
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
@@ -2753,19 +2699,13 @@ data:
                     "uid": "$Source"
                   },
                   "decimals": 2,
-                  "fieldConfig": {
-                    "defaults": {
-                      "links": []
-                    },
-                    "overrides": []
-                  },
                   "fill": 1,
                   "fillGradient": 0,
                   "gridPos": {
                     "h": 5,
                     "w": 24,
                     "x": 0,
-                    "y": 72
+                    "y": 100
                   },
                   "hiddenSeries": false,
                   "id": 20,
@@ -2788,10 +2728,9 @@ data:
                   "links": [],
                   "nullPointMode": "null",
                   "options": {
-                    "alertThreshold": true
+                    "dataLinks": []
                   },
                   "percentage": false,
-                  "pluginVersion": "9.3.6",
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
@@ -2848,19 +2787,13 @@ data:
                   "datasource": {
                     "uid": "$Source"
                   },
-                  "fieldConfig": {
-                    "defaults": {
-                      "links": []
-                    },
-                    "overrides": []
-                  },
                   "fill": 1,
                   "fillGradient": 0,
                   "gridPos": {
                     "h": 5,
                     "w": 24,
                     "x": 0,
-                    "y": 77
+                    "y": 105
                   },
                   "hiddenSeries": false,
                   "id": 22,
@@ -2883,10 +2816,9 @@ data:
                   "links": [],
                   "nullPointMode": "null",
                   "options": {
-                    "alertThreshold": true
+                    "dataLinks": []
                   },
                   "percentage": false,
-                  "pluginVersion": "9.3.6",
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
@@ -2943,19 +2875,13 @@ data:
                   "datasource": {
                     "uid": "$Source"
                   },
-                  "fieldConfig": {
-                    "defaults": {
-                      "links": []
-                    },
-                    "overrides": []
-                  },
                   "fill": 1,
                   "fillGradient": 0,
                   "gridPos": {
                     "h": 5,
                     "w": 24,
                     "x": 0,
-                    "y": 82
+                    "y": 110
                   },
                   "hiddenSeries": false,
                   "id": 23,
@@ -2976,10 +2902,9 @@ data:
                   "links": [],
                   "nullPointMode": "null",
                   "options": {
-                    "alertThreshold": true
+                    "dataLinks": []
                   },
                   "percentage": false,
-                  "pluginVersion": "9.3.6",
                   "pointradius": 5,
                   "points": false,
                   "renderer": "flot",
@@ -3081,10 +3006,6 @@ data:
                     "$__all"
                   ]
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "$Source"
-                },
                 "definition": "label_values(kube_pod_info{pod=~\".*worker.*\"}, namespace)",
                 "hide": 0,
                 "includeAll": true,
@@ -3115,10 +3036,6 @@ data:
                   "value": [
                     "$__all"
                   ]
-                },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "$Source"
                 },
                 "definition": "label_values(kube_pod_info{pod=~\".*worker.*\", namespace=~\"${namespace}\"}, node_name)",
                 "hide": 0,
@@ -3151,11 +3068,7 @@ data:
                     "$__all"
                   ]
                 },
-                "datasource": {
-                  "type": "prometheus",
-                  "uid": "$Source"
-                },
-                "definition": "label_values(worker_status{namespace=~\"${namespace}\"}, pod)",
+                "definition": "label_values(workerStatus{namespace=~\"${namespace}\"}, pod)",
                 "hide": 2,
                 "includeAll": true,
                 "label": "Worker Node",
@@ -3163,8 +3076,8 @@ data:
                 "name": "pod",
                 "options": [],
                 "query": {
-                  "query": "label_values(worker_status{namespace=~\"${namespace}\"}, pod)",
-                  "refId": "Prometheus-pod-Variable-Query"
+                  "query": "label_values(workerStatus{namespace=~\"${namespace}\"}, pod)",
+                  "refId": "StandardVariableQuery"
                 },
                 "refresh": 1,
                 "regex": ".+",
@@ -3198,6 +3111,6 @@ data:
           "timezone": "browser",
           "title": "Application / Worker Service",
           "uid": "9e7fd88bc04444e0aa68a6c582621650c392e317",
-          "version": 15,
+          "version": 133,
           "weekStart": ""
         }
