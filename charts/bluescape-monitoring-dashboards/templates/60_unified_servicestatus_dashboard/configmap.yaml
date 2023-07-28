@@ -36,7 +36,7 @@ data:
       "fiscalYearStartMonth": 0,
       "gnetId": 11992,
       "graphTooltip": 0,
-      "id": 70,
+      "id": 88,
       "links": [
         {
           "asDropdown": true,
@@ -102,14 +102,17 @@ data:
           "options": {
             "colorMode": "background",
             "graphMode": "area",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
+            "justifyMode": "center",
+            "orientation": "auto",
             "reduceOptions": {
               "calcs": [
                 "lastNotNull"
               ],
               "fields": "",
               "values": false
+            },
+            "text": {
+              "titleSize": 12
             },
             "textMode": "auto"
           },
@@ -120,11 +123,14 @@ data:
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "exemplar": false,
               "expr": "avg_over_time(probe_success[$__interval]) * 100",
+              "format": "time_series",
               "instant": true,
               "interval": "",
               "legendFormat": "",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -365,6 +371,7 @@ data:
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "exemplar": false,
               "expr": "probe_success",
               "instant": true,
@@ -1427,7 +1434,7 @@ data:
               "refId": "StandardVariableQuery"
             },
             "refresh": 1,
-            "regex": "/^aes-ambassador-\\d+.*/",
+            "regex": "/^enroute-\\d+.*/",
             "skipUrlSync": false,
             "sort": 0,
             "type": "query"
@@ -1502,20 +1509,20 @@ data:
             "auto_min": "10s",
             "current": {
               "selected": false,
-              "text": "30s",
-              "value": "30s"
+              "text": "1m",
+              "value": "1m"
             },
             "hide": 0,
             "label": "Interval",
             "name": "interval",
             "options": [
               {
-                "selected": true,
+                "selected": false,
                 "text": "30s",
                 "value": "30s"
               },
               {
-                "selected": false,
+                "selected": true,
                 "text": "1m",
                 "value": "1m"
               },
@@ -1591,6 +1598,7 @@ data:
               }
             ],
             "query": "30s,1m,2m,3m,5m,7m,10m,30m,1h,6h,12h,1d,7d,14d,30d,60d",
+            "queryValue": "",
             "refresh": 2,
             "skipUrlSync": false,
             "type": "interval"
@@ -1630,7 +1638,7 @@ data:
         ]
       },
       "time": {
-        "from": "now-5m",
+        "from": "now-15m",
         "to": "now"
       },
       "timepicker": {
@@ -1649,7 +1657,7 @@ data:
       },
       "timezone": "",
       "title": "Service Status",
-      "uid": "d06278d15608be63a8b14764db1514fac03ebf96",
+      "uid": "MrVto13Vk",
       "version": 2,
       "weekStart": ""
     }

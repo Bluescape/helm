@@ -24,12 +24,12 @@ data:
           }
         ]
       },
-      "description": "Enroute dashboard for Prometheus (Performance)",
+      "description": "Ambassador dashboard for Prometheus (Performance)",
       "editable": true,
       "fiscalYearStartMonth": 0,
       "gnetId": 10850,
       "graphTooltip": 0,
-      "id": 27,
+      "id": 90,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -1218,7 +1218,7 @@ data:
           ],
           "thresholds": [],
           "timeRegions": [],
-          "title": "Ambassador Downstream Responses",
+          "title": "Envoy Downstream Responses",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1232,12 +1232,14 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:126",
               "format": "short",
               "label": "RPM",
               "logBase": 1,
               "show": true
             },
             {
+              "$$hashKey": "object:127",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1341,7 +1343,7 @@ data:
           ],
           "thresholds": [],
           "timeRegions": [],
-          "title": "Ambassador Upstream Responses",
+          "title": "Envoy Upstream Responses",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -1355,12 +1357,14 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:223",
               "format": "short",
               "label": "RPM",
               "logBase": 1,
               "show": true
             },
             {
+              "$$hashKey": "object:224",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1514,12 +1518,6 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -1549,7 +1547,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1643,12 +1641,6 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -1676,7 +1668,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1769,12 +1761,6 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -1802,7 +1788,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1886,12 +1872,6 @@ data:
             "uid": "PBFA97CFB590B2093"
           },
           "decimals": 0,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -1922,7 +1902,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -1986,12 +1966,6 @@ data:
             "uid": "PBFA97CFB590B2093"
           },
           "decimals": 0,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2022,7 +1996,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2081,12 +2055,6 @@ data:
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
           },
           "fontSize": "100%",
           "gridPos": {
@@ -2153,12 +2121,6 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2188,7 +2150,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2249,12 +2211,6 @@ data:
             "uid": "PBFA97CFB590B2093"
           },
           "decimals": 0,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2284,7 +2240,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -2344,12 +2300,6 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2382,7 +2332,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -2503,12 +2453,6 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2537,7 +2481,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -2633,12 +2577,6 @@ data:
             "uid": "PBFA97CFB590B2093"
           },
           "decimals": 0,
-          "fieldConfig": {
-            "defaults": {
-              "custom": {}
-            },
-            "overrides": []
-          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -2670,7 +2608,7 @@ data:
             "alertThreshold": true
           },
           "percentage": false,
-          "pluginVersion": "7.2.2",
+          "pluginVersion": "9.3.6",
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
@@ -2761,16 +2699,12 @@ data:
       "refresh": "1m",
       "schemaVersion": 37,
       "style": "dark",
-      "tags": [
-        "ambassador",
-        "bluescape",
-        "k8s"
-      ],
+      "tags": [],
       "templating": {
         "list": [
           {
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "http",
               "value": "http"
             },
@@ -2829,7 +2763,7 @@ data:
       },
       "timezone": "",
       "title": "Enroute / Performance Metrics",
-      "uid": "66bfc9b7ff37760d0496a3cc07e0a4d61aa0ee59",
-      "version": 3,
+      "uid": "cW85x134k",
+      "version": 1,
       "weekStart": ""
     }

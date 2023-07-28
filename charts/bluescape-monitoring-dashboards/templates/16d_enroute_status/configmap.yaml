@@ -1,19 +1,21 @@
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: enroute-stats-dashboard
+  name: enroute-edge-stack-dashboard
 
   labels:
-    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 data:
-  enroute-stats-dashboard.json: |-
+  enroute-edge-stack-dashboard.json: |-
     {
       "annotations": {
         "list": [
           {
             "builtIn": 1,
             "datasource": {
-              "uid": "${DS_PROMETHEUS}"
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
             },
             "enable": true,
             "hide": true,
@@ -23,12 +25,12 @@ data:
           }
         ]
       },
-      "description": "Enroute dashboard for Prometheus",
+      "description": "EnRoute dashboard for Prometheus",
       "editable": true,
       "fiscalYearStartMonth": 0,
-      "gnetId": 10434,
+      "gnetId": 13758,
       "graphTooltip": 0,
-      "id": 35,
+      "id": 89,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -55,7 +57,7 @@ data:
               "refId": "A"
             }
           ],
-          "title": "Ambassador Metrics Endpoint",
+          "title": "EnRoute - Envoy Data Plane",
           "type": "row"
         },
         {
@@ -66,6 +68,12 @@ data:
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
@@ -150,7 +158,7 @@ data:
           ],
           "thresholds": [],
           "timeRegions": [],
-          "title": "Ambassador Response Codes",
+          "title": "Envoy Response Codes",
           "tooltip": {
             "shared": true,
             "sort": 0,
@@ -164,12 +172,14 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:91",
               "format": "short",
               "label": "RPM",
               "logBase": 1,
               "show": true
             },
             {
+              "$$hashKey": "object:92",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -187,6 +197,12 @@ data:
           "datasource": {
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
           },
           "fill": 1,
           "fillGradient": 0,
@@ -309,6 +325,12 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
           "fill": 1,
           "fillGradient": 0,
           "gridPos": {
@@ -377,16 +399,6 @@ data:
               "intervalFactor": 1,
               "legendFormat": "50th percentile",
               "refId": "C"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "expr": "",
-              "format": "time_series",
-              "intervalFactor": 1,
-              "refId": "D"
             }
           ],
           "thresholds": [],
@@ -429,13 +441,21 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "fieldConfig": {
+            "defaults": {
+              "links": []
+            },
+            "overrides": []
+          },
           "fill": 1,
+          "fillGradient": 0,
           "gridPos": {
             "h": 8,
             "w": 18,
             "x": 0,
             "y": 25
           },
+          "hiddenSeries": false,
           "id": 28,
           "legend": {
             "avg": false,
@@ -450,7 +470,11 @@ data:
           "linewidth": 1,
           "links": [],
           "nullPointMode": "null",
+          "options": {
+            "alertThreshold": true
+          },
           "percentage": false,
+          "pluginVersion": "9.3.6",
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
@@ -549,7 +573,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -599,506 +624,78 @@ data:
           ],
           "title": "Registered Services",
           "type": "stat"
-        },
-        {
-          "collapsed": false,
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "gridPos": {
-            "h": 1,
-            "w": 24,
-            "x": 0,
-            "y": 33
-          },
-          "id": 9,
-          "panels": [],
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "refId": "A"
-            }
-          ],
-          "title": "Ambassador Stats Endpoint",
-          "type": "row"
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fill": 1,
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 34
-          },
-          "hideTimeOverride": false,
-          "id": 2,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "hideEmpty": false,
-            "hideZero": false,
-            "max": true,
-            "min": true,
-            "rightSide": false,
-            "show": true,
-            "total": true,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "2xx",
-              "color": "#508642"
-            },
-            {
-              "alias": "3xx",
-              "color": "#0a437c"
-            },
-            {
-              "alias": "4xx",
-              "color": "#e5ac0e"
-            },
-            {
-              "alias": "5xx",
-              "color": "#bf1b00"
-            }
-          ],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "sum(increase(envoy_listener_0_0_0_0_${listener_port}_http_ingress_http_downstream_rq_2xx[1m]))",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "2xx",
-              "refId": "E"
-            },
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "sum(increase(envoy_listener_0_0_0_0_${listener_port}_http_ingress_http_downstream_rq_3xx[1m]))",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "3xx",
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "sum(increase(envoy_listener_0_0_0_0_${listener_port}_http_ingress_http_downstream_rq_4xx[1m]))",
-              "format": "time_series",
-              "instant": false,
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "4xx",
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "sum(increase(envoy_listener_0_0_0_0_${listener_port}_http_ingress_http_downstream_rq_5xx[1m]))",
-              "format": "time_series",
-              "interval": "",
-              "intervalFactor": 2,
-              "legendFormat": "5xx",
-              "refId": "D"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "API Requests",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "RPM",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": "RPM",
-              "logBase": 1,
-              "min": "0",
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fill": 1,
-          "gridPos": {
-            "h": 7,
-            "w": 24,
-            "x": 0,
-            "y": 41
-          },
-          "id": 6,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": true,
-            "min": true,
-            "show": true,
-            "total": false,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "envoy_listener_0_0_0_0_${listener_port}_downstream_cx_length_ms{quantile=\"0.5\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "0.5 quantile",
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "envoy_listener_0_0_0_0_${listener_port}_downstream_cx_length_ms{quantile=\"0.9\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "0.9 quantile",
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "envoy_listener_0_0_0_0_${listener_port}_downstream_cx_length_ms{quantile=\"0.99\"}",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "0.99 quantile",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Downstream Connections Length",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "milliseconds",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "logBase": 1,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "dashLength": 10,
-          "dashes": false,
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fill": 1,
-          "gridPos": {
-            "h": 7,
-            "w": 20,
-            "x": 0,
-            "y": 48
-          },
-          "id": 5,
-          "legend": {
-            "alignAsTable": true,
-            "avg": true,
-            "current": false,
-            "max": true,
-            "min": true,
-            "show": true,
-            "total": true,
-            "values": true
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null as zero",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "spaceLength": 10,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "sum(increase(envoy_http_ingress_http_downstream_cx_http1_total[1m]))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "HTTP/1.1",
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "sum(increase(envoy_http_ingress_http_downstream_cx_http2_total[1m]))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "HTTP/2",
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "sum(increase(envoy_http_ingress_http_downstream_cx_websocket_total[1m]))",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "legendFormat": "WebSocket",
-              "refId": "C"
-            }
-          ],
-          "thresholds": [],
-          "timeRegions": [],
-          "title": "Downstream Connections",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": "RPM",
-              "logBase": 1,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "logBase": 1,
-              "show": false
-            }
-          ],
-          "yaxis": {
-            "align": false
-          }
-        },
-        {
-          "datasource": {
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [
-                {
-                  "options": {
-                    "match": "null",
-                    "result": {
-                      "text": "N/A"
-                    }
-                  },
-                  "type": "special"
-                }
-              ],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "none"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 4,
-            "x": 20,
-            "y": 48
-          },
-          "id": 4,
-          "links": [],
-          "maxDataPoints": 100,
-          "options": {
-            "colorMode": "none",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "horizontal",
-            "reduceOptions": {
-              "calcs": [
-                "mean"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "textMode": "auto"
-          },
-          "pluginVersion": "9.3.6",
-          "targets": [
-            {
-              "datasource": {
-                "uid": "${DS_PROMETHEUS}"
-              },
-              "expr": "envoy_cluster_manager_total_clusters",
-              "format": "time_series",
-              "intervalFactor": 2,
-              "refId": "A"
-            }
-          ],
-          "title": "Registered Services",
-          "type": "stat"
         }
       ],
-      "refresh": "1m",
+      "refresh": "30s",
       "schemaVersion": 37,
       "style": "dark",
-      "tags": [
-        "bluescape",
-        "k8s",
-        "ambassador"
-      ],
+      "tags": [],
       "templating": {
         "list": [
           {
             "current": {
               "selected": false,
-              "text": "Prometheus",
-              "value": "Prometheus"
+              "text": "All",
+              "value": "$__all"
             },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
+            "definition": "label_values(envoy_cluster_manager_active_clusters, namespace)",
             "hide": 0,
-            "includeAll": false,
-            "label": "datasource",
-            "multi": false,
-            "name": "DS_PROMETHEUS",
+            "includeAll": true,
+            "label": "Namespace",
+            "multi": true,
+            "name": "namespace",
             "options": [],
-            "query": "prometheus",
+            "query": {
+              "query": "label_values(envoy_cluster_manager_active_clusters, namespace)",
+              "refId": "StandardVariableQuery"
+            },
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
-            "type": "datasource"
+            "sort": 5,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
           },
           {
             "current": {
-              "selected": true,
-              "text": "8080",
-              "value": "8080"
+              "selected": false,
+              "text": "All",
+              "value": "$__all"
             },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
+            "definition": "label_values(envoy_cluster_manager_active_clusters{namespace=\"$namespace\"}, pod)",
             "hide": 0,
-            "label": "Listener port",
-            "name": "listener_port",
-            "options": [
-              {
-                "selected": true,
-                "text": "8080",
-                "value": "8080"
-              }
-            ],
-            "query": "8080",
+            "includeAll": true,
+            "label": "Pod",
+            "multi": true,
+            "name": "pod",
+            "options": [],
+            "query": {
+              "query": "label_values(envoy_cluster_manager_active_clusters{namespace=\"$namespace\"}, pod)",
+              "refId": "StandardVariableQuery"
+            },
+            "refresh": 1,
+            "regex": "",
             "skipUrlSync": false,
-            "type": "textbox"
+            "sort": 5,
+            "tagValuesQuery": "",
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
           }
         ]
       },
       "time": {
-        "from": "now-1h",
+        "from": "now-15m",
         "to": "now"
       },
       "timepicker": {
@@ -1127,8 +724,8 @@ data:
         ]
       },
       "timezone": "",
-      "title": "Enroute / General Overview",
-      "uid": "7b06c3d6d084f8f214b17acc7837783e223a1a81",
+      "title": "Enroute Status",
+      "uid": "vVTx013Vk",
       "version": 3,
       "weekStart": ""
     }
