@@ -23,12 +23,12 @@ data:
           }
         ]
       },
-      "description": "EnRoute dashboard for Prometheus",
+      "description": "Enroute dashboard for Prometheus",
       "editable": true,
       "fiscalYearStartMonth": 0,
       "gnetId": 10434,
       "graphTooltip": 0,
-      "id": 83,
+      "id": 98,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -685,7 +685,7 @@ data:
       },
       "timezone": "",
       "title": "Enroute / General Overview",
-      "uid": "QLgyno34k",
-      "version": 1,
+      "uid": "051d5dcead54b491c70e83da75638e386924b2f2",
+      "version": 2,
       "weekStart": ""
     }

@@ -36,7 +36,7 @@ data:
       "fiscalYearStartMonth": 0,
       "gnetId": 11992,
       "graphTooltip": 0,
-      "id": 88,
+      "id": 54,
       "links": [
         {
           "asDropdown": true,
@@ -74,6 +74,7 @@ data:
             "type": "prometheus",
             "uid": "PBFA97CFB590B2093"
           },
+          "description": "",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -126,8 +127,7 @@ data:
               "editorMode": "code",
               "exemplar": false,
               "expr": "avg_over_time(probe_success[$__interval]) * 100",
-              "format": "time_series",
-              "instant": true,
+              "instant": false,
               "interval": "",
               "legendFormat": "",
               "range": true,
@@ -1509,20 +1509,20 @@ data:
             "auto_min": "10s",
             "current": {
               "selected": false,
-              "text": "1m",
-              "value": "1m"
+              "text": "30s",
+              "value": "30s"
             },
             "hide": 0,
             "label": "Interval",
             "name": "interval",
             "options": [
               {
-                "selected": false,
+                "selected": true,
                 "text": "30s",
                 "value": "30s"
               },
               {
-                "selected": true,
+                "selected": false,
                 "text": "1m",
                 "value": "1m"
               },
@@ -1598,7 +1598,6 @@ data:
               }
             ],
             "query": "30s,1m,2m,3m,5m,7m,10m,30m,1h,6h,12h,1d,7d,14d,30d,60d",
-            "queryValue": "",
             "refresh": 2,
             "skipUrlSync": false,
             "type": "interval"
@@ -1638,7 +1637,7 @@ data:
         ]
       },
       "time": {
-        "from": "now-15m",
+        "from": "now-5m",
         "to": "now"
       },
       "timepicker": {
@@ -1657,7 +1656,7 @@ data:
       },
       "timezone": "",
       "title": "Service Status",
-      "uid": "MrVto13Vk",
-      "version": 2,
+      "uid": "d06278d15608be63a8b14764db1514fac03ebf96",
+      "version": 133,
       "weekStart": ""
     }
