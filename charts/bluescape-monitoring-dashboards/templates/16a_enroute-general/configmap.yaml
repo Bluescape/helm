@@ -23,7 +23,7 @@ data:
           }
         ]
       },
-      "description": "Enroute dashboard for Prometheus",
+      "description": "EnRoute dashboard for Prometheus",
       "editable": true,
       "fiscalYearStartMonth": 0,
       "gnetId": 10434,

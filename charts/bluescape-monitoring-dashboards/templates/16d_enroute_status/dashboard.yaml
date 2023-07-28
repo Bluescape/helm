@@ -2,12 +2,12 @@
 apiVersion: integreatly.org/v1alpha1
 kind: GrafanaDashboard
 metadata:
-  name: enroute-edge-stack-dashboard
+  name: enroute-status-dashboard
 
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
   json: ""
   configMapRef:
-    name: enroute-edge-stack-dashboard
-    key: enroute-edge-stack-dashboard.json
+    name: enroute-status-dashboard
+    key: enroute-status-dashboard.json
