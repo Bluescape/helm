@@ -36,7 +36,7 @@ data:
       "fiscalYearStartMonth": 0,
       "gnetId": 11992,
       "graphTooltip": 0,
-      "id": 54,
+      "id": 101,
       "links": [
         {
           "asDropdown": true,
@@ -112,9 +112,7 @@ data:
               "fields": "",
               "values": false
             },
-            "text": {
-              "titleSize": 12
-            },
+            "text": {},
             "textMode": "auto"
           },
           "pluginVersion": "9.3.6",
@@ -129,7 +127,7 @@ data:
               "expr": "avg_over_time(probe_success[$__interval]) * 100",
               "instant": false,
               "interval": "",
-              "legendFormat": "",
+              "legendFormat": "{{` {{target}} `}}",
               "range": true,
               "refId": "A"
             }
@@ -376,7 +374,7 @@ data:
               "expr": "probe_success",
               "instant": true,
               "interval": "",
-              "legendFormat": "",
+              "legendFormat": "{{` {{target}} `}}",
               "refId": "A"
             }
           ],
@@ -682,11 +680,12 @@ data:
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "exemplar": true,
               "expr": "avg(probe_duration_seconds) by(instance)",
               "instant": false,
               "interval": "",
-              "legendFormat": "",
+              "legendFormat": "{{` {{instance}} `}}",
               "refId": "A"
             }
           ],
@@ -866,13 +865,14 @@ data:
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "expr": "(sum by (container) (rate(container_cpu_usage_seconds_total{node=~\"${node_name:regex}\", container=~\"${container_name:regex}\", namespace=~\"${namespace:regex}\"}[1m]))) * 100",
               "format": "time_series",
               "hide": false,
               "instant": false,
               "interval": "${interval}",
               "intervalFactor": 1,
-              "legendFormat": "",
+              "legendFormat": "{{` {{container}} `}}",
               "refId": "A"
             }
           ],
@@ -892,11 +892,13 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:726",
               "format": "percent",
               "logBase": 1,
               "show": true
             },
             {
+              "$$hashKey": "object:727",
               "format": "short",
               "logBase": 1,
               "show": false
@@ -969,9 +971,11 @@ data:
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "expr": "sum((container_memory_usage_bytes{node=~\"${node_name:regex}\", container=~\"${container_name:regex}\", namespace=~\"${namespace:regex}\"})/1024/1024) by (container)",
               "interval": "${interval}",
-              "legendFormat": "",
+              "legendFormat": "{{` {{container}} `}}",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -991,11 +995,13 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:630",
               "format": "decmbytes",
               "logBase": 1,
               "show": true
             },
             {
+              "$$hashKey": "object:631",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1064,9 +1070,11 @@ data:
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "expr": "(sum(rate(container_fs_writes_bytes_total{pod=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[1m])) by (container))/1024",
               "interval": "${interval}",
-              "legendFormat": "",
+              "legendFormat": "{{` {{container}} `}}",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -1086,11 +1094,13 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:250",
               "format": "deckbytes",
               "logBase": 1,
               "show": true
             },
             {
+              "$$hashKey": "object:251",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1161,9 +1171,11 @@ data:
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "expr": "(sum(rate(container_fs_reads_bytes_total{container=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[1m])) by (container))/1024",
               "interval": "${interval}",
-              "legendFormat": "",
+              "legendFormat": "{{` {{container}} `}}",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -1183,11 +1195,13 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:534",
               "format": "deckbytes",
               "logBase": 1,
               "show": true
             },
             {
+              "$$hashKey": "object:535",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1263,9 +1277,11 @@ data:
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "expr": "(sum(rate(container_network_transmit_bytes_total{pod=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[5m])) by (namespace))/1024",
               "interval": "${interval}",
-              "legendFormat": "",
+              "legendFormat": "{{` {{namespace}} `}}",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -1286,12 +1302,14 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:346",
               "format": "deckbytes",
               "label": "",
               "logBase": 1,
               "show": true
             },
             {
+              "$$hashKey": "object:347",
               "format": "short",
               "label": "",
               "logBase": 1,
@@ -1365,9 +1383,11 @@ data:
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
+              "editorMode": "code",
               "expr": "(sum(rate(container_network_receive_bytes_total{pod=~\"${container_name:regex}.+\", node=~\"${node_name:regex}\", namespace=~\"${namespace:regex}\"}[5m])) by (namespace))/1024",
               "interval": "${interval}",
-              "legendFormat": "",
+              "legendFormat": "{{` {{namespace}} `}}",
+              "range": true,
               "refId": "A"
             }
           ],
@@ -1387,11 +1407,13 @@ data:
           },
           "yaxes": [
             {
+              "$$hashKey": "object:438",
               "format": "deckbytes",
               "logBase": 1,
               "show": true
             },
             {
+              "$$hashKey": "object:439",
               "format": "short",
               "logBase": 1,
               "show": true
@@ -1657,6 +1679,6 @@ data:
       "timezone": "",
       "title": "Service Status",
       "uid": "d06278d15608be63a8b14764db1514fac03ebf96",
-      "version": 133,
+      "version": 2,
       "weekStart": ""
     }
