@@ -2,12 +2,12 @@
 apiVersion: integreatly.org/v1alpha1
 kind: GrafanaDashboard
 metadata:
-  name: ambassador--performance-metrics-by-pod-dashboard
+  name: enroute-status-dashboard
 
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
   json: ""
   configMapRef:
-    name: ambassador--performance-metrics-by-pod-dashboard
-    key: ambassador--performance-metrics-by-pod-dashboard.json
+    name: enroute-status-dashboard
+    key: enroute-status-dashboard.json
