@@ -13,8 +13,8 @@ data:
               {
                 "builtIn": 1,
                 "datasource": {
-                  "type": "prometheus",
-                  "uid": "PBFA97CFB590B2093"
+                  "type": "datasource",
+                  "uid": "grafana"
                 },
                 "enable": true,
                 "hide": true,
@@ -33,7 +33,7 @@ data:
           "editable": true,
           "fiscalYearStartMonth": 0,
           "graphTooltip": 0,
-          "id": 16,
+          "id": 19,
           "links": [],
           "liveNow": false,
           "panels": [
@@ -547,6 +547,6 @@ data:
           "timezone": "",
           "title": "Application / Express Apps",
           "uid": "122c86b474b3d978038142c9ec4bf0436d299ad7",
-          "version": 143,
+          "version": 4,
           "weekStart": ""
         }
