@@ -33,7 +33,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
-      "id": 25,
+      "id": 80,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -917,6 +917,486 @@ data:
           "transformations": [],
           "transparent": true,
           "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "PBB3B880A3FC93816"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "opacity",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 2,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "always",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "dashed+area"
+                }
+              },
+              "links": [],
+              "mappings": [],
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 5000
+                  },
+                  {
+                    "color": "red",
+                    "value": 10000
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 55
+          },
+          "id": 61,
+          "options": {
+            "legend": {
+              "calcs": [
+                "lastNotNull",
+                "range"
+              ],
+              "displayMode": "table",
+              "placement": "bottom",
+              "showLegend": true,
+              "sortBy": "Last *",
+              "sortDesc": true
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.1.4",
+          "targets": [
+            {
+              "alias": "$tag_feature / $tag_test - start",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PBB3B880A3FC93816"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "workspace_loading.start",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT /^$Measurement$/ FROM \"workspace_loading.start\",\"workspace_loading.preload\",\"workspace_loading.loading\",\"workspace_loading.loaded\",\"workspace_loading.interactive\" WHERE (\"environment\" =~ /^$Environment$/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"package\" =~ /^$Package$/ AND \"process\" =~ /^$Process$/) AND $timeFilter GROUP BY \"environment\", \"test\", \"feature\"",
+              "rawQuery": false,
+              "refId": "Start",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "$Calculation"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                }
+              ]
+            },
+            {
+              "alias": "$tag_feature / $tag_test - preload",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PBB3B880A3FC93816"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "workspace_loading.preload",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT /^$Measurement$/ FROM \"workspace_loading.start\",\"workspace_loading.preload\",\"workspace_loading.loading\",\"workspace_loading.loaded\",\"workspace_loading.interactive\" WHERE (\"environment\" =~ /^$Environment$/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"package\" =~ /^$Package$/ AND \"process\" =~ /^$Process$/) AND $timeFilter GROUP BY \"environment\", \"test\", \"feature\"",
+              "rawQuery": false,
+              "refId": "Preload",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "$Calculation"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                }
+              ]
+            },
+            {
+              "alias": "$tag_feature / $tag_test - loading",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PBB3B880A3FC93816"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "workspace_loading.loading",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT /^$Measurement$/ FROM \"workspace_loading.start\",\"workspace_loading.preload\",\"workspace_loading.loading\",\"workspace_loading.loaded\",\"workspace_loading.interactive\" WHERE (\"environment\" =~ /^$Environment$/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"package\" =~ /^$Package$/ AND \"process\" =~ /^$Process$/) AND $timeFilter GROUP BY \"environment\", \"test\", \"feature\"",
+              "rawQuery": false,
+              "refId": "Loading",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "$Calculation"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                }
+              ]
+            },
+            {
+              "alias": "$tag_feature / $tag_test - loaded",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PBB3B880A3FC93816"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "workspace_loading.loaded",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT /^$Measurement$/ FROM \"workspace_loading.start\",\"workspace_loading.preload\",\"workspace_loading.loading\",\"workspace_loading.loaded\",\"workspace_loading.interactive\" WHERE (\"environment\" =~ /^$Environment$/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"package\" =~ /^$Package$/ AND \"process\" =~ /^$Process$/) AND $timeFilter GROUP BY \"environment\", \"test\", \"feature\"",
+              "rawQuery": false,
+              "refId": "Loaded",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "$Calculation"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                }
+              ]
+            },
+            {
+              "alias": "$tag_feature / $tag_test - interactive",
+              "datasource": {
+                "type": "influxdb",
+                "uid": "PBB3B880A3FC93816"
+              },
+              "groupBy": [
+                {
+                  "params": [
+                    "environment"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "test"
+                  ],
+                  "type": "tag"
+                },
+                {
+                  "params": [
+                    "feature"
+                  ],
+                  "type": "tag"
+                }
+              ],
+              "hide": false,
+              "measurement": "workspace_loading.interactive",
+              "orderByTime": "ASC",
+              "policy": "default",
+              "query": "SELECT /^$Measurement$/ FROM \"workspace_loading.start\",\"workspace_loading.preload\",\"workspace_loading.loading\",\"workspace_loading.loaded\",\"workspace_loading.interactive\" WHERE (\"environment\" =~ /^$Environment$/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"package\" =~ /^$Package$/ AND \"process\" =~ /^$Process$/) AND $timeFilter GROUP BY \"environment\", \"test\", \"feature\"",
+              "rawQuery": false,
+              "refId": "Interactive",
+              "resultFormat": "time_series",
+              "select": [
+                [
+                  {
+                    "params": [
+                      "$Calculation"
+                    ],
+                    "type": "field"
+                  }
+                ]
+              ],
+              "tags": [
+                {
+                  "key": "environment",
+                  "operator": "=~",
+                  "value": "/^$Environment$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "feature",
+                  "operator": "=~",
+                  "value": "/^$Feature$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "test",
+                  "operator": "=~",
+                  "value": "/^$Test$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "package",
+                  "operator": "=~",
+                  "value": "/^$Package$/"
+                },
+                {
+                  "condition": "AND",
+                  "key": "process",
+                  "operator": "=~",
+                  "value": "/^$Process$/"
+                }
+              ]
+            }
+          ],
+          "title": "Workspace Loading",
+          "transformations": [],
+          "transparent": true,
+          "type": "timeseries"
         }
       ],
       "refresh": "10s",
@@ -986,8 +1466,12 @@ data:
           {
             "current": {
               "selected": false,
-              "text": "All",
-              "value": "$__all"
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
             },
             "datasource": {
               "type": "influxdb",
@@ -996,7 +1480,7 @@ data:
             "definition": "show tag values with key = feature WHERE package=~/^$Package/ AND \"environment\" =~ /^$Environment$/",
             "hide": 0,
             "includeAll": true,
-            "multi": false,
+            "multi": true,
             "name": "Feature",
             "options": [],
             "query": "show tag values with key = feature WHERE package=~/^$Package/ AND \"environment\" =~ /^$Environment$/",
@@ -1010,8 +1494,12 @@ data:
             "allValue": "*",
             "current": {
               "selected": false,
-              "text": "All",
-              "value": "$__all"
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
             },
             "datasource": {
               "type": "influxdb",
@@ -1021,7 +1509,7 @@ data:
             "hide": 0,
             "includeAll": true,
             "label": "",
-            "multi": false,
+            "multi": true,
             "name": "Test",
             "options": [],
             "query": "show tag values with key=test WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"environment\" =~ /^$Environment$/",
@@ -1036,7 +1524,7 @@ data:
           {
             "allValue": "*",
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "All",
               "value": "$__all"
             },
@@ -1137,6 +1625,6 @@ data:
       "timezone": "",
       "title": "QA / Front-End Test Metrics Summary",
       "uid": "39c3e8153e33b5e2ed8d786a3614369123a52355",
-      "version": 2,
+      "version": 7,
       "weekStart": ""
     }
