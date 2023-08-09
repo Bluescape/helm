@@ -36,7 +36,7 @@ data:
           "fiscalYearStartMonth": 0,
           "gnetId": 14997,
           "graphTooltip": 1,
-          "id": 6,
+          "id": 136,
           "links": [],
           "liveNow": false,
           "panels": [
@@ -1439,7 +1439,7 @@ data:
                     "uid": "PBFA97CFB590B2093"
                   },
                   "editorMode": "code",
-                  "expr": "sum by(instance) (mongodb_ss_oplogTruncation_truncateCount{instance=\"10.64.113.179:9216\"})",
+                  "expr": "sum by(instance) (mongodb_ss_oplogTruncation_truncateCount{instance=~\"$instance\"})",
                   "format": "time_series",
                   "hide": false,
                   "interval": "",
@@ -1956,6 +1956,28 @@ data:
                 "refresh": 2,
                 "skipUrlSync": false,
                 "type": "interval"
+              },
+              {
+                "current": {
+                  "selected": false,
+                  "text": "10.64.113.179:9216",
+                  "value": "10.64.113.179:9216"
+                },
+                "definition": "label_values(mongodb_ss_oplogTruncation_truncateCount, instance)",
+                "hide": 0,
+                "includeAll": false,
+                "multi": false,
+                "name": "instance",
+                "options": [],
+                "query": {
+                  "query": "label_values(mongodb_ss_oplogTruncation_truncateCount, instance)",
+                  "refId": "StandardVariableQuery"
+                },
+                "refresh": 1,
+                "regex": "",
+                "skipUrlSync": false,
+                "sort": 0,
+                "type": "query"
               }
             ]
           },
@@ -1991,6 +2013,6 @@ data:
           "timezone": "browser",
           "title": "MongoDB",
           "uid": "f0e95a7cfe8cc479a68d7d839e1de4a1ac874486",
-          "version": 9,
+          "version": 4,
           "weekStart": ""
         }
