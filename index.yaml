@@ -355,6 +355,16 @@ entries:
   bluescape-monitoring-dashboards:
   - apiVersion: v2
     appVersion: 1.16.4
+    created: "2023-08-10T15:58:37.544022413Z"
+    description: A Helm chart for Kubernetes
+    digest: 97cf4632c87f9d5642d12f60321ffbaa031db2521c49ed6091352a1fbd6cdbe3
+    name: bluescape-monitoring-dashboards
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-dashboards-0.3.15/bluescape-monitoring-dashboards-0.3.15.tgz
+    version: 0.3.15
+  - apiVersion: v2
+    appVersion: 1.16.4
     created: "2023-08-04T22:10:24.621066569Z"
     description: A Helm chart for Kubernetes
     digest: 7daa55f597948a06048fa45f6bef93a1d427f3fa8fdab69fa7b13ba2906d6688
@@ -1445,6 +1455,31 @@ entries:
   enroute:
   - apiVersion: v2
     appVersion: v1.0.0
+    created: "2023-08-10T15:58:37.731367447Z"
+    description: EnRoute API Gateway
+    digest: f65efc0fdd5d0e804b814ccdfb714545b879f99c36214ce024d251e4ef21f4cd
+    home: https://getenroute.io/
+    icon: https://getenroute.io/favicon.ico
+    keywords:
+    - api gateway
+    - EnRoute - Envoy Route Controller
+    - Saaras
+    - envoy
+    - ingress
+    maintainers:
+    - email: contact@saaras.io
+      name: contact
+    name: enroute
+    sources:
+    - https://github.com/saarasio/enroute
+    - https://getenroute.io
+    - https://github.com/envoyproxy/envoy
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/enroute-0.8.7/enroute-0.8.7.tgz
+    version: 0.8.7
+  - apiVersion: v2
+    appVersion: v1.0.0
     created: "2023-07-13T12:50:43.380868529Z"
     description: EnRoute API Gateway
     digest: 1e3e31aa6eb38ffd2a98b62fcf75a51981fe4c2665eb14001de0b27cc5a6fb45
@@ -2489,4 +2524,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-08-04T22:10:24.622062974Z"
+generated: "2023-08-10T15:58:37.732068143Z"
