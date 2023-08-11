@@ -485,7 +485,7 @@ data:
             "name": "namespace",
             "options": [
               {
-                "selected": false,
+                "selected": true,
                 "text": "--",
                 "value": "--"
               },
@@ -495,7 +495,7 @@ data:
                 "value": "uat"
               },
               {
-                "selected": true,
+                "selected": false,
                 "text": "stg1",
                 "value": "stg1"
               },
