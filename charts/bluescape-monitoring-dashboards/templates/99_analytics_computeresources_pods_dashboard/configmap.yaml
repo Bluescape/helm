@@ -475,8 +475,8 @@ data:
           {
             "current": {
               "selected": true,
-              "text": "stg1",
-              "value": "stg1"
+              "text": "--",
+              "value": "--"
             },
             "hide": 0,
             "includeAll": false,
