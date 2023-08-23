@@ -27,7 +27,7 @@ data:
           "editable": true,
           "fiscalYearStartMonth": 0,
           "graphTooltip": 0,
-          "id": 32,
+          "id": 96,
           "links": [],
           "liveNow": false,
           "panels": [
@@ -124,7 +124,9 @@ data:
                     "type": "prometheus",
                     "uid": "PBFA97CFB590B2093"
                   },
+                  "editorMode": "code",
                   "expr": "sum(pending_jobs_count{namespace=~\"${namespace}\"})",
+                  "range": true,
                   "refId": "A"
                 }
               ],
@@ -137,6 +139,7 @@ data:
               "dashLength": 10,
               "dashes": false,
               "datasource": {
+                "type": "prometheus",
                 "uid": "$Source"
               },
               "fieldConfig": {
@@ -186,8 +189,10 @@ data:
                   "datasource": {
                     "uid": "$Source"
                   },
+                  "editorMode": "code",
                   "expr": "sum(pending_jobs_count{namespace=~\"${namespace}\"}) by (pod, namespace)",
                   "legendFormat": "",
+                  "range": true,
                   "refId": "A"
                 }
               ],
@@ -301,7 +306,7 @@ data:
               },
               "gridPos": {
                 "h": 2,
-                "w": 12,
+                "w": 6,
                 "x": 0,
                 "y": 7
               },
@@ -352,7 +357,7 @@ data:
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 9
+                "y": 11
               },
               "id": 67,
               "panels": [],
@@ -381,117 +386,6 @@ data:
               "dashLength": 10,
               "dashes": false,
               "datasource": {
-                "uid": "$Source"
-              },
-              "fieldConfig": {
-                "defaults": {
-                  "links": []
-                },
-                "overrides": []
-              },
-              "fill": 1,
-              "fillGradient": 0,
-              "gridPos": {
-                "h": 6,
-                "w": 12,
-                "x": 0,
-                "y": 10
-              },
-              "hiddenSeries": false,
-              "id": 59,
-              "legend": {
-                "avg": false,
-                "current": false,
-                "max": false,
-                "min": false,
-                "show": true,
-                "total": false,
-                "values": false
-              },
-              "lines": true,
-              "linewidth": 1,
-              "nullPointMode": "null",
-              "options": {
-                "alertThreshold": true
-              },
-              "percentage": false,
-              "pluginVersion": "9.3.6",
-              "pointradius": 2,
-              "points": false,
-              "renderer": "flot",
-              "seriesOverrides": [],
-              "spaceLength": 10,
-              "stack": false,
-              "steppedLine": false,
-              "targets": [
-                {
-                  "datasource": {
-                    "uid": "$Source"
-                  },
-                  "expr": "avg(irate(msdoc_request_counter{namespace=~\"${namespace}\"}[1m])) by (service)",
-                  "legendFormat": "Requests",
-                  "refId": "A"
-                },
-                {
-                  "datasource": {
-                    "uid": "$Source"
-                  },
-                  "expr": " avg(irate(msdoc_success_count{namespace=~\"${namespace}\"}[1m])) by (service)",
-                  "legendFormat": "Success",
-                  "refId": "B"
-                },
-                {
-                  "datasource": {
-                    "uid": "$Source"
-                  },
-                  "expr": "avg(irate(msdoc_failure_count{namespace=~\"${namespace}\"}[1m])) by (service)",
-                  "legendFormat": "Failure",
-                  "refId": "C"
-                }
-              ],
-              "thresholds": [],
-              "timeRegions": [],
-              "title": "MSDoc Converter Requests",
-              "tooltip": {
-                "shared": true,
-                "sort": 0,
-                "value_type": "individual"
-              },
-              "type": "graph",
-              "xaxis": {
-                "mode": "time",
-                "show": true,
-                "values": []
-              },
-              "yaxes": [
-                {
-                  "format": "short",
-                  "logBase": 1,
-                  "show": true
-                },
-                {
-                  "format": "short",
-                  "logBase": 1,
-                  "show": true
-                }
-              ],
-              "yaxis": {
-                "align": false
-              }
-            },
-            {
-              "aliasColors": {
-                "AWS S3 Failure": "dark-red",
-                "AWS S3 Request Count": "dark-blue",
-                "AWS S3 Success": "dark-green",
-                "Failure": "dark-red",
-                "Requests": "dark-blue",
-                "Success": "light-green"
-              },
-              "bars": false,
-              "dashLength": 10,
-              "dashes": false,
-              "datasource": {
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
               },
@@ -505,9 +399,9 @@ data:
               "fillGradient": 0,
               "gridPos": {
                 "h": 6,
-                "w": 12,
-                "x": 12,
-                "y": 10
+                "w": 24,
+                "x": 0,
+                "y": 12
               },
               "hiddenSeries": false,
               "id": 52,
@@ -620,7 +514,7 @@ data:
                 "h": 6,
                 "w": 12,
                 "x": 0,
-                "y": 16
+                "y": 18
               },
               "hiddenSeries": false,
               "id": 48,
@@ -713,7 +607,7 @@ data:
                 "h": 6,
                 "w": 12,
                 "x": 12,
-                "y": 16
+                "y": 18
               },
               "hiddenSeries": false,
               "id": 60,
@@ -800,7 +694,7 @@ data:
                 "h": 6,
                 "w": 8,
                 "x": 0,
-                "y": 22
+                "y": 24
               },
               "id": 62,
               "pluginVersion": "6.5.2",
@@ -908,7 +802,7 @@ data:
                 "h": 6,
                 "w": 16,
                 "x": 8,
-                "y": 22
+                "y": 24
               },
               "id": 63,
               "pluginVersion": "6.5.2",
@@ -1040,7 +934,7 @@ data:
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 28
+                "y": 30
               },
               "id": 44,
               "panels": [],
@@ -1071,7 +965,7 @@ data:
                 "h": 9,
                 "w": 6,
                 "x": 0,
-                "y": 29
+                "y": 31
               },
               "id": 46,
               "links": [],
@@ -1149,7 +1043,7 @@ data:
                 "h": 9,
                 "w": 18,
                 "x": 6,
-                "y": 29
+                "y": 31
               },
               "id": 42,
               "links": [],
@@ -1301,7 +1195,7 @@ data:
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 38
+                "y": 40
               },
               "id": 6,
               "panels": [],
@@ -1338,7 +1232,7 @@ data:
                 "h": 6,
                 "w": 12,
                 "x": 0,
-                "y": 39
+                "y": 41
               },
               "hiddenSeries": false,
               "id": 33,
@@ -1428,7 +1322,7 @@ data:
                 "h": 6,
                 "w": 12,
                 "x": 12,
-                "y": 39
+                "y": 41
               },
               "hiddenSeries": false,
               "id": 2,
@@ -1522,7 +1416,7 @@ data:
                 "h": 6,
                 "w": 12,
                 "x": 0,
-                "y": 45
+                "y": 47
               },
               "hiddenSeries": false,
               "id": 25,
@@ -1620,7 +1514,7 @@ data:
                 "h": 6,
                 "w": 12,
                 "x": 12,
-                "y": 45
+                "y": 47
               },
               "hiddenSeries": false,
               "id": 27,
@@ -1718,7 +1612,7 @@ data:
                 "h": 7,
                 "w": 12,
                 "x": 0,
-                "y": 51
+                "y": 53
               },
               "hiddenSeries": false,
               "id": 29,
@@ -1816,7 +1710,7 @@ data:
                 "h": 7,
                 "w": 12,
                 "x": 12,
-                "y": 51
+                "y": 53
               },
               "hiddenSeries": false,
               "id": 31,
@@ -1913,7 +1807,7 @@ data:
                 "h": 6,
                 "w": 24,
                 "x": 0,
-                "y": 58
+                "y": 60
               },
               "hiddenSeries": false,
               "id": 35,
@@ -2002,7 +1896,7 @@ data:
               }
             },
             {
-              "collapsed": true,
+              "collapsed": false,
               "datasource": {
                 "type": "prometheus",
                 "uid": "PBFA97CFB590B2093"
@@ -2011,185 +1905,10 @@ data:
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 64
+                "y": 66
               },
               "id": 37,
-              "panels": [
-                {
-                  "aliasColors": {},
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": {
-                    "uid": "$Source"
-                  },
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": {
-                    "h": 6,
-                    "w": 24,
-                    "x": 0,
-                    "y": 61
-                  },
-                  "hiddenSeries": false,
-                  "id": 39,
-                  "legend": {
-                    "alignAsTable": true,
-                    "avg": false,
-                    "current": true,
-                    "max": false,
-                    "min": false,
-                    "rightSide": true,
-                    "show": true,
-                    "sort": "current",
-                    "sortDesc": true,
-                    "total": false,
-                    "values": true
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [],
-                  "nullPointMode": "null",
-                  "options": {
-                    "dataLinks": []
-                  },
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [],
-                  "spaceLength": 10,
-                  "stack": false,
-                  "steppedLine": false,
-                  "targets": [
-                    {
-                      "datasource": {
-                        "uid": "$Source"
-                      },
-                      "expr": "(sum(rate(container_network_receive_bytes_total{node_name=~'${node_name}',namespace=~\"${namespace}\", pod=~\".*worker.*\"}[5m])) by (pod, namespace))/1024",
-                      "interval": "",
-                      "legendFormat": "",
-                      "refId": "A"
-                    }
-                  ],
-                  "thresholds": [],
-                  "timeRegions": [],
-                  "title": "Worker Pod Received Network Traffic per Container",
-                  "tooltip": {
-                    "shared": false,
-                    "sort": 2,
-                    "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                    "mode": "time",
-                    "show": true,
-                    "values": []
-                  },
-                  "yaxes": [
-                    {
-                      "format": "deckbytes",
-                      "logBase": 1,
-                      "show": true
-                    },
-                    {
-                      "format": "short",
-                      "logBase": 1,
-                      "show": true
-                    }
-                  ],
-                  "yaxis": {
-                    "align": false
-                  }
-                },
-                {
-                  "aliasColors": {},
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": {
-                    "uid": "$Source"
-                  },
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": {
-                    "h": 6,
-                    "w": 24,
-                    "x": 0,
-                    "y": 67
-                  },
-                  "hiddenSeries": false,
-                  "id": 40,
-                  "legend": {
-                    "alignAsTable": true,
-                    "avg": false,
-                    "current": true,
-                    "max": false,
-                    "min": false,
-                    "rightSide": true,
-                    "show": true,
-                    "sort": "current",
-                    "sortDesc": true,
-                    "total": false,
-                    "values": true
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [],
-                  "nullPointMode": "null",
-                  "options": {
-                    "dataLinks": []
-                  },
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [],
-                  "spaceLength": 10,
-                  "stack": false,
-                  "steppedLine": false,
-                  "targets": [
-                    {
-                      "datasource": {
-                        "uid": "$Source"
-                      },
-                      "expr": "(sum(rate(container_network_transmit_bytes_total{node_name=~'${node_name}',namespace=~\"${namespace}\", pod=~\".*worker.*\"}[5m])) by (pod, namespace))/1024",
-                      "interval": "",
-                      "legendFormat": "",
-                      "refId": "A"
-                    }
-                  ],
-                  "thresholds": [],
-                  "timeRegions": [],
-                  "title": "Worker Pod Transmit Network Traffic per Container",
-                  "tooltip": {
-                    "shared": false,
-                    "sort": 2,
-                    "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                    "mode": "time",
-                    "show": true,
-                    "values": []
-                  },
-                  "yaxes": [
-                    {
-                      "format": "deckbytes",
-                      "logBase": 1,
-                      "show": true
-                    },
-                    {
-                      "format": "short",
-                      "logBase": 1,
-                      "show": true
-                    }
-                  ],
-                  "yaxis": {
-                    "align": false
-                  }
-                }
-              ],
+              "panels": [],
               "targets": [
                 {
                   "datasource": {
@@ -2203,6 +1922,194 @@ data:
               "type": "row"
             },
             {
+              "aliasColors": {},
+              "bars": false,
+              "dashLength": 10,
+              "dashes": false,
+              "datasource": {
+                "uid": "$Source"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "links": []
+                },
+                "overrides": []
+              },
+              "fill": 1,
+              "fillGradient": 0,
+              "gridPos": {
+                "h": 6,
+                "w": 24,
+                "x": 0,
+                "y": 67
+              },
+              "hiddenSeries": false,
+              "id": 39,
+              "legend": {
+                "alignAsTable": true,
+                "avg": false,
+                "current": true,
+                "max": false,
+                "min": false,
+                "rightSide": true,
+                "show": true,
+                "sort": "current",
+                "sortDesc": true,
+                "total": false,
+                "values": true
+              },
+              "lines": true,
+              "linewidth": 1,
+              "links": [],
+              "nullPointMode": "null",
+              "options": {
+                "alertThreshold": true
+              },
+              "percentage": false,
+              "pluginVersion": "9.3.6",
+              "pointradius": 5,
+              "points": false,
+              "renderer": "flot",
+              "seriesOverrides": [],
+              "spaceLength": 10,
+              "stack": false,
+              "steppedLine": false,
+              "targets": [
+                {
+                  "datasource": {
+                    "uid": "$Source"
+                  },
+                  "expr": "(sum(rate(container_network_receive_bytes_total{node_name=~'${node_name}',namespace=~\"${namespace}\", pod=~\".*worker.*\"}[5m])) by (pod, namespace))/1024",
+                  "interval": "",
+                  "legendFormat": "",
+                  "refId": "A"
+                }
+              ],
+              "thresholds": [],
+              "timeRegions": [],
+              "title": "Worker Pod Received Network Traffic per Container",
+              "tooltip": {
+                "shared": false,
+                "sort": 2,
+                "value_type": "individual"
+              },
+              "type": "graph",
+              "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+              },
+              "yaxes": [
+                {
+                  "format": "deckbytes",
+                  "logBase": 1,
+                  "show": true
+                },
+                {
+                  "format": "short",
+                  "logBase": 1,
+                  "show": true
+                }
+              ],
+              "yaxis": {
+                "align": false
+              }
+            },
+            {
+              "aliasColors": {},
+              "bars": false,
+              "dashLength": 10,
+              "dashes": false,
+              "datasource": {
+                "uid": "$Source"
+              },
+              "fieldConfig": {
+                "defaults": {
+                  "links": []
+                },
+                "overrides": []
+              },
+              "fill": 1,
+              "fillGradient": 0,
+              "gridPos": {
+                "h": 6,
+                "w": 24,
+                "x": 0,
+                "y": 73
+              },
+              "hiddenSeries": false,
+              "id": 40,
+              "legend": {
+                "alignAsTable": true,
+                "avg": false,
+                "current": true,
+                "max": false,
+                "min": false,
+                "rightSide": true,
+                "show": true,
+                "sort": "current",
+                "sortDesc": true,
+                "total": false,
+                "values": true
+              },
+              "lines": true,
+              "linewidth": 1,
+              "links": [],
+              "nullPointMode": "null",
+              "options": {
+                "alertThreshold": true
+              },
+              "percentage": false,
+              "pluginVersion": "9.3.6",
+              "pointradius": 5,
+              "points": false,
+              "renderer": "flot",
+              "seriesOverrides": [],
+              "spaceLength": 10,
+              "stack": false,
+              "steppedLine": false,
+              "targets": [
+                {
+                  "datasource": {
+                    "uid": "$Source"
+                  },
+                  "expr": "(sum(rate(container_network_transmit_bytes_total{node_name=~'${node_name}',namespace=~\"${namespace}\", pod=~\".*worker.*\"}[5m])) by (pod, namespace))/1024",
+                  "interval": "",
+                  "legendFormat": "",
+                  "refId": "A"
+                }
+              ],
+              "thresholds": [],
+              "timeRegions": [],
+              "title": "Worker Pod Transmit Network Traffic per Container",
+              "tooltip": {
+                "shared": false,
+                "sort": 2,
+                "value_type": "individual"
+              },
+              "type": "graph",
+              "xaxis": {
+                "mode": "time",
+                "show": true,
+                "values": []
+              },
+              "yaxes": [
+                {
+                  "format": "deckbytes",
+                  "logBase": 1,
+                  "show": true
+                },
+                {
+                  "format": "short",
+                  "logBase": 1,
+                  "show": true
+                }
+              ],
+              "yaxis": {
+                "align": false
+              }
+            },
+            {
               "collapsed": true,
               "datasource": {
                 "type": "prometheus",
@@ -2212,7 +2119,7 @@ data:
                 "h": 1,
                 "w": 24,
                 "x": 0,
-                "y": 65
+                "y": 79
               },
               "id": 8,
               "panels": [
@@ -2583,388 +2490,6 @@ data:
               ],
               "title": "Worker Container Stats",
               "type": "row"
-            },
-            {
-              "collapsed": true,
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "gridPos": {
-                "h": 1,
-                "w": 24,
-                "x": 0,
-                "y": 66
-              },
-              "id": 18,
-              "panels": [
-                {
-                  "aliasColors": {},
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": {
-                    "uid": "$Source"
-                  },
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": {
-                    "h": 5,
-                    "w": 24,
-                    "x": 0,
-                    "y": 95
-                  },
-                  "hiddenSeries": false,
-                  "id": 19,
-                  "legend": {
-                    "alignAsTable": true,
-                    "avg": false,
-                    "current": true,
-                    "max": false,
-                    "min": false,
-                    "rightSide": true,
-                    "show": true,
-                    "sideWidth": 450,
-                    "sort": "current",
-                    "sortDesc": true,
-                    "total": false,
-                    "values": true
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [],
-                  "nullPointMode": "null",
-                  "options": {
-                    "dataLinks": []
-                  },
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [],
-                  "spaceLength": 10,
-                  "stack": false,
-                  "steppedLine": false,
-                  "targets": [
-                    {
-                      "datasource": {
-                        "uid": "$Source"
-                      },
-                      "expr": "(sum by (pod, namespace, instance) (rate(container_cpu_usage_seconds_total{node_name=~'${node_name}',namespace=~\"${namespace}\", container=\"msdoc-converter\"}[1m]))) * 100",
-                      "format": "time_series",
-                      "hide": false,
-                      "instant": false,
-                      "interval": "",
-                      "intervalFactor": 1,
-                      "legendFormat": "",
-                      "refId": "A"
-                    }
-                  ],
-                  "thresholds": [],
-                  "timeRegions": [],
-                  "title": "Msdoc-Converter CPU Usage per Container per core",
-                  "tooltip": {
-                    "shared": false,
-                    "sort": 2,
-                    "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                    "mode": "time",
-                    "show": true,
-                    "values": []
-                  },
-                  "yaxes": [
-                    {
-                      "format": "percent",
-                      "logBase": 1,
-                      "show": true
-                    },
-                    {
-                      "format": "short",
-                      "logBase": 1,
-                      "show": false
-                    }
-                  ],
-                  "yaxis": {
-                    "align": false
-                  }
-                },
-                {
-                  "aliasColors": {},
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": {
-                    "uid": "$Source"
-                  },
-                  "decimals": 2,
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": {
-                    "h": 5,
-                    "w": 24,
-                    "x": 0,
-                    "y": 100
-                  },
-                  "hiddenSeries": false,
-                  "id": 20,
-                  "legend": {
-                    "alignAsTable": true,
-                    "avg": true,
-                    "current": true,
-                    "max": true,
-                    "min": true,
-                    "rightSide": true,
-                    "show": true,
-                    "sideWidth": 585,
-                    "sort": "current",
-                    "sortDesc": true,
-                    "total": false,
-                    "values": true
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [],
-                  "nullPointMode": "null",
-                  "options": {
-                    "dataLinks": []
-                  },
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [],
-                  "spaceLength": 10,
-                  "stack": false,
-                  "steppedLine": false,
-                  "targets": [
-                    {
-                      "datasource": {
-                        "uid": "$Source"
-                      },
-                      "expr": "sum((container_memory_usage_bytes{node_name=~'${node_name}',namespace=~\"${namespace}\", container=~\"msdoc-converter\"})/1024/1024) by (pod, namespace)",
-                      "interval": "",
-                      "legendFormat": "",
-                      "refId": "A"
-                    }
-                  ],
-                  "thresholds": [],
-                  "timeRegions": [],
-                  "title": "Msdoc-Converter Memory per Container",
-                  "tooltip": {
-                    "shared": false,
-                    "sort": 2,
-                    "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                    "mode": "time",
-                    "show": true,
-                    "values": []
-                  },
-                  "yaxes": [
-                    {
-                      "format": "decmbytes",
-                      "logBase": 1,
-                      "show": true
-                    },
-                    {
-                      "format": "short",
-                      "logBase": 1,
-                      "show": true
-                    }
-                  ],
-                  "yaxis": {
-                    "align": false
-                  }
-                },
-                {
-                  "aliasColors": {},
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": {
-                    "uid": "$Source"
-                  },
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": {
-                    "h": 5,
-                    "w": 24,
-                    "x": 0,
-                    "y": 105
-                  },
-                  "hiddenSeries": false,
-                  "id": 22,
-                  "legend": {
-                    "alignAsTable": true,
-                    "avg": true,
-                    "current": true,
-                    "max": true,
-                    "min": true,
-                    "rightSide": true,
-                    "show": true,
-                    "sideWidth": 510,
-                    "sort": "avg",
-                    "sortDesc": true,
-                    "total": false,
-                    "values": true
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [],
-                  "nullPointMode": "null",
-                  "options": {
-                    "dataLinks": []
-                  },
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [],
-                  "spaceLength": 10,
-                  "stack": false,
-                  "steppedLine": false,
-                  "targets": [
-                    {
-                      "datasource": {
-                        "uid": "$Source"
-                      },
-                      "expr": "(sum(rate(container_fs_reads_bytes_total{node_name=~'${node_name}',namespace=~\"${namespace}\", container=\"msdoc-converter\"}[1m])) by (pod, namespace))/1024",
-                      "interval": "",
-                      "legendFormat": "",
-                      "refId": "A"
-                    }
-                  ],
-                  "thresholds": [],
-                  "timeRegions": [],
-                  "title": "Msdoc-Converter Container Disk Reads (kbps)",
-                  "tooltip": {
-                    "shared": false,
-                    "sort": 2,
-                    "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                    "mode": "time",
-                    "show": true,
-                    "values": []
-                  },
-                  "yaxes": [
-                    {
-                      "format": "deckbytes",
-                      "logBase": 1,
-                      "show": true
-                    },
-                    {
-                      "format": "short",
-                      "logBase": 1,
-                      "show": true
-                    }
-                  ],
-                  "yaxis": {
-                    "align": false
-                  }
-                },
-                {
-                  "aliasColors": {},
-                  "bars": false,
-                  "dashLength": 10,
-                  "dashes": false,
-                  "datasource": {
-                    "uid": "$Source"
-                  },
-                  "fill": 1,
-                  "fillGradient": 0,
-                  "gridPos": {
-                    "h": 5,
-                    "w": 24,
-                    "x": 0,
-                    "y": 110
-                  },
-                  "hiddenSeries": false,
-                  "id": 23,
-                  "legend": {
-                    "alignAsTable": true,
-                    "avg": true,
-                    "current": true,
-                    "max": true,
-                    "min": true,
-                    "rightSide": true,
-                    "show": true,
-                    "sideWidth": 510,
-                    "total": false,
-                    "values": true
-                  },
-                  "lines": true,
-                  "linewidth": 1,
-                  "links": [],
-                  "nullPointMode": "null",
-                  "options": {
-                    "dataLinks": []
-                  },
-                  "percentage": false,
-                  "pointradius": 5,
-                  "points": false,
-                  "renderer": "flot",
-                  "seriesOverrides": [],
-                  "spaceLength": 10,
-                  "stack": false,
-                  "steppedLine": false,
-                  "targets": [
-                    {
-                      "datasource": {
-                        "uid": "$Source"
-                      },
-                      "expr": "(sum(rate(container_fs_writes_bytes_total{node_name=~'${node_name}',namespace=~\"${namespace}\", container_name=\"msdoc-converter\"}[1m])) by (pod, namespace))/1024",
-                      "interval": "",
-                      "legendFormat": "",
-                      "refId": "A"
-                    }
-                  ],
-                  "thresholds": [],
-                  "timeRegions": [],
-                  "title": "Msdoc-Converter Container Disk Writes (kbps)",
-                  "tooltip": {
-                    "shared": false,
-                    "sort": 2,
-                    "value_type": "individual"
-                  },
-                  "type": "graph",
-                  "xaxis": {
-                    "mode": "time",
-                    "show": true,
-                    "values": []
-                  },
-                  "yaxes": [
-                    {
-                      "format": "deckbytes",
-                      "logBase": 1,
-                      "show": true
-                    },
-                    {
-                      "format": "short",
-                      "logBase": 1,
-                      "show": true
-                    }
-                  ],
-                  "yaxis": {
-                    "align": false
-                  }
-                }
-              ],
-              "targets": [
-                {
-                  "datasource": {
-                    "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
-                  },
-                  "refId": "A"
-                }
-              ],
-              "title": "Msdoc-converter Container Stats",
-              "type": "row"
             }
           ],
           "refresh": "30s",
@@ -3006,6 +2531,10 @@ data:
                     "$__all"
                   ]
                 },
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "PBFA97CFB590B2093"
+                },
                 "definition": "label_values(kube_pod_info{pod=~\".*worker.*\"}, namespace)",
                 "hide": 0,
                 "includeAll": true,
@@ -3037,6 +2566,10 @@ data:
                     "$__all"
                   ]
                 },
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "PBFA97CFB590B2093"
+                },
                 "definition": "label_values(kube_pod_info{pod=~\".*worker.*\", namespace=~\"${namespace}\"}, node_name)",
                 "hide": 0,
                 "includeAll": true,
@@ -3067,6 +2600,10 @@ data:
                   "value": [
                     "$__all"
                   ]
+                },
+                "datasource": {
+                  "type": "prometheus",
+                  "uid": "PBFA97CFB590B2093"
                 },
                 "definition": "label_values(workerStatus{namespace=~\"${namespace}\"}, pod)",
                 "hide": 2,
@@ -3111,6 +2648,6 @@ data:
           "timezone": "browser",
           "title": "Application / Worker Service",
           "uid": "9e7fd88bc04444e0aa68a6c582621650c392e317",
-          "version": 133,
+          "version": 5,
           "weekStart": ""
         }
