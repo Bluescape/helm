@@ -1411,6 +1411,39 @@ entries:
           image: ghcr.io/dexidp/dex:v2.36.0
     apiVersion: v2
     appVersion: 2.36.0
+    created: "2023-08-29T04:44:53.546163191Z"
+    description: OpenID Connect (OIDC) identity and OAuth 2.0 provider with pluggable
+      connectors.
+    digest: 550d7bb4b3bda8a3d24204458b840d572abff83bd2191520d3e3bf8a030094cc
+    home: https://dexidp.io/
+    icon: https://dexidp.io/favicon.png
+    keywords:
+    - oidc
+    - oauth
+    - identity-provider
+    - saml
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: mark.sagikazar@gmail.com
+      name: sagikazarmark
+      url: https://sagikazarmark.hu
+    name: dex
+    sources:
+    - https://github.com/dexidp/dex
+    - https://github.com/dexidp/helm-charts/tree/master/charts/dex
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/dex-0.14.3-patch2/dex-0.14.3-patch2.tgz
+    version: 0.14.3-patch2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: "Use updated HorizontalPodAutoscaler API Version which is no longer served in K8s >=1.25"
+      artifacthub.io/images: |
+        - name: dex
+          image: ghcr.io/dexidp/dex:v2.36.0
+    apiVersion: v2
+    appVersion: 2.36.0
     created: "2023-06-30T22:34:45.085568428Z"
     description: OpenID Connect (OIDC) identity and OAuth 2.0 provider with pluggable
       connectors.
@@ -2574,4 +2607,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-08-22T23:44:03.926915823Z"
+generated: "2023-08-29T04:44:53.5477648Z"
