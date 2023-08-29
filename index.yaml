@@ -11,6 +11,21 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/aws-lb-controller-crds-0.2.0/aws-lb-controller-crds-0.2.0.tgz
     version: 0.2.0
+  base:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2023-08-29T04:53:50.265399564Z"
+    description: Helm chart for deploying Istio cluster resources and CRDs
+    digest: 5f0b8045bc788e951939107e66c4c8bad1e95427f918b30418e4521f460b7fb7
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio
+    name: base
+    sources:
+    - https://github.com/istio/istio
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/base-1.0.0/base-1.0.0.tgz
+    version: 1.0.0
   bluescape-aws-load-balancer-controller:
   - apiVersion: v2
     appVersion: v2.3.0
@@ -1220,6 +1235,22 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/cert-manager-sync-0.1.0/cert-manager-sync-0.1.0.tgz
     version: 0.1.0
+  cni:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2023-08-29T04:53:50.407154523Z"
+    description: Helm chart for istio-cni components
+    digest: 1021a3e5adba4ae5fef7bd2e91684fef7f1e0a0d4c43ee6441ea0c3e15e1178b
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio-cni
+    - istio
+    name: cni
+    sources:
+    - https://github.com/istio/istio/tree/master/cni
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/cni-1.0.0/cni-1.0.0.tgz
+    version: 1.0.0
   contour:
   - annotations:
       category: Infrastructure
@@ -2131,6 +2162,23 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/istio-monitoring-0.1.0-alpha1/istio-monitoring-0.1.0-alpha1.tgz
     version: 0.1.0-alpha1
+  istiod:
+  - apiVersion: v1
+    appVersion: 1.0.0
+    created: "2023-08-29T04:53:50.554423857Z"
+    description: Helm chart for istio control plane
+    digest: 7beb0c1be9ba02d2c555d0e592e0ebb1595cb2544eb8acc1dbfc04f5bb9a9807
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio
+    - istiod
+    - istio-discovery
+    name: istiod
+    sources:
+    - https://github.com/istio/istio
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/istiod-1.0.0/istiod-1.0.0.tgz
+    version: 1.0.0
   kube-oidc-proxy:
   - apiVersion: v1
     appVersion: v0.3.0
@@ -2607,4 +2655,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-08-29T04:44:53.5477648Z"
+generated: "2023-08-29T04:53:50.555105954Z"
