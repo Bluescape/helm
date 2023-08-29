@@ -20,7 +20,7 @@ spec:
     image: "{{ .ProxyImage }}"
   {{- end }}
     ports:
-    - containerPort: 15090
+    - containerPort: {{ .Values.bluescapeMods.httpEnvoyProm.containerPort }}
       protocol: TCP
       name: http-envoy-prom
     args:

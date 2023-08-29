@@ -83,7 +83,7 @@ spec:
         - containerPort: 15021
           name: status-port
           protocol: TCP
-        - containerPort: 15090
+        - containerPort: {{ .Values.bluescapeMods.httpEnvoyProm.containerPort }}
           protocol: TCP
           name: http-envoy-prom
         args:
