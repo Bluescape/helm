@@ -4,11 +4,9 @@
  |  __| | '_ \|  _  // _ \| | | | __/ _ \
  | |____| | | | | \ | (_) | |_| | ||  __/
  |______|_| |_|_|  \_\___/ \__,_|\__\___|
-                                         
-𝙴𝚗𝚁𝚘𝚞𝚝𝚎 Ingress API Gateway Community Edition Installed!
--------------------------------------------------------
-Request a free evaluation license for enterprise version
-by sending an email to contact@saaras.io
+
+𝙴𝚗𝚁𝚘𝚞𝚝𝚎 Ingress API Gateway Installed!
+--------------------------------------
 
 Slack Channel         - https://slack.saaras.io
 Getting Started Guide - https://docs.getenroute.io/docs/prologue/introduction/
