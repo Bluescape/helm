@@ -1957,6 +1957,23 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/gatekeeper-policy-manager-0.4.0/gatekeeper-policy-manager-0.4.0.tgz
     version: 0.4.0
+  gateway:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-08-29T04:58:40.727718415Z"
+    description: Helm chart for deploying Istio gateways
+    digest: 09b5e16b163230a15cdc3553135646d1e08c477c4d16ca76498a2e5cb546346c
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio
+    - gateways
+    name: gateway
+    sources:
+    - https://github.com/istio/istio
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/gateway-1.0.0/gateway-1.0.0.tgz
+    version: 1.0.0
   gen3-wall-logging:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -2655,4 +2672,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-08-29T04:53:50.555105954Z"
+generated: "2023-08-29T04:58:40.728345846Z"
