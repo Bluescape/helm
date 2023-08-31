@@ -33,7 +33,7 @@ data:
       "editable": true,
       "fiscalYearStartMonth": 0,
       "graphTooltip": 1,
-      "id": 85,
+      "id": 94,
       "links": [],
       "liveNow": false,
       "panels": [
@@ -300,6 +300,18 @@ data:
               "legendFormat": "Shutterstock",
               "range": true,
               "refId": "G"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "sum(rate(bing_search_response_time_popsync_v2_plugins_sum[1m])) * 60",
+              "hide": false,
+              "legendFormat": "Bing",
+              "range": true,
+              "refId": "H"
             }
           ],
           "title": "Image requests - provider / minute",
@@ -1601,7 +1613,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -1795,8 +1808,8 @@ data:
             ]
           },
           "gridPos": {
-            "h": 7,
-            "w": 12,
+            "h": 6,
+            "w": 8,
             "x": 0,
             "y": 25
           },
@@ -2028,7 +2041,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -2222,9 +2236,9 @@ data:
             ]
           },
           "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
+            "h": 6,
+            "w": 8,
+            "x": 8,
             "y": 25
           },
           "id": 34,
@@ -2455,458 +2469,8 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "none"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 1 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "light-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 0.5 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "super-light-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 1.5 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 2 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 2.5 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-yellow",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 3 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-yellow",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 4 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-orange",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 5 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-orange",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 8 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 10 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 100 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "> 100"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#a20013",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "__systemRef": "hideSeriesFrom",
-                "matcher": {
-                  "id": "byNames",
-                  "options": {
-                    "mode": "exclude",
-                    "names": [
-                      "> 100"
-                    ],
-                    "prefix": "All except:",
-                    "readOnly": true
-                  }
-                },
-                "properties": [
-                  {
-                    "id": "custom.hideFrom",
-                    "value": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": true
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 0,
-            "y": 32
-          },
-          "id": 30,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "none"
-            }
-          },
-          "pluginVersion": "9.3.6",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "increase(n8n_search_response_time_popsync_v2_plugins_bucket[1m])",
-              "format": "time_series",
-              "hide": true,
-              "instant": false,
-              "legendFormat": "{{ `{{le}}` }}",
-              "range": true,
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"0.5\"}[1m])) by (le)",
-              "format": "time_series",
-              "hide": false,
-              "legendFormat": "< 0.5 sec",
-              "range": true,
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"1\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"0.5\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 1 sec",
-              "range": true,
-              "refId": "C"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"1.5\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"1\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 1.5 sec",
-              "range": true,
-              "refId": "D"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"2\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"1.5\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 2 sec",
-              "range": true,
-              "refId": "E"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"2.5\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"2\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 2.5 sec",
-              "range": true,
-              "refId": "F"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"3\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"2.5\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 3 sec",
-              "range": true,
-              "refId": "G"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"4\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"3\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 4 sec",
-              "range": true,
-              "refId": "H"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"5\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"4\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 5 sec",
-              "range": true,
-              "refId": "I"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"8\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"5\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 8 sec",
-              "range": true,
-              "refId": "J"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"10\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"8\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 10 sec",
-              "range": true,
-              "refId": "K"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"100\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"10\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 100 sec",
-              "range": true,
-              "refId": "L"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"+Inf\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"100\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "> 100",
-              "range": true,
-              "refId": "M"
-            }
-          ],
-          "title": "N8N search response times",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "left",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineStyle": {
-                  "fill": "solid"
-                },
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -3100,437 +2664,10 @@ data:
             ]
           },
           "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
-            "y": 32
-          },
-          "id": 36,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
-            },
-            "tooltip": {
-              "mode": "multi",
-              "sort": "desc"
-            }
-          },
-          "pluginVersion": "9.3.6",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "exemplar": true,
-              "expr": "increase(unsplash_search_response_time_popsync_v2_plugins_bucket[1m])",
-              "format": "time_series",
-              "hide": true,
-              "instant": false,
-              "legendFormat": "{{ `{{le}}` }}",
-              "range": true,
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"0.5\"}[1m])) by (le)",
-              "format": "time_series",
-              "hide": false,
-              "legendFormat": "< {{ `{{le}}` }} sec",
-              "range": true,
-              "refId": "B"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"1\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"0.5\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 1 sec",
-              "range": true,
-              "refId": "C"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"1.5\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"1\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 1.5 sec",
-              "range": true,
-              "refId": "D"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"2\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"1.5\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 2 sec",
-              "range": true,
-              "refId": "E"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"2.5\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"2\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 2.5 sec",
-              "range": true,
-              "refId": "F"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"3\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"2.5\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 3 sec",
-              "range": true,
-              "refId": "G"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"4\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"3\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 4 sec",
-              "range": true,
-              "refId": "H"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"5\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"4\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 5 sec",
-              "range": true,
-              "refId": "I"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"8\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"5\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 8 sec",
-              "range": true,
-              "refId": "J"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"10\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"8\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 10 sec",
-              "range": true,
-              "refId": "K"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"100\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"10\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "< 100 sec",
-              "range": true,
-              "refId": "L"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
-              },
-              "editorMode": "code",
-              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"+Inf\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"100\"}[1m])) by (le))",
-              "hide": false,
-              "legendFormat": "> 100",
-              "range": true,
-              "refId": "M"
-            }
-          ],
-          "title": "Unsplash search response times",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
-          },
-          "description": "",
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "left",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "lineInterpolation": "linear",
-                "lineStyle": {
-                  "fill": "solid"
-                },
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "none"
-            },
-            "overrides": [
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 1 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "light-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 0.5 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "super-light-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 1.5 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 2 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-green",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 2.5 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-yellow",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 3 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-yellow",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 4 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-orange",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 5 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-orange",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 8 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 10 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "semi-dark-red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "< 100 sec"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "dark-red",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "> 100"
-                },
-                "properties": [
-                  {
-                    "id": "color",
-                    "value": {
-                      "fixedColor": "#a20013",
-                      "mode": "fixed"
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 0,
-            "y": 39
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 25
           },
           "id": 32,
           "options": {
@@ -3760,7 +2897,460 @@ data:
                 "mode": "absolute",
                 "steps": [
                   {
-                    "color": "green"
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 1 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "light-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 0.5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "super-light-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 1.5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 2 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 2.5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 3 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 4 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 8 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 10 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 100 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "> 100"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#a20013",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "> 100"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 0,
+            "y": 31
+          },
+          "id": 30,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.3.6",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "increase(n8n_search_response_time_popsync_v2_plugins_bucket[1m])",
+              "format": "time_series",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "{{ `{{le}}` }}",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"0.5\"}[1m])) by (le)",
+              "format": "time_series",
+              "hide": false,
+              "legendFormat": "< 0.5 sec",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"1\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"0.5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 1 sec",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"1.5\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"1\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 1.5 sec",
+              "range": true,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"2\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"1.5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 2 sec",
+              "range": true,
+              "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"2.5\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"2\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 2.5 sec",
+              "range": true,
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"3\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"2.5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 3 sec",
+              "range": true,
+              "refId": "G"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"4\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"3\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 4 sec",
+              "range": true,
+              "refId": "H"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"5\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"4\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 5 sec",
+              "range": true,
+              "refId": "I"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"8\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 8 sec",
+              "range": true,
+              "refId": "J"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"10\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"8\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 10 sec",
+              "range": true,
+              "refId": "K"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"100\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"10\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 100 sec",
+              "range": true,
+              "refId": "L"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"+Inf\"}[1m])) by (le)) - ignoring(le) (sum(increase(n8n_search_response_time_popsync_v2_plugins_bucket{le=\"100\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "> 100",
+              "range": true,
+              "refId": "M"
+            }
+          ],
+          "title": "N8N search response times",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "left",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
                   },
                   {
                     "color": "red",
@@ -3954,10 +3544,866 @@ data:
             ]
           },
           "gridPos": {
-            "h": 7,
-            "w": 12,
-            "x": 12,
-            "y": 39
+            "h": 6,
+            "w": 8,
+            "x": 8,
+            "y": 31
+          },
+          "id": 36,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "9.3.6",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "increase(unsplash_search_response_time_popsync_v2_plugins_bucket[1m])",
+              "format": "time_series",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "{{ `{{le}}` }}",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"0.5\"}[1m])) by (le)",
+              "format": "time_series",
+              "hide": false,
+              "legendFormat": "< {{ `{{le}}` }} sec",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"1\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"0.5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 1 sec",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"1.5\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"1\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 1.5 sec",
+              "range": true,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"2\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"1.5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 2 sec",
+              "range": true,
+              "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"2.5\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"2\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 2.5 sec",
+              "range": true,
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"3\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"2.5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 3 sec",
+              "range": true,
+              "refId": "G"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"4\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"3\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 4 sec",
+              "range": true,
+              "refId": "H"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"5\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"4\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 5 sec",
+              "range": true,
+              "refId": "I"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"8\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 8 sec",
+              "range": true,
+              "refId": "J"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"10\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"8\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 10 sec",
+              "range": true,
+              "refId": "K"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"100\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"10\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 100 sec",
+              "range": true,
+              "refId": "L"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"+Inf\"}[1m])) by (le)) - ignoring(le) (sum(increase(unsplash_search_response_time_popsync_v2_plugins_bucket{le=\"100\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "> 100",
+              "range": true,
+              "refId": "M"
+            }
+          ],
+          "title": "Unsplash search response times",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "left",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 1 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "light-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 0.5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "super-light-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 1.5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 2 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 2.5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 3 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 4 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 8 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 10 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 100 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "> 100"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#a20013",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 8,
+            "x": 16,
+            "y": 31
+          },
+          "id": 38,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "9.3.6",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "exemplar": true,
+              "expr": "increase(bing_search_response_time_popsync_v2_plugins_bucket[1m])",
+              "format": "time_series",
+              "hide": true,
+              "instant": false,
+              "legendFormat": "{{ `{{le}}` }}",
+              "range": true,
+              "refId": "A"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"0.5\"}[1m])) by (le)",
+              "format": "time_series",
+              "hide": false,
+              "legendFormat": "< {{ `{{le}}` }} sec",
+              "range": true,
+              "refId": "B"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"1\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"0.5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 1 sec",
+              "range": true,
+              "refId": "C"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"1.5\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"1\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 1.5 sec",
+              "range": true,
+              "refId": "D"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"2\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"1.5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 2 sec",
+              "range": true,
+              "refId": "E"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"2.5\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"2\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 2.5 sec",
+              "range": true,
+              "refId": "F"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"3\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"2.5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 3 sec",
+              "range": true,
+              "refId": "G"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"4\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"3\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 4 sec",
+              "range": true,
+              "refId": "H"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"5\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"4\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 5 sec",
+              "range": true,
+              "refId": "I"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"8\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"5\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 8 sec",
+              "range": true,
+              "refId": "J"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"10\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"8\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 10 sec",
+              "range": true,
+              "refId": "K"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"100\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"10\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "< 100 sec",
+              "range": true,
+              "refId": "L"
+            },
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "PBFA97CFB590B2093"
+              },
+              "editorMode": "code",
+              "expr": "(sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"+Inf\"}[1m])) by (le)) - ignoring(le) (sum(increase(bing_search_response_time_popsync_v2_plugins_bucket{le=\"100\"}[1m])) by (le))",
+              "hide": false,
+              "legendFormat": "> 100",
+              "range": true,
+              "refId": "M"
+            }
+          ],
+          "title": "Bing search response times",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "PBFA97CFB590B2093"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "left",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 1 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "light-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 0.5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "super-light-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 1.5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 2 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 2.5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 3 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-yellow",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 4 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 5 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-orange",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 8 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 10 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "semi-dark-red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "< 100 sec"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "dark-red",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "> 100"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "#a20013",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 0,
+            "y": 37
           },
           "id": 37,
           "options": {
@@ -4193,7 +4639,7 @@ data:
       "timepicker": {},
       "timezone": "",
       "title": "Popsync-2.0",
-      "uid": "EkKYqXqVz",
-      "version": 1,
+      "uid": "1ef8ad8da337d159400527589be212c3c1351a21",
+      "version": 3,
       "weekStart": ""
     }
