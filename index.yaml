@@ -2739,6 +2739,18 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/prometheus-proxy-0.1.0-alpha2/prometheus-proxy-0.1.0-alpha2.tgz
     version: 0.1.0-alpha2
+  raw:
+  - apiVersion: v2
+    appVersion: 1.0.0-alpha1
+    created: "2023-08-31T19:18:24.383951878Z"
+    description: A place for all the Kubernetes resources which don't already have
+      a home
+    digest: b56acbdd10074b93d1df28aaffd0cad64997dfd65d9eff76894841064832354e
+    name: raw
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/raw-1.0.0-alpha1/raw-1.0.0-alpha1.tgz
+    version: 1.0.0-alpha1
   redis:
   - annotations:
       category: Database
@@ -2806,4 +2818,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-08-29T07:13:13.73701377Z"
+generated: "2023-08-31T19:18:24.385170674Z"
