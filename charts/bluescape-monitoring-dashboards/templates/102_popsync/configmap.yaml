@@ -223,7 +223,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum(rate(google_custom_search_response_time_popsync_v2_plugins_sum[1m])) * 60",
+              "expr": "sum(rate(google_custom_search_response_time_sum[1m])) * 60",
               "hide": false,
               "legendFormat": "Google custom API",
               "range": true,
@@ -247,7 +247,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum(rate(adobestock_search_response_time_popsync_v2_plugins_sum[1m])) * 60",
+              "expr": "sum(rate(adobestock_search_response_time_sum[1m])) * 60",
               "hide": false,
               "legendFormat": "Adobestock",
               "range": true,
@@ -259,7 +259,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum(rate(getty_images_response_time_popsync_v2_plugins_sum[1m])) * 60",
+              "expr": "sum(rate(getty_images_response_time_sum[1m])) * 60",
               "hide": false,
               "legendFormat": "Getty",
               "range": true,
@@ -271,7 +271,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum(rate(n8n_search_response_time_popsync_v2_plugins_sum[1m])) * 60",
+              "expr": "sum(rate(n8n_search_response_time_sum[1m])) * 60",
               "hide": false,
               "legendFormat": "N8N",
               "range": true,
@@ -283,7 +283,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum(rate(unsplash_search_response_time_popsync_v2_plugins_sum[1m])) * 60",
+              "expr": "sum(rate(unsplash_search_response_time_sum[1m])) * 60",
               "hide": false,
               "legendFormat": "Unsplash",
               "range": true,
@@ -295,7 +295,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum(rate(shutterstock_search_response_time_popsync_v2_plugins_sum[1m])) * 60",
+              "expr": "sum(rate(shutterstock_search_response_time_sum[1m])) * 60",
               "hide": false,
               "legendFormat": "Shutterstock",
               "range": true,
