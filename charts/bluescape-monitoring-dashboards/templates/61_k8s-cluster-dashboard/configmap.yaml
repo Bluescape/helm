@@ -1485,13 +1485,122 @@ data:
           "type": "stat"
         },
         {
-          "columns": [],
           "datasource": {
             "type": "prometheus",
             "uid": "${datasource}"
           },
           "description": "List of Replication Controller with it number of replicas",
-          "fontSize": "100%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "decimals": 2,
+              "displayName": "",
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Time"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Time"
+                  },
+                  {
+                    "id": "custom.align"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "replicationcontroller"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Replication Controller"
+                  },
+                  {
+                    "id": "unit",
+                    "value": "short"
+                  },
+                  {
+                    "id": "decimals",
+                    "value": 2
+                  },
+                  {
+                    "id": "custom.displayMode",
+                    "value": "color-background"
+                  },
+                  {
+                    "id": "custom.align"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Value"
+                },
+                "properties": [
+                  {
+                    "id": "displayName",
+                    "value": "Value"
+                  },
+                  {
+                    "id": "unit",
+                    "value": "short"
+                  },
+                  {
+                    "id": "custom.displayMode",
+                    "value": "color-background"
+                  },
+                  {
+                    "id": "custom.align"
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "rgba(237, 129, 40, 0.89)",
+                          "value": null
+                        },
+                        {
+                          "color": "rgba(50, 172, 45, 0.97)",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
           "gridPos": {
             "h": 9,
             "w": 8,
@@ -1500,76 +1609,17 @@ data:
           },
           "id": 51,
           "links": [],
-          "scroll": true,
-          "showHeader": true,
-          "sort": {
-            "col": 0,
-            "desc": true
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
           },
-          "styles": [
-            {
-              "$$hashKey": "object:196",
-              "alias": "Time",
-              "align": "auto",
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "pattern": "Time",
-              "type": "hidden"
-            },
-            {
-              "$$hashKey": "object:197",
-              "alias": "Replication Controller",
-              "align": "auto",
-              "colorMode": "cell",
-              "colors": [
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 2,
-              "link": false,
-              "mappingType": 1,
-              "pattern": "replicationcontroller",
-              "thresholds": [],
-              "type": "string",
-              "unit": "short"
-            },
-            {
-              "$$hashKey": "object:198",
-              "alias": "Value",
-              "align": "auto",
-              "colorMode": "cell",
-              "colors": [
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)",
-                "rgba(245, 54, 54, 0.9)"
-              ],
-              "dateFormat": "YYYY-MM-DD HH:mm:ss",
-              "decimals": 0,
-              "mappingType": 1,
-              "pattern": "Value",
-              "thresholds": [
-                "1"
-              ],
-              "type": "number",
-              "unit": "short"
-            },
-            {
-              "$$hashKey": "object:199",
-              "alias": "",
-              "align": "auto",
-              "colors": [
-                "rgba(245, 54, 54, 0.9)",
-                "rgba(237, 129, 40, 0.89)",
-                "rgba(50, 172, 45, 0.97)"
-              ],
-              "decimals": 2,
-              "pattern": "/.*/",
-              "thresholds": [],
-              "type": "hidden",
-              "unit": "short"
-            }
-          ],
+          "pluginVersion": "9.3.6",
           "targets": [
             {
               "datasource": {
@@ -1577,17 +1627,27 @@ data:
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "kube_replicationcontroller_status_replicas{namespace=~\"$namespace\"}",
+              "exemplar": false,
+              "expr": "kube_replicaset_status_replicas{namespace=~\"$namespace\"}",
               "format": "table",
               "hide": false,
               "instant": true,
               "intervalFactor": 1,
+              "legendFormat": "{{`{{namespace}}`}}",
+              "range": false,
               "refId": "A"
             }
           ],
           "title": "Replication Controller - Up To Date",
-          "transform": "table",
-          "type": "table-old"
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {
+                "reducers": []
+              }
+            }
+          ],
+          "type": "table"
         },
         {
           "datasource": {
@@ -1659,7 +1719,8 @@ data:
                 "type": "prometheus",
                 "uid": "${datasource}"
               },
-              "expr": "sum(kube_replicationcontroller_status_replicas{namespace=~\"$namespace\"})",
+              "editorMode": "code",
+              "expr": "sum(kube_replicaset_status_replicas{namespace=~\"$namespace\"})",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 1,
@@ -1818,9 +1879,11 @@ data:
                 "type": "prometheus",
                 "uid": "${datasource}"
               },
-              "expr": "sum(kube_replicationcontroller_spec_replicas{namespace=~\"$namespace\"})\n-\nsum(kube_replicationcontroller_status_replicas{namespace=~\"$namespace\"})",
+              "editorMode": "code",
+              "expr": "sum(kube_replicaset_spec_replicas{namespace=~\"$namespace\"})\n-\nsum(kube_replicaset_status_replicas{namespace=~\"$namespace\"})",
               "format": "time_series",
               "intervalFactor": 1,
+              "range": true,
               "refId": "A"
             }
           ],
@@ -1977,9 +2040,11 @@ data:
                 "type": "prometheus",
                 "uid": "${datasource}"
               },
-              "expr": "sum(kube_replicationcontroller_spec_replicas{namespace=~\"$namespace\"})",
+              "editorMode": "code",
+              "expr": "sum(kube_replicaset_spec_replicas{namespace=~\"$namespace\"})",
               "format": "time_series",
               "intervalFactor": 1,
+              "range": true,
               "refId": "A"
             }
           ],
@@ -3209,7 +3274,7 @@ data:
               "expr": "sum(container_memory_usage_bytes{name!=\"\"}) by (node)",
               "format": "time_series",
               "intervalFactor": 1,
-              "legendFormat": "{{`{{ namespace }}`}}",
+              "legendFormat": "{{`{{ namespace }}`}}`",
               "range": true,
               "refId": "A"
             }
@@ -3416,6 +3481,10 @@ data:
               "text": "None",
               "value": ""
             },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
             "definition": "datasource",
             "hide": 2,
             "includeAll": false,
@@ -3460,6 +3529,10 @@ data:
               "text": "All",
               "value": "$__all"
             },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
             "definition": "label_values(node_boot_time{job=\"node-exporter\"}, instance)",
             "hide": 0,
             "includeAll": true,
@@ -3483,6 +3556,10 @@ data:
               "text": "All",
               "value": "$__all"
             },
+            "datasource": {
+              "type": "prometheus",
+              "uid": "PBFA97CFB590B2093"
+            },
             "definition": "",
             "hide": 0,
             "includeAll": true,
@@ -3503,7 +3580,7 @@ data:
         ]
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-30m",
         "to": "now"
       },
       "timepicker": {
@@ -3534,6 +3611,6 @@ data:
       "timezone": "browser",
       "title": "K8s Cluster Metrics",
       "uid": "77920b77e01e60227d098a3574130a0c31a29915",
-      "version": 11,
+      "version": 3,
       "weekStart": ""
     }
