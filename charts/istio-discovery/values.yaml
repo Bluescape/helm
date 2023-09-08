@@ -489,7 +489,7 @@ bluescapeMods:
   # Reprogram all monitoring endpoints from 15090 (istio-proxy metrics alone) to 15020 (merged app + istio-proxy metrics)
     containerPort: 15090
 
-  # Specifies if aws-load-balancer-controller should be started in hostNetwork mode.
+  # Specifies if istiod should be started in hostNetwork mode.
   #
   # This is required if using a custom CNI where the managed control plane nodes are unable to initiate
   # network connections to the pods, for example using Calico CNI plugin on EKS. This is not required or
