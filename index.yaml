@@ -13,6 +13,20 @@ entries:
     version: 0.2.0
   base:
   - apiVersion: v1
+    appVersion: 1.18.2
+    created: "2023-09-08T22:43:46.217022478Z"
+    description: Helm chart for deploying Istio cluster resources and CRDs
+    digest: 8afc1369920d8cc04b320a47b0ea962ed7fcd6b53d005409c9b4b46ac686d68b
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio
+    name: base
+    sources:
+    - https://github.com/istio/istio
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/base-1.18.2/base-1.18.2.tgz
+    version: 1.18.2
+  - apiVersion: v1
     appVersion: 1.0.3
     created: "2023-08-29T07:13:12.169589316Z"
     description: Helm chart for deploying Istio cluster resources and CRDs
@@ -1299,6 +1313,21 @@ entries:
     version: 0.1.0
   cni:
   - apiVersion: v1
+    appVersion: 1.18.2
+    created: "2023-09-08T22:43:46.355189718Z"
+    description: Helm chart for istio-cni components
+    digest: 6012b3d4d41b0c73b50c217f8d6d8d274128e5a73c0d491666cdd311c4cd07da
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio-cni
+    - istio
+    name: cni
+    sources:
+    - https://github.com/istio/istio/tree/master/cni
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/cni-1.18.2/cni-1.18.2.tgz
+    version: 1.18.2
+  - apiVersion: v1
     appVersion: 1.0.3
     created: "2023-08-29T07:13:12.349416008Z"
     description: Helm chart for istio-cni components
@@ -2017,6 +2046,22 @@ entries:
     version: 0.4.0
   gateway:
   - apiVersion: v2
+    appVersion: 1.18.2
+    created: "2023-09-08T22:43:46.473085415Z"
+    description: Helm chart for deploying Istio gateways
+    digest: bfbfaac9e6e5fd3298600749db3c9777021a0eaf730a3c74e6853898e3ac1932
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio
+    - gateways
+    name: gateway
+    sources:
+    - https://github.com/istio/istio
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/gateway-1.18.2/gateway-1.18.2.tgz
+    version: 1.18.2
+  - apiVersion: v2
     appVersion: 1.0.3
     created: "2023-08-29T07:13:13.535485699Z"
     description: Helm chart for deploying Istio gateways
@@ -2286,6 +2331,22 @@ entries:
     - https://github.com/Bluescape/helm/releases/download/istio-monitoring-0.1.0-alpha1/istio-monitoring-0.1.0-alpha1.tgz
     version: 0.1.0-alpha1
   istiod:
+  - apiVersion: v1
+    appVersion: 1.18.2
+    created: "2023-09-08T22:43:46.6080106Z"
+    description: Helm chart for istio control plane
+    digest: 1327d1a6e6c1e3fb001ebf1b02a1d495528548d3d49b65b4e68f9b85bf058242
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio
+    - istiod
+    - istio-discovery
+    name: istiod
+    sources:
+    - https://github.com/istio/istio
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/istiod-1.18.2/istiod-1.18.2.tgz
+    version: 1.18.2
   - apiVersion: v1
     appVersion: 1.0.3
     created: "2023-08-29T07:13:13.735985728Z"
@@ -2849,4 +2910,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-09-08T01:46:30.632351462Z"
+generated: "2023-09-08T22:43:46.609520526Z"
