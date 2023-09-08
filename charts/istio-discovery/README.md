@@ -98,4 +98,5 @@ getmesh list
 - Check out the relevant tag and/or download the release artifact from the Istio upstream at https://github.com/istio/istio/tags.
 - Compare the files listed above between the latest release and this customized chart.
 - Publish the chart to the internal Helm repository.
-Ensure that you update the Chart.yaml file to maintain parity between the upstream and this custom version.
+- Ensure that you update the Chart.yaml file to maintain parity between the upstream and this custom version.
+  - This is recommended to avoid unnecessary overrides in the helm chart.
