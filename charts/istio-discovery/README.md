@@ -57,3 +57,45 @@ This allows safe [canary upgrades](https://istio.io/latest/docs/setup/upgrade/ca
 ```yaml
 revision: my-revision-name
 ```
+### Custom Mods added for Bluescape use case.
+#### Files impacted :
+- [gateway-injection-template.yaml](files%2Fgateway-injection-template.yaml)
+- [injection-template.yaml](files%2Finjection-template.yaml)
+- [kube-gateway.yaml](files%2Fkube-gateway.yaml)
+- [deployment.yaml](templates%2Fdeployment.yaml) 
+- [values.yaml](values.yaml)
+
+#### Helm Values
+The following subsection has been added to the values.yaml file, allowing users to override custom changes.
+
+```yaml
+bluescapeMods:
+  httpEnvoyProm:
+  # Reprogram all monitoring endpoints from 15090 (istio-proxy metrics alone) to 15020 (merged app + istio-proxy metrics)
+    containerPort: 15090
+
+  # Specifies if aws-load-balancer-controller should be started in hostNetwork mode.
+  #
+  # This is required if using a custom CNI where the managed control plane nodes are unable to initiate
+  # network connections to the pods, for example using Calico CNI plugin on EKS. This is not required or
+  # recommended if using the Amazon VPC CNI plugin.
+  hostNetwork: false
+
+  # Specifies the dnsPolicy that should be used for pods in the deployment
+  #
+  # This may need to be used to be changed given certain conditions. For instance, if one uses the cilium CNI
+  # with certain settings, one may need to set `hostNetwork: true` and webhooks won't work unless `dnsPolicy`
+  # is set to `ClusterFirstWithHostNet`. See https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
+  dnsPolicy:
+```
+
+#### How to make future updates ?
+- Use the getmesh CLI to check the latest version published by Tetrate:
+```bash
+getmesh fetch
+getmesh list
+```
+- Check out the relevant tag and/or download the release artifact from the Istio upstream at https://github.com/istio/istio/tags.
+- Compare the files listed above between the latest release and this customized chart.
+- Publish the chart to the internal Helm repository.
+Ensure that you update the Chart.yaml file to maintain parity between the upstream and this custom version.
