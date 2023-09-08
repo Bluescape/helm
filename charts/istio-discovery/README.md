@@ -95,8 +95,10 @@ bluescapeMods:
 getmesh fetch
 getmesh list
 ```
-- Check out the relevant tag and/or download the release artifact from the Istio upstream at https://github.com/istio/istio/tags.
+- Check out the relevant tag from the Istio upstream at https://github.com/istio/istio/tags 
+   AND/OR 
+- Download the release artifact directly from https://istio-release.storage.googleapis.com/charts/index.yaml
 - Compare the files listed above between the latest release and this customized chart.
 - Publish the chart to the internal Helm repository.
-- Ensure that you update the Chart.yaml file to maintain parity between the upstream and this custom version.
-  - This is recommended to avoid unnecessary overrides in the helm chart.
+- Ensure that you update `appVersion` and `version` in the `Chart.yaml` file to maintain parity between the upstream and this custom version.
+  - This is recommended to avoid unnecessary overrides in the custom helm chart.
