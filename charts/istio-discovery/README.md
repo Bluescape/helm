@@ -96,7 +96,7 @@ getmesh fetch
 getmesh list
 ```
 - Check out the relevant tag from the Istio upstream at https://github.com/istio/istio/tags 
-   AND/OR 
+   **AND/OR** 
 - Download the release artifact directly from https://istio-release.storage.googleapis.com/charts/index.yaml
 - Compare the files listed above between the latest release and this customized chart.
 - Publish the chart to the internal Helm repository.
