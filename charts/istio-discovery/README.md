@@ -100,5 +100,5 @@ getmesh list
 - Download the release artifact directly from https://istio-release.storage.googleapis.com/charts/index.yaml
 - Compare the files listed above between the latest release and this customized chart.
 - Publish the chart to the internal Helm repository.
-- Ensure that you update `appVersion` and `version` in the `Chart.yaml` file to maintain parity between the upstream and this custom version.
+- Ensure that you update `appVersion` and `version` in the `Chart.yaml` file(s) for ALL the charts to maintain parity between the upstream and this custom version.
   - This is recommended to avoid unnecessary overrides in the custom helm chart.
