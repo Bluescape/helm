@@ -9,21 +9,9 @@ spec:
   image: "{{ .Values.vault_cr.image }}:{{ .Values.vault_cr.imageTag }}"
 
   podAntiAffinity: failure-domain.beta.kubernetes.io/zone
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: "spot"
-                operator: In
-                values: [ "false" ]
-              - key: "dedicated"
-                operator: NotIn
-                values:
-                  - loki
-                  - cortex
-                  - prometheus
-                  - edge
+  {{- if .Values.vault_cr.affinity }}
+  affinity: {{ toYaml .Values.vault_cr.affinity | nindent 8 }}
+  {{- end }}
   annotations:
     common/annotation: 'true'
   vaultAnnotations:
