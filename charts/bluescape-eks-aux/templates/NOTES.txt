@@ -9,7 +9,7 @@ kubectl get ClusterIssuer --all-namespaces
 {{- end }}
 
 3. Validate "STATUS" of Vault:
-{{- if or .Values.vault.enabled }}
+{{- if or .Values.vault_cr.enabled }}
 kubectl get Vault -n vault
 {{- end }}
 
