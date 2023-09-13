@@ -1,0 +1,13 @@
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: bull-queue-prometheus-dashboard
+  labels:
+     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  json: 
+  configMapRef:
+    name: bull-queue-prometheus-dashboard
+    key: bull-queue-prometheus-dashboard.json
+  name: bull-queue-prometheus-dashboard
