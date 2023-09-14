@@ -45,7 +45,7 @@ kiali:
     image:
       override: false
       repository: quay.io/kiali/kiali
-      tag: v1.59.1
+      tag: v1.73.0
     ingress:
       enabled: false
       host: 'kiali.example.bluescape.io'
@@ -58,7 +58,7 @@ kiali:
     image:
       override: false
       repository: quay.io/kiali/kiali
-      tag: v1.59.1
+      tag: v1.73.0
     ingress:
       enabled: false
       host: 'kiali.example.bluescape.io'
@@ -73,13 +73,13 @@ jaeger:
     enabled: false
     image:
       repository: jaegertracing/all-in-one
-      tag: 1.39.0
+      tag: 1.49.0
     ingress:
       enabled: false
   prod_config:
     enabled: false
     image:
       repository: jaegertracing/all-in-one
-      tag: 1.39.0
+      tag: 1.49.0
     ingress:
       enabled: false
