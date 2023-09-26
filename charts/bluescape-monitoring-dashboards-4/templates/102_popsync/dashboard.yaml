@@ -1,0 +1,12 @@
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: popsync-2.0-dashboard
+  labels:
+     {{- include "bluescape-monitoring-dashboards-4.labels" . | nindent 4 }}
+spec:
+  json: 
+  configMapRef:
+    name: popsync-2.0-dashboard
+    key: popsync-2.0-dashboard.json

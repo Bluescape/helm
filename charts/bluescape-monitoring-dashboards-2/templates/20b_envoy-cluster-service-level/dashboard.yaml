@@ -1,0 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name:  envoy-cluster-service-level-dashboard
+
+  labels:
+    {{- include "bluescape-monitoring-dashboards-2.labels" . | nindent 4 }}
+spec:
+  json: ""
+  configMapRef:
+    name:  envoy-cluster-service-level-dashboard
+    key:  envoy-cluster-service-level-dashboard.json

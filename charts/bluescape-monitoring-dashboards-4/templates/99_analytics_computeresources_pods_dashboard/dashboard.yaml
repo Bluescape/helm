@@ -1,0 +1,13 @@
+---
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name: analytics--compute-resources--pods-dashboard
+
+  labels:
+     {{- include "bluescape-monitoring-dashboards-4.labels" . | nindent 4 }}
+spec:
+  json: ""
+  configMapRef:
+    name: analytics--compute-resources--pods-dashboard
+    key: analytics--compute-resources--pods-dashboard.json
