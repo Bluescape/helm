@@ -994,6 +994,50 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-dashboards-0.2.12/bluescape-monitoring-dashboards-0.2.12.tgz
     version: 0.2.12
+  bluescape-monitoring-dashboards-2:
+  - apiVersion: v2
+    appVersion: 1.16.4
+    created: "2023-09-27T10:52:33.645657844Z"
+    description: A Helm chart for Kubernetes
+    digest: c366fb68a3bcd50e23e4ab658d52105e57f1592deae1303999d536144a87bf5d
+    name: bluescape-monitoring-dashboards-2
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-dashboards-2-0.1.0/bluescape-monitoring-dashboards-2-0.1.0.tgz
+    version: 0.1.0
+  bluescape-monitoring-dashboards-3:
+  - apiVersion: v2
+    appVersion: 1.16.4
+    created: "2023-09-27T10:52:33.819805531Z"
+    description: A Helm chart for Kubernetes
+    digest: 31aa2c32c126d758dd850769138288e0c165de619bd3a80de90e48ec23c9de63
+    name: bluescape-monitoring-dashboards-3
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-dashboards-3-0.1.0/bluescape-monitoring-dashboards-3-0.1.0.tgz
+    version: 0.1.0
+  bluescape-monitoring-dashboards-4:
+  - apiVersion: v2
+    appVersion: 1.16.4
+    created: "2023-09-27T10:52:34.040683837Z"
+    description: A Helm chart for Kubernetes
+    digest: 16895ea3a32527943fa8dc1eb56fe6c4adf04e1431362f88b7d266c20e7e48cd
+    name: bluescape-monitoring-dashboards-4
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-dashboards-4-0.1.0/bluescape-monitoring-dashboards-4-0.1.0.tgz
+    version: 0.1.0
+  bluescape-monitoring-dashboards-5:
+  - apiVersion: v2
+    appVersion: 1.16.4
+    created: "2023-09-27T10:52:34.215892531Z"
+    description: A Helm chart for Kubernetes
+    digest: 2f76e36ecea24af1fee2a4efbe2fcc89a874ab03ed9452fe2d1a64a42d1699d5
+    name: bluescape-monitoring-dashboards-5
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-dashboards-5-0.1.0/bluescape-monitoring-dashboards-5-0.1.0.tgz
+    version: 0.1.0
   bluescape-monitoring-grafana:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -2980,4 +3024,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-09-19T12:13:42.857202096Z"
+generated: "2023-09-27T10:52:34.217106239Z"
