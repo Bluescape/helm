@@ -112,6 +112,16 @@ entries:
   bluescape-banzai-dashboards:
   - apiVersion: v2
     appVersion: 1.16.4
+    created: "2023-09-27T18:57:21.96440459Z"
+    description: A Helm chart for Kubernetes
+    digest: a024da61d8fb11a8fd8426a7936850d58bd49955c8bbc45d4ab49ecd4ec5abf5
+    name: bluescape-banzai-dashboards
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-banzai-dashboards-0.1.1/bluescape-banzai-dashboards-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.16.4
     created: "2023-09-27T17:56:48.659353363Z"
     description: A Helm chart for Kubernetes
     digest: 19f33cf0dee03b4cdb7817bf393065e8763c9365bab52b02404575959b9d7aae
@@ -3075,4 +3085,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-09-27T18:43:30.209197592Z"
+generated: "2023-09-27T18:57:21.965331192Z"
