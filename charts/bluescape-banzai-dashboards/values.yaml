@@ -1,0 +1,116 @@
+
+
+#### These settings below are only for enabling specific banzai-cloud dashboards taken from the banzai-cloud/grafana-operator helm chart
+#Enable Default Dashboards
+defaultDashboards:
+  enabled: false
+#Enable kubelet Dashboard
+  kubelet:
+    enabled: false
+#Enable prometheus Dashboard
+  prometheus:
+    prometheusSpec:
+      remoteWriteDashboards:
+        enabled: false
+
+  statefulset:
+    enabled: false
+
+  scheduler:
+    enabled: false
+
+  proxy:
+    enabled: false
+
+  prometheus_remote_write:
+    enabled: false
+
+  pod_total:
+    enabled: false
+
+  persistentvolumesusage:
+    enabled: false
+
+  nodes:
+    enabled: false
+
+  node_rsrc_use:
+    enabled: false
+
+  node_cluster_rsrc_use:
+    enabled: false
+
+  namespace_by_workload:
+    enabled: false
+
+  namespace_by_pod:
+    enabled: false
+
+  workload_total:
+    enabled: false
+
+  k8s_resources_workloads_namespace:
+    enabled: false
+
+  k8s_resources_workloads_pod:
+    enabled: false
+
+  k8s_resources_workload:
+    enabled: false
+
+  k8s_resources_pod:
+    enabled: false
+
+  k8s_resources_node:
+    enabled: false
+
+  k8s_resources_namespace:
+    enabled: false
+
+  k8s_resources_cluster:
+    enabled: false
+
+  etcd:
+    enabled: false
+
+  controller_manager:
+    enabled: false
+
+  cluster_total:
+    enabled: false
+
+  apiserver:
+    enabled: false
+
+  logging_dashboard:
+    enabled: false
+    plugins:
+      - name: "grafana-piechart-panel"
+        version: "1.6.1"
+      - name: "grafana-clock-panel"
+        version: "1.1.1"
+
+  thanos:
+    bucket_replicate:
+      enabled: false
+
+    compact:
+      enabled: false
+
+    overview:
+      enabled: false
+
+    query:
+      enabled: false
+
+    receive:
+      enabled: false
+
+    rule:
+      enabled: false
+
+    sidecar:
+      enabled: false
+
+    store:
+      enabled: false
