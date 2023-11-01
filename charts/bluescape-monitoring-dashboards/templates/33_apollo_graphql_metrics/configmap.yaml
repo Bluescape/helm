@@ -557,17 +557,32 @@ data:
           },
           "fieldConfig": {
             "defaults": {
-              "mappings": [],
+              "mappings": [
+                {
+                  "options": {
+                    "No data": {
+                      "color": "blue",
+                      "index": 0,
+                      "text": "0"
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
               "thresholds": {
                 "mode": "percentage",
                 "steps": [
                   {
-                    "color": "green",
+                    "color": "blue",
                     "value": null
                   },
                   {
-                    "color": "orange",
-                    "value": 70
+                    "color": "green",
+                    "value": 1
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 50
                   },
                   {
                     "color": "red",
@@ -605,7 +620,7 @@ data:
                 "uid": "PBFA97CFB590B2093"
               },
               "editorMode": "code",
-              "expr": "sum(increase(graphql_queries_resolved{operation=\"mutation\"}[$__range])) by (operationName) > 0",
+              "expr": "sum(increase(graphql_queries_resolved{operation=\"mutation\"} [1m])) > 0 or vector(0)",
               "hide": false,
               "legendFormat": "__auto",
               "range": true,
@@ -1099,7 +1114,6 @@ data:
       "timezone": "utc",
       "title": "Apollo GraphQL Metrics",
       "uid": "852d736c289f1ce6e67aff30a314e354b2dbc3f8",
-      "version": 6,
+      "version": 7,
       "weekStart": ""
     }
-    
