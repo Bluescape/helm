@@ -752,7 +752,7 @@ data:
               "format": "time_series",
               "instant": false,
               "interval": "",
-              "legendFormat": "{{operationName}}",
+              "legendFormat": "{{`{{operationName}}`}}",
               "queryType": "randomWalk",
               "range": true,
               "refId": "A"
@@ -852,7 +852,7 @@ data:
               "format": "time_series",
               "instant": false,
               "interval": "",
-              "legendFormat": "{{operationName}}",
+              "legendFormat": "{{`{{operationName}}`}}",
               "queryType": "randomWalk",
               "range": true,
               "refId": "A"
@@ -965,7 +965,7 @@ data:
               "format": "time_series",
               "instant": false,
               "interval": "",
-              "legendFormat": "{{parentType}}.{{fieldName}} - {{returnType}}",
+              "legendFormat": "{{`{{parentType}}.{{fieldName}} - {{returnType}}`}}",
               "queryType": "randomWalk",
               "range": true,
               "refId": "A"
@@ -1065,7 +1065,7 @@ data:
               "format": "time_series",
               "instant": false,
               "interval": "",
-              "legendFormat": "{{parentType}}.{{fieldName}} - {{returnType}}",
+              "legendFormat": "{{`{{parentType}}.{{fieldName}} - {{returnType}}`}}",
               "queryType": "randomWalk",
               "range": true,
               "refId": "A"
