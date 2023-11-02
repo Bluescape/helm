@@ -1,0 +1,283 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: synthetic-tests-monitoring-dashboard
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+data:
+  synthetic-tests-monitoring-dashboard.json: |-
+    {
+      "annotations": {
+        "list": [
+          {
+            "builtIn": 1,
+            "datasource": {
+              "type": "grafana",
+              "uid": "-- Grafana --"
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "target": {
+              "limit": 100,
+              "matchAny": false,
+              "tags": [],
+              "type": "dashboard"
+            },
+            "type": "dashboard"
+          }
+        ]
+      },
+      "editable": true,
+      "fiscalYearStartMonth": 0,
+      "graphTooltip": 0,
+      "id": 24,
+      "links": [],
+      "liveNow": false,
+      "panels": [
+        {
+          "datasource": {
+            "type": "loki",
+            "uid": "P807A653824E089EC"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "fillOpacity": 70,
+                "lineWidth": 1
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "result:passed": {
+                      "color": "green",
+                      "index": 0,
+                      "text": "PASS"
+                    }
+                  },
+                  "type": "value"
+                },
+                {
+                  "options": {
+                    "pattern": "result=failed",
+                    "result": {
+                      "color": "red",
+                      "index": 1,
+                      "text": "FAIL"
+                    }
+                  },
+                  "type": "regex"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "result"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "fixed"
+                    }
+                  },
+                  {
+                    "id": "mappings",
+                    "value": [
+                      {
+                        "options": {
+                          "failed": {
+                            "color": "red",
+                            "index": 1,
+                            "text": "FAILED"
+                          },
+                          "passed": {
+                            "color": "green",
+                            "index": 0,
+                            "text": "PASSED"
+                          }
+                        },
+                        "type": "value"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 0
+          },
+          "id": 2,
+          "options": {
+            "colWidth": 0.9,
+            "legend": {
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "rowHeight": 0.9,
+            "showValue": "auto",
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.3.6",
+          "repeat": "syntheticTests",
+          "repeatDirection": "h",
+          "targets": [
+            {
+              "$$hashKey": "object:29",
+              "aggregation": "Last",
+              "datasource": {
+                "type": "loki",
+                "uid": "P807A653824E089EC"
+              },
+              "dateFormat": "YYYY-MM-DD HH:mm:ss",
+              "decimals": 2,
+              "displayAliasType": "Warning / Critical",
+              "displayType": "Annotation",
+              "displayValueWithAlias": "Never",
+              "editorMode": "code",
+              "expr": "{container=\"synthetic-tests\"} | json  | log_type=\"run\" ",
+              "legendFormat": "passed",
+              "queryType": "range",
+              "refId": "A",
+              "units": "none",
+              "url": "",
+              "valueDisplayRegex": "",
+              "valueHandler": "String Threshold"
+            }
+          ],
+          "title": "Panel Title",
+          "transformations": [
+            {
+              "id": "extractFields",
+              "options": {
+                "format": "kvp",
+                "replace": false,
+                "source": "Line"
+              }
+            },
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "names": [
+                    "Time",
+                    "duration",
+                    "passes",
+                    "failures",
+                    "result"
+                  ]
+                }
+              }
+            }
+          ],
+          "type": "status-history"
+        }
+      ],
+      "schemaVersion": 37,
+      "style": "dark",
+      "tags": [],
+      "templating": {
+        "list": [
+          {
+            "current": {
+              "selected": true,
+              "text": [
+                "All"
+              ],
+              "value": [
+                "$__all"
+              ]
+            },
+            "datasource": {
+              "type": "loki",
+              "uid": "P807A653824E089EC"
+            },
+            "definition": "",
+            "hide": 0,
+            "includeAll": true,
+            "label": "synthetictests",
+            "multi": true,
+            "name": "syntheticTests",
+            "options": [],
+            "query": {
+              "label": "component",
+              "refId": "LokiVariableQueryEditor-VariableQuery",
+              "stream": "",
+              "type": 1
+            },
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 1,
+            "type": "query"
+          },
+          {
+            "current": {
+              "isNone": true,
+              "selected": true,
+              "text": "None",
+              "value": ""
+            },
+            "datasource": {
+              "type": "loki",
+              "uid": "P807A653824E089EC"
+            },
+            "definition": "",
+            "error": {},
+            "hide": 0,
+            "includeAll": false,
+            "multi": false,
+            "name": "query0",
+            "options": [],
+            "query": {
+              "label": "container=\"synthetic-tests\"",
+              "refId": "LokiVariableQueryEditor-VariableQuery",
+              "stream": "",
+              "type": 1
+            },
+            "refresh": 1,
+            "regex": "/.*log_type",
+            "skipUrlSync": false,
+            "sort": 0,
+            "type": "query"
+          }
+        ]
+      },
+      "time": {
+        "from": "now-1h",
+        "to": "now"
+      },
+      "timepicker": {},
+      "timezone": "",
+      "title": "Synthetic-tests-monitoring-dashboard",
+      "uid": "ncrirV4Iz",
+      "version": 1,
+      "weekStart": ""
+    }
