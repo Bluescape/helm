@@ -177,6 +177,9 @@ spec:
             - --service-cluster $(ENROUTE_NAMESPACE)
             - --service-node $(ENVOY_POD_NAME)
             - --log-level {{ .Values.envoySettings.logLevel }}
+            {{- if .Values.envoySettings.logFormat }}
+            - --log-format {{ .Values.envoySettings.logFormat }}
+            {{- end }}
           env:
             - name: ENROUTE_NAMESPACE
               valueFrom:
