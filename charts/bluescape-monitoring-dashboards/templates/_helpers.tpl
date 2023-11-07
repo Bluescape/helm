@@ -48,7 +48,7 @@ Selector labels
 {{- define "bluescape-monitoring-dashboards.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "bluescape-monitoring-dashboards.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-dashboard: bluescape-monitoring
+dashboard: bluescape-dashboards
 {{- end }}
 
 {{/*
