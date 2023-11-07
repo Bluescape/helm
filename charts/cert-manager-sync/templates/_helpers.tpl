@@ -35,6 +35,7 @@ Common labels
 */}}
 {{- define "cert-manager-sync.labels" -}}
 helm.sh/chart: {{ include "cert-manager-sync.chart" . }}
+component: {{ include "cert-manager-sync.name" . }}
 {{ include "cert-manager-sync.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
