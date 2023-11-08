@@ -36,7 +36,7 @@ data:
       "fiscalYearStartMonth": 0,
       "gnetId": 17421,
       "graphTooltip": 1,
-      "id": 79,
+      "id": 92,
       "links": [],
       "liveNow": true,
       "panels": [
@@ -109,7 +109,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.4",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
               "datasource": {
@@ -187,7 +187,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.4",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
               "datasource": {
@@ -262,7 +262,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.4",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
               "datasource": {
@@ -337,7 +337,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.4",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
               "datasource": {
@@ -412,7 +412,7 @@ data:
             "text": {},
             "textMode": "auto"
           },
-          "pluginVersion": "9.1.4",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
               "datasource": {
@@ -488,7 +488,7 @@ data:
             "showHeader": true,
             "sortBy": []
           },
-          "pluginVersion": "9.1.4",
+          "pluginVersion": "9.3.6",
           "targets": [
             {
               "datasource": {
@@ -579,6 +579,9 @@ data:
                 "lineWidth": 1,
                 "scaleDistribution": {
                   "type": "linear"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
                 }
               },
               "decimals": 0,
@@ -705,6 +708,9 @@ data:
                 "lineWidth": 1,
                 "scaleDistribution": {
                   "type": "linear"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
                 }
               },
               "decimals": 0,
@@ -873,6 +879,7 @@ data:
             "y": 20
           },
           "id": 19,
+          "interval": "1m",
           "options": {
             "legend": {
               "calcs": [],
@@ -894,11 +901,11 @@ data:
               },
               "editorMode": "code",
               "exemplar": false,
-              "expr": "rate(graphql_queries_resolved{operation=\"query\"}[$__rate_interval])",
+              "expr": "rate(graphql_queries_resolved{operation=\"query\"}[$__rate_interval]) or vector(0)",
               "format": "time_series",
               "instant": false,
               "interval": "",
-              "legendFormat": "{{ `{{operationName}}` }}",
+              "legendFormat": "{{`{{operationName}}`}}",
               "queryType": "randomWalk",
               "range": true,
               "refId": "A"
@@ -973,6 +980,7 @@ data:
             "y": 20
           },
           "id": 20,
+          "interval": "1m",
           "options": {
             "legend": {
               "calcs": [],
@@ -998,7 +1006,7 @@ data:
               "format": "time_series",
               "instant": false,
               "interval": "",
-              "legendFormat": "{{ `{{operationName}}` }}",
+              "legendFormat": "{{`{{operationName}}`}}",
               "queryType": "randomWalk",
               "range": true,
               "refId": "A"
@@ -1086,6 +1094,7 @@ data:
             "y": 30
           },
           "id": 16,
+          "interval": "1m",
           "options": {
             "legend": {
               "calcs": [],
@@ -1111,7 +1120,7 @@ data:
               "format": "time_series",
               "instant": false,
               "interval": "",
-              "legendFormat": "{{ `{{parentType}}.{{fieldName}} - {{returnType}}` }}",
+              "legendFormat": "{{`{{parentType}}.{{fieldName}} - {{returnType}}`}}",
               "queryType": "randomWalk",
               "range": true,
               "refId": "A"
@@ -1186,6 +1195,7 @@ data:
             "y": 30
           },
           "id": 15,
+          "interval": "1m",
           "options": {
             "legend": {
               "calcs": [],
@@ -1211,7 +1221,7 @@ data:
               "format": "time_series",
               "instant": false,
               "interval": "",
-              "legendFormat": "{{ `{{parentType}}.{{fieldName}} - {{returnType}}` }}",
+              "legendFormat": "{{`{{parentType}}.{{fieldName}} - {{returnType}}`}}",
               "queryType": "randomWalk",
               "range": true,
               "refId": "A"
@@ -1222,7 +1232,7 @@ data:
           "type": "timeseries"
         }
       ],
-      "refresh": "10s",
+      "refresh": "30s",
       "schemaVersion": 37,
       "style": "dark",
       "tags": [
@@ -1234,7 +1244,7 @@ data:
         "list": [
           {
             "current": {
-              "selected": true,
+              "selected": false,
               "text": "Prometheus",
               "value": "Prometheus"
             },
@@ -1253,13 +1263,13 @@ data:
         ]
       },
       "time": {
-        "from": "now-24h",
+        "from": "now-30m",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
       "title": "Apollo GraphQL Metrics",
-      "uid": "RQRYVAmnz",
-      "version": 1,
+      "uid": "852d736c289f1ce6e67aff30a314e354b2dbc3f8",
+      "version": 5,
       "weekStart": ""
     }
