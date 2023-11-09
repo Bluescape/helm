@@ -48,7 +48,7 @@ Selector labels
 {{- define "bluescape-banzai-dashboards.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "bluescape-banzai-dashboards.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-dashboard: bluescape-dashboards
+bluescape-dashboards: grafana-dashboards
 {{- end }}
 
 {{/*
