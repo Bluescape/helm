@@ -8,7 +8,7 @@ image:
   repository: bluescape/cert-manager-sync
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.0.1-amd64-rc14"
+  tag: "latest"
 
 nameOverride: ""
 fullnameOverride: ""
