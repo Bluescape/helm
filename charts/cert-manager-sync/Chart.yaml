@@ -2,5 +2,5 @@ apiVersion: v2
 name: cert-manager-sync
 description: Helm chart to install cert-manager-sync controller
 type: application
-version: 0.1.2-alpha2
+version: 0.1.2
 appVersion: "0.0.2"
