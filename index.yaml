@@ -1528,6 +1528,16 @@ entries:
   cert-manager-sync:
   - apiVersion: v2
     appVersion: 0.0.2
+    created: "2023-11-10T05:15:28.232552095Z"
+    description: Helm chart to install cert-manager-sync controller
+    digest: a98efa7897635d2e7d7d4fa45103de9477435eac228638ebf74082d2e922950a
+    name: cert-manager-sync
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/cert-manager-sync-0.1.2/cert-manager-sync-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.0.2
     created: "2023-11-10T05:05:10.252624589Z"
     description: Helm chart to install cert-manager-sync controller
     digest: b9a9205b1487946948a6bd565062a9d25bdadd6276942f1a2b7bc7b7def04f4f
@@ -3220,4 +3230,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-11-10T05:05:10.25354562Z"
+generated: "2023-11-10T05:15:28.233474841Z"
