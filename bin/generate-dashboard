@@ -1,9 +1,10 @@
+set -x
 #!/bin/bash
 
 set -eo pipefail
 
 workdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-dashboard_base="$workdir/../charts/bluescape-monitoring-dashboards"
+dashboard_base="$workdir/../charts/$3"
 to_add="$1"
 new_dashboard_dir="$2"
 prereqs=(yaml2json json2yaml jq)
@@ -108,8 +109,8 @@ sanity_check_arg1()
 sanity_check_arg2()
 {
   local desired_path
-  num_dirs=${#DIRS[@]}
-  desired_path="charts/bluescape-monitoring-dashboards"
+  local num_dirs=${#DIRS[@]}
+  desired_path="charts/${DIRS[((num_dirs - 1))]}"
   current_path="${DIRS[((num_dirs - 2))]}/${DIRS[((num_dirs - 1))]}"
 
   if [[ -z "$new_dashboard_dir" ]]; then
@@ -139,6 +140,14 @@ sanity_check_arg2()
   fi
 }
 
+validate_dashboard_base()
+{
+  if [[ -z "$dashboard_base" ]]; then
+    echo >&2 'Dashboard base path is empty. Please set a valid path.'
+    exit 1
+  fi
+}
+
 case $(uname -s) in
   Linux) grep=$(which grep)
     sed=$(which sed)
@@ -154,5 +163,7 @@ esac
 check_prereqs
 sanity_check_arg1
 sanity_check_arg2
+validate_dashboard_base
 generate_configmap
 generate_dashboard_manifest
+
