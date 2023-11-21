@@ -44,7 +44,7 @@ and if it isn't in the proper directory then it will exit with an error
 
 
 ```
-Usage: ../bin/add-dashboard <path/to/exported/dashboard.json> <new_dashboard_directory>
+Usage: ../bin/add-dashboard <path/to/exported/dashboard.json> <new_dashboard_directory> <dashboard_base>
 
 ```
 
@@ -58,8 +58,12 @@ pathing. A simple name such as `65_dashboard_name` is sufficient.
 
 ```
 $ cd <repo>/helm/charts/bluescape-monitoring-dashboards
-../bin/add-dashboard $HOME/Downloads/Redis.json 44_redis_dashboard
+../bin/add-dashboard $HOME/Downloads/Redis.json 44_redis_dashboard bluescape-monitoring-dashboards
 ```
+
+If you want to place dashboards under bluescape-monitoring-dashboards-2 base, execute like below 
+$ cd <repo>/helm/charts/bluescape-monitoring-dashboards-2
+../bin/add-dashboard $HOME/Downloads/Nginx.json 99_nginx_dashboard bluescape-monitoring-dashboards-2
 
 ### Validations performed at runtime
 
