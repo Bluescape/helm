@@ -46,17 +46,17 @@ and if it isn't in the proper directory then it will exit with an error
 ```
 Usage:
 
-  Syntax: ./add-dashboard -j <path to dashboard.json> -d <new chart directory name> -b <dashboard base path>
+  Syntax: $0 -j|--json <path to dashboard.json> -d|--dir  <new chart directory name> -b|--base <dashboard base path>
 
-  Example Usage: Go to the dashboard base directory (bluescape-monitoring-dashboards) which you can obtain
-  using -l option of this script and execute script like below 
+  Example Usage: From the /path/to/helm/charts directory execute script like below 
 
-  cd /path/to/helmrepo/helm/charts/bluescape-monitoring-dashboards
-  ../../bin/add-dashboard -j ~/Downloads/Redis.json -d 44_redis_dashboard -b bluescape-monitoring-dashboards
+  cd /path/to/helm/charts 
+  ../bin/add-dashboard -j ~/Downloads/Redis.json -d 44_redis_dashboard -b bluescape-monitoring-dashboards
 
   Additional options:
   -h : help
   -l : list of  base dashboards
+
 ```
 
 The first argument is the path to the exported JSON from grafana.
@@ -66,12 +66,6 @@ the new configmap and dashboard manifests will be placed. This argument requires
 pathing. A simple name such as `65_dashboard_name` is sufficient.
 
 The third argument is the dashboard base , in which dashboards need to be placed, you can get available dashboards using ./add-dashboard -l 
-### Example
-
-```
-$ cd <repo>/helm/charts/bluescape-monitoring-dashboards
-../bin/add-dashboard $HOME/Downloads/Redis.json 44_redis_dashboard
-```
 
 ### Validations performed at runtime
 
