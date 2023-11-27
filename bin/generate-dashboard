@@ -1,14 +1,63 @@
 #!/bin/bash
 
+usage() {
+  echo """
+  Syntax: $0 -j <path to dashboard.json> -d <new chart directory name> -b <dashboard base path>
+
+  Example Usage: Go to the dashboard base directory which you can obtain using -l option of this script 
+  and execute script like below 
+
+  cd /path/to/helmrepo/helm/charts/bluescape-monitoring-dashboards
+  ../../bin/add-dashboard -j ~/Downloads/Redis.json -d 44_redis_dashboard -b bluescape-monitoring-dashboards
+
+  Additional options:
+  -h : help
+  -l : list of  base dashboards
+  """
+  exit 1
+}
+
+while getopts "hlj:d:b:" opt; do
+  case $opt in
+    j) to_add=$OPTARG ;;
+    d) new_dashboard_dir=$OPTARG ;;
+    b) dashboard_base=$OPTARG ;;
+    h) usage ;;
+    l) echo "Available dashboard bases
+             bs-monitoring-dashboards
+             bs-monitoring-dashboards-2
+             bs-monitoring-dashboards-3" 
+       exit 0
+       ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+        exit 1 ;;
+    :) echo "Option -$OPTARG requires an argument." >&2
+        exit 1 ;;
+  esac
+done
+
+available_dashboards=("bluescape-monitoring-dashboards" "bluescape-monitoring-dashboards-2" "bluescape-monitoring-dashboards-3")
+
+if [ -z "$dashboard_base" ]; then
+  echo >&2 "Error: Dashboard base path (-b) is required, use add-dasbhoard -l to get list of available dashboard base"
+  usage
+  exit 1
+elif [[ ! " ${available_dashboards[@]} " =~ " ${dashboard_base} " ]]; then
+  echo >&2 "Error: Specified dashboard base '$dashboard_base' is not in the list of available dashboards."
+  echo >&2 "Available dashboard bases: ${available_dashboards[*]}"
+  usage
+  exit 1
+fi
+
 set -eo pipefail
 
 workdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-dashboard_base="$workdir/../charts/bluescape-monitoring-dashboards"
-to_add="$1"
-new_dashboard_dir="$2"
+dashboard_base="$workdir/../charts/$dashboard_base"
+to_add="$to_add"
+new_dashboard_dir="$new_dashboard_dir"
 prereqs=(yaml2json json2yaml jq)
 darwin_prereqs=(ggrep gsed)
-IFS=/ read -ra DIRS <<< "$dashboard_base"
+IFS=/ read -ra DIRS <<< "$dashboard_base" 
 
 generate_configmap()
 {
@@ -69,20 +118,6 @@ check_prereqs()
   done
 }
 
-usage()
-{
-  echo >&2 """
-  Usage: $0 <path to dashboard.json> <new chart directory name>
-
-  The chart directory name will be a *directory* created under which the
-  generated dashboard manifest and configmap will get placed.
-
-  NOTE: this script is not capable of generating multiple dashboards
-  under a single chart template directory. If you need that, you'll have
-  to manually add the dashboard.
-  """
-}
-
 sanity_check_arg1()
 {
   if [[ -z "$to_add" ]]; then
@@ -108,8 +143,8 @@ sanity_check_arg1()
 sanity_check_arg2()
 {
   local desired_path
-  num_dirs=${#DIRS[@]}
-  desired_path="charts/bluescape-monitoring-dashboards"
+  local num_dirs=${#DIRS[@]}
+  desired_path="charts/${DIRS[((num_dirs - 1))]}"
   current_path="${DIRS[((num_dirs - 2))]}/${DIRS[((num_dirs - 1))]}"
 
   if [[ -z "$new_dashboard_dir" ]]; then
@@ -138,6 +173,7 @@ sanity_check_arg2()
     exit 1
   fi
 }
+
 
 case $(uname -s) in
   Linux) grep=$(which grep)

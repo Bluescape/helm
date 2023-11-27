@@ -10,8 +10,8 @@ of the process.
  * export dashboard JSON from grafana dashboard using the export tool
    * make sure "Export for sharing external externally" is not set to on
  * save the JSON somewhere well-known on your laptop/computer
- * use the templates in `<repo>/helm/charts/bluescape-monitoring-dashboards/templates/0_template`
-   * create a new dashboard directory in `<repo>/helm/charts/bluescape-monitoring-dashboards/templates`
+ * use the templates in `<repo>/helm/charts/bluescape-monitoring-dashboards-3-3/templates/0_template`
+   * create a new dashboard directory in `<repo>/helm/charts/bluescape-monitoring-dashboards-3-3/templates`
    * within that newly created directory, copy the templates from `0_template`.
    * chdir to the new directory
    * put the exported JSON in the `configmap.yaml` using the example data
@@ -24,7 +24,7 @@ Jump down to verify dashboards below.
 ## Automatic Addition
 
 These instructions cover how to use the `add-dashboard` script located
-in `<repo>/helm/charts/bluescape-monitoring-dashboards`
+in `<repo>/helm/charts/bluescape-monitoring-dashboards-3-3`
 
 ### Pre-requisites
 
@@ -44,19 +44,8 @@ and if it isn't in the proper directory then it will exit with an error
 
 
 ```
-Usage:
+Usage: ../bin/add-dashboard <path/to/exported/dashboard.json> <new_dashboard_directory>
 
-  Syntax: ./add-dashboard -j <path to dashboard.json> -d <new chart directory name> -b <dashboard base path>
-
-  Example Usage: Go to the dashboard base directory (bluescape-monitoring-dashboards) which you can obtain
-  using -l option of this script and execute script like below 
-
-  cd /path/to/helmrepo/helm/charts/bluescape-monitoring-dashboards
-  ../../bin/add-dashboard -j ~/Downloads/Redis.json -d 44_redis_dashboard -b bluescape-monitoring-dashboards
-
-  Additional options:
-  -h : help
-  -l : list of  base dashboards
 ```
 
 The first argument is the path to the exported JSON from grafana.
@@ -65,11 +54,10 @@ The second argument is the name of the dashboard directory into which
 the new configmap and dashboard manifests will be placed. This argument requires
 pathing. A simple name such as `65_dashboard_name` is sufficient.
 
-The third argument is the dashboard base , in which dashboards need to be placed, you can get available dashboards using ./add-dashboard -l 
 ### Example
 
 ```
-$ cd <repo>/helm/charts/bluescape-monitoring-dashboards
+$ cd <repo>/helm/charts/bluescape-monitoring-dashboards-3-3
 ../bin/add-dashboard $HOME/Downloads/Redis.json 44_redis_dashboard
 ```
 
@@ -108,7 +96,7 @@ cat 44_redis_dashboard/dashboad.yaml
 
 ```
 $ cd <repo>/helm/charts
-$ helm template /bluescape-monitoring-dashboards | yamllint -
+$ helm template /bluescape-monitoring-dashboards-3-3 | yamllint -
 ```
 
 You should get no errors from `yamllint` and you should get no errors
@@ -124,7 +112,7 @@ set of examples, we'll be using the Atreus cluster to perform these tests.
 You'll have to transpose these directions with whichever [test] cluster you, the
 reader, is working in.
 
-Note that if the `bluescape-monitoring-dashboards` are already installed on your
+Note that if the `bluescape-monitoring-dashboards-3-3` are already installed on your
 cluster, you'll need to re-use the same deployment name under which those were
 installed with helm before.
 
@@ -139,7 +127,7 @@ $ helm ls
 NAME                            NAMESPACE       REVISION        UPDATED                                 STATUS          CHART                                   APP VERSION
 a-atreus                        grafana         1               2021-08-09 23:37:45.464990415 +0000 UTC deployed        grafana-operator-0.2.5                  master
 grafana-a-atreus                grafana         1               2021-08-09 23:38:16.854245718 +0000 UTC deployed        bluescape-monitoring-grafana-0.2.3      1.16.0
-grafana-dashboards-a-atreus     grafana         6               2021-08-09 23:23:16.473682282 +0000 UTC deployed        bluescape-monitoring-dashboards-0.2.3   1.16.2
+grafana-dashboards-a-atreus     grafana         6               2021-08-09 23:23:16.473682282 +0000 UTC deployed        bluescape-monitoring-dashboards-3-3-0.2.3   1.16.2
 ```
 
 ...so in this case, we'll need to make note that the dashboards were
@@ -150,7 +138,7 @@ Now run the dry-run
 
 ```
 $ cd <repo>/helm/charts
-$ helm upgrade --install grafana-dashboards-a-atreus bluescape-monitoring-dashboards -n grafana --dry-run
+$ helm upgrade --install grafana-dashboards-a-atreus bluescape-monitoring-dashboards-3-3 -n grafana --dry-run
 ```
 
 This should give a lot of useful output and no errors. If there are errors,
@@ -163,7 +151,7 @@ $ kctx atreus
 Switched to context "arn:aws:eks:us-west-2:429863676324:cluster/atreus".
 
 $ cd <repo>/helm/charts
-$ helm upgrade --install grafana-dashboards-atreus bluescape-monitoring-dashboards -n grafana
+$ helm upgrade --install grafana-dashboards-atreus bluescape-monitoring-dashboards-3-3 -n grafana
 ```
 
 This should not fail. Once this completes, login to grafana on the test cluster
