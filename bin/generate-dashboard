@@ -1,14 +1,14 @@
 #!/bin/bash
 
-usage() {
+usage() 
+{
   echo """
-  Syntax: $0 -j <path to dashboard.json> -d <new chart directory name> -b <dashboard base path>
+  Syntax: $0 -j|--json <path to dashboard.json> -d|--dir  <new dashboard dir name> -b|--base <dashboard base path>
 
-  Example Usage: Go to the dashboard base directory which you can obtain using -l option of this script 
-  and execute script like below 
+  Example Usage: From the /path/to/helm/charts directory execute script like below 
 
-  cd /path/to/helmrepo/helm/charts/bluescape-monitoring-dashboards
-  ../../bin/add-dashboard -j ~/Downloads/Redis.json -d 44_redis_dashboard -b bluescape-monitoring-dashboards
+  cd /path/to/helm/charts 
+  ../bin/add-dashboard -j ~/Downloads/Redis.json -d 44_redis_dashboard -b bluescape-monitoring-dashboards
 
   Additional options:
   -h : help
@@ -17,34 +17,45 @@ usage() {
   exit 1
 }
 
-while getopts "hlj:d:b:" opt; do
-  case $opt in
-    j) to_add=$OPTARG ;;
-    d) new_dashboard_dir=$OPTARG ;;
-    b) dashboard_base=$OPTARG ;;
-    h) usage ;;
-    l) echo "Available dashboard bases
-             bs-monitoring-dashboards
-             bs-monitoring-dashboards-2
-             bs-monitoring-dashboards-3" 
-       exit 0
-       ;;
-    \?) echo "Invalid option -$OPTARG" >&2
-        exit 1 ;;
-    :) echo "Option -$OPTARG requires an argument." >&2
-        exit 1 ;;
+##Array of available dashboard base in which corresponding dashboards has to be placed
+#SRE/Devops Er have to add new dashboard base based on requirement
+available_base_dashboards=("bluescape-monitoring-dashboards" "bluescape-monitoring-dashboards-2")
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -j|--json)
+      to_add=$2
+      shift 2
+      ;;
+    -d|--dir)
+      new_dashboard_dir=$2
+      shift 2
+      ;;
+    -b|--base)
+      dashboard_base=$2
+      shift 2
+      ;;
+    -h|--help)
+      usage
+      ;;
+    -l|--list)
+      echo "Available dashboard bases "
+      for dbbasedirs in "${available_base_dashboards[@]}"
+      do
+        echo "$dbbasedirs"
+      done
+      exit 0
+      ;;
+    *)
+      echo "Invalid option: $1" >&2
+      exit 1
+      ;;
   esac
 done
 
-available_dashboards=("bluescape-monitoring-dashboards" "bluescape-monitoring-dashboards-2" "bluescape-monitoring-dashboards-3")
-
+##Ensure dashboard base need to be provided during execution
 if [ -z "$dashboard_base" ]; then
   echo >&2 "Error: Dashboard base path (-b) is required, use add-dasbhoard -l to get list of available dashboard base"
-  usage
-  exit 1
-elif [[ ! " ${available_dashboards[@]} " =~ " ${dashboard_base} " ]]; then
-  echo >&2 "Error: Specified dashboard base '$dashboard_base' is not in the list of available dashboards."
-  echo >&2 "Available dashboard bases: ${available_dashboards[*]}"
   usage
   exit 1
 fi
@@ -52,12 +63,11 @@ fi
 set -eo pipefail
 
 workdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-dashboard_base="$workdir/../charts/$dashboard_base"
+dashboard_base="$dashboard_base"
 to_add="$to_add"
 new_dashboard_dir="$new_dashboard_dir"
 prereqs=(yaml2json json2yaml jq)
 darwin_prereqs=(ggrep gsed)
-IFS=/ read -ra DIRS <<< "$dashboard_base" 
 
 generate_configmap()
 {
@@ -142,20 +152,24 @@ sanity_check_arg1()
 
 sanity_check_arg2()
 {
-  local desired_path
-  local num_dirs=${#DIRS[@]}
-  desired_path="charts/${DIRS[((num_dirs - 1))]}"
-  current_path="${DIRS[((num_dirs - 2))]}/${DIRS[((num_dirs - 1))]}"
+  #Check the provided dashboard base is available in "available_base_dashboards" variable 
+  #if passed proceed generating dashboards else stop the execution
+  found_dashboard_base=false
+  for dbs in "${available_base_dashboards[@]}"
+  do
+    if [[ "$dbs" == "$dashboard_base" ]]; then
+      found_dashboard_base=true
+      break
+    fi
+  done
 
-  if [[ -z "$new_dashboard_dir" ]]; then
-    echo >&2 'Please specify the directory in which the dashboard should be created.'
-    usage
+  if [[ "$found_dashboard_base" == false ]]; then
+    echo "Dashboard base not found in available base dashboards. Use -l option to list available dashboard bases."
     exit 1
   fi
 
-  if [[ "$current_path" != "$desired_path" ]]; then
-    printf >&2 "Please run this script from the %s path in the helm repo\n" $desired_path
-    echo "Current path is $current_path"
+  if [[ -z "$new_dashboard_dir" ]]; then
+    echo >&2 'Please specify the directory in which the dashboard should be created.'
     usage
     exit 1
   fi
@@ -173,7 +187,6 @@ sanity_check_arg2()
     exit 1
   fi
 }
-
 
 case $(uname -s) in
   Linux) grep=$(which grep)
