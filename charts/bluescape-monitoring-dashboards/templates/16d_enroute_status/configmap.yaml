@@ -708,7 +708,7 @@ data:
             "uid": "PBFA97CFB590B2093"
           },
           "editorMode": "builder",
-          "expr": "enroute_cachehandler_onupdate_duration_seconds{quantile=\"0.99\"}",
+          "expr": "rate(enroute_cachehandler_onupdate_duration_seconds{quantile=\"0.99\", job=\"enroute-admin\"}[1m])",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
