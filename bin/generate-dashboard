@@ -19,31 +19,28 @@ usage()
 
 ##Array of available dashboard base in which corresponding dashboards has to be placed
 #SRE/Devops Er have to add new dashboard base based on requirement
-available_base_dashboards=("bluescape-monitoring-dashboards" "bluescape-monitoring-dashboards-2")
+ADB='bluescape-monitoring-dashboards'
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -j|--json)
-      to_add=$2
-      shift 2
+      shift
+      to_add="$1"
       ;;
     -d|--dir)
-      new_dashboard_dir=$2
-      shift 2
+      shift
+      new_dashboard_dir="$1"
       ;;
     -b|--base)
-      dashboard_base=$2
-      shift 2
+      shift
+      dashboard_base="$1"
       ;;
     -h|--help)
       usage
       ;;
     -l|--list)
       echo "Available dashboard bases "
-      for dbbasedirs in "${available_base_dashboards[@]}"
-      do
-        echo "$dbbasedirs"
-      done
+      ls ${ADB}*
       exit 0
       ;;
     *)
@@ -51,6 +48,7 @@ while [[ $# -gt 0 ]]; do
       exit 1
       ;;
   esac
+  shift
 done
 
 ##Ensure dashboard base need to be provided during execution
@@ -154,14 +152,12 @@ sanity_check_arg2()
 {
   #Check the provided dashboard base is available in "available_base_dashboards" variable 
   #if passed proceed generating dashboards else stop the execution
-  found_dashboard_base=false
-  for dbs in "${available_base_dashboards[@]}"
-  do
-    if [[ "$dbs" == "$dashboard_base" ]]; then
-      found_dashboard_base=true
-      break
-    fi
-  done
+
+found_dashboard_base=false
+
+if [[ -d "$dashboard_base" ]]; then
+  found_dashboard_base=true
+fi
 
   if [[ "$found_dashboard_base" == false ]]; then
     echo "Dashboard base not found in available base dashboards. Use -l option to list available dashboard bases."
