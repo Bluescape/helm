@@ -44,7 +44,18 @@ and if it isn't in the proper directory then it will exit with an error
 
 
 ```
-Usage: ../bin/add-dashboard <path/to/exported/dashboard.json> <new_dashboard_directory>
+Usage:
+
+  Syntax: $0 -j|--json <path to dashboard.json> -d|--dir  <new chart directory name> -b|--base <dashboard base path>
+
+  Example Usage: From the /path/to/helm/charts directory execute script like below 
+
+  cd /path/to/helm/charts 
+  ../bin/add-dashboard -j ~/Downloads/Redis.json -d 44_redis_dashboard -b bluescape-monitoring-dashboards
+
+  Additional options:
+  -h : help
+  -l : list of  base dashboards
 
 ```
 
@@ -54,12 +65,7 @@ The second argument is the name of the dashboard directory into which
 the new configmap and dashboard manifests will be placed. This argument requires
 pathing. A simple name such as `65_dashboard_name` is sufficient.
 
-### Example
-
-```
-$ cd <repo>/helm/charts/bluescape-monitoring-dashboards
-../bin/add-dashboard $HOME/Downloads/Redis.json 44_redis_dashboard
-```
+The third argument is the dashboard base , in which dashboards need to be placed, you can get available dashboards using ./add-dashboard -l 
 
 ### Validations performed at runtime
 
