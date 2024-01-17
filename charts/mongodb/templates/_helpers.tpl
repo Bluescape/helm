@@ -19,14 +19,10 @@ If release name contains chart name it will be used as a full name.
 Create a default mongo service name which can be overridden.
 */}}
 {{- define "mongodb.service.nameOverride" -}}
-    {{- if .Values.service -}}
-        {{- if .Values.service.nameOverride }}
-            {{- .Values.service.nameOverride -}}
-        {{- else -}}
-            {{ include "mongodb.fullname" . }}-headless
-        {{- end -}}
+    {{- if and .Values.service .Values.service.nameOverride -}}
+        {{- print .Values.service.nameOverride -}}
     {{- else -}}
-        {{ include "mongodb.fullname" . }}-headless
+        {{- printf "%s-headless" (include "mongodb.fullname" .) -}}
     {{- end }}
 {{- end }}
 
@@ -34,14 +30,10 @@ Create a default mongo service name which can be overridden.
 Create a default mongo arbiter service name which can be overridden.
 */}}
 {{- define "mongodb.arbiter.service.nameOverride" -}}
-    {{- if .Values.arbiter.service -}}
-        {{- if .Values.arbiter.service.nameOverride }}
-            {{- .Values.arbiter.service.nameOverride -}}
-        {{- else -}}
-            {{ include "mongodb.fullname" . }}-arbiter-headless
-        {{- end -}}
+    {{- if and .Values.arbiter.service .Values.arbiter.service.nameOverride -}}
+        {{- print .Values.arbiter.service.nameOverride -}}
     {{- else -}}
-        {{ include "mongodb.fullname" . }}-arbiter-headless
+        {{- printf "%s-arbiter-headless" (include "mongodb.fullname" .) -}}
     {{- end }}
 {{- end }}
 
@@ -49,68 +41,64 @@ Create a default mongo arbiter service name which can be overridden.
 Return the proper MongoDB&reg; image name
 */}}
 {{- define "mongodb.image" -}}
-{{ include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) }}
+{{- include "common.images.image" (dict "imageRoot" .Values.image "global" .Values.global) -}}
 {{- end -}}
 
 {{/*
 Return the proper image name (for the metrics image)
 */}}
 {{- define "mongodb.metrics.image" -}}
-{{ include "common.images.image" (dict "imageRoot" .Values.metrics.image "global" .Values.global) }}
+{{- include "common.images.image" (dict "imageRoot" .Values.metrics.image "global" .Values.global) -}}
 {{- end -}}
 
 {{/*
 Return the proper image name (for the init container volume-permissions image)
 */}}
 {{- define "mongodb.volumePermissions.image" -}}
-{{ include "common.images.image" (dict "imageRoot" .Values.volumePermissions.image "global" .Values.global) }}
+{{- include "common.images.image" (dict "imageRoot" .Values.volumePermissions.image "global" .Values.global) -}}
 {{- end -}}
 
 {{/*
 Return the proper image name (for the init container auto-discovery image)
 */}}
 {{- define "mongodb.externalAccess.autoDiscovery.image" -}}
-{{ include "common.images.image" (dict "imageRoot" .Values.externalAccess.autoDiscovery.image "global" .Values.global) }}
+{{- include "common.images.image" (dict "imageRoot" .Values.externalAccess.autoDiscovery.image "global" .Values.global) -}}
 {{- end -}}
 
 {{/*
 Return the proper image name (for the TLS Certs image)
 */}}
 {{- define "mongodb.tls.image" -}}
-{{ include "common.images.image" (dict "imageRoot" .Values.tls.image "global" .Values.global) }}
+{{- include "common.images.image" (dict "imageRoot" .Values.tls.image "global" .Values.global) -}}
 {{- end -}}
 
 {{/*
 Return the proper Docker Image Registry Secret Names
 */}}
 {{- define "mongodb.imagePullSecrets" -}}
-{{ include "common.images.pullSecrets" (dict "images" (list .Values.image .Values.metrics.image .Values.volumePermissions.image) "global" .Values.global) }}
+{{- include "common.images.pullSecrets" (dict "images" (list .Values.image .Values.metrics.image .Values.volumePermissions.image .Values.tls.image) "global" .Values.global) -}}
 {{- end -}}
 
 {{/*
 Allow the release namespace to be overridden for multi-namespace deployments in combined charts.
 */}}
 {{- define "mongodb.namespace" -}}
-    {{- if .Values.global -}}
-        {{- if .Values.global.namespaceOverride }}
-            {{- .Values.global.namespaceOverride -}}
-        {{- else -}}
-            {{- .Release.Namespace -}}
-        {{- end -}}
+    {{- if and .Values.global .Values.global.namespaceOverride -}}
+        {{- print .Values.global.namespaceOverride -}}
     {{- else -}}
-        {{- .Release.Namespace -}}
+        {{- print .Release.Namespace -}}
     {{- end }}
 {{- end -}}
 {{- define "mongodb.serviceMonitor.namespace" -}}
     {{- if .Values.metrics.serviceMonitor.namespace -}}
-        {{- .Values.metrics.serviceMonitor.namespace -}}
+        {{- print .Values.metrics.serviceMonitor.namespace -}}
     {{- else -}}
         {{- include "mongodb.namespace" . -}}
     {{- end }}
 {{- end -}}
 {{- define "mongodb.prometheusRule.namespace" -}}
     {{- if .Values.metrics.prometheusRule.namespace -}}
-        {{- .Values.metrics.prometheusRule.namespace -}}
+        {{- print .Values.metrics.prometheusRule.namespace -}}
     {{- else -}}
         {{- include "mongodb.namespace" . -}}
     {{- end }}
@@ -123,10 +111,52 @@ is true or default otherwise.
 */}}
 {{- define "mongodb.serviceAccountName" -}}
     {{- if .Values.serviceAccount.create -}}
-        {{ default (include "mongodb.fullname" .) .Values.serviceAccount.name }}
+        {{- default (include "mongodb.fullname" .) (print .Values.serviceAccount.name) -}}
     {{- else -}}
-        {{ default "default" .Values.serviceAccount.name }}
+        {{- default "default" (print .Values.serviceAccount.name) -}}
     {{- end -}}
+{{- end -}}
+
+{{/*
+Return the list of custom users to create during the initialization (string format)
+*/}}
+{{- define "mongodb.customUsers" -}}
+    {{- $customUsers := list -}}
+    {{- if .Values.auth.username -}}
+        {{- $customUsers = append $customUsers .Values.auth.username }}
+    {{- end }}
+    {{- range .Values.auth.usernames }}
+        {{- $customUsers = append $customUsers . }}
+    {{- end }}
+    {{- printf "%s" (default "" (join "," $customUsers)) -}}
+{{- end -}}
+
+{{/*
+Return the list of passwords for the custom users (string format)
+*/}}
+{{- define "mongodb.customPasswords" -}}
+    {{- $customPasswords := list -}}
+    {{- if .Values.auth.password -}}
+        {{- $customPasswords = append $customPasswords .Values.auth.password }}
+    {{- end }}
+    {{- range .Values.auth.passwords }}
+        {{- $customPasswords = append $customPasswords . }}
+    {{- end }}
+    {{- printf "%s" (default "" (join "," $customPasswords)) -}}
+{{- end -}}
+
+{{/*
+Return the list of custom databases to create during the initialization (string format)
+*/}}
+{{- define "mongodb.customDatabases" -}}
+    {{- $customDatabases := list -}}
+    {{- if .Values.auth.database -}}
+        {{- $customDatabases = append $customDatabases .Values.auth.database }}
+    {{- end }}
+    {{- range .Values.auth.databases }}
+        {{- $customDatabases = append $customDatabases . }}
+    {{- end }}
+    {{- printf "%s" (default "" (join "," $customDatabases)) -}}
 {{- end -}}
 
 {{/*
@@ -155,7 +185,7 @@ Return the secret with MongoDB&reg; credentials
 */}}
 {{- define "mongodb.secretName" -}}
     {{- if .Values.auth.existingSecret -}}
-        {{- printf "%s" .Values.auth.existingSecret -}}
+        {{- printf "%s" (tpl .Values.auth.existingSecret $) -}}
     {{- else -}}
         {{- printf "%s" (include "mongodb.fullname" .) -}}
     {{- end -}}
@@ -249,7 +279,8 @@ Compile all warnings into a single message, and call fail.
 {{- $messages := list -}}
 {{- $messages := append $messages (include "mongodb.validateValues.pspAndRBAC" .) -}}
 {{- $messages := append $messages (include "mongodb.validateValues.architecture" .) -}}
-{{- $messages := append $messages (include "mongodb.validateValues.customDatabase" .) -}}
+{{- $messages := append $messages (include "mongodb.validateValues.customUsersDBs" .) -}}
+{{- $messages := append $messages (include "mongodb.validateValues.customUsersDBsLength" .) -}}
 {{- $messages := append $messages (include "mongodb.validateValues.externalAccessServiceType" .) -}}
 {{- $messages := append $messages (include "mongodb.validateValues.loadBalancerIPsListLength" .) -}}
 {{- $messages := append $messages (include "mongodb.validateValues.nodePortListLength" .) -}}
@@ -281,18 +312,30 @@ mongodb: architecture
 {{- end -}}
 
 {{/*
-Validate values of MongoDB&reg; - both auth.username and auth.database are necessary
+Validate values of MongoDB&reg; - both auth.usernames and auth.databases are necessary
 to create a custom user and database during 1st initialization
 */}}
-{{- define "mongodb.validateValues.customDatabase" -}}
-{{- if or (and .Values.auth.username (not .Values.auth.database)) (and (not .Values.auth.username) .Values.auth.database) }}
-mongodb: auth.username, auth.database
-    Both auth.username and auth.database must be provided to create
-    a custom user and database during 1st initialization.
-    Please set both of them (--set auth.username="xxxx",auth.database="yyyy")
+{{- define "mongodb.validateValues.customUsersDBs" -}}
+{{- $customUsers := include "mongodb.customUsers" . -}}
+{{- $customDatabases := include "mongodb.customDatabases" . -}}
+{{- if or (and (empty $customUsers) (not (empty $customDatabases))) (and (not (empty $customUsers)) (empty $customDatabases)) }}
+mongodb: auth.usernames, auth.databases
+    Both auth.usernames and auth.databases must be provided to create
+    custom users and databases during 1st initialization.
+    Please set both of them (--set auth.usernames[0]="xxxx",auth.databases[0]="yyyy")
 {{- end -}}
 {{- end -}}
 
+{{/*
+Validate values of MongoDB&reg; - both auth.usernames and auth.databases arrays should have the same length
+to create a custom user and database during 1st initialization
+*/}}
+{{- define "mongodb.validateValues.customUsersDBsLength" -}}
+{{- if ne (len .Values.auth.usernames) (len .Values.auth.databases) }}
+mongodb: auth.usernames, auth.databases
+    Both auth.usernames and auth.databases arrays should have the same length
+{{- end -}}
+{{- end -}}
 
 {{/*
 Validate values of MongoDB&reg; - service type for external access
@@ -332,7 +375,7 @@ mongodb: .Values.externalAccess.service.nodePorts
 Validate values of MongoDB&reg; - RBAC should be enabled when autoDiscovery is enabled
 */}}
 {{- define "mongodb.validateValues.externalAccessAutoDiscoveryRBAC" -}}
-{{- if and (eq .Values.architecture "replicaset") .Values.externalAccess.enabled .Values.externalAccess.autoDiscovery.enabled (not .Values.rbac.create )}}
+{{- if and (eq .Values.architecture "replicaset") .Values.externalAccess.enabled .Values.externalAccess.autoDiscovery.enabled (not .Values.rbac.create ) }}
 mongodb: rbac.create
     By specifying "externalAccess.enabled=true" and "externalAccess.autoDiscovery.enabled=true"
     an initContainer will be used to autodetect the external IPs/ports by querying the
@@ -364,17 +407,6 @@ Return the appropriate apiGroup for PodSecurityPolicy.
 {{- print "policy" -}}
 {{- else -}}
 {{- print "extensions" -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Return the appropriate apiVersion for PodSecurityPolicy.
-*/}}
-{{- define "podSecurityPolicy.apiVersion" -}}
-{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
-{{- print "policy/v1beta1" -}}
-{{- else -}}
-{{- print "extensions/v1beta1" -}}
 {{- end -}}
 {{- end -}}
 
