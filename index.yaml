@@ -527,6 +527,16 @@ entries:
   bluescape-monitoring-dashboards:
   - apiVersion: v2
     appVersion: 1.16.4
+    created: "2024-01-18T16:44:56.035753229Z"
+    description: A Helm chart for Kubernetes
+    digest: bbc86165d581bcae10c4e0280f045c40c46fdcda7ea9fe34b108be802354a5b2
+    name: bluescape-monitoring-dashboards
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-dashboards-0.3.30/bluescape-monitoring-dashboards-0.3.30.tgz
+    version: 0.3.30
+  - apiVersion: v2
+    appVersion: 1.16.4
     created: "2023-11-29T15:04:03.959846465Z"
     description: A Helm chart for Kubernetes
     digest: cfe29d9e0ae904ff498398af083c5c495411eae48e3c5fe4be2abc1b27b94e4e
@@ -3020,6 +3030,40 @@ entries:
   - annotations:
       category: Database
     apiVersion: v2
+    appVersion: 5.0.10
+    created: "2024-01-18T16:44:56.178183949Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: MongoDB(R) is a relational open source NoSQL database. Easy to use,
+      it stores data in JSON-like documents. Automated scalability and high-performance.
+      Ideal for developing cloud native applications.
+    digest: 81e9be6639d7d2f8ff4f4eebf32213c8dce6d5e238b2eed9182cf9eced6c41b3
+    home: https://github.com/bitnami/charts/tree/master/bitnami/mongodb
+    icon: https://bitnami.com/assets/stacks/mongodb/img/mongodb-stack-220x234.png
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    - cluster
+    - replicaset
+    - replication
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    name: mongodb
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/mongodb
+    - https://mongodb.org
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/mongodb-12.1.31/mongodb-12.1.31.tgz
+    version: 12.1.31
+  - annotations:
+      category: Database
+    apiVersion: v2
     appVersion: 4.4.9
     created: "2022-06-17T02:54:12.095384475Z"
     dependencies:
@@ -3270,4 +3314,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2023-11-29T15:04:03.960722677Z"
+generated: "2024-01-18T16:44:56.179064497Z"
