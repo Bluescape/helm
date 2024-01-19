@@ -3064,6 +3064,40 @@ entries:
   - annotations:
       category: Database
     apiVersion: v2
+    appVersion: 5.0.10
+    created: "2024-01-19T21:54:26.119118482Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: MongoDB(R) is a relational open source NoSQL database. Easy to use,
+      it stores data in JSON-like documents. Automated scalability and high-performance.
+      Ideal for developing cloud native applications.
+    digest: 18a133e0dc4e0cb9426444c246a0232e9b57b7055089d932083de55734e9f671
+    home: https://github.com/bitnami/charts/tree/master/bitnami/mongodb
+    icon: https://bitnami.com/assets/stacks/mongodb/img/mongodb-stack-220x234.png
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    - cluster
+    - replicaset
+    - replication
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    name: mongodb
+    sources:
+    - https://github.com/bitnami/containers/tree/main/bitnami/mongodb
+    - https://mongodb.org
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/mongodb-12.1.31-bs1/mongodb-12.1.31-bs1.tgz
+    version: 12.1.31-bs1
+  - annotations:
+      category: Database
+    apiVersion: v2
     appVersion: 4.4.9
     created: "2022-06-17T02:54:12.095384475Z"
     dependencies:
@@ -3314,4 +3348,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2024-01-18T16:44:56.179064497Z"
+generated: "2024-01-19T21:54:26.119893988Z"
