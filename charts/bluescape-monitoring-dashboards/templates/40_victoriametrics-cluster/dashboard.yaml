@@ -1,0 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name:  victoriametrics-clusters-dashboard
+
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  json: ""
+  configMapRef:
+    name: victoriametrics-clusters-dashboard
+    key:  victoriametrics-clusters-dashboard.json
