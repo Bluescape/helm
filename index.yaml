@@ -2825,6 +2825,23 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/kube-oidc-proxy-0.3.1/kube-oidc-proxy-0.3.1.tgz
     version: 0.3.1
+  kubed:
+  - apiVersion: v1
+    appVersion: v0.12.0
+    created: "2024-02-05T17:51:36.881323054Z"
+    description: Kubed by AppsCode - Kubernetes daemon
+    digest: be5f16769d2bb3f0ed4a1b8fb9aa122190e7cfb1b42aaea45ffe2e40be269746
+    home: https://github.com/appscode/kubed
+    icon: https://cdn.appscode.com/images/products/kubed/icons/android-icon-192x192.png
+    maintainers:
+    - email: support@appscode.com
+      name: appscode
+    name: kubed
+    sources:
+    - https://github.com/appscode/kubed
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/kubed-v0.12.0/kubed-v0.12.0.tgz
+    version: v0.12.0
   lacework-agent:
   - apiVersion: v1
     appVersion: "1.2"
@@ -3378,4 +3395,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2024-02-02T22:01:11.979064331Z"
+generated: "2024-02-05T17:51:36.882280527Z"
