@@ -1,0 +1,6 @@
+# Ignore VSCode and Idea config dirs
+.idea
+.vscode
+
+# Ignore .DS_Store in all folders
+**/.DS_Store
