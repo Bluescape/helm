@@ -15,6 +15,10 @@ spec:
       port: 8000
       targetPort: metrics-enroute
       protocol: TCP
+    - name: envoy-admin
+      protocol: TCP
+      port: 9001
+      targetPort: 9001
   selector:
     {{- include "enroute.selectorLabels" . | nindent 4 }}
   type: ClusterIP
