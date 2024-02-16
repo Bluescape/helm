@@ -288,6 +288,7 @@ data:
             "y": 1
           },
           "id": 130,
+          "interval": "1m",
           "links": [],
           "maxDataPoints": 100,
           "options": {
@@ -9128,7 +9129,6 @@ data:
       },
       "timepicker": {
         "refresh_intervals": [
-          "10s",
           "30s",
           "1m",
           "5m",
