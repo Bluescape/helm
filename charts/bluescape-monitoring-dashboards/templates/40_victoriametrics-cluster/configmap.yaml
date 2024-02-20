@@ -57,7 +57,7 @@ data:
               "uid": "$ds"
             },
             "enable": true,
-            "expr": "sum(changes(vm_app_start_timestamp{job=~\"$job\", instance=~\"$instance\"})) by(job)",
+            "expr": "sum(changes(vm_app_start_timestamp{job=~\"$job\", instance=~\"$instance\"}[1m])) by(job)",
             "hide": true,
             "iconColor": "dark-yellow",
             "name": "restarts",
@@ -70,7 +70,7 @@ data:
       "fiscalYearStartMonth": 0,
       "gnetId": 11176,
       "graphTooltip": 1,
-      "id": 82,
+      "id": 65,
       "links": [
         {
           "icon": "doc",
@@ -288,6 +288,7 @@ data:
             "y": 1
           },
           "id": 130,
+          "interval": "1m",
           "links": [],
           "maxDataPoints": 100,
           "options": {
@@ -964,6 +965,7 @@ data:
             "y": 13
           },
           "id": 2,
+          "interval": "1m",
           "options": {
             "legend": {
               "calcs": [
@@ -1069,6 +1071,7 @@ data:
             "y": 13
           },
           "id": 6,
+          "interval": "1m",
           "links": [],
           "options": {
             "legend": {
@@ -1285,6 +1288,7 @@ data:
             "y": 21
           },
           "id": 8,
+          "interval": "1m",
           "links": [],
           "options": {
             "legend": {
@@ -1392,6 +1396,7 @@ data:
             "y": 29
           },
           "id": 52,
+          "interval": "1m",
           "links": [],
           "options": {
             "legend": {
@@ -1475,7 +1480,7 @@ data:
                 {
                   "targetBlank": true,
                   "title": "Drilldown",
-                  "url": "/d/oS7Bi_0Wz?viewPanel=203&var-job=${__field.labels.job}&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                  "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=203&var-job=${__field.labels.job}&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                 }
               ],
               "mappings": [],
@@ -1505,6 +1510,7 @@ data:
             "y": 29
           },
           "id": 104,
+          "interval": "30s",
           "links": [],
           "options": {
             "legend": {
@@ -1532,13 +1538,14 @@ data:
                 "uid": "$ds"
               },
               "editorMode": "code",
-              "exemplar": true,
+              "exemplar": false,
               "expr": "sum(rate(vm_log_messages_total{job=~\"$job\",instance=~\"$instance\", level!=\"info\"}[$__rate_interval])) by (job, level) > 0",
               "format": "time_series",
               "hide": false,
+              "instant": false,
               "interval": "5m",
               "intervalFactor": 1,
-              "legendFormat": "{{`{{job}}`}} - {{`{{level}}`}}",
+              "legendFormat": "{{`{{job}} - {{level}}`}}",
               "range": true,
               "refId": "A"
             }
@@ -1605,7 +1612,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=189&var-job=${__field.labels.job}&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=189&var-job=${__field.labels.job}&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -1631,7 +1638,7 @@ data:
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 14
+                "y": 38
               },
               "id": 66,
               "links": [],
@@ -1717,7 +1724,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=190&var-job=${__field.labels.job}&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=190&var-job=${__field.labels.job}&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -1743,9 +1750,10 @@ data:
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 14
+                "y": 38
               },
               "id": 138,
+              "interval": "30s",
               "links": [],
               "options": {
                 "legend": {
@@ -1828,7 +1836,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=192&var-job=${__field.labels.job}&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=192&var-job=${__field.labels.job}&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -1854,9 +1862,10 @@ data:
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 22
+                "y": 46
               },
               "id": 64,
+              "interval": "1m",
               "links": [],
               "options": {
                 "legend": {
@@ -1974,9 +1983,10 @@ data:
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 22
+                "y": 46
               },
               "id": 122,
+              "interval": "1m",
               "links": [],
               "options": {
                 "legend": {
@@ -2115,7 +2125,7 @@ data:
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 30
+                "y": 54
               },
               "id": 117,
               "links": [],
@@ -2235,9 +2245,10 @@ data:
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 30
+                "y": 54
               },
               "id": 204,
+              "interval": "1m",
               "links": [],
               "options": {
                 "legend": {
@@ -2359,7 +2370,7 @@ data:
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 38
+                "y": 62
               },
               "id": 68,
               "links": [],
@@ -2464,9 +2475,10 @@ data:
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 38
+                "y": 62
               },
               "id": 119,
+              "interval": "30s",
               "options": {
                 "legend": {
                   "calcs": [
@@ -2569,7 +2581,7 @@ data:
                 "h": 8,
                 "w": 12,
                 "x": 0,
-                "y": 46
+                "y": 70
               },
               "id": 70,
               "links": [],
@@ -2674,9 +2686,10 @@ data:
                 "h": 8,
                 "w": 12,
                 "x": 12,
-                "y": 46
+                "y": 70
               },
               "id": 120,
+              "interval": "30s",
               "options": {
                 "legend": {
                   "calcs": [
@@ -3035,6 +3048,7 @@ data:
                 "y": 87
               },
               "id": 142,
+              "interval": "1m",
               "links": [
                 {
                   "targetBlank": true,
@@ -3248,6 +3262,7 @@ data:
                 "y": 95
               },
               "id": 170,
+              "interval": "1m",
               "links": [],
               "options": {
                 "legend": {
@@ -4060,6 +4075,7 @@ data:
                 "y": 129
               },
               "id": 80,
+              "interval": "1m",
               "links": [],
               "options": {
                 "legend": {
@@ -4167,6 +4183,7 @@ data:
                 "y": 129
               },
               "id": 78,
+              "interval": "1m",
               "links": [],
               "options": {
                 "legend": {
@@ -4594,7 +4611,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=196&${__url_time_range}&${__all_variables}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=196&${__url_time_range}&${__all_variables}"
                     }
                   ],
                   "mappings": [],
@@ -4707,7 +4724,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=192&var-job=$job_storage&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=192&var-job=$job_storage&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -4853,7 +4870,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=189&var-job=$job_storage&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=189&var-job=$job_storage&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -5021,6 +5038,7 @@ data:
                 "y": 161
               },
               "id": 141,
+              "interval": "1m",
               "links": [
                 {
                   "targetBlank": true,
@@ -5452,7 +5470,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=200&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=200&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -5699,7 +5717,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=201&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=201&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -6324,7 +6342,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=192&var-job=$job_select&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=192&var-job=$job_select&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -6469,7 +6487,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=189&var-job=$job_select&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=189&var-job=$job_select&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -7442,7 +7460,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=192&var-job=$job_insert&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=192&var-job=$job_insert&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -7587,7 +7605,7 @@ data:
                     {
                       "targetBlank": true,
                       "title": "Drilldown",
-                      "url": "/d/oS7Bi_0Wz?viewPanel=189&var-job=$job_insert&var-ds=$ds&var-instance=$instance&${__url_time_range}"
+                      "url": "/d/7489ae2f02a0332ea4bf07dcab9f26040eed2ef1?viewPanel=189&var-job=$job_insert&var-ds=$ds&var-instance=$instance&${__url_time_range}"
                     }
                   ],
                   "mappings": [],
@@ -8081,6 +8099,7 @@ data:
                 "y": 267
               },
               "id": 114,
+              "interval": "1m",
               "links": [],
               "options": {
                 "legend": {
@@ -8767,7 +8786,7 @@ data:
                   "expr": "sum(vm_data_size_bytes{job=~\"$job\", instance=~\"$instance\", type=~\"indexdb.*\"}) by(job, instance)",
                   "format": "time_series",
                   "intervalFactor": 1,
-                  "legendFormat": "{{`{{job}}`}}:{{`{{instance}}`}} (indexdb)",
+                  "legendFormat": "{{`{{job}}:{{instance}}`}} (indexdb)",
                   "range": true,
                   "refId": "A"
                 },
@@ -8781,7 +8800,7 @@ data:
                   "format": "time_series",
                   "hide": false,
                   "intervalFactor": 1,
-                  "legendFormat": "{{`{{job}}`}}:{{`{{instance}}`}} (datapoints)",
+                  "legendFormat": "{{`{{job}}:{{instance}}`}} (datapoints)",
                   "range": true,
                   "refId": "B"
                 }
@@ -9105,12 +9124,11 @@ data:
         ]
       },
       "time": {
-        "from": "now-15m",
+        "from": "now-30m",
         "to": "now"
       },
       "timepicker": {
         "refresh_intervals": [
-          "10s",
           "30s",
           "1m",
           "5m",
@@ -9123,7 +9141,7 @@ data:
       },
       "timezone": "",
       "title": "VictoriaMetrics - cluster",
-      "uid": "oS7Bi_0Wz",
-      "version": 2,
+      "uid": "7489ae2f02a0332ea4bf07dcab9f26040eed2ef1",
+      "version": 1,
       "weekStart": ""
     }
