@@ -2201,6 +2201,6 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: logginglokifrontenddashboard
-        labels:
-            {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
     
