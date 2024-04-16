@@ -1,0 +1,12 @@
+apiVersion: integreatly.org/v1alpha1
+kind: GrafanaDashboard
+metadata:
+  name:  Logging - Loki Frontend Dashboard
+
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
+spec:
+  json: ""
+  configMapRef:
+    name:  Logging - Loki Frontend Dashboard
+    key:  logginglokifrontenddashboard-dashboard.json
