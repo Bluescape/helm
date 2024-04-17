@@ -1,7 +1,7 @@
 ---
 apiVersion: v1
 data:
-  logginglokifrontenddashboard-dashboard.json: |-
+  logging-lokifrontenddashboard-dashboard.json: |-
     {
       "annotations": {
         "list": [
@@ -2200,7 +2200,7 @@ data:
 kind: ConfigMap
 metadata:
   creationTimestamp: null
-  name: logginglokifrontenddashboard
+  name: logging-lokifrontenddashboard
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
     
