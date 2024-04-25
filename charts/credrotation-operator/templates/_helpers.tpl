@@ -23,6 +23,17 @@ If release name contains chart name it will be used as a full name.
 {{- end }}
 {{- end }}
 
+
+{{/* Create a default fully qualified app name for the db-shim.  */}}
+{{- define "db-shim-configmap.name" -}}
+{{- if .Values.dbShimName }}
+{{- .Values.dbShimName | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- default "db-shim-api" }}
+{{- end }}
+{{- end }}
+
+
 {{/*
 Create chart name and version as used by the chart label.
 */}}
@@ -48,6 +59,7 @@ Selector labels
 {{- define "credrotator-operator.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "credrotator-operator.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app: {{ include "db-shim-configmap.name" . }}-cm
 {{- end }}
 
 {{/*
