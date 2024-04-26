@@ -1,15 +1,25 @@
+{{- $root := . -}}
+{{- with .Values.services }}
+  {{- range $key, $value := . }}
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "credrotator-operator.fullname" . }}
+  name: {{ $key }}
   labels:
-    {{- include "credrotator-operator.labels" . | nindent 4 }}
+    {{- include "credrotator-operator.labels" $root | nindent 4}}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{$value.type}}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: metrics
-      protocol: TCP
-      name: metrics
+    {{- with $value.ports}}
+    {{- range $pkey, $pvalue := .}}
+    - name: {{$pvalue.name}}
+      port: {{$pvalue.port}}
+      targetPort: {{$pvalue.targetPort}}
+      protocol: {{$pvalue.protocol}}
+    {{- end}}
+    {{- end}}
   selector:
-    {{- include "credrotator-operator.selectorLabels" . | nindent 4 }}
+    {{- include "credrotator-operator.selectorLabels" $root | nindent 4}}
+    {{- end }}
+    {{- end }}

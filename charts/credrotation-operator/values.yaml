@@ -54,9 +54,20 @@ securityContext:
   runAsNonRoot: true
   runAsUser: ruby
 
-service:
-  type: ClusterIP
-  port: 9100
+services:
+  metrics:
+    type: ClusterIP
+    ports:
+      - name: metrics
+        port: 9100
+        protocol: TCP
+  shim-api:
+    type: ClusterIP
+    ports:
+      - name: http
+        port: 80
+        protocol: TCP
+        targetPort: 8080
 
 ingress:
   enabled: false
