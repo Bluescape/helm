@@ -55,7 +55,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- define "credrotator-operator.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "credrotator-operator.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-app: {{ include "db-shim-configmap.name" . }}-cm
+app: {{ include "db-shim-configmap.name" . }}
 {{- end }}
 
 
