@@ -36,12 +36,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
 {{- if .Values.podEnvironment.env }}
           env:
-            - name: LOG_LEVEL
-              value: info
-            - name: DEBUG_HTTP
-              value: "false"
-            - name: DB_SHIM_ADDR
-              value: db-shim-service.credentialrotation.svc.cluster.local
 {{- range $envVar := .Values.podEnvironment.env }}
             {{- if eq $envVar.name "DB_SHIM_IMAGE" }}
             - name: {{ $envVar.name }}
