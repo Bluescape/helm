@@ -1978,6 +1978,16 @@ entries:
     - https://github.com/Bluescape/helm/releases/download/credrotator-operator-0.1.1/credrotator-operator-0.1.1.tgz
     version: 0.1.1
   - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2024-04-30T00:33:19.354442592Z"
+    description: A Helm chart for Kubernetes
+    digest: d499a1be8b887dd0e84c085256e69aee6b54f727df80fc1c6245edf4fbe6074e
+    name: credrotator-operator
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/credrotator-operator-0.1.1-alpha1/credrotator-operator-0.1.1-alpha1.tgz
+    version: 0.1.1-alpha1
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2023-04-27T00:41:07.329379293Z"
     description: A Helm chart for Kubernetes
@@ -3500,4 +3510,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2024-04-29T18:37:17.6486875Z"
+generated: "2024-04-30T00:33:19.355499488Z"
