@@ -52,7 +52,7 @@ securityContext:
     - ALL
   readOnlyRootFilesystem: false
   runAsNonRoot: true
-  runAsUser: ruby
+  runAsUser: 1000
 
 services:
   metrics:
@@ -61,13 +61,6 @@ services:
       - name: metrics
         port: 9100
         protocol: TCP
-  shim-api:
-    type: ClusterIP
-    ports:
-      - name: http
-        port: 80
-        protocol: TCP
-        targetPort: 8080
 
 ingress:
   enabled: false
