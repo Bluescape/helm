@@ -23,6 +23,12 @@ spec:
     resource:
       name: cpu
       targetAverageUtilization: {{ .Values.pilot.cpu.targetAverageUtilization }}
+  {{- if .Values.pilot.memory.targetAverageUtilization }}
+  - type: Resource
+    resource:
+      name: memory
+      targetAverageUtilization: {{ .Values.pilot.memory.targetAverageUtilization }}
+  {{- end }}
 ---
 {{- else }}
 {{- if (semverCompare ">=1.23-0" .Capabilities.KubeVersion.GitVersion)}}
@@ -37,7 +43,7 @@ metadata:
   labels:
     app: istiod
     release: {{ .Release.Name }}
-    istio.io/rev: {{ .Values.revision | default "default" }}
+    istio.io/rev: {{ .Values.revision | default "default" | quote }}
     install.operator.istio.io/owning-resource: {{ .Values.ownerName | default "unknown" }}
     operator.istio.io/component: "Pilot"
 spec:
@@ -54,6 +60,17 @@ spec:
       target:
         type: Utilization
         averageUtilization: {{ .Values.pilot.cpu.targetAverageUtilization }}
+  {{- if .Values.pilot.memory.targetAverageUtilization }}
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: {{ .Values.pilot.memory.targetAverageUtilization }}
+  {{- end }}
+  {{- if .Values.pilot.autoscaleBehavior }}
+  behavior: {{ toYaml .Values.pilot.autoscaleBehavior | nindent 4 }}
+  {{- end }}
 ---
 {{- end }}
 {{- end }}

@@ -7,7 +7,7 @@ metadata:
     app: istiod
     release: {{ .Release.Name }}
     istio: istiod
-    istio.io/rev: {{ .Values.defaultRevision }}
+    istio.io/rev: {{ .Values.defaultRevision | quote }}
 webhooks:
   - name: validation.istio.io
     clientConfig:
@@ -32,9 +32,6 @@ webhooks:
           - networking.istio.io
           - telemetry.istio.io
           - extensions.istio.io
-          {{- if .Values.base.validateGateway }}
-          - gateway.networking.k8s.io
-          {{- end }}
         apiVersions:
           - "*"
         resources:

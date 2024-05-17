@@ -1,12 +1,12 @@
 apiVersion: v2
-name: gateway
+appVersion: 1.21.2-tetrate3-bs1
 description: Helm chart for deploying Istio gateways
-type: application
-version: 1.18.2
-appVersion: 1.18.2
-sources:
-- https://github.com/istio/istio
 icon: https://istio.io/latest/favicons/android-192x192.png
 keywords:
 - istio
 - gateways
+name: gateway
+sources:
+- https://github.com/istio/istio
+type: application
+version: 1.21.2-tetrate3-bs1

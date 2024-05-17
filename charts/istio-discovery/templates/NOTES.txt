@@ -10,7 +10,6 @@ Next steps:
     * https://istio.io/latest/docs/tasks/traffic-management
     * https://istio.io/latest/docs/tasks/security/
     * https://istio.io/latest/docs/tasks/policy-enforcement/
-    * https://istio.io/latest/docs/tasks/policy-enforcement/
   * Review the list of actively supported releases, CVE publications and our hardening guide:
     * https://istio.io/latest/docs/releases/supported-releases/
     * https://istio.io/latest/news/security/
@@ -52,5 +51,19 @@ For further documentation see https://istio.io website
 {{- $res := tpl (print "{{" (repeat (split "." $dep | len) "(")  ".Values." (replace "." ")." $dep) ")}}") $}}
 {{- if not (eq $res "")}}
 WARNING: {{$dep|quote}} is deprecated; use {{$replace|quote}} instead.
+{{- end }}
+{{- end }}
+{{-
+  $failDeps := dict
+    "telemetry.v2.prometheus.configOverride"
+    "telemetry.v2.stackdriver.configOverride"
+    "telemetry.v2.stackdriver.disableOutbound"
+    "telemetry.v2.stackdriver.outboundAccessLogging"
+}}
+{{- range $dep, $replace := $failDeps }}
+{{- /* Complex logic to turn the string above into a null-safe traversal like ((.Values.global).certificates */}}
+{{- $res := tpl (print "{{" (repeat (split "." $dep | len) "(")  ".Values." (replace "." ")." $dep) ")}}") $}}
+{{- if not (eq $res "")}}
+{{fail (print $dep " is removed")}}
 {{- end }}
 {{- end }}
