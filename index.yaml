@@ -13,6 +13,20 @@ entries:
     version: 0.2.0
   base:
   - apiVersion: v1
+    appVersion: 1.20.6-tetrate0-alpha2
+    created: "2024-05-17T01:51:01.365864681Z"
+    description: Helm chart for deploying Istio cluster resources and CRDs
+    digest: be093fe055b212a2db35f19623491d8648c621b1be2e5c709c06bf4e62bd75cc
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio
+    name: base
+    sources:
+    - https://github.com/istio/istio
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/base-1.20.6-tetrate0-alpha2/base-1.20.6-tetrate0-alpha2.tgz
+    version: 1.20.6-tetrate0-alpha2
+  - apiVersion: v1
     appVersion: 1.18.2
     created: "2023-09-08T22:43:46.217022478Z"
     description: Helm chart for deploying Istio cluster resources and CRDs
@@ -2057,6 +2071,21 @@ entries:
     version: 1.15.4-alpha1
   cni:
   - apiVersion: v1
+    appVersion: 1.20.6-tetrate0-alpha2
+    created: "2024-05-17T01:51:01.491182487Z"
+    description: Helm chart for istio-cni components
+    digest: 4eeabbb9d6183cbc471dbbc95ad36058d7361f82bba43846124314aacc6dc4cd
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio-cni
+    - istio
+    name: cni
+    sources:
+    - https://github.com/istio/istio/tree/release-1.20/cni
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/cni-1.20.6-tetrate0-alpha2/cni-1.20.6-tetrate0-alpha2.tgz
+    version: 1.20.6-tetrate0-alpha2
+  - apiVersion: v1
     appVersion: 1.18.2
     created: "2023-09-08T22:43:46.355189718Z"
     description: Helm chart for istio-cni components
@@ -2880,6 +2909,22 @@ entries:
     version: 0.4.0
   gateway:
   - apiVersion: v2
+    appVersion: 1.20.6-tetrate0-alpha2
+    created: "2024-05-17T01:51:01.643309216Z"
+    description: Helm chart for deploying Istio gateways
+    digest: 73d3b726febbe31fa65b31c749ebe30d175affc5dac09b8a88e15204b4bee9e9
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio
+    - gateways
+    name: gateway
+    sources:
+    - https://github.com/istio/istio
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/gateway-1.20.6-tetrate0-alpha2/gateway-1.20.6-tetrate0-alpha2.tgz
+    version: 1.20.6-tetrate0-alpha2
+  - apiVersion: v2
     appVersion: 1.18.2
     created: "2023-09-08T22:43:46.473085415Z"
     description: Helm chart for deploying Istio gateways
@@ -3185,6 +3230,22 @@ entries:
     - https://github.com/Bluescape/helm/releases/download/istio-monitoring-0.1.0-alpha1/istio-monitoring-0.1.0-alpha1.tgz
     version: 0.1.0-alpha1
   istiod:
+  - apiVersion: v1
+    appVersion: 1.20.6-tetrate0-alpha2
+    created: "2024-05-17T01:51:01.755477617Z"
+    description: Helm chart for istio control plane
+    digest: 3cc196a4e5a69b487c7c58556c6a9e7ba68b0a998ee4b816c6f6450a4119cf89
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio
+    - istiod
+    - istio-discovery
+    name: istiod
+    sources:
+    - https://github.com/istio/istio
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/istiod-1.20.6-tetrate0-alpha2/istiod-1.20.6-tetrate0-alpha2.tgz
+    version: 1.20.6-tetrate0-alpha2
   - apiVersion: v1
     appVersion: 1.18.2
     created: "2023-09-08T22:43:46.6080106Z"
@@ -3849,4 +3910,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2024-05-15T18:44:01.916379708Z"
+generated: "2024-05-17T01:51:01.757258276Z"
