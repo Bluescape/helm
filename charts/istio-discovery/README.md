@@ -57,16 +57,20 @@ This allows safe [canary upgrades](https://istio.io/latest/docs/setup/upgrade/ca
 ```yaml
 revision: my-revision-name
 ```
+
 ### Custom Mods added for Bluescape use case.
+
 #### Files impacted :
+
 - [gateway-injection-template.yaml](files%2Fgateway-injection-template.yaml)
 - [injection-template.yaml](files%2Finjection-template.yaml)
 - [kube-gateway.yaml](files%2Fkube-gateway.yaml)
-- [deployment.yaml](templates%2Fdeployment.yaml) 
+- [deployment.yaml](templates%2Fdeployment.yaml)
 - [values.yaml](values.yaml)
 
 #### Helm Values
-The following subsection has been added to the values.yaml file, allowing users to override custom changes.
+
+The following subsection has been added to the `values.yaml` file, allowing users to override custom changes.
 
 ```yaml
 bluescapeMods:
@@ -85,21 +89,7 @@ bluescapeMods:
   #
   # This may need to be used to be changed given certain conditions. For instance, if one uses the cilium CNI
   # with certain settings, one may need to set `hostNetwork: true` and webhooks won't work unless `dnsPolicy`
-  # is set to `ClusterFirstWithHostNet`. See https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy
+  # is set to `ClusterFirstWithHostNet`. See [Kubernetes Documentation](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy)
   dnsPolicy:
-```
 
-#### How to make future updates ?
-- Use the getmesh CLI to check the latest version published by Tetrate:
-```bash
-getmesh fetch
-getmesh list
 ```
-- Check out the relevant tag from the Istio upstream at https://github.com/istio/istio/tags 
-   **AND/OR** 
-- Download the release artifact directly from https://istio-release.storage.googleapis.com/charts/index.yaml
-- Compare the files listed above between the latest release and this customized chart.
-  - make sure to update the files from the "Files Impacted" section above
-- Publish the chart to the internal Helm repository.
-- Ensure that you update `appVersion` and `version` in the `Chart.yaml` file(s) for ALL the charts to maintain parity between the upstream and this custom version.
-  - This is recommended to avoid unnecessary overrides in the custom helm chart.
