@@ -1,5 +1,8 @@
 # Default values for credrotator-operator.
 # This is a YAML-formatted file.
+# This file is not meant to be used as-is for our helm charts
+# Make sure you copy this file and modify it to suit your needs
+# and then use that copy.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
