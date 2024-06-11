@@ -22,9 +22,11 @@ spec:
     storage: true
     schema:
       openAPIV3Schema:
+        description: "RotatingCredential is the Schema for the rotatingcredentials API. This is a custom resource definition for managing rotating credentials for databases."
         type: object
         properties:
           spec:
+            description: "RotatingCredential CR spec."
             type: object
             required:
             - db_type
@@ -101,6 +103,7 @@ spec:
                     type: string
                     default: zdt
           status:
+            description: "The status for the CR. This is where the operator will store the current state of the CR."
             type: object
             properties:
               # type of database (db, postgres, mongo)
