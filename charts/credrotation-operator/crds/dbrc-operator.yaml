@@ -5,7 +5,7 @@ metadata:
   name: rotatingcredentials.sretools.bluescape.io
   # https://github.io/kubernetes/enhancements/blob/master/keps/sig-api-machinery/2337-k8s.io-group-protection/README.md
   annotations:
-    "api-approved.kubernetes.io": "unapproved, experimentalal-only; please get an approval from Kubernetes API reviewers if you're trying to develop a..."
+    "api-approved.kubernetes.io": "unapproved, experimental-only; please get an approval from Kubernetes API reviewers if you're trying to develop a..."
 spec:
   group: sretools.bluescape.io
   names:
@@ -28,7 +28,10 @@ spec:
             type: object
             required:
             - db_type
+            - image
             properties:
+              image:
+                type: string
               db_type:
                 type: string
                 enum: ['mysql', 'postgres', 'mongodb']
@@ -68,9 +71,9 @@ spec:
                     - vault_password
                 required:
                 - vault_addr
-#             rotate_lead_time:
-#               type: string
-#               default: "14d"
+              # rotate_lead_time:
+              #   type: string
+              #   default: "14d"
               force_rotation:
                 type: boolean
                 default: false
@@ -112,18 +115,56 @@ spec:
               # the phase currently running in control loop
               phase:
                 type: string
+              # Actual expiration
+              expiration:
+                type: string
               # timestamp recorded in database of last rotation
               # note: this value is sourced from the database not the operator
               last_rotation:
                 type: string
               # timestamp calculated by days-to-expire + lastRotated
               next_rotation_eligible:
+                description: "Next Rotation Eligibility"
                 type: string
-              # Actual expiration
-              expiration:
+                default: ""
+              # password last changed
+              password_last_changed:
                 type: string
+              # password expired
+              password_expired:
+                type: string
+              password_lifetime:
+                type: integer
               cronjob_name:
+                description: "Cronjob Name"
                 type: string
+              # within_job_window
+              within_job_window:
+                type: boolean
+              host:
+                type: string
+              pod_watcher:
+                description: "Pod Watcher Active"
+                type: boolean
+              nre_override:
+                description: "Next Rotation Eligibility Override"
+                type: string
+                default: ""
+              rotation:
+                type: object
+                description: "Rotation Status"
+                properties:
+                  success:
+                    type: boolean
+                    default: false
+                  attempts:
+                    type: integer
+                    default: 0
+                  failed:
+                    type: integer
+                    default: 0
+                  pod_name:
+                    type: string
     subresources:
       status: {}
     additionalPrinterColumns:
@@ -143,6 +184,10 @@ spec:
         type: string
         description: Date of the last time credentials were rotated
         jsonPath: .status.phase
+      - name: Expiration
+        type: string
+        description: Actual credential expiration
+        jsonPath: .status.expiration
       - name: Last Rotation
         type: string
         description: Date of the last time credentials were rotated
@@ -151,10 +196,6 @@ spec:
         type: string
         description: Date of next eligible rotation
         jsonPath: .status.next_rotation_eligible
-      - name: Expiration
-        type: string
-        description: Actual credential expiration
-        jsonPath: .status.expiration
       - name: Cronjob Name
         type: string
         description: Cronjob name
