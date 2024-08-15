@@ -4045,6 +4045,32 @@ entries:
   splunk-connect-for-kubernetes:
   - apiVersion: v1
     appVersion: 1.5.4
+    created: "2024-08-15T17:19:39.537575463Z"
+    description: Collect logs, objects (metadata), and metrics with Splunk.
+    digest: 730f13c1c9fac028b0c2e65ad89cefd34219d86b516b5ce294912fc3771793bc
+    home: https://github.com/splunk/splunk-connect-for-kubernetes/tree/main/helm-chart
+    keywords:
+    - splunk
+    - monitoring
+    - logging
+    - metrics
+    - metadata
+    - objects
+    maintainers:
+    - email: DataEdge@splunk.com
+      name: Splunk Inc.
+    name: splunk-connect-for-kubernetes
+    sources:
+    - https://github.com/splunk/splunk-connect-for-kubernetes/tree/main/helm-chart
+    - https://github.com/splunk/fluent-plugin-splunk-hec
+    - https://github.com/splunk/fluent-plugin-kubernetes-metrics
+    - https://github.com/splunk/fluent-plugin-k8s-metrics-agg
+    - https://github.com/splunk/fluent-plugin-kubernetes-objects
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha3/splunk-connect-for-kubernetes-1.5.4-alpha3.tgz
+    version: 1.5.4-alpha3
+  - apiVersion: v1
+    appVersion: 1.5.4
     created: "2024-08-15T16:52:19.640876316Z"
     description: Collect logs, objects (metadata), and metrics with Splunk.
     digest: a9d313e39ccfe4d18e2e99d6cb02c35d7d60c8048dc25c19bc4e9b71494c8265
@@ -4095,4 +4121,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2024-08-15T16:52:19.641818815Z"
+generated: "2024-08-15T17:19:39.53845566Z"
