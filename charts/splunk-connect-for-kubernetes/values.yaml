@@ -1010,7 +1010,7 @@ splunk-kubernetes-metrics:
     # The domain of the registry to pull the image from
     registry: docker.io
     # The name of the image to pull
-    name: splunk/k8s-metrics-aggr
+    name: bluescape/splunk-k8s-metrics-aggr
     # The tag of the image to pull
     tag: 1.2.3
     # The policy that specifies when the user wants the images to be pulled
