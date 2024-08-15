@@ -1,0 +1,22 @@
+apiVersion: v1
+appVersion: 1.5.4
+description: Collect logs, objects (metadata), and metrics with Splunk.
+home: https://github.com/splunk/splunk-connect-for-kubernetes/tree/main/helm-chart
+keywords:
+- splunk
+- monitoring
+- logging
+- metrics
+- metadata
+- objects
+maintainers:
+- email: DataEdge@splunk.com
+  name: Splunk Inc.
+name: splunk-connect-for-kubernetes
+sources:
+- https://github.com/splunk/splunk-connect-for-kubernetes/tree/main/helm-chart
+- https://github.com/splunk/fluent-plugin-splunk-hec
+- https://github.com/splunk/fluent-plugin-kubernetes-metrics
+- https://github.com/splunk/fluent-plugin-k8s-metrics-agg
+- https://github.com/splunk/fluent-plugin-kubernetes-objects
+version: 1.5.4
