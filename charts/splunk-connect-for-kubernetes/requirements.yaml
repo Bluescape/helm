@@ -1,13 +1,7 @@
 dependencies:
   - name: splunk-kubernetes-logging
-    version: 1.5.4
-    repository: file://chats/splunk-kubernetes-logging/
     condition: splunk-kubernetes-logging.enabled
   - name: splunk-kubernetes-objects
-    version: 1.5.4
-    repository: file://chats/splunk-kubernetes-objects/
     condition: splunk-kubernetes-objects.enabled
   - name: splunk-kubernetes-metrics
-    version: 1.5.4
-    repository: file://chats/splunk-kubernetes-metrics/
     condition: splunk-kubernetes-metrics.enabled
