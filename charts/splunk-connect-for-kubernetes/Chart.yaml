@@ -19,4 +19,4 @@ sources:
 - https://github.com/splunk/fluent-plugin-kubernetes-metrics
 - https://github.com/splunk/fluent-plugin-k8s-metrics-agg
 - https://github.com/splunk/fluent-plugin-kubernetes-objects
-version: 1.5.4-alpha4
+version: 1.5.4-alpha5
