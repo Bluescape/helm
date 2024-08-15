@@ -2374,6 +2374,16 @@ entries:
     version: 0.5.1
   credrotator-operator:
   - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2024-08-15T15:36:03.079394767Z"
+    description: A Helm chart for Kubernetes
+    digest: 6d85d4e159bb5303ea95262e5693cb6c447db653f943600b1f3a6d82117953f3
+    name: credrotator-operator
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/credrotator-operator-0.1.2/credrotator-operator-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: 0.1.0
     created: "2024-04-29T18:37:17.647734847Z"
     description: A Helm chart for Kubernetes
@@ -4032,4 +4042,31 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/redis-14.1.1-alpha1/redis-14.1.1-alpha1.tgz
     version: 14.1.1-alpha1
-generated: "2024-05-17T17:36:32.127382792Z"
+  splunk-connect-for-kubernetes:
+  - apiVersion: v1
+    appVersion: 1.5.4
+    created: "2024-08-15T15:36:03.268041391Z"
+    description: Collect logs, objects (metadata), and metrics with Splunk.
+    digest: 76286997fa54a8baa9c0bbb037c4f7605bdbac48258a4db2460949991780898f
+    home: https://github.com/splunk/splunk-connect-for-kubernetes/tree/main/helm-chart
+    keywords:
+    - splunk
+    - monitoring
+    - logging
+    - metrics
+    - metadata
+    - objects
+    maintainers:
+    - email: DataEdge@splunk.com
+      name: Splunk Inc.
+    name: splunk-connect-for-kubernetes
+    sources:
+    - https://github.com/splunk/splunk-connect-for-kubernetes/tree/main/helm-chart
+    - https://github.com/splunk/fluent-plugin-splunk-hec
+    - https://github.com/splunk/fluent-plugin-kubernetes-metrics
+    - https://github.com/splunk/fluent-plugin-k8s-metrics-agg
+    - https://github.com/splunk/fluent-plugin-kubernetes-objects
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
+    version: 1.5.4-alpha
+generated: "2024-08-15T15:36:03.269704667Z"
