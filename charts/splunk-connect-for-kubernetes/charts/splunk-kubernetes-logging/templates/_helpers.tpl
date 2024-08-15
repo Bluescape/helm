@@ -169,7 +169,7 @@ Create the image name
 {{- if contains .Values.image.tag "sha256" -}}
 {{- printf "%s/%s@%s" .Values.image.registry .Values.image.name .Values.image.tag -}}
 {{- else -}}
-{{- printf "%s/%s:%s" .Values.image.registry .Values.image.name .Values.image.tag -}}
+{{- printf "%s:%s" .Values.image.name .Values.image.tag -}}
 {{- end -}}
 {{- end -}}
 
