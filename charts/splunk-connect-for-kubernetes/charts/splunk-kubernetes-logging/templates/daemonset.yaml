@@ -56,7 +56,7 @@ spec:
       {{- end }}
       {{- if .Values.image.usePullSecret }}
       imagePullSecrets:
-      - name: {{ .Values.image.pullSecretName }}
+      - name: {{ .Values.image.pullSecretName  }}
       {{- end }}
       containers:
       - name: splunk-fluentd-k8s-logs
