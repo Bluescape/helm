@@ -4045,6 +4045,45 @@ entries:
   splunk-connect-for-kubernetes:
   - apiVersion: v1
     appVersion: 1.5.4
+    created: "2024-08-15T21:55:34.139865173Z"
+    dependencies:
+    - condition: splunk-kubernetes-logging.enabled
+      name: splunk-kubernetes-logging
+      repository: file://charts/splunk-kubernetes-logging/
+      version: 1.5.4
+    - condition: splunk-kubernetes-objects.enabled
+      name: splunk-kubernetes-objects
+      repository: file://charts/splunk-kubernetes-objects/
+      version: 1.5.4
+    - condition: splunk-kubernetes-metrics.enabled
+      name: splunk-kubernetes-metrics
+      repository: file://charts/splunk-kubernetes-metrics/
+      version: 1.5.4
+    description: Collect logs, objects (metadata), and metrics with Splunk.
+    digest: cff0729a388af0f5ef4fbd47e97fb1102a81049f5a535de16b10e9fa39e23878
+    home: https://github.com/splunk/splunk-connect-for-kubernetes/tree/main/helm-chart
+    keywords:
+    - splunk
+    - monitoring
+    - logging
+    - metrics
+    - metadata
+    - objects
+    maintainers:
+    - email: DataEdge@splunk.com
+      name: Splunk Inc.
+    name: splunk-connect-for-kubernetes
+    sources:
+    - https://github.com/splunk/splunk-connect-for-kubernetes/tree/main/helm-chart
+    - https://github.com/splunk/fluent-plugin-splunk-hec
+    - https://github.com/splunk/fluent-plugin-kubernetes-metrics
+    - https://github.com/splunk/fluent-plugin-k8s-metrics-agg
+    - https://github.com/splunk/fluent-plugin-kubernetes-objects
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha6/splunk-connect-for-kubernetes-1.5.4-alpha6.tgz
+    version: 1.5.4-alpha6
+  - apiVersion: v1
+    appVersion: 1.5.4
     created: "2024-08-15T21:45:04.241492657Z"
     dependencies:
     - condition: splunk-kubernetes-logging.enabled
@@ -4186,4 +4225,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2024-08-15T21:45:04.242385517Z"
+generated: "2024-08-15T21:55:34.140740204Z"
