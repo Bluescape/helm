@@ -4045,6 +4045,45 @@ entries:
   splunk-connect-for-kubernetes:
   - apiVersion: v1
     appVersion: 1.5.4
+    created: "2024-08-15T21:45:04.241492657Z"
+    dependencies:
+    - condition: splunk-kubernetes-logging.enabled
+      name: splunk-kubernetes-logging
+      repository: file://charts/splunk-kubernetes-logging
+      version: 1.5.4
+    - condition: splunk-kubernetes-objects.enabled
+      name: splunk-kubernetes-objects
+      repository: file://charts/splunk-kubernetes-objects
+      version: 1.5.4
+    - condition: splunk-kubernetes-metrics.enabled
+      name: splunk-kubernetes-metrics
+      repository: file://charts/splunk-kubernetes-metrics
+      version: 1.5.4
+    description: Collect logs, objects (metadata), and metrics with Splunk.
+    digest: c3bdd9af32382f074d7c63213fe0f0ce67de86616e44f7f94ae8aef5682912da
+    home: https://github.com/splunk/splunk-connect-for-kubernetes/tree/main/helm-chart
+    keywords:
+    - splunk
+    - monitoring
+    - logging
+    - metrics
+    - metadata
+    - objects
+    maintainers:
+    - email: DataEdge@splunk.com
+      name: Splunk Inc.
+    name: splunk-connect-for-kubernetes
+    sources:
+    - https://github.com/splunk/splunk-connect-for-kubernetes/tree/main/helm-chart
+    - https://github.com/splunk/fluent-plugin-splunk-hec
+    - https://github.com/splunk/fluent-plugin-kubernetes-metrics
+    - https://github.com/splunk/fluent-plugin-k8s-metrics-agg
+    - https://github.com/splunk/fluent-plugin-kubernetes-objects
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha5/splunk-connect-for-kubernetes-1.5.4-alpha5.tgz
+    version: 1.5.4-alpha5
+  - apiVersion: v1
+    appVersion: 1.5.4
     created: "2024-08-15T20:15:11.575185724Z"
     description: Collect logs, objects (metadata), and metrics with Splunk.
     digest: e16ac966d5b2707f95a25336871909ffa5134cef659e1b67190679b70408f644
@@ -4147,4 +4186,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2024-08-15T20:15:11.576087827Z"
+generated: "2024-08-15T21:45:04.242385517Z"
