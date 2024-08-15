@@ -2,7 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-enabled: true
 # = Log Level =
 # logLevel is to set log level of the Splunk kubernetes metrics collector. Avaiable values are:
 # * debug
