@@ -1,14 +1,16 @@
+{{- /*
+Copyright VMware, Inc.
+SPDX-License-Identifier: APACHE-2.0
+*/}}
+
 {{- if eq .Values.architecture "replicaset" }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ printf "%s-scripts" (include "mongodb.fullname" .) }}
   namespace: {{ include "mongodb.namespace" . | quote }}
-  labels: {{- include "common.labels.standard" . | nindent 4 }}
+  labels: {{- include "common.labels.standard" ( dict "customLabels" .Values.commonLabels "context" $ ) | nindent 4 }}
     app.kubernetes.io/component: mongodb
-    {{- if .Values.commonLabels }}
-    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
-    {{- end }}
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
@@ -75,7 +77,9 @@ data:
     {{- end }}
     {{- else if eq .Values.externalAccess.service.type "NodePort" }}
     ID="${MY_POD_NAME#"{{ $fullname }}-"}"
-    export MONGODB_ADVERTISED_PORT_NUMBER=$(echo '{{ .Values.externalAccess.service.nodePorts }}' | tr -d '[]' | cut -d ' ' -f "$(($ID + 1))")
+    if is_empty_value "$MONGODB_ADVERTISED_PORT_NUMBER"; then
+      export MONGODB_ADVERTISED_PORT_NUMBER=$(echo '{{ .Values.externalAccess.service.nodePorts }}' | tr -d '[]' | cut -d ' ' -f "$(($ID + 1))")
+    fi
     {{- if .Values.externalAccess.service.domain }}
     export MONGODB_ADVERTISED_HOSTNAME={{ .Values.externalAccess.service.domain }}
     {{- else }}
@@ -114,8 +118,12 @@ data:
       {{- range $e, $i := until $replicaCount }}
       {{- $mongoList = append $mongoList (printf "%s-%d.%s-headless.%s.svc.%s:%d" $fullname $i $fullname $releaseNamespace $clusterDomain $portNumber) }}
       {{- end }}
-      current_primary=$(mongosh admin --host "{{ join "," $mongoList }}" {{- if .Values.auth.enabled }} --authenticationDatabase admin -u root -p $MONGODB_ROOT_PASSWORD{{- end }}{{- if .Values.tls.enabled}} --tls --tlsCertificateKeyFile=/certs/mongodb.pem --tlsCAFile=/certs/mongodb-ca-cert{{- end }} --eval 'db.runCommand("ismaster")' | awk -F\' '/primary/ {print $2}')
 
+      {{- if .Values.externalAccess.externalMaster.enabled }}
+        current_primary={{ printf "%s:%d" (.Values.externalAccess.externalMaster.host) ( int .Values.externalAccess.externalMaster.port) }}
+      {{- else }}
+        current_primary=$(mongosh admin --host "{{ join "," $mongoList }}" {{- if .Values.auth.enabled }} --authenticationDatabase admin -u $MONGODB_ROOT_USER -p $MONGODB_ROOT_PASSWORD{{- end }}{{- if .Values.tls.enabled}} --tls --tlsCertificateKeyFile=/certs/mongodb.pem --tlsCAFile=/certs/mongodb-ca-cert{{- end }} --eval 'db.runCommand("ismaster")' | awk -F\' '/primary/ {print $2}')
+      {{- end }}
       if ! is_empty_value "$current_primary"; then
         info "Detected existing primary: ${current_primary}"
       fi
@@ -168,7 +176,9 @@ data:
     {{- end }}
     {{- else if eq .Values.externalAccess.hidden.service.type "NodePort" }}
     ID="${MY_POD_NAME#"{{ $fullname }}-hidden-"}"
-    export MONGODB_ADVERTISED_PORT_NUMBER=$(echo '{{ .Values.externalAccess.hidden.service.nodePorts }}' | tr -d '[]' | cut -d ' ' -f "$(($ID + 1))")
+    if is_empty_value "$MONGODB_ADVERTISED_PORT_NUMBER"; then
+      export MONGODB_ADVERTISED_PORT_NUMBER=$(echo '{{ .Values.externalAccess.service.nodePorts }}' | tr -d '[]' | cut -d ' ' -f "$(($ID + 1))")
+    fi
     {{- if .Values.externalAccess.hidden.service.domain }}
     export MONGODB_ADVERTISED_HOSTNAME={{ .Values.externalAccess.hidden.service.domain }}
     {{- else }}
@@ -215,7 +225,7 @@ data:
     SLEEP_PERIOD=10
 
     {{- if and .Values.auth.enabled .Values.auth.rootPassword }}
-    usernameAndPassword="-u root -p ${MONGODB_ROOT_PASSWORD}"
+    usernameAndPassword="-u ${MONGODB_ROOT_USER} -p ${MONGODB_ROOT_PASSWORD}"
     {{- else }}
     usernameAndPassword=""
     {{- end }}
