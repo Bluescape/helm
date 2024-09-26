@@ -1,3 +1,8 @@
+{{/*
+Copyright VMware, Inc.
+SPDX-License-Identifier: APACHE-2.0
+*/}}
+
 {{/* vim: set filetype=mustache: */}}
 {{/*
 Expand the name of the chart.
@@ -22,9 +27,13 @@ Create a default mongo service name which can be overridden.
     {{- if and .Values.service .Values.service.nameOverride -}}
         {{- print .Values.service.nameOverride -}}
     {{- else -}}
-        {{- printf "%s-headless" (include "mongodb.fullname" .) -}}
-    {{- end }}
-{{- end }}
+        {{- if eq .Values.architecture "replicaset" -}}
+            {{- printf "%s-headless" (include "mongodb.fullname" .) -}}
+        {{- else -}}
+            {{- printf "%s" (include "mongodb.fullname" .) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
 
 {{/*
 Create a default mongo arbiter service name which can be overridden.
@@ -285,6 +294,8 @@ Compile all warnings into a single message, and call fail.
 {{- $messages := append $messages (include "mongodb.validateValues.loadBalancerIPsListLength" .) -}}
 {{- $messages := append $messages (include "mongodb.validateValues.nodePortListLength" .) -}}
 {{- $messages := append $messages (include "mongodb.validateValues.externalAccessAutoDiscoveryRBAC" .) -}}
+{{- $messages := append $messages (include "mongodb.validateValues.replicaset.existingSecrets" .) -}}
+{{- $messages := append $messages (include "mongodb.validateValues.hidden.existingSecrets" .) -}}
 {{- $messages := without $messages "" -}}
 {{- $message := join "\n" $messages -}}
 
@@ -385,19 +396,44 @@ mongodb: rbac.create
 {{- end -}}
 
 {{/*
+Validate values of MongoDB&reg; - Number of replicaset secrets must be the same than number of replicaset nodes.
+*/}}
+{{- define "mongodb.validateValues.replicaset.existingSecrets" -}}
+{{- if and .Values.tls.enabled (eq .Values.architecture "replicaset") (not (empty .Values.tls.replicaset.existingSecrets)) }}
+{{- $nbSecrets := len .Values.tls.replicaset.existingSecrets -}}
+{{- if not (eq $nbSecrets (int .Values.replicaCount)) }}
+mongodb: tls.replicaset.existingSecrets
+    tls.replicaset.existingSecrets Number of secrets and number of replicaset nodes must be the same.
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Validate values of MongoDB&reg; - Number of hidden secrets must be the same than number of hidden nodes.
+*/}}
+{{- define "mongodb.validateValues.hidden.existingSecrets" -}}
+{{- if and .Values.tls.enabled (include "mongodb.hidden.enabled" .) (not (empty .Values.tls.hidden.existingSecrets)) }}
+{{- $nbSecrets := len .Values.tls.hidden.existingSecrets -}}
+{{- if not (eq $nbSecrets (int .Values.hidden.replicaCount)) }}
+mongodb: tls.hidden.existingSecrets
+    tls.hidden.existingSecrets Number of secrets and number of hidden nodes must be the same.
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Validate values of MongoDB&reg; exporter URI string - auth.enabled and/or tls.enabled must be enabled or it defaults
 */}}
 {{- define "mongodb.mongodb_exporter.uri" -}}
     {{- $uriTlsArgs := ternary "tls=true&tlsCertificateKeyFile=/certs/mongodb.pem&tlsCAFile=/certs/mongodb-ca-cert" "" .Values.tls.enabled -}}
     {{- if .Values.metrics.username }}
         {{- $uriAuth := ternary "$(echo $MONGODB_METRICS_USERNAME | sed -r \"s/@/%40/g;s/:/%3A/g\"):$(echo $MONGODB_METRICS_PASSWORD | sed -r \"s/@/%40/g;s/:/%3A/g\")@" "" .Values.auth.enabled -}}
-        {{- printf "mongodb://%slocalhost:27017/admin?%s" $uriAuth $uriTlsArgs -}}
+        {{- printf "mongodb://%slocalhost:%d/admin?%s" $uriAuth (int .Values.containerPorts.mongodb) $uriTlsArgs -}}
     {{- else -}}
         {{- $uriAuth := ternary "$MONGODB_ROOT_USER:$(echo $MONGODB_ROOT_PASSWORD | sed -r \"s/@/%40/g;s/:/%3A/g\")@" "" .Values.auth.enabled -}}
-        {{- printf "mongodb://%slocalhost:27017/admin?%s" $uriAuth $uriTlsArgs -}}
+        {{- printf "mongodb://%slocalhost:%d/admin?%s" $uriAuth (int .Values.containerPorts.mongodb) $uriTlsArgs -}}
     {{- end -}}
 {{- end -}}
-
 
 {{/*
 Return the appropriate apiGroup for PodSecurityPolicy.
@@ -414,7 +450,7 @@ Return the appropriate apiGroup for PodSecurityPolicy.
 Return true if a TLS secret object should be created
 */}}
 {{- define "mongodb.createTlsSecret" -}}
-{{- if and .Values.tls.enabled (not .Values.tls.existingSecret) }}
+{{- if and .Values.tls.enabled (not .Values.tls.existingSecret) (include "mongodb.autoGenerateCerts" .) }}
     {{- true -}}
 {{- end -}}
 {{- end -}}
@@ -429,4 +465,44 @@ Return the secret containing MongoDB&reg; TLS certificates
 {{- else -}}
     {{- printf "%s-ca" (include "mongodb.fullname" .) -}}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Return true if certificates must be auto generated
+*/}}
+{{- define "mongodb.autoGenerateCerts" -}}
+{{- $standalone := (eq .Values.architecture "standalone") | ternary (not .Values.tls.standalone.existingSecret) true -}}
+{{- $replicaset := (eq .Values.architecture "replicaset") | ternary (empty .Values.tls.replicaset.existingSecrets) true -}}
+{{- $arbiter := (eq (include "mongodb.arbiter.enabled" .) "true") | ternary (not .Values.tls.arbiter.existingSecret) true -}}
+{{- $hidden := (eq (include "mongodb.hidden.enabled" .) "true") | ternary (empty .Values.tls.hidden.existingSecrets) true -}}
+{{- if and $standalone $replicaset $arbiter $hidden -}}
+    {{- true -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Generate argument list for mongodb-exporter
+reference: https://github.com/percona/mongodb_exporter/blob/main/REFERENCE.md
+*/}}
+{{- define "mongodb.exporterArgs" -}}
+{{- with .Values.metrics.collector -}}
+{{- ternary " --collect-all" "" .all -}}
+{{- ternary " --collector.diagnosticdata" "" .diagnosticdata -}}
+{{- ternary " --collector.replicasetstatus" "" .replicasetstatus -}}
+{{- ternary " --collector.dbstats" "" .dbstats -}}
+{{- ternary " --collector.topmetrics" "" .topmetrics -}}
+{{- ternary " --collector.indexstats" "" .indexstats -}}
+{{- ternary " --collector.collstats" "" .collstats -}}
+{{- if .collstatsColls -}}
+{{- " --mongodb.collstats-colls=" -}}
+{{- join "," .collstatsColls -}}
+{{- end -}}
+{{- if .indexstatsColls -}}
+{{- " --mongodb.indexstats-colls=" -}}
+{{- join "," .indexstatsColls -}}
+{{- end -}}
+{{- $limitArg := print " --collector.collstats-limit=" .collstatsLimit -}}
+{{- ne (print .collstatsLimit) "0" | ternary $limitArg "" -}}
+{{- end -}}
+{{- ternary " --compatible-mode" "" .Values.metrics.compatibleMode -}}
 {{- end -}}
