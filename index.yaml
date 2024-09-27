@@ -3733,6 +3733,51 @@ entries:
   mongodb:
   - annotations:
       category: Database
+      images: |
+        - name: kubectl
+          image: docker.io/bitnami/kubectl:1.25.14-debian-11-r5
+        - name: mongodb-exporter
+          image: docker.io/bitnami/mongodb-exporter:0.39.0-debian-11-r106
+        - name: mongodb
+          image: docker.io/bitnami/mongodb:6.0.10-debian-11-r8
+        - name: nginx
+          image: docker.io/bitnami/nginx:1.25.2-debian-11-r32
+        - name: os-shell
+          image: docker.io/bitnami/os-shell:11-debian-11-r72
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 6.0.10
+    created: "2024-09-27T00:26:37.783067286Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: MongoDB(R) is a relational open source NoSQL database. Easy to use,
+      it stores data in JSON-like documents. Automated scalability and high-performance.
+      Ideal for developing cloud native applications.
+    digest: 3dcf60c8e9782b7410cf2e734ade5221a008c992d495a7ebf600e103163e72b3
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/mongodb/img/mongodb-stack-220x234.png
+    keywords:
+    - mongodb
+    - database
+    - nosql
+    - cluster
+    - replicaset
+    - replication
+    maintainers:
+    - name: VMware, Inc.
+      url: https://github.com/bitnami/charts
+    name: mongodb
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/mongodb
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/mongodb-13.18.5/mongodb-13.18.5.tgz
+    version: 13.18.5
+  - annotations:
+      category: Database
     apiVersion: v2
     appVersion: 5.0.10
     created: "2024-01-18T16:44:56.178183949Z"
@@ -4274,4 +4319,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2024-08-15T22:10:10.501432824Z"
+generated: "2024-09-27T00:26:37.783480531Z"
