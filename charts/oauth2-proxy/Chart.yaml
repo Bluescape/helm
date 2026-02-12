@@ -6,6 +6,14 @@ annotations:
       "name": "oauth2-proxy-iamguarded"
 apiVersion: v2
 appVersion: 7.12.0
+dependencies:
+  - condition: redis.enabled
+    name: redis
+    repository: file:///redis
+    version: 22.x.x
+  - name: common
+    repository: file:///common
+    version: 2.x.x
 description: A reverse proxy and static file server that provides authentication using Providers (Google, GitHub, and others) to validate accounts by email, domain or group.
 home: https://chainguard.dev
 keywords:
@@ -16,4 +24,4 @@ keywords:
   - google
   - github
 name: oauth2-proxy
-version: 8.0.2-alpha1
+version: 8.0.2-alpha2

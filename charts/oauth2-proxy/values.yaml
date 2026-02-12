@@ -749,7 +749,7 @@ externalRedis:
 redis:
   ## @param redis.enabled Deploy Redis&reg; sub-chart
   ##
-  enabled: true
+  enabled: false
   ## @param redis.architecture Redis&reg; architecture
   ##
   architecture: "standalone"
