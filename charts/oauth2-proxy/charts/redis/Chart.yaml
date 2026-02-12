@@ -1,0 +1,19 @@
+annotations:
+  category: Database
+  licenses: Apache-2.0
+apiVersion: v2
+appVersion: 8.2.0
+dependencies:
+- name: common
+  repository: file:///common
+  version: 2.x.x
+description: Redis(R) is an open source, advanced key-value store. It is often referred
+  to as a data structure server since keys can contain strings, hashes, lists, sets
+  and sorted sets.
+home: https://chainguard.dev
+keywords:
+- redis
+- keyvalue
+- database
+name: redis
+version: 22.0.3

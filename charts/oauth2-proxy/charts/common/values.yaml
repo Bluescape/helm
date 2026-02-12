@@ -1,0 +1,14 @@
+# This file has been modified by Chainguard, Inc.
+#
+# Copyright Chainguard, Inc. All Rights Reserved.
+# Chainguard, Inc. modifications are subject to the license
+# available at: https://www.chainguard.dev/legal/software-license-agreement
+#
+# Copyright Broadcom, Inc. All Rights Reserved.
+# SPDX-License-Identifier: APACHE-2.0
+
+## iamguarded/common
+## It is required by CI/CD tools and processes.
+## @skip exampleValue
+##
+exampleValue: common-chart
