@@ -335,18 +335,18 @@ image:
 ## Configuration section
 ##
 configuration:
-  ## @param configuration.clientID OAuth client ID
+  ## @param configuration.clientID OAuth client ID (if empty, use configuration.existingSecret)
   ##
-  clientID: "XXXXXXX"
-  ## @param configuration.clientSecret OAuth client secret
+  clientID: ""
+  ## @param configuration.clientSecret OAuth client secret (if empty, use configuration.existingSecret)
   ##
-  clientSecret: "XXXXXXXX"
+  clientSecret: ""
   ## Create a new secret with the following command openssl rand -base64 32 | head -c 32 | base64
   ## Use an existing secret for OAuth2 credentials (see secret.yaml for required fields)
   ##
-  ## @param configuration.cookieSecret OAuth cookie secret
+  ## @param configuration.cookieSecret OAuth cookie secret (if empty, use configuration.existingSecret)
   ##
-  cookieSecret: "XXXXXXXXXXXXXXXX"
+  cookieSecret: ""
   ## @param configuration.existingSecret Secret with the client ID, secret and cookie secret
   ##
   existingSecret: ""

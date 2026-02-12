@@ -133,21 +133,39 @@ spec:
             {{- end }}
           {{- end }}
           env:
+            {{- if or .Values.configuration.clientID .Values.configuration.existingSecret }}
             - name: OAUTH2_PROXY_CLIENT_ID
+              {{- if .Values.configuration.clientID }}
+              value: {{ .Values.configuration.clientID | quote }}
+              {{- else }}
               valueFrom:
                 secretKeyRef:
                   name: {{ template "oauth2-proxy.secretName" . }}
                   key: client-id
+              {{- end }}
+            {{- end }}
+            {{- if or .Values.configuration.clientSecret .Values.configuration.existingSecret }}
             - name: OAUTH2_PROXY_CLIENT_SECRET
+              {{- if .Values.configuration.clientSecret }}
+              value: {{ .Values.configuration.clientSecret | quote }}
+              {{- else }}
               valueFrom:
                 secretKeyRef:
                   name: {{ template "oauth2-proxy.secretName" . }}
                   key: client-secret
+              {{- end }}
+            {{- end }}
+            {{- if or .Values.configuration.cookieSecret .Values.configuration.existingSecret }}
             - name: OAUTH2_PROXY_COOKIE_SECRET
+              {{- if .Values.configuration.cookieSecret }}
+              value: {{ .Values.configuration.cookieSecret | quote }}
+              {{- else }}
               valueFrom:
                 secretKeyRef:
                   name: {{ template "oauth2-proxy.secretName" . }}
                   key: cookie-secret
+              {{- end }}
+            {{- end }}
             {{- if or .Values.redis.enabled .Values.externalRedis.host }}
             - name: OAUTH2_PROXY_SESSION_STORE_TYPE
               value: "redis"
