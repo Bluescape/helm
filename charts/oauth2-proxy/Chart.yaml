@@ -9,10 +9,10 @@ appVersion: 7.12.0
 dependencies:
   - condition: redis.enabled
     name: redis
-    repository: file:///redis
+    repository: file://./charts/redis
     version: 22.x.x
   - name: common
-    repository: file:///common
+    repository: file://./charts/common
     version: 2.x.x
 description: A reverse proxy and static file server that provides authentication using Providers (Google, GitHub, and others) to validate accounts by email, domain or group.
 home: https://chainguard.dev
