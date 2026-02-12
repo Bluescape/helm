@@ -3954,6 +3954,31 @@ entries:
     - https://github.com/Bluescape/helm/releases/download/n8n-0.1.0-alpha1/n8n-0.1.0-alpha1.tgz
     version: 0.1.0-alpha1
   oauth2-proxy:
+  - annotations:
+      category: Infrastructure
+      helm.sh/images: |
+        - "image": "cgr.dev/chainguard-private/oauth2-proxy-iamguarded:7.14.2"
+          "name": "oauth2-proxy-iamguarded"
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 7.12.0
+    created: "2026-02-12T14:47:59.204085981Z"
+    description: A reverse proxy and static file server that provides authentication
+      using Providers (Google, GitHub, and others) to validate accounts by email,
+      domain or group.
+    digest: d76f193323fae8abef7ec27ce312c7541f2260a0df9cc4b5b52dba44016867e3
+    home: https://chainguard.dev
+    keywords:
+    - kubernetes
+    - oauth
+    - oauth2
+    - authentication
+    - google
+    - github
+    name: oauth2-proxy
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/oauth2-proxy-8.0.2-alpha1/oauth2-proxy-8.0.2-alpha1.tgz
+    version: 8.0.2-alpha1
   - apiVersion: v1
     appVersion: 5.1.0
     created: "2022-05-19T22:04:04.616409326Z"
@@ -4329,4 +4354,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2026-02-05T00:38:38.838362674Z"
+generated: "2026-02-12T14:47:59.204541799Z"
