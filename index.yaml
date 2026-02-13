@@ -3962,6 +3962,39 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.12.0
+    created: "2026-02-13T15:22:11.644485186Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: file://./charts/redis
+      version: 22.x.x
+    - name: common
+      repository: file://./charts/common
+      version: 2.x.x
+    description: A reverse proxy and static file server that provides authentication
+      using Providers (Google, GitHub, and others) to validate accounts by email,
+      domain or group.
+    digest: 7b145def42d22fea6cc21b86dc5778d39100586ccab79f5ec01e014cc7ef5bfe
+    home: https://chainguard.dev
+    keywords:
+    - kubernetes
+    - oauth
+    - oauth2
+    - authentication
+    - google
+    - github
+    name: oauth2-proxy
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/oauth2-proxy-8.0.2/oauth2-proxy-8.0.2.tgz
+    version: 8.0.2
+  - annotations:
+      category: Infrastructure
+      helm.sh/images: |
+        - "image": "cgr.dev/chainguard-private/oauth2-proxy-iamguarded:7.14.2"
+          "name": "oauth2-proxy-iamguarded"
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 7.12.0
     created: "2026-02-12T15:30:04.148397082Z"
     dependencies:
     - condition: redis.enabled
@@ -4387,4 +4420,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2026-02-12T15:30:04.148884401Z"
+generated: "2026-02-13T15:22:11.644998119Z"
