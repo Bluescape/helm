@@ -9,6 +9,16 @@ metadata:
 data:
   apollo-graphql-metrics-dashboard.json: |-
     {
+      "__inputs": [
+        {
+          "name": "DS_PROMETHEUS",
+          "label": "Prometheus",
+          "description": "",
+          "type": "datasource",
+          "pluginId": "prometheus",
+          "pluginName": "Prometheus"
+        }
+      ],
       "annotations": {
         "list": [
           {
@@ -24,7 +34,9 @@ data:
             "target": {
               "limit": 100,
               "matchAny": false,
-              "tags": [],
+              "tags": [
+    
+              ],
               "type": "dashboard"
             },
             "type": "dashboard"
@@ -37,7 +49,9 @@ data:
       "gnetId": 17421,
       "graphTooltip": 1,
       "id": 92,
-      "links": [],
+      "links": [
+    
+      ],
       "liveNow": true,
       "panels": [
         {
@@ -53,14 +67,16 @@ data:
             "y": 0
           },
           "id": 10,
-          "panels": [],
+          "panels": [
+    
+          ],
           "title": "Summary",
           "type": "row"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -68,7 +84,9 @@ data:
                 "mode": "thresholds"
               },
               "decimals": 0,
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
@@ -85,7 +103,9 @@ data:
               },
               "unit": "short"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -106,7 +126,8 @@ data:
               "fields": "",
               "values": false
             },
-            "text": {},
+            "text": {
+            },
             "textMode": "auto"
           },
           "pluginVersion": "9.3.6",
@@ -114,7 +135,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": true,
@@ -129,13 +150,15 @@ data:
             }
           ],
           "title": "Queries",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "type": "stat"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -143,7 +166,9 @@ data:
                 "mode": "thresholds"
               },
               "decimals": 0,
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -163,7 +188,9 @@ data:
               },
               "unit": "percentunit"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -184,7 +211,8 @@ data:
               "fields": "",
               "values": false
             },
-            "text": {},
+            "text": {
+            },
             "textMode": "auto"
           },
           "pluginVersion": "9.3.6",
@@ -192,7 +220,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": true,
@@ -207,13 +235,15 @@ data:
             }
           ],
           "title": "Success Rate",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "type": "stat"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -221,7 +251,9 @@ data:
                 "mode": "thresholds"
               },
               "decimals": 0,
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
@@ -238,7 +270,9 @@ data:
               },
               "unit": "short"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -259,7 +293,8 @@ data:
               "fields": "",
               "values": false
             },
-            "text": {},
+            "text": {
+            },
             "textMode": "auto"
           },
           "pluginVersion": "9.3.6",
@@ -267,7 +302,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": true,
@@ -282,13 +317,15 @@ data:
             }
           ],
           "title": "Errors",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "type": "stat"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -296,7 +333,9 @@ data:
                 "mode": "thresholds"
               },
               "decimals": 0,
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
@@ -313,7 +352,9 @@ data:
               },
               "unit": "short"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -334,7 +375,8 @@ data:
               "fields": "",
               "values": false
             },
-            "text": {},
+            "text": {
+            },
             "textMode": "auto"
           },
           "pluginVersion": "9.3.6",
@@ -342,7 +384,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": true,
@@ -357,13 +399,15 @@ data:
             }
           ],
           "title": "Query Errors",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "type": "stat"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -371,7 +415,9 @@ data:
                 "mode": "thresholds"
               },
               "decimals": 0,
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
@@ -388,7 +434,9 @@ data:
               },
               "unit": "short"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -409,7 +457,8 @@ data:
               "fields": "",
               "values": false
             },
-            "text": {},
+            "text": {
+            },
             "textMode": "auto"
           },
           "pluginVersion": "9.3.6",
@@ -417,7 +466,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": true,
@@ -432,13 +481,15 @@ data:
             }
           ],
           "title": "Mutation Errors",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "type": "stat"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -452,7 +503,9 @@ data:
                 "inspect": false
               },
               "decimals": 0,
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -468,7 +521,9 @@ data:
               },
               "unit": "short"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -486,14 +541,16 @@ data:
               "show": false
             },
             "showHeader": true,
-            "sortBy": []
+            "sortBy": [
+    
+            ]
           },
           "pluginVersion": "9.3.6",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": true,
@@ -514,7 +571,8 @@ data:
                 "excludeByName": {
                   "Time": true
                 },
-                "indexByName": {},
+                "indexByName": {
+                },
                 "renameByName": {
                   "Value": "Count",
                   "operation": "Operation",
@@ -525,7 +583,8 @@ data:
             {
               "id": "sortBy",
               "options": {
-                "fields": {},
+                "fields": {
+                },
                 "sort": [
                   {
                     "desc": true,
@@ -550,14 +609,16 @@ data:
             "y": 12
           },
           "id": 13,
-          "panels": [],
+          "panels": [
+    
+          ],
           "title": "Queries",
           "type": "row"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -585,7 +646,9 @@ data:
                 }
               },
               "decimals": 0,
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "min": 0,
               "thresholds": {
                 "mode": "absolute",
@@ -602,7 +665,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 7,
@@ -616,7 +681,9 @@ data:
             "barWidth": 0.97,
             "groupWidth": 0.7,
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": false
@@ -637,7 +704,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": true,
@@ -658,7 +725,8 @@ data:
                 "excludeByName": {
                   "Time": true
                 },
-                "indexByName": {},
+                "indexByName": {
+                },
                 "renameByName": {
                   "Value": "Count",
                   "namespace": "Namespace",
@@ -671,7 +739,8 @@ data:
             {
               "id": "sortBy",
               "options": {
-                "fields": {},
+                "fields": {
+                },
                 "sort": [
                   {
                     "desc": true,
@@ -686,7 +755,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -714,7 +783,9 @@ data:
                 }
               },
               "decimals": 0,
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "min": 0,
               "thresholds": {
                 "mode": "absolute",
@@ -731,7 +802,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 7,
@@ -745,7 +818,9 @@ data:
             "barWidth": 0.97,
             "groupWidth": 0.7,
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": false
@@ -766,7 +841,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": true,
@@ -787,7 +862,8 @@ data:
                 "excludeByName": {
                   "Time": true
                 },
-                "indexByName": {},
+                "indexByName": {
+                },
                 "renameByName": {
                   "Time": "",
                   "Value": "Count",
@@ -802,7 +878,8 @@ data:
             {
               "id": "sortBy",
               "options": {
-                "fields": {},
+                "fields": {
+                },
                 "sort": [
                   {
                     "desc": true,
@@ -817,7 +894,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -854,7 +931,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -870,7 +949,9 @@ data:
               },
               "unit": "ops"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 9,
@@ -882,7 +963,9 @@ data:
           "interval": "1m",
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -897,7 +980,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -912,13 +995,15 @@ data:
             }
           ],
           "title": "Total numbers of Queries",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "type": "timeseries"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -955,7 +1040,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -971,7 +1058,9 @@ data:
               },
               "unit": "ops"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 9,
@@ -983,7 +1072,9 @@ data:
           "interval": "1m",
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -998,7 +1089,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1013,7 +1104,9 @@ data:
             }
           ],
           "title": "Total numbers of Mutations",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "type": "timeseries"
         },
         {
@@ -1025,14 +1118,16 @@ data:
             "y": 29
           },
           "id": 18,
-          "panels": [],
+          "panels": [
+    
+          ],
           "title": "Field Resolvers",
           "type": "row"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -1069,7 +1164,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1085,7 +1182,9 @@ data:
               },
               "unit": "ops"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 8,
@@ -1097,7 +1196,9 @@ data:
           "interval": "1m",
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1112,7 +1213,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1127,13 +1228,15 @@ data:
             }
           ],
           "title": "Total numbers of field resolver requests",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "type": "timeseries"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -1170,7 +1273,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1186,7 +1291,9 @@ data:
               },
               "unit": "s"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 8,
@@ -1198,7 +1305,9 @@ data:
           "interval": "1m",
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1213,7 +1322,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1228,7 +1337,9 @@ data:
             }
           ],
           "title": "Average inbound field resolver duration",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "type": "timeseries"
         }
       ],
@@ -1252,7 +1363,9 @@ data:
             "includeAll": false,
             "multi": false,
             "name": "Datasource",
-            "options": [],
+            "options": [
+    
+            ],
             "query": "prometheus",
             "queryValue": "",
             "refresh": 1,
@@ -1266,7 +1379,8 @@ data:
         "from": "now-30m",
         "to": "now"
       },
-      "timepicker": {},
+      "timepicker": {
+      },
       "timezone": "",
       "title": "Apollo GraphQL Metrics",
       "uid": "852d736c289f1ce6e67aff30a314e354b2dbc3f8",

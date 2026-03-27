@@ -8,6 +8,16 @@ metadata:
 data:
   qa-frontend-dashboard.json: |-
     {
+      "__inputs": [
+        {
+          "name": "DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY",
+          "label": "InfluxDB - Performance Helper Summary",
+          "description": "",
+          "type": "datasource",
+          "pluginId": "influxdb",
+          "pluginName": "InfluxDB"
+        }
+      ],
       "annotations": {
         "list": [
           {
@@ -23,7 +33,9 @@ data:
             "target": {
               "limit": 100,
               "matchAny": false,
-              "tags": [],
+              "tags": [
+    
+              ],
               "type": "dashboard"
             },
             "type": "dashboard"
@@ -34,13 +46,15 @@ data:
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "id": 80,
-      "links": [],
+      "links": [
+    
+      ],
       "liveNow": false,
       "panels": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "PBB3B880A3FC93816"
+            "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
           },
           "description": "",
           "fieldConfig": {
@@ -81,8 +95,12 @@ data:
                   "mode": "off"
                 }
               },
-              "links": [],
-              "mappings": [],
+              "links": [
+    
+              ],
+              "mappings": [
+    
+              ],
               "min": 0,
               "thresholds": {
                 "mode": "absolute",
@@ -99,7 +117,9 @@ data:
               },
               "unit": "s"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 11,
@@ -131,7 +151,7 @@ data:
               "alias": "$tag_feature / $tag_test ",
               "datasource": {
                 "type": "influxdb",
-                "uid": "PBB3B880A3FC93816"
+                "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
               },
               "groupBy": [
                 {
@@ -205,14 +225,16 @@ data:
             }
           ],
           "title": "Test Duration",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "transparent": true,
           "type": "timeseries"
         },
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "PBB3B880A3FC93816"
+            "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
           },
           "description": "",
           "fieldConfig": {
@@ -253,8 +275,12 @@ data:
                   "mode": "off"
                 }
               },
-              "links": [],
-              "mappings": [],
+              "links": [
+    
+              ],
+              "mappings": [
+    
+              ],
               "min": 0,
               "thresholds": {
                 "mode": "absolute",
@@ -271,7 +297,9 @@ data:
               },
               "unit": "percent"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 11,
@@ -303,7 +331,7 @@ data:
               "alias": "$tag_feature / $tag_test - $col",
               "datasource": {
                 "type": "influxdb",
-                "uid": "PBB3B880A3FC93816"
+                "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
               },
               "groupBy": [
                 {
@@ -383,14 +411,16 @@ data:
             }
           ],
           "title": "CPU Usage",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "transparent": true,
           "type": "timeseries"
         },
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "PBB3B880A3FC93816"
+            "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
           },
           "description": "",
           "fieldConfig": {
@@ -431,8 +461,12 @@ data:
                   "mode": "off"
                 }
               },
-              "links": [],
-              "mappings": [],
+              "links": [
+    
+              ],
+              "mappings": [
+    
+              ],
               "min": 0,
               "thresholds": {
                 "mode": "absolute",
@@ -449,7 +483,9 @@ data:
               },
               "unit": "decgbytes"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 11,
@@ -481,7 +517,7 @@ data:
               "alias": "$tag_feature / $tag_test - $col",
               "datasource": {
                 "type": "influxdb",
-                "uid": "PBB3B880A3FC93816"
+                "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
               },
               "groupBy": [
                 {
@@ -561,14 +597,16 @@ data:
             }
           ],
           "title": "Memory Usage",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "transparent": true,
           "type": "timeseries"
         },
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "PBB3B880A3FC93816"
+            "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
           },
           "description": "",
           "fieldConfig": {
@@ -609,8 +647,12 @@ data:
                   "mode": "dashed+area"
                 }
               },
-              "links": [],
-              "mappings": [],
+              "links": [
+    
+              ],
+              "mappings": [
+    
+              ],
               "max": 65,
               "min": 0,
               "thresholds": {
@@ -632,7 +674,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 11,
@@ -664,7 +708,7 @@ data:
               "alias": "$tag_feature / $tag_test - $col",
               "datasource": {
                 "type": "influxdb",
-                "uid": "PBB3B880A3FC93816"
+                "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
               },
               "groupBy": [
                 {
@@ -738,14 +782,16 @@ data:
             }
           ],
           "title": "Workspace FPS",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "transparent": true,
           "type": "timeseries"
         },
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "PBB3B880A3FC93816"
+            "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
           },
           "description": "",
           "fieldConfig": {
@@ -786,8 +832,12 @@ data:
                   "mode": "dashed+area"
                 }
               },
-              "links": [],
-              "mappings": [],
+              "links": [
+    
+              ],
+              "mappings": [
+    
+              ],
               "min": 0,
               "thresholds": {
                 "mode": "absolute",
@@ -808,7 +858,9 @@ data:
               },
               "unit": "ms"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 11,
@@ -840,7 +892,7 @@ data:
               "alias": "$tag_feature / $tag_test - $col",
               "datasource": {
                 "type": "influxdb",
-                "uid": "PBB3B880A3FC93816"
+                "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
               },
               "groupBy": [
                 {
@@ -914,14 +966,16 @@ data:
             }
           ],
           "title": "Workspace Frame Time",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "transparent": true,
           "type": "timeseries"
         },
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "PBB3B880A3FC93816"
+            "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
           },
           "description": "",
           "fieldConfig": {
@@ -962,8 +1016,12 @@ data:
                   "mode": "dashed+area"
                 }
               },
-              "links": [],
-              "mappings": [],
+              "links": [
+    
+              ],
+              "mappings": [
+    
+              ],
               "min": 0,
               "thresholds": {
                 "mode": "absolute",
@@ -984,7 +1042,9 @@ data:
               },
               "unit": "ms"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 11,
@@ -1016,7 +1076,7 @@ data:
               "alias": "$tag_feature / $tag_test - start",
               "datasource": {
                 "type": "influxdb",
-                "uid": "PBB3B880A3FC93816"
+                "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
               },
               "groupBy": [
                 {
@@ -1092,7 +1152,7 @@ data:
               "alias": "$tag_feature / $tag_test - preload",
               "datasource": {
                 "type": "influxdb",
-                "uid": "PBB3B880A3FC93816"
+                "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
               },
               "groupBy": [
                 {
@@ -1168,7 +1228,7 @@ data:
               "alias": "$tag_feature / $tag_test - loading",
               "datasource": {
                 "type": "influxdb",
-                "uid": "PBB3B880A3FC93816"
+                "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
               },
               "groupBy": [
                 {
@@ -1244,7 +1304,7 @@ data:
               "alias": "$tag_feature / $tag_test - loaded",
               "datasource": {
                 "type": "influxdb",
-                "uid": "PBB3B880A3FC93816"
+                "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
               },
               "groupBy": [
                 {
@@ -1320,7 +1380,7 @@ data:
               "alias": "$tag_feature / $tag_test - interactive",
               "datasource": {
                 "type": "influxdb",
-                "uid": "PBB3B880A3FC93816"
+                "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
               },
               "groupBy": [
                 {
@@ -1394,7 +1454,9 @@ data:
             }
           ],
           "title": "Workspace Loading",
-          "transformations": [],
+          "transformations": [
+    
+          ],
           "transparent": true,
           "type": "timeseries"
         }
@@ -1417,7 +1479,7 @@ data:
             },
             "datasource": {
               "type": "influxdb",
-              "uid": "PBB3B880A3FC93816"
+              "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
             },
             "definition": "show tag values with key = package WHERE $timeFilter",
             "hide": 0,
@@ -1425,7 +1487,9 @@ data:
             "label": "Package",
             "multi": false,
             "name": "Package",
-            "options": [],
+            "options": [
+    
+            ],
             "query": "show tag values with key = package WHERE $timeFilter",
             "refresh": 1,
             "regex": "",
@@ -1445,14 +1509,16 @@ data:
             },
             "datasource": {
               "type": "influxdb",
-              "uid": "PBB3B880A3FC93816"
+              "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
             },
             "definition": "show tag values with key = environment WHERE package=~/^$Package/",
             "hide": 0,
             "includeAll": false,
             "multi": false,
             "name": "Environment",
-            "options": [],
+            "options": [
+    
+            ],
             "query": "show tag values with key = environment WHERE package=~/^$Package/",
             "refresh": 1,
             "regex": "",
@@ -1475,14 +1541,16 @@ data:
             },
             "datasource": {
               "type": "influxdb",
-              "uid": "PBB3B880A3FC93816"
+              "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
             },
             "definition": "show tag values with key = feature WHERE package=~/^$Package/ AND \"environment\" =~ /^$Environment$/",
             "hide": 0,
             "includeAll": true,
             "multi": true,
             "name": "Feature",
-            "options": [],
+            "options": [
+    
+            ],
             "query": "show tag values with key = feature WHERE package=~/^$Package/ AND \"environment\" =~ /^$Environment$/",
             "refresh": 1,
             "regex": "",
@@ -1503,7 +1571,7 @@ data:
             },
             "datasource": {
               "type": "influxdb",
-              "uid": "PBB3B880A3FC93816"
+              "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
             },
             "definition": "show tag values with key=test WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"environment\" =~ /^$Environment$/",
             "hide": 0,
@@ -1511,7 +1579,9 @@ data:
             "label": "",
             "multi": true,
             "name": "Test",
-            "options": [],
+            "options": [
+    
+            ],
             "query": "show tag values with key=test WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"environment\" =~ /^$Environment$/",
             "refresh": 1,
             "regex": "",
@@ -1530,14 +1600,16 @@ data:
             },
             "datasource": {
               "type": "influxdb",
-              "uid": "PBB3B880A3FC93816"
+              "uid": "${DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY}"
             },
             "definition": "show tag values with key = exe WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
             "hide": 0,
             "includeAll": true,
             "multi": false,
             "name": "Process",
-            "options": [],
+            "options": [
+    
+            ],
             "query": "show tag values with key = exe WHERE package=~/^$Package/ AND \"feature\" =~ /^$Feature$/ AND \"test\" =~ /^$Test$/ AND \"environment\" =~ /^$Environment$/",
             "refresh": 1,
             "regex": "",

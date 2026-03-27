@@ -1,5 +1,11 @@
 ---
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: logging-lokifrontenddashboard
+  labels:
+    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 data:
   logging-lokifrontenddashboard-dashboard.json: |-
     {
@@ -18,7 +24,9 @@ data:
             "target": {
               "limit": 100,
               "matchAny": false,
-              "tags": [],
+              "tags": [
+    
+              ],
               "type": "dashboard"
             },
             "type": "dashboard"
@@ -29,7 +37,9 @@ data:
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "id": 83,
-      "links": [],
+      "links": [
+    
+      ],
       "liveNow": false,
       "panels": [
         {
@@ -54,7 +64,9 @@ data:
               "color": {
                 "mode": "thresholds"
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -69,7 +81,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -120,7 +134,9 @@ data:
               "color": {
                 "mode": "thresholds"
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -135,7 +151,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -186,7 +204,9 @@ data:
               "color": {
                 "mode": "thresholds"
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -201,7 +221,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -251,7 +273,9 @@ data:
               "color": {
                 "mode": "thresholds"
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -266,7 +290,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -316,7 +342,9 @@ data:
               "color": {
                 "mode": "thresholds"
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -331,7 +359,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -382,7 +412,9 @@ data:
               "color": {
                 "mode": "thresholds"
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -397,7 +429,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -448,7 +482,9 @@ data:
               "color": {
                 "mode": "thresholds"
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -463,7 +499,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -512,7 +550,9 @@ data:
             "y": 7
           },
           "id": 6,
-          "panels": [],
+          "panels": [
+    
+          ],
           "title": "Workers",
           "type": "row",
           "targets": null
@@ -520,7 +560,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "description": "Total memory usage by workload",
           "fieldConfig": {
@@ -561,7 +601,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -577,7 +619,9 @@ data:
               },
               "unit": "bytes"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -588,7 +632,9 @@ data:
           "id": 14,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -602,7 +648,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(\n    container_memory_working_set_bytes{namespace=\"loki\", container!=\"\", image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-loki-distributed-(?:querier|query-frontend|query-scheduler)\"}\n) by (workload)\n",
@@ -617,7 +663,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "description": "Total percentage of CPU usage of K8s node by workload ",
           "fieldConfig": {
@@ -655,7 +701,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -671,7 +719,9 @@ data:
               },
               "unit": "percent"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -682,7 +732,9 @@ data:
           "id": 35,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -696,7 +748,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(\n  ((sum(\n    (sum(rate(container_cpu_usage_seconds_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", image!=\"\", namespace=\"loki\", container!=\"\"}[5m])) by (node, pod) / \n    on (node) group_left machine_cpu_cores)) by (pod)) * 100) *\n  on (pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-loki-distributed-(?:querier|query-frontend|query-scheduler)\"}) by (workload)",
@@ -750,7 +802,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -796,7 +850,9 @@ data:
           "id": 2,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -875,7 +931,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "noValue": "0",
               "thresholds": {
                 "mode": "absolute",
@@ -891,7 +949,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -902,7 +962,9 @@ data:
           "id": 4,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -969,7 +1031,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -984,7 +1048,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -995,7 +1061,9 @@ data:
           "id": 21,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1110,7 +1178,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1156,7 +1226,9 @@ data:
           "id": 20,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1191,7 +1263,9 @@ data:
             "y": 25
           },
           "id": 28,
-          "panels": [],
+          "panels": [
+    
+          ],
           "title": "Memcached",
           "type": "row",
           "targets": null
@@ -1199,7 +1273,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -1226,7 +1300,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1241,7 +1317,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -1255,7 +1333,9 @@ data:
             "barWidth": 0.97,
             "groupWidth": 0.7,
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1275,7 +1355,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "exemplar": false,
@@ -1293,7 +1373,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "description": "Total memory usage by workload",
           "fieldConfig": {
@@ -1334,7 +1414,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1350,7 +1432,9 @@ data:
               },
               "unit": "bytes"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -1361,7 +1445,9 @@ data:
           "id": 34,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1375,7 +1461,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(\n    container_memory_working_set_bytes{namespace=\"loki\", container!=\"\", image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-loki-distributed-memcached-.+\"}\n) by (workload)\n",
@@ -1390,7 +1476,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "description": "Total percentage of CPU usage of K8s node by workload ",
           "fieldConfig": {
@@ -1428,7 +1514,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1444,7 +1532,9 @@ data:
               },
               "unit": "percent"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -1455,7 +1545,9 @@ data:
           "id": 16,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1469,7 +1561,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(\n  ((sum(\n    (sum(rate(container_cpu_usage_seconds_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", image!=\"\", namespace=\"loki\", container!=\"\"}[5m])) by (node, pod) / \n    on (node) group_left machine_cpu_cores)) by (pod)) * 100) *\n  on (pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-loki-distributed-memcached-.+\"}) by (workload)",
@@ -1485,7 +1577,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -1522,7 +1614,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1538,7 +1632,9 @@ data:
               },
               "unit": "bytes"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -1549,7 +1645,9 @@ data:
           "id": 33,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1563,7 +1661,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(memcached_read_bytes_total{loki_instance=~\"${loki_instance}\", namespace=\"loki\"}[1m])) by (service)",
@@ -1578,7 +1676,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -1615,7 +1713,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1631,7 +1731,9 @@ data:
               },
               "unit": "bytes"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -1642,7 +1744,9 @@ data:
           "id": 38,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1656,7 +1760,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(memcached_written_bytes_total{loki_instance=~\"${loki_instance}\", namespace=\"loki\"}[1m])) by (service)",
@@ -1671,7 +1775,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -1708,7 +1812,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1724,7 +1830,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -1735,7 +1843,9 @@ data:
           "id": 39,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1749,7 +1859,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(memcached_current_items{loki_instance=~\"${loki_instance}\", namespace=\"loki\"}) by (service)",
@@ -1764,7 +1874,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -1801,7 +1911,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1817,7 +1929,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -1828,7 +1942,9 @@ data:
           "id": 40,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1842,7 +1958,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(memcached_items_evicted_total{loki_instance=~\"${loki_instance}\", namespace=\"loki\"}[1m])) by (service)",
@@ -1857,7 +1973,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -1894,7 +2010,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1909,7 +2027,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -1920,7 +2040,9 @@ data:
           "id": 32,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -1934,7 +2056,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(memcached_commands_total{loki_instance=~\"${loki_instance}\", namespace=\"loki\", status=\"hit\"}[1m])) by (service)",
@@ -1949,7 +2071,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -1986,7 +2108,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -2001,7 +2125,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -2012,7 +2138,9 @@ data:
           "id": 37,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -2026,7 +2154,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(memcached_commands_total{loki_instance=~\"${loki_instance}\", namespace=\"loki\", status=\"hit\"}[1m])) by (service)",
@@ -2041,7 +2169,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${datasource}"
           },
           "fieldConfig": {
             "defaults": {
@@ -2078,7 +2206,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -2093,7 +2223,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 6,
@@ -2104,7 +2236,9 @@ data:
           "id": 36,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -2118,7 +2252,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${datasource}"
               },
               "editorMode": "code",
               "expr": "sum(rate(memcached_commands_total{loki_instance=~\"${loki_instance}\", namespace=\"loki\", status=\"badval\"}[1m])) by (service)",
@@ -2134,7 +2268,9 @@ data:
       "refresh": "5s",
       "schemaVersion": 37,
       "style": "dark",
-      "tags": [],
+      "tags": [
+    
+      ],
       "templating": {
         "list": [
           {
@@ -2148,7 +2284,9 @@ data:
             "label": "Prometheus Node",
             "multi": false,
             "name": "datasource",
-            "options": [],
+            "options": [
+    
+            ],
             "query": "prometheus",
             "queryValue": "",
             "refresh": 1,
@@ -2173,7 +2311,9 @@ data:
             "label": "Loki Instance",
             "multi": false,
             "name": "loki_instance",
-            "options": [],
+            "options": [
+    
+            ],
             "query": {
               "query": "label_values(loki_build_info{namespace=~\"loki\"}, loki_instance)",
               "refId": "StandardVariableQuery"
@@ -2190,17 +2330,11 @@ data:
         "from": "now-30m",
         "to": "now"
       },
-      "timepicker": {},
+      "timepicker": {
+      },
       "timezone": "",
       "title": "Logging - Loki FrontEnd Query Metrics",
       "uid": "H4EPKGJIk",
       "version": 3,
       "weekStart": ""
     }
-kind: ConfigMap
-metadata:
-  creationTimestamp: null
-  name: logging-lokifrontenddashboard
-  labels:
-    {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
-    

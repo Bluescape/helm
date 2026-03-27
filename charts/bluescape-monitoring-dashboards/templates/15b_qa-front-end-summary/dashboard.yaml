@@ -7,6 +7,7 @@ metadata:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
   {{- include "bluescape-monitoring-dashboards.grafanaDashboardInstanceSelector" . | nindent 2 }}
+  {{- include "bluescape-monitoring-dashboards.grafanaDashboardDatasourceMappings" (list . (list "DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY")) | nindent 2 }}
   configMapRef:
     name:  qa-frontend-dashboard
     key:  qa-frontend-dashboard.json

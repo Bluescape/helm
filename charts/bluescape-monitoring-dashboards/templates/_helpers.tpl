@@ -75,3 +75,19 @@ instanceSelector:
 instanceSelector: {}
 {{- end }}
 {{- end }}
+
+{{/*
+Render GrafanaDashboard datasource mappings for exported dashboards that use __inputs.
+Pass the root context and a list of input names.
+*/}}
+{{- define "bluescape-monitoring-dashboards.grafanaDashboardDatasourceMappings" -}}
+{{- $root := index . 0 -}}
+{{- $inputs := index . 1 -}}
+{{- if gt (len $inputs) 0 }}
+datasources:
+{{- range $input := $inputs }}
+  - inputName: {{ $input | quote }}
+    datasourceName: {{ required (printf "Missing grafanaOperator.datasourceMappings.%s" $input) (index $root.Values.grafanaOperator.datasourceMappings $input) | quote }}
+{{- end }}
+{{- end }}
+{{- end }}

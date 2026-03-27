@@ -9,6 +9,16 @@ metadata:
 data:
   analytics--compute-resources--pods-dashboard.json: |-
     {
+      "__inputs": [
+        {
+          "name": "DS_PROMETHEUS",
+          "label": "Prometheus",
+          "description": "",
+          "type": "datasource",
+          "pluginId": "prometheus",
+          "pluginName": "Prometheus"
+        }
+      ],
       "annotations": {
         "list": [
           {
@@ -21,7 +31,9 @@ data:
             "target": {
               "limit": 100,
               "matchAny": false,
-              "tags": [],
+              "tags": [
+    
+              ],
               "type": "dashboard"
             },
             "type": "dashboard"
@@ -33,7 +45,9 @@ data:
       "graphTooltip": 0,
       "id": 66,
       "iteration": 1654800223012,
-      "links": [],
+      "links": [
+    
+      ],
       "liveNow": false,
       "panels": [
         {
@@ -70,7 +84,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -85,7 +101,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 11,
@@ -96,7 +114,9 @@ data:
           "id": 7,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom"
             },
@@ -108,7 +128,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum by (container) (kube_pod_status_phase{namespace=\"$namespace\", phase=\"Running\", pod=~\"analytics-.*\"} * on(pod) group_left(container) kube_pod_container_info{namespace=\"$namespace\", pod=~\"analytics-.*\"} )",
@@ -133,7 +153,9 @@ data:
                 "align": "auto",
                 "displayMode": "auto"
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -215,14 +237,16 @@ data:
               "show": false
             },
             "showHeader": true,
-            "sortBy": []
+            "sortBy": [
+    
+            ]
           },
           "pluginVersion": "8.3.3",
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": false,
               "expr": "sum by (container) (kube_pod_status_phase{namespace=\"$namespace\", phase=\"Running\", pod=~\"analytics-.*\"} * on(pod) group_left(container) kube_pod_container_info{namespace=\"$namespace\", pod=~\"analytics-.*\"} )",
@@ -242,7 +266,8 @@ data:
                 "excludeByName": {
                   "Time": true
                 },
-                "indexByName": {},
+                "indexByName": {
+                },
                 "renameByName": {
                   "Value #Running Pods": "No. Pods Running",
                   "container": "Container"
@@ -252,7 +277,8 @@ data:
             {
               "id": "sortBy",
               "options": {
-                "fields": {},
+                "fields": {
+                },
                 "sort": [
                   {
                     "field": "Container"
@@ -297,7 +323,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -313,7 +341,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 11,
@@ -324,7 +354,9 @@ data:
           "id": 2,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom"
             },
@@ -336,7 +368,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum (rate (container_cpu_usage_seconds_total{namespace=\"$namespace\", container=~\"analytics-.*\"}[1m])) by (container)",
@@ -382,7 +414,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -398,7 +432,9 @@ data:
               },
               "unit": "bytes"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 11,
@@ -409,7 +445,9 @@ data:
           "id": 8,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom"
             },
@@ -421,7 +459,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "exemplar": true,
               "expr": "sum(\n    container_memory_working_set_bytes{namespace=\"$namespace\", container!=\"\", image!=\"\"}\n  * on(namespace, pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"$namespace\", workload=~\"analytics-.*\"}\n) by (container)",
@@ -438,7 +476,9 @@ data:
       "refresh": "5s",
       "schemaVersion": 34,
       "style": "dark",
-      "tags": [],
+      "tags": [
+    
+      ],
       "templating": {
         "list": [
           {
@@ -480,7 +520,8 @@ data:
         "from": "now-6h",
         "to": "now"
       },
-      "timepicker": {},
+      "timepicker": {
+      },
       "timezone": "",
       "title": "Analytics / Compute Resources / Pods",
       "uid": "qqv557j7z",
