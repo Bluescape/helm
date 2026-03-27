@@ -579,6 +579,16 @@ entries:
   bluescape-monitoring-dashboards:
   - apiVersion: v2
     appVersion: 1.16.4
+    created: "2026-03-27T19:23:15.049883592Z"
+    description: A Helm chart for Kubernetes
+    digest: d89500e08b100319140d3c1aee818df23cff0b6de7d35a5eca007cef53d766c1
+    name: bluescape-monitoring-dashboards
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-dashboards-0.4.5-alpha2/bluescape-monitoring-dashboards-0.4.5-alpha2.tgz
+    version: 0.4.5-alpha2
+  - apiVersion: v2
+    appVersion: 1.16.4
     created: "2026-03-27T16:18:32.557311896Z"
     description: A Helm chart for Kubernetes
     digest: ac7dbfe68e729230c81f99359c0d716b1c5b609e2eb28a435486c25d5ba7406b
@@ -4430,4 +4440,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2026-03-27T16:18:32.558326021Z"
+generated: "2026-03-27T19:23:15.050537479Z"
