@@ -61,3 +61,17 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+GrafanaDashboard instance selector for Grafana Operator v5+.
+By default this matches all Grafana instances in the namespace.
+Override it when multiple Grafana instances share a namespace.
+*/}}
+{{- define "bluescape-monitoring-dashboards.grafanaDashboardInstanceSelector" -}}
+{{- if .Values.grafanaOperator.instanceSelector }}
+instanceSelector:
+{{- tpl (.Values.grafanaOperator.instanceSelector | toYaml) . | nindent 2 }}
+{{- else }}
+instanceSelector: {}
+{{- end }}
+{{- end }}

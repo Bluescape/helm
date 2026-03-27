@@ -1,5 +1,5 @@
 ---
-apiVersion: integreatly.org/v1alpha1
+apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: k8s-cluster-metrics-dashboard
@@ -7,7 +7,7 @@ metadata:
   labels:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  json: ""
+  {{- include "bluescape-monitoring-dashboards.grafanaDashboardInstanceSelector" . | nindent 2 }}
   configMapRef:
     name: k8s-cluster-metrics-dashboard
     key: k8s-cluster-metrics-dashboard.json

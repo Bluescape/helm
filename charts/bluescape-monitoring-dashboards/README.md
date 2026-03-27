@@ -2,6 +2,21 @@
 
 NOTE: You must helm version 3.x
 
+This chart targets Grafana Operator `5.22.2` and renders
+`grafana.integreatly.org/v1beta1` `GrafanaDashboard` resources.
+
+By default the chart renders `spec.instanceSelector: {}`, which matches all
+Grafana instances in the release namespace. If more than one Grafana instance
+exists in that namespace, override `grafanaOperator.instanceSelector` in
+`values.yaml` or via your Helm values, for example:
+
+```yaml
+grafanaOperator:
+  instanceSelector:
+    matchLabels:
+      app.kubernetes.io/instance: grafana-instance
+```
+
 ## Manual Addition
 
 This part is purposefully sparse but enough is given to give the reader a sufficient overview
@@ -18,6 +33,8 @@ of the process.
      provided in the `configmap.yaml` template
    * update the necessary fields in `configmap.yaml`
  * fix the necessary fields in `dashboard.yaml`
+   * keep `configMapRef` pointed at the dashboard JSON key
+   * do not add back the legacy `spec.json: ""` placeholder
 
 Jump down to verify dashboards below.
 
