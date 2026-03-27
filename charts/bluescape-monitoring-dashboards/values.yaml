@@ -1,6 +1,20 @@
 
 
 #### These settings below are only for enabling specific banzai-cloud dashboards taken from the banzai-cloud/grafana-operator helm chart
+# Required by Grafana Operator v5+ GrafanaDashboard resources.
+# Leave empty to match all Grafana instances in the namespace, or set
+# matchLabels/matchExpressions to target a specific Grafana instance.
+grafanaOperator:
+  instanceSelector: {}
+  datasourceMappings:
+    DS_PROMETHEUS: Prometheus
+    DS_PROMETHEUS_DOCKER: Prometheus
+    DS_LOKI: loki-system
+    DS_INFLUXDB_K6: InfluxDB - k6
+    DS_INFLUXDB_E2E: InfluxDB - E2E
+    DS_INFLUXDB_TELEGRAF: InfluxDB - Telegraf
+    DS_INFLUXDB_PERFORMANCE_HELPER_SUMMARY: InfluxDB - Performance Helper Summary
+
 #Enable Default Dashboards
 defaultDashboards:
   enabled: false

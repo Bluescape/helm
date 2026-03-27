@@ -2,6 +2,26 @@
 
 NOTE: You must helm version 3.x
 
+This chart targets Grafana Operator `5.22.2` and renders
+`grafana.integreatly.org/v1beta1` `GrafanaDashboard` resources.
+
+By default the chart renders `spec.instanceSelector: {}`, which matches all
+Grafana instances in the release namespace. If more than one Grafana instance
+exists in that namespace, override `grafanaOperator.instanceSelector` in
+`values.yaml` or via your Helm values, for example:
+
+```yaml
+grafanaOperator:
+  instanceSelector:
+    matchLabels:
+      app.kubernetes.io/instance: grafana-instance
+```
+
+Dashboards exported from Grafana should keep datasource `__inputs` placeholders
+instead of hardcoded datasource UIDs. Map those placeholders in
+`GrafanaDashboard.spec.datasources` and keep the shared datasource name lookup
+in `grafanaOperator.datasourceMappings`.
+
 ## Manual Addition
 
 This part is purposefully sparse but enough is given to give the reader a sufficient overview
@@ -16,8 +36,16 @@ of the process.
    * chdir to the new directory
    * put the exported JSON in the `configmap.yaml` using the example data
      provided in the `configmap.yaml` template
-   * update the necessary fields in `configmap.yaml`
+   * keep exported datasource `__inputs` placeholders in the JSON
+   * replace any hardcoded datasource UIDs with `${DS_*}` placeholders
+     * update the necessary fields in `configmap.yaml`
  * fix the necessary fields in `dashboard.yaml`
+   * add `spec.datasources` mappings for every datasource placeholder used by
+     the dashboard JSON
+   * keep `configMapRef` pointed at the dashboard JSON key
+   * do not add back the legacy `spec.json: ""` placeholder
+ * if the dashboard introduces a new datasource placeholder name, add it under
+   `grafanaOperator.datasourceMappings` in `values.yaml`
 
 Jump down to verify dashboards below.
 
@@ -72,7 +100,7 @@ The third argument is the dashboard base , in which dashboards need to be placed
 A cursory check of the following is performed at runtime:
 
   * the script is running from the expected directory
-  * the JSON imported will have `__inputs` and `__requires` removed
+  * datasource `__inputs` should be preserved when the exported dashboard uses them
   * the dashboard JSON is valid JSON
   * pre-requisite binaries are on the running machine
 

@@ -1,4 +1,4 @@
-apiVersion: integreatly.org/v1alpha1
+apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name: entitler-errors-dashboard
@@ -7,7 +7,8 @@ metadata:
      {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4
     }}
 spec:
-  json: ""
+  {{- include "bluescape-monitoring-dashboards.grafanaDashboardInstanceSelector" . | nindent 2 }}
+  {{- include "bluescape-monitoring-dashboards.grafanaDashboardDatasourceMappings" (list . (list "DS_LOKI")) | nindent 2 }}
   configMapRef:
     name: entitler-errors-dashboard
     key: entitler-errors-dashboard.json

@@ -8,6 +8,16 @@ metadata:
 data:
   enroute-stats-dashboard.json: |-
     {
+      "__inputs": [
+        {
+          "name": "DS_PROMETHEUS",
+          "label": "Prometheus",
+          "description": "",
+          "type": "datasource",
+          "pluginId": "prometheus",
+          "pluginName": "Prometheus"
+        }
+      ],
       "annotations": {
         "list": [
           {
@@ -29,14 +39,16 @@ data:
       "gnetId": 10434,
       "graphTooltip": 0,
       "id": 98,
-      "links": [],
+      "links": [
+    
+      ],
       "liveNow": false,
       "panels": [
         {
           "collapsed": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "gridPos": {
             "h": 1,
@@ -45,12 +57,14 @@ data:
             "y": 0
           },
           "id": 22,
-          "panels": [],
+          "panels": [
+    
+          ],
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "refId": "A"
             }
@@ -59,13 +73,14 @@ data:
           "type": "row"
         },
         {
-          "aliasColors": {},
+          "aliasColors": {
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -88,7 +103,9 @@ data:
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
+          "links": [
+    
+          ],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -98,7 +115,9 @@ data:
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+    
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -106,7 +125,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"2\"}[1m]))",
               "format": "time_series",
@@ -117,7 +136,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"3\"}[1m]))",
               "format": "time_series",
@@ -128,7 +147,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"4\"}[1m]))",
               "format": "time_series",
@@ -139,7 +158,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_http_downstream_rq_xx{envoy_response_code_class=\"5\"}[1m]))",
               "format": "time_series",
@@ -148,8 +167,12 @@ data:
               "refId": "D"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
+          "thresholds": [
+    
+          ],
+          "timeRegions": [
+    
+          ],
           "title": "Enroute Response Codes",
           "tooltip": {
             "shared": true,
@@ -160,7 +183,9 @@ data:
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": []
+            "values": [
+    
+            ]
           },
           "yaxes": [
             {
@@ -180,13 +205,14 @@ data:
           }
         },
         {
-          "aliasColors": {},
+          "aliasColors": {
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -209,7 +235,9 @@ data:
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
+          "links": [
+    
+          ],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -219,7 +247,9 @@ data:
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+    
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -227,7 +257,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"2\"}[1m]))",
               "format": "time_series",
@@ -238,7 +268,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"3\"}[1m]))",
               "format": "time_series",
@@ -249,7 +279,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"4\"}[1m]))",
               "format": "time_series",
@@ -260,7 +290,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_cluster_upstream_rq_xx{envoy_response_code_class=\"5\"}[1m]))",
               "format": "time_series",
@@ -269,8 +299,12 @@ data:
               "refId": "D"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
+          "thresholds": [
+    
+          ],
+          "timeRegions": [
+    
+          ],
           "title": "API Response Codes",
           "tooltip": {
             "shared": true,
@@ -281,7 +315,9 @@ data:
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": []
+            "values": [
+    
+            ]
           },
           "yaxes": [
             {
@@ -301,13 +337,14 @@ data:
           }
         },
         {
-          "aliasColors": {},
+          "aliasColors": {
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -330,7 +367,9 @@ data:
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
+          "links": [
+    
+          ],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -340,7 +379,9 @@ data:
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+    
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -348,7 +389,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "histogram_quantile(0.95, sum(rate(envoy_http_downstream_cx_length_ms_bucket[5m])) by (le))",
               "format": "time_series",
@@ -359,7 +400,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "histogram_quantile(0.9, sum(rate(envoy_http_downstream_cx_length_ms_bucket[5m])) by (le))",
               "format": "time_series",
@@ -370,7 +411,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "histogram_quantile(0.5, sum(rate(envoy_http_downstream_cx_length_ms_bucket[5m])) by (le))",
               "format": "time_series",
@@ -381,7 +422,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "",
               "format": "time_series",
@@ -389,8 +430,12 @@ data:
               "refId": "D"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
+          "thresholds": [
+    
+          ],
+          "timeRegions": [
+    
+          ],
           "title": "Downstream Connections Length",
           "tooltip": {
             "shared": true,
@@ -401,7 +446,9 @@ data:
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": []
+            "values": [
+    
+            ]
           },
           "yaxes": [
             {
@@ -421,13 +468,14 @@ data:
           }
         },
         {
-          "aliasColors": {},
+          "aliasColors": {
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fill": 1,
           "fillGradient": 0,
@@ -450,7 +498,9 @@ data:
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
+          "links": [
+    
+          ],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -460,7 +510,9 @@ data:
           "pointradius": 2,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+    
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -468,7 +520,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_http_downstream_cx_http1_active[1m]))",
               "format": "time_series",
@@ -479,7 +531,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_http_downstream_cx_http2_active_active[1m]))",
               "format": "time_series",
@@ -490,7 +542,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "sum(increase(envoy_http_downstream_cx_upgrades_active[1m]))",
               "format": "time_series",
@@ -499,8 +551,12 @@ data:
               "refId": "C"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
+          "thresholds": [
+    
+          ],
+          "timeRegions": [
+    
+          ],
           "title": "Active Connections",
           "tooltip": {
             "shared": true,
@@ -511,7 +567,9 @@ data:
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": []
+            "values": [
+    
+            ]
           },
           "yaxes": [
             {
@@ -533,7 +591,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -566,7 +624,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 8,
@@ -575,7 +635,9 @@ data:
             "y": 25
           },
           "id": 32,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -596,7 +658,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "expr": "avg(envoy_cluster_manager_active_clusters)",
               "format": "time_series",
@@ -611,7 +673,9 @@ data:
       "refresh": "1m",
       "schemaVersion": 37,
       "style": "dark",
-      "tags": [],
+      "tags": [
+    
+      ],
       "templating": {
         "list": [
           {
@@ -625,7 +689,9 @@ data:
             "label": "datasource",
             "multi": false,
             "name": "DS_PROMETHEUS",
-            "options": [],
+            "options": [
+    
+            ],
             "query": "prometheus",
             "refresh": 1,
             "regex": "",

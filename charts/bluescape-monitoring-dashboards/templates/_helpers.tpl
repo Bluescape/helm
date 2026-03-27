@@ -61,3 +61,33 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+GrafanaDashboard instance selector for Grafana Operator v5+.
+By default this matches all Grafana instances in the namespace.
+Override it when multiple Grafana instances share a namespace.
+*/}}
+{{- define "bluescape-monitoring-dashboards.grafanaDashboardInstanceSelector" -}}
+{{- if .Values.grafanaOperator.instanceSelector }}
+instanceSelector:
+{{- tpl (.Values.grafanaOperator.instanceSelector | toYaml) . | nindent 2 }}
+{{- else }}
+instanceSelector: {}
+{{- end }}
+{{- end }}
+
+{{/*
+Render GrafanaDashboard datasource mappings for exported dashboards that use __inputs.
+Pass the root context and a list of input names.
+*/}}
+{{- define "bluescape-monitoring-dashboards.grafanaDashboardDatasourceMappings" -}}
+{{- $root := index . 0 -}}
+{{- $inputs := index . 1 -}}
+{{- if gt (len $inputs) 0 }}
+datasources:
+{{- range $input := $inputs }}
+  - inputName: {{ $input | quote }}
+    datasourceName: {{ required (printf "Missing grafanaOperator.datasourceMappings.%s" $input) (index $root.Values.grafanaOperator.datasourceMappings $input) | quote }}
+{{- end }}
+{{- end }}
+{{- end }}

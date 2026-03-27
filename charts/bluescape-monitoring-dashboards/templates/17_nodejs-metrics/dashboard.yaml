@@ -1,4 +1,4 @@
-apiVersion: integreatly.org/v1alpha1
+apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
   name:  nodejs-metrics-dashboard
@@ -6,7 +6,8 @@ metadata:
   labels:
     {{- include "bluescape-monitoring-dashboards.labels" . | nindent 4 }}
 spec:
-  json: ""
+  {{- include "bluescape-monitoring-dashboards.grafanaDashboardInstanceSelector" . | nindent 2 }}
+  {{- include "bluescape-monitoring-dashboards.grafanaDashboardDatasourceMappings" (list . (list "DS_PROMETHEUS")) | nindent 2 }}
   configMapRef:
     name:  nodejs-metrics-dashboard
     key:  nodejs-metrics-dashboard.json

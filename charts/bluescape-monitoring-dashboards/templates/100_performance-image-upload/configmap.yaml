@@ -8,6 +8,16 @@ metadata:
 data:
   performance--image-upload-metrics-dashboard.json: |-
     {
+      "__inputs": [
+        {
+          "name": "DS_PROMETHEUS",
+          "label": "Prometheus",
+          "description": "",
+          "type": "datasource",
+          "pluginId": "prometheus",
+          "pluginName": "Prometheus"
+        }
+      ],
       "annotations": {
         "list": [
           {
@@ -23,7 +33,9 @@ data:
             "target": {
               "limit": 100,
               "matchAny": false,
-              "tags": [],
+              "tags": [
+    
+              ],
               "type": "dashboard"
             },
             "type": "dashboard"
@@ -34,7 +46,9 @@ data:
       "fiscalYearStartMonth": 0,
       "graphTooltip": 0,
       "id": 80,
-      "links": [],
+      "links": [
+    
+      ],
       "liveNow": false,
       "panels": [
         {
@@ -46,14 +60,16 @@ data:
             "y": 0
           },
           "id": 13,
-          "panels": [],
+          "panels": [
+    
+          ],
           "title": "Application Metrics",
           "type": "row"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -90,7 +106,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -105,7 +123,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 9,
@@ -116,7 +136,9 @@ data:
           "id": 2,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -130,7 +152,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum by (service)(rate(image_downscale_job_final_completion_time_sum{workspace_id=~\"${workspace_id:regex}\", namespace=~\"${namespace:regex}\"}[1m]))/sum by (service)(rate(image_downscale_job_final_completion_time_count{workspace_id=~\"${workspace_id:regex}\", namespace=~\"${namespace:regex}\"}[1m]))/1000",
@@ -145,7 +167,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -182,7 +204,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -197,7 +221,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 9,
@@ -208,7 +234,9 @@ data:
           "id": 3,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -222,7 +250,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum by (service)(rate(image_virus_scan_completion_time_sum{workspace_id=~\"${workspace_id:regex}\", namespace=~\"${namespace:regex}\"}[1m]))/sum by (service)(rate(image_virus_scan_completion_time_count{workspace_id=~\"${workspace_id:regex}\", namespace=~\"${namespace:regex}\"}[1m]))/1000",
@@ -237,7 +265,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -274,7 +302,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -325,7 +355,9 @@ data:
           "id": 6,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -339,7 +371,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum by (service)(rate(source_url_image_download_for_downscale_time_sum{workspace_id=~\"${workspace_id:regex}\", namespace=~\"${namespace:regex}\"}[1m]))/sum by (service)(rate(source_url_image_download_for_downscale_time_count{workspace_id=~\"${workspace_id:regex}\", namespace=~\"${namespace:regex}\"}[1m]))/1000",
@@ -354,7 +386,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -391,7 +423,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -442,7 +476,9 @@ data:
           "id": 7,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -456,7 +492,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum by (service)(rate(source_url_image_storing_time_sum{workspace_id=~\"${workspace_id:regex}\", namespace=~\"${namespace:regex}\"}[1m]))/sum by (service)(rate(source_url_image_storing_time_count{workspace_id=~\"${workspace_id:regex}\", namespace=~\"${namespace:regex}\"}[1m]))/1000",
@@ -471,7 +507,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -508,7 +544,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -523,7 +561,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 9,
@@ -534,7 +574,9 @@ data:
           "id": 5,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -548,7 +590,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum by (service)(rate(downscaled_image_storage_time_sum{workspace_id=~\"${workspace_id:regex}\", namespace=~\"${namespace:regex}\"}[1m]))/sum by (service)(rate(downscaled_image_storage_time_count{workspace_id=~\"${workspace_id:regex}\",  namespace=~\"${namespace:regex}\"}[1m]))/1000",
@@ -569,14 +611,16 @@ data:
             "y": 28
           },
           "id": 11,
-          "panels": [],
+          "panels": [
+    
+          ],
           "title": "Container Metrics",
           "type": "row"
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -613,7 +657,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -628,7 +674,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 9,
@@ -639,7 +687,9 @@ data:
           "id": 8,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -653,7 +703,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "(sum by (container) (rate(container_cpu_usage_seconds_total{container=~\"sourceurl-image-worker|worker\", namespace=~\"${namespace:regex}\"}[1m]))) * 1000",
@@ -668,7 +718,7 @@ data:
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "fieldConfig": {
             "defaults": {
@@ -705,7 +755,9 @@ data:
                   "mode": "off"
                 }
               },
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -720,7 +772,9 @@ data:
                 ]
               }
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 9,
@@ -731,7 +785,9 @@ data:
           "id": 9,
           "options": {
             "legend": {
-              "calcs": [],
+              "calcs": [
+    
+              ],
               "displayMode": "list",
               "placement": "bottom",
               "showLegend": true
@@ -745,7 +801,7 @@ data:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "editorMode": "code",
               "expr": "sum((container_memory_usage_bytes{container=~\"worker|sourceurl-image-worker\", namespace=~\"${namespace:regex}\"})/1024/1024) by (container)",
@@ -761,7 +817,9 @@ data:
       "refresh": false,
       "schemaVersion": 37,
       "style": "dark",
-      "tags": [],
+      "tags": [
+    
+      ],
       "templating": {
         "list": [
           {
@@ -777,7 +835,7 @@ data:
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "${DS_PROMETHEUS}"
             },
             "definition": "label_values(namespace)",
             "hide": 0,
@@ -785,7 +843,9 @@ data:
             "label": "Namespace",
             "multi": true,
             "name": "namespace",
-            "options": [],
+            "options": [
+    
+            ],
             "query": {
               "query": "label_values(namespace)",
               "refId": "StandardVariableQuery"
@@ -809,7 +869,7 @@ data:
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "${DS_PROMETHEUS}"
             },
             "definition": "label_values(image_downscale_job_final_completion_time_sum, workspace_id)",
             "hide": 0,
@@ -817,7 +877,9 @@ data:
             "label": "Workspace ID",
             "multi": true,
             "name": "workspace_id",
-            "options": [],
+            "options": [
+    
+            ],
             "query": {
               "query": "label_values(image_downscale_job_final_completion_time_sum, workspace_id)",
               "refId": "StandardVariableQuery"
@@ -834,7 +896,8 @@ data:
         "from": "now-1h",
         "to": "now"
       },
-      "timepicker": {},
+      "timepicker": {
+      },
       "timezone": "",
       "title": "Performance / Image Upload Metrics",
       "uid": "jFtVv-1Vk",

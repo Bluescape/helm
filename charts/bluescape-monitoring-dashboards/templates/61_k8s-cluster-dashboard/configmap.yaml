@@ -9,6 +9,16 @@ metadata:
 data:
   k8s-cluster-metrics-dashboard.json: |-
     {
+      "__inputs": [
+        {
+          "name": "DS_PROMETHEUS",
+          "label": "Prometheus",
+          "description": "",
+          "type": "datasource",
+          "pluginId": "prometheus",
+          "pluginName": "Prometheus"
+        }
+      ],
       "annotations": {
         "list": [
           {
@@ -24,7 +34,9 @@ data:
             "target": {
               "limit": 100,
               "matchAny": false,
-              "tags": [],
+              "tags": [
+    
+              ],
               "type": "dashboard"
             },
             "type": "dashboard"
@@ -56,7 +68,7 @@ data:
           "collapsed": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "gridPos": {
             "h": 1,
@@ -65,12 +77,14 @@ data:
             "y": 0
           },
           "id": 36,
-          "panels": [],
+          "panels": [
+    
+          ],
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "refId": "A"
             }
@@ -116,7 +130,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -125,7 +141,9 @@ data:
             "y": 1
           },
           "id": 38,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -195,7 +213,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -204,7 +224,9 @@ data:
             "y": 1
           },
           "id": 40,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -274,7 +296,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -283,7 +307,9 @@ data:
             "y": 1
           },
           "id": 39,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -353,7 +379,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -362,7 +390,9 @@ data:
             "y": 1
           },
           "id": 41,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -399,7 +429,7 @@ data:
           "collapsed": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "gridPos": {
             "h": 1,
@@ -408,12 +438,14 @@ data:
             "y": 4
           },
           "id": 28,
-          "panels": [],
+          "panels": [
+    
+          ],
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "refId": "A"
             }
@@ -464,7 +496,9 @@ data:
               },
               "unit": "percent"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -473,7 +507,9 @@ data:
             "y": 5
           },
           "id": 4,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "orientation": "horizontal",
@@ -506,7 +542,8 @@ data:
           "type": "gauge"
         },
         {
-          "aliasColors": {},
+          "aliasColors": {
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
@@ -536,7 +573,9 @@ data:
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
+          "links": [
+    
+          ],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -546,7 +585,9 @@ data:
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+    
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -585,8 +626,12 @@ data:
               "refId": "C"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
+          "thresholds": [
+    
+          ],
+          "timeRegions": [
+    
+          ],
           "title": "Cluster Pod Capacity",
           "tooltip": {
             "shared": true,
@@ -597,7 +642,9 @@ data:
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": []
+            "values": [
+    
+            ]
           },
           "yaxes": [
             {
@@ -656,7 +703,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -665,7 +714,9 @@ data:
             "y": 10
           },
           "id": 30,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -736,7 +787,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -745,7 +798,9 @@ data:
             "y": 10
           },
           "id": 31,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -816,7 +871,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -825,7 +882,9 @@ data:
             "y": 13
           },
           "id": 32,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -896,7 +955,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -905,7 +966,9 @@ data:
             "y": 13
           },
           "id": 33,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -976,7 +1039,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -985,7 +1050,9 @@ data:
             "y": 13
           },
           "id": 34,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -1022,7 +1089,7 @@ data:
           "collapsed": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "gridPos": {
             "h": 1,
@@ -1031,12 +1098,14 @@ data:
             "y": 16
           },
           "id": 45,
-          "panels": [],
+          "panels": [
+    
+          ],
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "refId": "A"
             }
@@ -1082,7 +1151,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -1091,7 +1162,9 @@ data:
             "y": 17
           },
           "id": 47,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -1161,7 +1234,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -1170,7 +1245,9 @@ data:
             "y": 17
           },
           "id": 48,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -1240,7 +1317,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -1249,7 +1328,9 @@ data:
             "y": 17
           },
           "id": 49,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -1285,7 +1366,7 @@ data:
           "collapsed": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "gridPos": {
             "h": 1,
@@ -1294,12 +1375,14 @@ data:
             "y": 20
           },
           "id": 14,
-          "panels": [],
+          "panels": [
+    
+          ],
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "refId": "A"
             }
@@ -1328,7 +1411,9 @@ data:
             "y": 21
           },
           "id": 16,
-          "links": [],
+          "links": [
+    
+          ],
           "scroll": true,
           "showHeader": true,
           "sort": {
@@ -1443,7 +1528,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -1452,7 +1539,9 @@ data:
             "y": 21
           },
           "id": 18,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -1501,7 +1590,9 @@ data:
               },
               "decimals": 2,
               "displayName": "",
-              "mappings": [],
+              "mappings": [
+    
+              ],
               "thresholds": {
                 "mode": "absolute",
                 "steps": [
@@ -1608,7 +1699,9 @@ data:
             "y": 21
           },
           "id": 51,
-          "links": [],
+          "links": [
+    
+          ],
           "options": {
             "footer": {
               "fields": "",
@@ -1643,7 +1736,9 @@ data:
             {
               "id": "merge",
               "options": {
-                "reducers": []
+                "reducers": [
+    
+                ]
               }
             }
           ],
@@ -1687,7 +1782,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -1696,7 +1793,9 @@ data:
             "y": 21
           },
           "id": 53,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -1768,7 +1867,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -1777,7 +1878,9 @@ data:
             "y": 24
           },
           "id": 20,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -1847,7 +1950,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -1856,7 +1961,9 @@ data:
             "y": 24
           },
           "id": 55,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -1928,7 +2035,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -1938,7 +2047,9 @@ data:
           },
           "hideTimeOverride": false,
           "id": 19,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -2008,7 +2119,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -2017,7 +2130,9 @@ data:
             "y": 27
           },
           "id": 57,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -2055,7 +2170,7 @@ data:
           "collapsed": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "gridPos": {
             "h": 1,
@@ -2064,12 +2179,14 @@ data:
             "y": 30
           },
           "id": 22,
-          "panels": [],
+          "panels": [
+    
+          ],
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "refId": "A"
             }
@@ -2117,7 +2234,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -2126,7 +2245,9 @@ data:
             "y": 31
           },
           "id": 25,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "background",
@@ -2195,7 +2316,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -2204,7 +2327,9 @@ data:
             "y": 31
           },
           "id": 24,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -2276,7 +2401,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 3,
@@ -2285,7 +2412,9 @@ data:
             "y": 31
           },
           "id": 26,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "background",
@@ -2321,7 +2450,7 @@ data:
           "collapsed": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "gridPos": {
             "h": 1,
@@ -2330,12 +2459,14 @@ data:
             "y": 34
           },
           "id": 68,
-          "panels": [],
+          "panels": [
+    
+          ],
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "refId": "A"
             }
@@ -2344,7 +2475,8 @@ data:
           "type": "row"
         },
         {
-          "aliasColors": {},
+          "aliasColors": {
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
@@ -2380,7 +2512,9 @@ data:
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
+          "links": [
+    
+          ],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -2390,7 +2524,9 @@ data:
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+    
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -2420,8 +2556,12 @@ data:
               "refId": "B"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
+          "thresholds": [
+    
+          ],
+          "timeRegions": [
+    
+          ],
           "title": "Network I/O",
           "tooltip": {
             "shared": true,
@@ -2432,7 +2572,9 @@ data:
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": []
+            "values": [
+    
+            ]
           },
           "yaxes": [
             {
@@ -2457,7 +2599,7 @@ data:
           "collapsed": false,
           "datasource": {
             "type": "prometheus",
-            "uid": "PBFA97CFB590B2093"
+            "uid": "${DS_PROMETHEUS}"
           },
           "gridPos": {
             "h": 1,
@@ -2466,12 +2608,14 @@ data:
             "y": 45
           },
           "id": 2,
-          "panels": [],
+          "panels": [
+    
+          ],
           "targets": [
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "${DS_PROMETHEUS}"
               },
               "refId": "A"
             }
@@ -2522,7 +2666,9 @@ data:
               },
               "unit": "percent"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -2531,7 +2677,9 @@ data:
             "y": 46
           },
           "id": 5,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "orientation": "horizontal",
@@ -2607,7 +2755,9 @@ data:
               },
               "unit": "percent"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -2616,7 +2766,9 @@ data:
             "y": 46
           },
           "id": 58,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "orientation": "horizontal",
@@ -2688,7 +2840,9 @@ data:
               },
               "unit": "none"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -2697,7 +2851,9 @@ data:
             "y": 46
           },
           "id": 64,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -2734,7 +2890,8 @@ data:
           "type": "stat"
         },
         {
-          "aliasColors": {},
+          "aliasColors": {
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
@@ -2768,7 +2925,9 @@ data:
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
+          "links": [
+    
+          ],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -2778,7 +2937,9 @@ data:
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+    
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -2797,8 +2958,12 @@ data:
               "refId": "A"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
+          "thresholds": [
+    
+          ],
+          "timeRegions": [
+    
+          ],
           "title": "CPU Use of node",
           "tooltip": {
             "shared": false,
@@ -2809,7 +2974,9 @@ data:
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": []
+            "values": [
+    
+            ]
           },
           "yaxes": [
             {
@@ -2830,7 +2997,8 @@ data:
           }
         },
         {
-          "aliasColors": {},
+          "aliasColors": {
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
@@ -2863,7 +3031,9 @@ data:
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
+          "links": [
+    
+          ],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -2873,7 +3043,9 @@ data:
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+    
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -2932,8 +3104,12 @@ data:
               "refId": "D"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
+          "thresholds": [
+    
+          ],
+          "timeRegions": [
+    
+          ],
           "title": "Cluster CPU Capacity",
           "tooltip": {
             "shared": true,
@@ -2944,7 +3120,9 @@ data:
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": []
+            "values": [
+    
+            ]
           },
           "yaxes": [
             {
@@ -3008,7 +3186,9 @@ data:
               },
               "unit": "percent"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -3017,7 +3197,9 @@ data:
             "y": 58
           },
           "id": 6,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "orientation": "horizontal",
@@ -3092,7 +3274,9 @@ data:
               },
               "unit": "percent"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -3101,7 +3285,9 @@ data:
             "y": 58
           },
           "id": 59,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "orientation": "horizontal",
@@ -3172,7 +3358,9 @@ data:
               },
               "unit": "decbytes"
             },
-            "overrides": []
+            "overrides": [
+    
+            ]
           },
           "gridPos": {
             "h": 5,
@@ -3181,7 +3369,9 @@ data:
             "y": 58
           },
           "id": 66,
-          "links": [],
+          "links": [
+    
+          ],
           "maxDataPoints": 100,
           "options": {
             "colorMode": "none",
@@ -3216,7 +3406,8 @@ data:
           "type": "stat"
         },
         {
-          "aliasColors": {},
+          "aliasColors": {
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
@@ -3250,7 +3441,9 @@ data:
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
+          "links": [
+    
+          ],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -3260,7 +3453,9 @@ data:
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+    
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": true,
@@ -3279,8 +3474,12 @@ data:
               "refId": "A"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
+          "thresholds": [
+    
+          ],
+          "timeRegions": [
+    
+          ],
           "title": "Ram memory Use of node",
           "tooltip": {
             "shared": false,
@@ -3291,7 +3490,9 @@ data:
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": []
+            "values": [
+    
+            ]
           },
           "yaxes": [
             {
@@ -3312,7 +3513,8 @@ data:
           }
         },
         {
-          "aliasColors": {},
+          "aliasColors": {
+          },
           "bars": false,
           "dashLength": 10,
           "dashes": false,
@@ -3342,7 +3544,9 @@ data:
           },
           "lines": true,
           "linewidth": 1,
-          "links": [],
+          "links": [
+    
+          ],
           "nullPointMode": "null",
           "options": {
             "alertThreshold": true
@@ -3352,7 +3556,9 @@ data:
           "pointradius": 5,
           "points": false,
           "renderer": "flot",
-          "seriesOverrides": [],
+          "seriesOverrides": [
+    
+          ],
           "spaceLength": 10,
           "stack": false,
           "steppedLine": false,
@@ -3413,8 +3619,12 @@ data:
               "refId": "D"
             }
           ],
-          "thresholds": [],
-          "timeRegions": [],
+          "thresholds": [
+    
+          ],
+          "timeRegions": [
+    
+          ],
           "title": "Cluster Ram memory Capacity",
           "tooltip": {
             "shared": true,
@@ -3425,7 +3635,9 @@ data:
           "xaxis": {
             "mode": "time",
             "show": true,
-            "values": []
+            "values": [
+    
+            ]
           },
           "yaxes": [
             {
@@ -3466,7 +3678,9 @@ data:
             "includeAll": false,
             "multi": false,
             "name": "cluster",
-            "options": [],
+            "options": [
+    
+            ],
             "query": "prometheus",
             "queryValue": "",
             "refresh": 1,
@@ -3483,7 +3697,7 @@ data:
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "${DS_PROMETHEUS}"
             },
             "definition": "datasource",
             "hide": 2,
@@ -3491,7 +3705,9 @@ data:
             "label": "",
             "multi": false,
             "name": "ds",
-            "options": [],
+            "options": [
+    
+            ],
             "query": {
               "query": "datasource",
               "refId": "StandardVariableQuery"
@@ -3516,7 +3732,9 @@ data:
             "label": "",
             "multi": false,
             "name": "datasource",
-            "options": [],
+            "options": [
+    
+            ],
             "query": "prometheus",
             "refresh": 1,
             "regex": "/$ds/",
@@ -3531,14 +3749,16 @@ data:
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "${DS_PROMETHEUS}"
             },
             "definition": "label_values(node_boot_time{job=\"node-exporter\"}, instance)",
             "hide": 0,
             "includeAll": true,
             "multi": true,
             "name": "node",
-            "options": [],
+            "options": [
+    
+            ],
             "query": {
               "query": "label_values(node_boot_time{job=\"node-exporter\"}, instance)",
               "refId": "StandardVariableQuery"
@@ -3558,14 +3778,16 @@ data:
             },
             "datasource": {
               "type": "prometheus",
-              "uid": "PBFA97CFB590B2093"
+              "uid": "${DS_PROMETHEUS}"
             },
             "definition": "",
             "hide": 0,
             "includeAll": true,
             "multi": true,
             "name": "namespace",
-            "options": [],
+            "options": [
+    
+            ],
             "query": {
               "query": "label_values(kube_pod_info, namespace)",
               "refId": "Prometheus-namespace-Variable-Query"
