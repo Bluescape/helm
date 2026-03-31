@@ -154,6 +154,16 @@ entries:
   bluescape-banzai-dashboards:
   - apiVersion: v2
     appVersion: 1.16.4
+    created: "2026-03-31T18:18:15.118694601Z"
+    description: A Helm chart for Kubernetes
+    digest: 8f5222b0a504675b512503413c81114371e5b58c93dd9156520ac1489c475464
+    name: bluescape-banzai-dashboards
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-banzai-dashboards-0.1.5-alpha1/bluescape-banzai-dashboards-0.1.5-alpha1.tgz
+    version: 0.1.5-alpha1
+  - apiVersion: v2
+    appVersion: 1.16.4
     created: "2023-11-09T20:15:42.453863288Z"
     description: A Helm chart for Kubernetes
     digest: 0970a3f1e914179282a9283b974ef2b48022a06e34284119731aeea05ca2aefd
@@ -4450,4 +4460,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2026-03-27T20:37:21.621715527Z"
+generated: "2026-03-31T18:18:15.119595507Z"
