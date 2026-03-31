@@ -2,6 +2,21 @@
 
 NOTE: You must helm version 3.x
 
+This chart targets Grafana Operator `5.22.2` and renders
+`grafana.integreatly.org/v1beta1` `GrafanaDashboard` resources.
+
+By default the chart renders `spec.instanceSelector: {}`, which matches all
+Grafana instances in the release namespace. If more than one Grafana instance
+exists in that namespace, override `grafanaOperator.instanceSelector` in
+`values.yaml` or via your Helm values, for example:
+
+```yaml
+grafanaOperator:
+  instanceSelector:
+    matchLabels:
+      app.kubernetes.io/instance: grafana-instance
+```
+
 ## Manual Addition
 
 This part is purposefully sparse but enough is given to give the reader a sufficient overview
@@ -14,10 +29,11 @@ of the process.
    * create a new dashboard directory in `<repo>/helm/charts/bluescape-banzai-dashboards/templates`
    * within that newly created directory, copy the templates from `0_template`.
    * chdir to the new directory
-   * put the exported JSON in the `configmap.yaml` using the example data
-     provided in the `configmap.yaml` template
-   * update the necessary fields in `configmap.yaml`
+   * put the exported JSON in the dashboard manifest `spec.json`
+   * update the necessary fields in the manifest
  * fix the necessary fields in `dashboard.yaml`
+   * keep the `grafana.integreatly.org/v1beta1` apiVersion
+   * keep `spec.instanceSelector`
 
 Jump down to verify dashboards below.
 
@@ -66,7 +82,6 @@ $ cd <repo>/helm/charts/bluescape-banzai-dashboards
 A cursory check of the following is performed at runtime:
 
   * the script is running from the expected directory
-  * the JSON imported will have `__inputs` and `__requires` removed
   * the dashboard JSON is valid JSON
   * pre-requisite binaries are on the running machine
 
