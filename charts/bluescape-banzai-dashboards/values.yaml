@@ -1,6 +1,12 @@
 
 
 #### These settings below are only for enabling specific banzai-cloud dashboards taken from the banzai-cloud/grafana-operator helm chart
+# Required by Grafana Operator v5+ GrafanaDashboard resources.
+# Leave empty to match all Grafana instances in the namespace, or set
+# matchLabels/matchExpressions to target a specific Grafana instance.
+grafanaOperator:
+  instanceSelector: {}
+
 #Enable Default Dashboards
 defaultDashboards:
   enabled: false

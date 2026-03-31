@@ -8,12 +8,13 @@ This script is based on: https://github.com/helm/charts/tree/master/stable/prome
 */ -}}
 {{- if and .Values.defaultDashboards.enabled .Values.defaultDashboards.nodes.enabled }}
 
-apiVersion: integreatly.org/v1alpha1
+apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: {{ printf "%s-%s" (include "bluescape-banzai-dashboards.fullname" $) "nodes" | trunc 63 | trimSuffix "-" }}
+  name: {{ include "bluescape-banzai-dashboards.grafanaDashboardName" (list $ "nodes") }}
   labels: {{- include "bluescape-banzai-dashboards.labels" . | nindent 8 }}
 spec:
+  {{- include "bluescape-banzai-dashboards.grafanaDashboardInstanceSelector" . | nindent 2 }}
   {{- if .Values.defaultDashboards.nodes.plugins }}
   plugins:
     {{- toYaml .Values.defaultDashboards.nodes.plugins | nindent 8 }}
@@ -56,7 +57,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 1,
               "fillGradient": 0,
@@ -99,7 +100,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "(\n  (1 - rate(node_cpu_seconds_total{job=\"node-exporter\", mode=\"idle\", instance=\"$instance\"}[5m]))\n/ ignoring(cpu) group_left\n  count without (cpu)( node_cpu_seconds_total{job=\"node-exporter\", mode=\"idle\", instance=\"$instance\"})\n)\n",
@@ -469,7 +470,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 0,
               "fillGradient": 0,
@@ -521,7 +522,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "rate(node_disk_read_bytes_total{job=\"node-exporter\", instance=\"$instance\", device=~\"mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|dasd.+\"}[5m])",
@@ -534,7 +535,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "rate(node_disk_written_bytes_total{job=\"node-exporter\", instance=\"$instance\", device=~\"mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|dasd.+\"}[5m])",
@@ -547,7 +548,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "rate(node_disk_io_time_seconds_total{job=\"node-exporter\", instance=\"$instance\", device=~\"mmcblk.p.+|nvme.+|rbd.+|sd.+|vd.+|xvd.+|dm-.+|dasd.+\"}[5m])",
@@ -703,7 +704,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 0,
               "fillGradient": 0,
@@ -746,7 +747,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "rate(node_network_receive_bytes_total{job=\"node-exporter\", instance=\"$instance\", device!=\"lo\"}[5m])",
@@ -796,7 +797,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 0,
               "fillGradient": 0,
@@ -839,7 +840,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "rate(node_network_transmit_bytes_total{job=\"node-exporter\", instance=\"$instance\", device!=\"lo\"}[5m])",

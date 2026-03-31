@@ -61,3 +61,35 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+GrafanaDashboard instance selector for Grafana Operator v5+.
+By default this matches all Grafana instances in the namespace.
+Override it when multiple Grafana instances share a namespace.
+*/}}
+{{- define "bluescape-banzai-dashboards.grafanaDashboardInstanceSelector" -}}
+{{- if .Values.grafanaOperator.instanceSelector }}
+instanceSelector:
+{{- tpl (.Values.grafanaOperator.instanceSelector | toYaml) . | nindent 2 }}
+{{- else }}
+instanceSelector: {}
+{{- end }}
+{{- end }}
+
+{{/*
+Build a GrafanaDashboard resource name while preserving the unique dashboard suffix.
+This avoids collisions when a long release/chart prefix would otherwise consume
+the 63-character Kubernetes object name limit.
+Pass the root context and the dashboard suffix.
+*/}}
+{{- define "bluescape-banzai-dashboards.grafanaDashboardName" -}}
+{{- $root := index . 0 -}}
+{{- $suffix := index . 1 -}}
+{{- $maxPrefixLen := int (sub 63 (add 1 (len $suffix))) -}}
+{{- $prefix := include "bluescape-banzai-dashboards.fullname" $root -}}
+{{- if lt $maxPrefixLen 1 -}}
+{{- $suffix | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" ($prefix | trunc $maxPrefixLen | trimSuffix "-") $suffix | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end }}

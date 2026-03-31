@@ -8,12 +8,13 @@ This script is based on: https://github.com/helm/charts/tree/master/stable/prome
 */ -}}
 {{- if and .Values.defaultDashboards.enabled .Values.defaultDashboards.controller_manager.enabled }}
 
-apiVersion: integreatly.org/v1alpha1
+apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: {{ printf "%s-%s" (include "bluescape-banzai-dashboards.fullname" $) "controller-manager" | trunc 63 | trimSuffix "-" }}
+  name: {{ include "bluescape-banzai-dashboards.grafanaDashboardName" (list $ "controller-manager") }}
   labels: {{- include "bluescape-banzai-dashboards.labels" . | nindent 8 }}
 spec:
+  {{- include "bluescape-banzai-dashboards.grafanaDashboardInstanceSelector" . | nindent 2 }}
   {{- if .Values.defaultDashboards.controller_manager.plugins }}
   plugins:
     {{- toYaml .Values.defaultDashboards.controller_manager.plugins | nindent 8 }}
@@ -52,7 +53,7 @@ spec:
             {
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fieldConfig": {
                 "defaults": {
@@ -115,7 +116,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "sum(up{cluster=\"$cluster\"})",
@@ -136,7 +137,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 1,
               "fillGradient": 0,
@@ -179,7 +180,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "sum(rate(workqueue_adds_total{cluster=\"$cluster\", instance=~\"$instance\"}[5m])) by (cluster, instance, name)",
@@ -227,7 +228,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 1,
               "fillGradient": 0,
@@ -270,7 +271,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "sum(rate(workqueue_depth{cluster=\"$cluster\", instance=~\"$instance\"}[5m])) by (cluster, instance, name)",
@@ -320,7 +321,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 1,
               "fillGradient": 0,
@@ -363,7 +364,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "histogram_quantile(0.99, sum(rate(workqueue_queue_duration_seconds_bucket{cluster=\"$cluster\", instance=~\"$instance\"}[5m])) by (cluster, instance, name, le))",
@@ -411,7 +412,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 1,
               "fillGradient": 0,
@@ -454,7 +455,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "sum(rate(rest_client_requests_total{instance=~\"$instance\",code=~\"2..\"}[5m]))",
@@ -467,7 +468,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "sum(rate(rest_client_requests_total{instance=~\"$instance\",code=~\"3..\"}[5m]))",
@@ -480,7 +481,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "sum(rate(rest_client_requests_total{instance=~\"$instance\",code=~\"4..\"}[5m]))",
@@ -493,7 +494,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "sum(rate(rest_client_requests_total{instance=~\"$instance\",code=~\"5..\"}[5m]))",
@@ -541,7 +542,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 1,
               "fillGradient": 0,
@@ -584,7 +585,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "histogram_quantile(0.99, sum(rate(rest_client_request_duration_seconds_bucket{cluster=\"$cluster\", instance=~\"$instance\", verb=\"POST\"}[5m])) by (verb, url, le))",
@@ -634,7 +635,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 1,
               "fillGradient": 0,
@@ -677,7 +678,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "histogram_quantile(0.99, sum(rate(rest_client_request_duration_seconds_bucket{cluster=\"$cluster\", instance=~\"$instance\", verb=\"GET\"}[5m])) by (verb, url, le))",
@@ -727,7 +728,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 1,
               "fillGradient": 0,
@@ -770,7 +771,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "process_resident_memory_bytes{cluster=\"$cluster\", instance=~\"$instance\"} ",
@@ -818,7 +819,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 1,
               "fillGradient": 0,
@@ -861,7 +862,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "rate(process_cpu_seconds_total{cluster=\"$cluster\", instance=~\"$instance\"}[5m])",
@@ -911,7 +912,7 @@ spec:
               "dashes": false,
               "datasource": {
                 "type": "prometheus",
-                "uid": "PBFA97CFB590B2093"
+                "uid": "$datasource"
               },
               "fill": 1,
               "fillGradient": 0,
@@ -954,7 +955,7 @@ spec:
                 {
                   "datasource": {
                     "type": "prometheus",
-                    "uid": "PBFA97CFB590B2093"
+                    "uid": "$datasource"
                   },
                   "editorMode": "code",
                   "expr": "go_goroutines{cluster=\"$cluster\",instance=~\"$instance\"}",
