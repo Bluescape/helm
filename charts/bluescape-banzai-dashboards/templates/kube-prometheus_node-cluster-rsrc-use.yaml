@@ -11,7 +11,7 @@ This script is based on: https://github.com/helm/charts/tree/master/stable/prome
 apiVersion: grafana.integreatly.org/v1beta1
 kind: GrafanaDashboard
 metadata:
-  name: {{ printf "%s-%s" (include "bluescape-banzai-dashboards.fullname" $) "node-cluster-rsrc-use" | trunc 63 | trimSuffix "-" }}
+  name: {{ include "bluescape-banzai-dashboards.grafanaDashboardName" (list $ "node-cluster-rsrc-use") }}
   labels: {{- include "bluescape-banzai-dashboards.labels" . | nindent 8 }}
 spec:
   {{- include "bluescape-banzai-dashboards.grafanaDashboardInstanceSelector" . | nindent 2 }}

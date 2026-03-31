@@ -75,3 +75,21 @@ instanceSelector:
 instanceSelector: {}
 {{- end }}
 {{- end }}
+
+{{/*
+Build a GrafanaDashboard resource name while preserving the unique dashboard suffix.
+This avoids collisions when a long release/chart prefix would otherwise consume
+the 63-character Kubernetes object name limit.
+Pass the root context and the dashboard suffix.
+*/}}
+{{- define "bluescape-banzai-dashboards.grafanaDashboardName" -}}
+{{- $root := index . 0 -}}
+{{- $suffix := index . 1 -}}
+{{- $maxPrefixLen := int (sub 63 (add 1 (len $suffix))) -}}
+{{- $prefix := include "bluescape-banzai-dashboards.fullname" $root -}}
+{{- if lt $maxPrefixLen 1 -}}
+{{- $suffix | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" ($prefix | trunc $maxPrefixLen | trimSuffix "-") $suffix | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end }}
