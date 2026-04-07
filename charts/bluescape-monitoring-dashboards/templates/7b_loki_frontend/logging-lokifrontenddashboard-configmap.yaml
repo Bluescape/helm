@@ -392,7 +392,7 @@ data:
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "count(loki_build_info{namespace=\"loki\", loki_instance=~\"${loki_instance}\", container=\"query-frontend\", job=\"system-loki-distributed-query-frontend\"})",
+              "expr": "count(loki_build_info{namespace=\"loki\", loki_instance=~\"${loki_instance}\", container=\"query-frontend\"})",
               "format": "time_series",
               "legendFormat": "__auto",
               "range": true,
@@ -462,7 +462,7 @@ data:
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "count(loki_build_info{namespace=\"loki\", loki_instance=~\"${loki_instance}\", container=\"index-gateway\", job=\"system-loki-distributed-index-gateway\"})",
+              "expr": "count(loki_build_info{namespace=\"loki\", loki_instance=~\"${loki_instance}\", container=\"index-gateway\"})",
               "format": "time_series",
               "legendFormat": "__auto",
               "range": true,
@@ -651,7 +651,7 @@ data:
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(\n    container_memory_working_set_bytes{namespace=\"loki\", container!=\"\", image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-loki-distributed-(?:querier|query-frontend|query-scheduler)\"}\n) by (workload)\n",
+              "expr": "sum(\n    container_memory_working_set_bytes{namespace=\"loki\", container!=\"\", image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-grafana-loki-(?:querier|query-frontend|query-scheduler)\"}\n) by (workload)\n",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -751,7 +751,7 @@ data:
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(\n  ((sum(\n    (sum(rate(container_cpu_usage_seconds_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", image!=\"\", namespace=\"loki\", container!=\"\"}[5m])) by (node, pod) / \n    on (node) group_left machine_cpu_cores)) by (pod)) * 100) *\n  on (pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-loki-distributed-(?:querier|query-frontend|query-scheduler)\"}) by (workload)",
+              "expr": "sum(\n  ((sum(\n    (sum(rate(container_cpu_usage_seconds_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", image!=\"\", namespace=\"loki\", container!=\"\"}[5m])) by (node, pod) / \n    on (node) group_left machine_cpu_cores)) by (pod)) * 100) *\n  on (pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-grafana-loki-(?:querier|query-frontend|query-scheduler)\"}) by (workload)",
               "hide": false,
               "legendFormat": "__auto",
               "range": true,
@@ -880,7 +880,7 @@ data:
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(rate(cortex_query_frontend_retries_count{job=\"system-loki-distributed-query-frontend\", namespace=\"loki\", loki_instance=\"${loki_instance}\"}[1m])) by (loki_instance)",
+              "expr": "sum(rate(cortex_query_frontend_retries_count{namespace=\"loki\", loki_instance=\"${loki_instance}\"}[1m])) by (loki_instance)",
               "hide": false,
               "legendFormat": "Retries - {{ `{{loki_instance}}` }}",
               "range": true,
@@ -1464,7 +1464,7 @@ data:
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(\n    container_memory_working_set_bytes{namespace=\"loki\", container!=\"\", image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-loki-distributed-memcached-.+\"}\n) by (workload)\n",
+              "expr": "sum(\n    container_memory_working_set_bytes{namespace=\"loki\", container!=\"\", image!=\"\"}\n  * on(namespace,pod)\n    group_left(workload, workload_type) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-memcached(?:chunks|frontend|indexqueries|indexwrites)\"}\n) by (workload)\n",
               "legendFormat": "__auto",
               "range": true,
               "refId": "A"
@@ -1564,7 +1564,7 @@ data:
                 "uid": "${datasource}"
               },
               "editorMode": "code",
-              "expr": "sum(\n  ((sum(\n    (sum(rate(container_cpu_usage_seconds_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", image!=\"\", namespace=\"loki\", container!=\"\"}[5m])) by (node, pod) / \n    on (node) group_left machine_cpu_cores)) by (pod)) * 100) *\n  on (pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-loki-distributed-memcached-.+\"}) by (workload)",
+              "expr": "sum(\n  ((sum(\n    (sum(rate(container_cpu_usage_seconds_total{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\", image!=\"\", namespace=\"loki\", container!=\"\"}[5m])) by (node, pod) / \n    on (node) group_left machine_cpu_cores)) by (pod)) * 100) *\n  on (pod) group_left(workload) namespace_workload_pod:kube_pod_owner:relabel{namespace=\"loki\", workload=~\"${loki_instance}-memcached(?:chunks|frontend|indexqueries|indexwrites)\"}) by (workload)",
               "hide": false,
               "legendFormat": "__auto",
               "range": true,
