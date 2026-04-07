@@ -90,6 +90,8 @@ spec:
             - "8443"
             - --mode-ingress
             - --enable-ratelimit
+            - --log-level
+            - {{ .Values.enrouteSettings.logLevel }}
             - --enroute-config-scope
             - {{ .Values.enrouteConfigScope }}
             {{- if .Values.service.useProxyProtocol }}
