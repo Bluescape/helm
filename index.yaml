@@ -2667,6 +2667,31 @@ entries:
     version: 0.8.7
   - apiVersion: v2
     appVersion: v1.0.0
+    created: "2026-04-08T15:23:55.502563792Z"
+    description: EnRoute API Gateway
+    digest: 7e2fd797e8f7eeb50b93a7c386ef2a5c3f5ddf2f797442e3e78fc38230c0573c
+    home: https://getenroute.io/
+    icon: https://getenroute.io/favicon.ico
+    keywords:
+    - api gateway
+    - EnRoute - Envoy Route Controller
+    - Saaras
+    - envoy
+    - ingress
+    maintainers:
+    - email: contact@saaras.io
+      name: contact
+    name: enroute
+    sources:
+    - https://github.com/saarasio/enroute
+    - https://getenroute.io
+    - https://github.com/envoyproxy/envoy
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/enroute-0.8.7-bs2/enroute-0.8.7-bs2.tgz
+    version: 0.8.7-bs2
+  - apiVersion: v2
+    appVersion: v1.0.0
     created: "2024-02-06T20:06:12.313142376Z"
     description: EnRoute API Gateway
     digest: 6cbb47693dad0b684b6e427c0e36c458bb93c45844075f5931781f09b988bb7d
@@ -4480,4 +4505,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2026-03-31T20:05:24.060620612Z"
+generated: "2026-04-08T15:23:55.50313156Z"
