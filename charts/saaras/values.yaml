@@ -147,6 +147,9 @@ enrouteConfigScope: "enroute0"
 envoySettings:
   logLevel: "debug"
 
+enrouteSettings:
+  logLevel: "info"
+
 # -- When enabled, setup resources need to run OPA
 opa:
   enable: false
