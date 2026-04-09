@@ -2614,7 +2614,7 @@ data:
                 "uid": "${datasource}"
               },
               "exemplar": true,
-              "expr": "sum(loki_ingester_memory_streams{job=\"system-loki-distributed-ingester\"}) by (tenant)",
+              "expr": "sum(loki_ingester_memory_streams{job=\"system-grafana-loki-ingester\"}) by (tenant)",
               "interval": "",
               "legendFormat": "{{ `{{tenant}}` }}",
               "refId": "A"
