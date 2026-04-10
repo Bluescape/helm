@@ -1,10 +1,13 @@
-{{- if and (or .Values.externalWorkloads.enabled .Values.clustermesh.useAPIServer) .Values.serviceAccounts.clustermeshApiserver.create }}
+{{- if and .Values.clustermesh.useAPIServer .Values.serviceAccounts.clustermeshApiserver.create .Values.rbac.create (eq .Values.clustermesh.apiserver.kvstoremesh.kvstoreMode "internal") (eq "true" (include "identityAllocationCRD" .)) }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: clustermesh-apiserver
   labels:
     app.kubernetes.io/part-of: cilium
+    {{- with .Values.commonLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   {{- with .Values.clustermesh.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -13,33 +16,10 @@ rules:
 - apiGroups:
   - cilium.io
   resources:
-  - ciliumnodes
-  - ciliumendpoints
   - ciliumidentities
-  verbs:
-  - create
-- apiGroups:
-  - cilium.io
-  resources:
-  - ciliumexternalworkloads/status
-  - ciliumnodes
-  - ciliumidentities
-  verbs:
-  - update
-- apiGroups:
-  - cilium.io
-  resources:
-  - ciliumendpoints
-  - ciliumendpoints/status
-  verbs:
-  - patch
-- apiGroups:
-  - cilium.io
-  resources:
-  - ciliumidentities
-  - ciliumexternalworkloads
   - ciliumendpoints
   - ciliumnodes
+  - ciliumendpointslices
   verbs:
   - get
   - list
@@ -49,6 +29,7 @@ rules:
   resources:
   - customresourcedefinitions
   verbs:
+  - get
   - list
   - watch
 - apiGroups:
@@ -69,4 +50,14 @@ rules:
   - get
   - list
   - watch
+{{- if or .Values.clustermesh.mcsapi.enabled .Values.clustermesh.enableMCSAPISupport }}
+- apiGroups:
+  - multicluster.x-k8s.io
+  resources:
+  - serviceexports
+  verbs:
+  - get
+  - list
+  - watch
+{{- end }}
 {{- end }}

@@ -1,10 +1,11 @@
+{{- $envoyDS := eq (include "envoyDaemonSetEnabled" .) "true" -}}
 {{- if and .Values.agent (not .Values.preflight.enabled) .Values.prometheus.enabled }}
-{{- if .Values.prometheus.serviceMonitor.enabled }}
+{{- if (or .Values.prometheus.serviceMonitor.enabled .Values.prometheus.metricsService) }}
 apiVersion: v1
 kind: Service
 metadata:
   name: cilium-agent
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ include "cilium.namespace" . }}
   {{- with .Values.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -13,6 +14,9 @@ metadata:
     k8s-app: cilium
     app.kubernetes.io/name: cilium-agent
     app.kubernetes.io/part-of: cilium
+    {{- with .Values.commonLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   clusterIP: None
   type: ClusterIP
@@ -23,25 +27,28 @@ spec:
     port: {{ .Values.prometheus.port }}
     protocol: TCP
     targetPort: prometheus
-  {{- if not .Values.envoy.enabled }}
+  {{- if not $envoyDS }}
   - name: envoy-metrics
-    port: {{ .Values.proxy.prometheus.port | default .Values.envoy.prometheus.port }}
+    port: {{ .Values.envoy.prometheus.port }}
     protocol: TCP
     targetPort: envoy-metrics
   {{- end }}
-{{- else if and .Values.proxy.prometheus.enabled .Values.envoy.prometheus.enabled (not .Values.envoy.enabled) }}
+{{- else if and .Values.envoy.prometheus.enabled (not $envoyDS) }}
 apiVersion: v1
 kind: Service
 metadata:
   name: cilium-agent
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ include "cilium.namespace" . }}
   annotations:
     prometheus.io/scrape: "true"
-    prometheus.io/port: {{ .Values.proxy.prometheus.port | default .Values.envoy.prometheus.port | quote }}
+    prometheus.io/port: {{ .Values.envoy.prometheus.port | quote }}
   labels:
     k8s-app: cilium
     app.kubernetes.io/name: cilium-agent
     app.kubernetes.io/part-of: cilium
+    {{- with .Values.commonLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   clusterIP: None
   type: ClusterIP
@@ -49,7 +56,7 @@ spec:
     k8s-app: cilium
   ports:
   - name: envoy-metrics
-    port: {{ .Values.proxy.prometheus.port | default .Values.envoy.prometheus.port }}
+    port: {{ .Values.envoy.prometheus.port }}
     protocol: TCP
     targetPort: envoy-metrics
 {{- end }}

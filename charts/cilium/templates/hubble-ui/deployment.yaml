@@ -3,7 +3,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: hubble-ui
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ include "cilium.namespace" . }}
   {{- with .Values.hubble.ui.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -12,6 +12,13 @@ metadata:
     k8s-app: hubble-ui
     app.kubernetes.io/name: hubble-ui
     app.kubernetes.io/part-of: cilium
+    {{- with .Values.commonLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+
+    {{- with .Values.hubble.ui.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
 spec:
   replicas: {{ .Values.hubble.ui.replicas }}
   selector:
@@ -35,18 +42,18 @@ spec:
         k8s-app: hubble-ui
         app.kubernetes.io/name: hubble-ui
         app.kubernetes.io/part-of: cilium
+        {{- with .Values.commonLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         {{- with .Values.hubble.ui.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
       {{- with .Values.hubble.ui.securityContext }}
-        {{- if .enabled }}
       securityContext:
         {{- omit . "enabled" | toYaml | nindent 8 }}
-        {{- end}}
       {{- end }}
       priorityClassName: {{ .Values.hubble.ui.priorityClassName }}
-      serviceAccount: {{ .Values.serviceAccounts.ui.name | quote }}
       serviceAccountName: {{ .Values.serviceAccounts.ui.name | quote }}
       automountServiceAccountToken: {{ .Values.serviceAccounts.ui.automount }}
       {{- with .Values.imagePullSecrets }}
@@ -67,11 +74,11 @@ spec:
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 8081
+            port: http
         readinessProbe:
           httpGet:
             path: /
-            port: 8081
+            port: http
         {{- with .Values.hubble.ui.frontend.resources }}
         resources:
           {{- toYaml . | trim | nindent 10 }}
@@ -177,8 +184,12 @@ spec:
           defaultMode: 420
           name: hubble-ui-nginx
         name: hubble-ui-nginx-conf
-      - emptyDir: {}
-        name: tmp-dir
+      - name: tmp-dir
+        {{- if .Values.hubble.ui.tmpVolume }}
+          {{- toYaml .Values.hubble.ui.tmpVolume | nindent 8 }}
+        {{- else }}
+        emptyDir: {}
+        {{- end }}
       {{- if .Values.hubble.relay.tls.server.enabled }}
       - name: hubble-ui-client-certs
       {{- if .Values.hubble.ui.standalone.enabled }}
@@ -189,7 +200,7 @@ spec:
           defaultMode: 0400
           sources:
           - secret:
-              name: hubble-ui-client-certs
+              name: {{ .Values.hubble.ui.tls.client.existingSecret | default "hubble-ui-client-certs" }}
               items:
                 - key: tls.crt
                   path: client.crt
