@@ -1,10 +1,4 @@
 {{- $envoyDS := eq (include "envoyDaemonSetEnabled" .) "true" -}}
-{{- $debug := .Values.debug | default dict -}}
-{{- $debugVerbose := "" -}}
-{{- if kindIs "string" $debug.verbose -}}
-  {{- $debugVerbose = ($debug.verbose | trim) -}}
-{{- end -}}
-{{- $debugVerboseLevels := splitList " " $debugVerbose -}}
 {{- if (and $envoyDS (not .Values.preflight.enabled)) }}
 ---
 apiVersion: apps/v1
@@ -86,9 +80,9 @@ spec:
         - '--'
         - '-c /var/run/cilium/envoy/bootstrap-config.json'
         - '--base-id {{ int .Values.envoy.baseID }}'
-        {{- if and $debug.enabled $debugVerbose (has "envoy" $debugVerboseLevels) }}
+        {{- if and (.Values.debug.enabled) (hasKey .Values.debug "verbose") (.Values.debug.verbose) (has "envoy" ( splitList " " .Values.debug.verbose )) }}
         - '--log-level trace'
-        {{- else if and $debug.enabled $debugVerbose (has "flow" $debugVerboseLevels) }}
+        {{- else if and (.Values.debug.enabled) (hasKey .Values.debug "verbose") (.Values.debug.verbose) (has "flow" ( splitList " " .Values.debug.verbose )) }}
         - '--log-level debug'
         {{- else if .Values.envoy.log.defaultLevel }}
         - '--log-level {{ .Values.envoy.log.defaultLevel }}'
