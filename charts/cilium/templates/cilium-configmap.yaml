@@ -19,6 +19,11 @@
 {{- $envoyDS := eq (include "envoyDaemonSetEnabled" .) "true" -}}
 {{- $readSecretsOnlyFromSecretsNamespace := eq (include "readSecretsOnlyFromSecretsNamespace" .) "true" -}}
 {{- $secretSyncEnabled := eq (include "secretSyncEnabled" .) "true" -}}
+{{- $debug := .Values.debug | default dict -}}
+{{- $debugVerbose := "" -}}
+{{- if kindIs "string" $debug.verbose -}}
+  {{- $debugVerbose = ($debug.verbose | trim) -}}
+{{- end -}}
 
 {{- /* Default values when 1.8 was initially deployed */ -}}
 {{- if semverCompare ">=1.8" (default "1.8" .Values.upgradeCompatibility) -}}
@@ -179,8 +184,8 @@ data:
   # If you want to run cilium in debug mode change this value to true
   debug: {{ .Values.debug.enabled | quote }}
 
-{{- if hasKey .Values.debug "verbose" }}
-  debug-verbose: "{{ .Values.debug.verbose }}"
+{{- if kindIs "string" $debug.verbose }}
+  debug-verbose: {{ $debugVerbose | quote }}
 {{- end }}
 
 {{- if hasKey .Values.debug "metricsSamplingInterval" }}
