@@ -9,13 +9,28 @@
 {{- end -}}
 
 {{- $kubeProxyReplacement := (coalesce .Values.kubeProxyReplacement "false") -}}
+{{- $envoyDS := eq (include "envoyDaemonSetEnabled" .) "true" -}}
+{{- $daemon := .Values.daemon | default dict -}}
+{{- $daemonConfigSources := "" -}}
+{{- if kindIs "string" $daemon.configSources -}}
+  {{- $daemonConfigSources = $daemon.configSources -}}
+{{- end -}}
+{{- $daemonAllowedConfigOverrides := "" -}}
+{{- if kindIs "string" $daemon.allowedConfigOverrides -}}
+  {{- $daemonAllowedConfigOverrides = $daemon.allowedConfigOverrides -}}
+{{- end -}}
+{{- $daemonBlockedConfigOverrides := "" -}}
+{{- if kindIs "string" $daemon.blockedConfigOverrides -}}
+  {{- $daemonBlockedConfigOverrides = $daemon.blockedConfigOverrides -}}
+{{- end -}}
+{{- $buildDaemonConfig := or (not $daemonConfigSources) (not (regexMatch "^config-map:[^,]+$" $daemonConfigSources)) -}}
 
 ---
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: cilium
-  namespace: {{ .Release.Namespace }}
+  name: {{ .Values.name }}
+  namespace: {{ include "cilium.namespace" . }}
   {{- with .Values.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -24,9 +39,12 @@ metadata:
     k8s-app: cilium
     app.kubernetes.io/part-of: cilium
     app.kubernetes.io/name: cilium-agent
+    {{- with .Values.commonLabels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
     {{- if .Values.keepDeprecatedLabels }}
     kubernetes.io/cluster-service: "true"
-    {{- if and .Values.gke.enabled (eq .Release.Namespace "kube-system" ) }}
+    {{- if and .Values.gke.enabled (eq (include "cilium.namespace" .) "kube-system" ) }}
       {{- fail "Invalid configuration: Installing Cilium on GKE with 'kubernetes.io/cluster-service' labels on 'kube-system' namespace causes Cilium DaemonSet to be removed by GKE. Either install Cilium on a different Namespace or install with '--set keepDeprecatedLabels=false'" }}
     {{- end }}
     {{- end }}
@@ -68,10 +86,14 @@ spec:
         {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        kubectl.kubernetes.io/default-container: cilium-agent
       labels:
         k8s-app: cilium
         app.kubernetes.io/name: cilium-agent
         app.kubernetes.io/part-of: cilium
+        {{- with .Values.commonLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
         {{- if .Values.keepDeprecatedLabels }}
         kubernetes.io/cluster-service: "true"
         {{- end }}
@@ -122,12 +144,11 @@ spec:
         {{- with .Values.extraArgs }}
         {{- toYaml . | trim | nindent 8 }}
         {{- end }}
-        {{- if semverCompare ">=1.20-0" .Capabilities.KubeVersion.Version }}
         startupProbe:
           httpGet:
             host: {{ .Values.ipv4.enabled | ternary "127.0.0.1" "::1" | quote }}
             path: /healthz
-            port: {{ .Values.healthPort }}
+            port: health
             scheme: HTTP
             httpHeaders:
             - name: "brief"
@@ -136,7 +157,6 @@ spec:
           periodSeconds: {{ .Values.startupProbe.periodSeconds }}
           successThreshold: 1
           initialDelaySeconds: 5
-        {{- end }}
         livenessProbe:
           {{- if or .Values.keepDeprecatedProbes $defaultKeepDeprecatedProbes }}
           exec:
@@ -148,19 +168,13 @@ spec:
           httpGet:
             host: {{ .Values.ipv4.enabled | ternary "127.0.0.1" "::1" | quote }}
             path: /healthz
-            port: {{ .Values.healthPort }}
+            port: health
             scheme: HTTP
             httpHeaders:
             - name: "brief"
               value: "true"
-          {{- end }}
-          {{- if semverCompare "<1.20-0" .Capabilities.KubeVersion.Version }}
-          # The initial delay for the liveness probe is intentionally large to
-          # avoid an endless kill & restart cycle if in the event that the initial
-          # bootstrapping takes longer than expected.
-          # Starting from Kubernetes 1.20, we are using startupProbe instead
-          # of this field.
-          initialDelaySeconds: 120
+            - name: "require-k8s-connectivity"
+              value: {{ .Values.livenessProbe.requireK8sConnectivity | quote }}
           {{- end }}
           periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
           successThreshold: 1
@@ -177,14 +191,11 @@ spec:
           httpGet:
             host: {{ .Values.ipv4.enabled | ternary "127.0.0.1" "::1" | quote }}
             path: /healthz
-            port: {{ .Values.healthPort }}
+            port: health
             scheme: HTTP
             httpHeaders:
             - name: "brief"
               value: "true"
-          {{- end }}
-          {{- if semverCompare "<1.20-0" .Capabilities.KubeVersion.Version }}
-          initialDelaySeconds: 5
           {{- end }}
           periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
           successThreshold: 1
@@ -209,20 +220,33 @@ spec:
             resourceFieldRef:
               resource: limits.memory
               divisor: '1'
+        {{- if and .Values.k8sServiceHostRef.name .Values.k8sServiceHostRef.key }}
+        - name: KUBERNETES_SERVICE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.k8sServiceHostRef.name }}
+              key: {{ .Values.k8sServiceHostRef.key }}
+        - name: KUBERNETES_SERVICE_PORT
+          value: {{ include "k8sServicePort" . }}
+        {{- end }}
         {{- if .Values.k8sServiceHost }}
         - name: KUBERNETES_SERVICE_HOST
-          value: {{ .Values.k8sServiceHost | quote }}
-        {{- end }}
-        {{- if .Values.k8sServicePort }}
+          value: {{ include "k8sServiceHost" . }}
         - name: KUBERNETES_SERVICE_PORT
-          value: {{ .Values.k8sServicePort | quote }}
+          value: {{ include "k8sServicePort" . }}
+        {{- end }}
+        {{- if .Values.k8sClientExponentialBackoff.enabled }}
+        - name: KUBE_CLIENT_BACKOFF_BASE
+          value: {{ .Values.k8sClientExponentialBackoff.backoffBaseSeconds | quote }}
+        - name: KUBE_CLIENT_BACKOFF_DURATION
+          value: {{ .Values.k8sClientExponentialBackoff.backoffMaxDurationSeconds | quote }}
         {{- end }}
         {{- with .Values.extraEnv }}
         {{- toYaml . | trim | nindent 8 }}
         {{- end }}
         {{- if .Values.cni.install }}
         lifecycle:
-          {{- if ne .Values.cni.chainingMode "aws-cni" }}
+          {{- if and .Values.cni.iptablesRemoveAWSRules (ne .Values.cni.chainingMode "aws-cni") }}
           postStart:
             exec:
               command:
@@ -240,30 +264,40 @@ spec:
         resources:
           {{- toYaml . | trim | nindent 10 }}
         {{- end }}
-        {{- if or .Values.prometheus.enabled .Values.hubble.metrics.enabled }}
         ports:
+        - name: health
+          containerPort: {{ .Values.healthPort }}
+          hostPort: {{ .Values.healthPort }}
+          protocol: TCP
+        {{- if .Values.hubble.enabled }}
         - name: peer-service
           containerPort: {{ .Values.hubble.peerService.targetPort }}
           hostPort: {{ .Values.hubble.peerService.targetPort }}
           protocol: TCP
+        {{- end }}
         {{- if .Values.prometheus.enabled }}
         - name: prometheus
           containerPort: {{ .Values.prometheus.port }}
           hostPort: {{ .Values.prometheus.port }}
           protocol: TCP
-        {{- if and .Values.proxy.prometheus.enabled .Values.envoy.prometheus.enabled (not .Values.envoy.enabled) }}
+        {{- if and .Values.envoy.prometheus.enabled (not $envoyDS) }}
         - name: envoy-metrics
-          containerPort: {{ .Values.proxy.prometheus.port | default .Values.envoy.prometheus.port }}
-          hostPort: {{ .Values.proxy.prometheus.port | default .Values.envoy.prometheus.port }}
+          containerPort: {{ .Values.envoy.prometheus.port }}
+          hostPort: {{ .Values.envoy.prometheus.port }}
+          protocol: TCP
+        {{- end }}
+        {{- if and .Values.envoy.debug.admin.enabled .Values.envoy.debug.admin.port (not $envoyDS) }}
+        - name: envoy-admin
+          containerPort: {{ .Values.envoy.debug.admin.port }}
+          hostPort: {{ .Values.envoy.debug.admin.port }}
           protocol: TCP
         {{- end }}
         {{- end }}
-        {{- if .Values.hubble.metrics.enabled }}
+        {{- if or .Values.hubble.metrics.enabled .Values.hubble.metrics.dynamic.enabled }}
         - name: hubble-metrics
           containerPort: {{ .Values.hubble.metrics.port }}
           hostPort: {{ .Values.hubble.metrics.port }}
           protocol: TCP
-        {{- end }}
         {{- end }}
         securityContext:
           {{- if .Values.securityContext.privileged }}
@@ -288,7 +322,7 @@ spec:
           mountPath: {{ dir .Values.authentication.mutual.spire.adminSocketPath }}
           readOnly: false
         {{- end }}
-        {{- if .Values.envoy.enabled }}
+        {{- if $envoyDS }}
         - name: envoy-sockets
           mountPath: /var/run/cilium/envoy/sockets
           readOnly: false
@@ -303,8 +337,6 @@ spec:
         - mountPath: /host/proc/sys/kernel
           name: host-proc-sys-kernel
         {{- end}}
-        {{- /* CRI-O already mounts the BPF filesystem */ -}}
-        {{- if and .Values.bpf.autoMount.enabled (not (eq .Values.containerRuntime.integration "crio")) }}
         - name: bpf-maps
           mountPath: /sys/fs/bpf
           {{- if .Values.securityContext.privileged }}
@@ -316,7 +348,6 @@ spec:
           # in Cilium.
           mountPropagation: HostToContainer
           {{- end}}
-        {{- end }}
         {{- if not (contains "/run/cilium/cgroupv2" .Values.cgroup.hostRoot) }}
         # Check for duplicate mounts before mounting
         - name: cilium-cgroup
@@ -324,13 +355,16 @@ spec:
         {{- end}}
         - name: cilium-run
           mountPath: /var/run/cilium
+        - name: cilium-netns
+          mountPath: /var/run/cilium/netns
+          mountPropagation: HostToContainer
         - name: etc-cni-netd
           mountPath: {{ .Values.cni.hostConfDirMountPath }}
         {{- if .Values.etcd.enabled }}
         - name: etcd-config-path
           mountPath: /var/lib/etcd-config
           readOnly: true
-        {{- if or .Values.etcd.ssl .Values.etcd.managed }}
+        {{- if .Values.etcd.ssl }}
         - name: etcd-secrets
           mountPath: /var/lib/etcd-secrets
           readOnly: true
@@ -357,16 +391,20 @@ spec:
           mountPath: /run/xtables.lock
         {{- if and .Values.encryption.enabled (eq .Values.encryption.type "ipsec") }}
         - name: cilium-ipsec-secrets
-          mountPath: {{ .Values.encryption.ipsec.mountPath | default .Values.encryption.mountPath }}
+          mountPath: {{ .Values.encryption.ipsec.mountPath }}
+        {{- end }}
+        {{- if and .Values.encryption.enabled (eq .Values.encryption.type "ztunnel") }}
+        - name: cilium-ztunnel-secrets
+          mountPath: /etc/ztunnel
         {{- end }}
         {{- if .Values.kubeConfigPath }}
         - name: kube-config
           mountPath: {{ .Values.kubeConfigPath }}
           readOnly: true
         {{- end }}
-        {{- if .Values.bgp.enabled }}
-        - name: bgp-config-path
-          mountPath: /var/lib/cilium/bgp
+        {{- if and .Values.hubble.enabled (or .Values.hubble.metrics.enabled .Values.hubble.metrics.dynamic.enabled) .Values.hubble.metrics.tls.enabled }}
+        - name: hubble-metrics-tls
+          mountPath: /var/lib/cilium/tls/hubble-metrics
           readOnly: true
         {{- end }}
         {{- if and .Values.hubble.enabled .Values.hubble.tls.enabled (hasKey .Values.hubble "listenAddress") }}
@@ -374,8 +412,14 @@ spec:
           mountPath: /var/lib/cilium/tls/hubble
           readOnly: true
         {{- end }}
+        {{- if $buildDaemonConfig }}
         - name: tmp
           mountPath: /tmp
+        {{- else }}
+        - name: cilium-config-path
+          mountPath: /tmp/cilium/config-map
+          readOnly: true
+        {{- end }}
         {{- range .Values.extraHostPathMounts }}
         - name: {{ .name }}
           mountPath: {{ .mountPath }}
@@ -383,6 +427,11 @@ spec:
           {{- if .mountPropagation }}
           mountPropagation: {{ .mountPropagation }}
           {{- end }}
+        {{- end }}
+        {{- if .Values.hubble.metrics.dynamic.enabled }}
+        - name: hubble-dynamic-metrics-config
+          mountPath: /dynamic-metrics-config
+          readOnly: true
         {{- end }}
         {{- if .Values.hubble.export.dynamic.enabled }}
         - name: hubble-flowlog-config
@@ -392,6 +441,7 @@ spec:
         {{- with .Values.extraVolumeMounts }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+        {{- include "cilium-agent.volumeMounts.extra" . | nindent 8 }}
       {{- if .Values.monitor.enabled }}
       - name: cilium-monitor
         image: {{ include "cilium.image" .Values.image | quote }}
@@ -425,23 +475,31 @@ spec:
       {{- toYaml .Values.extraContainers | nindent 6 }}
       {{- end }}
       initContainers:
+      {{- if $buildDaemonConfig }}
       - name: config
         image: {{ include "cilium.image" .Values.image | quote }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        {{- with .Values.initResources }}
+        resources:
+          {{- toYaml . | trim | nindent 10 }}
+        {{- end }}
         command:
         - cilium-dbg
         - build-config
-        {{- if (not (kindIs "invalid" .Values.daemon.configSources)) }}
-        - "--source={{.Values.daemon.configSources}}"
+        {{- if $daemonConfigSources }}
+        - "--source={{ $daemonConfigSources }}"
         {{- end }}
-        {{- if (not (kindIs "invalid" .Values.daemon.allowedConfigOverrides)) }}
-        - "--allow-config-keys={{.Values.daemon.allowedConfigOverrides}}"
+        {{- if $daemonAllowedConfigOverrides }}
+        - "--allow-config-keys={{ $daemonAllowedConfigOverrides }}"
         {{- end }}
-        {{- if (not (kindIs "invalid" .Values.daemon.blockedConfigOverrides)) }}
-        - "--deny-config-keys={{.Values.daemon.blockedConfigOverrides}}"
+        {{- if $daemonBlockedConfigOverrides }}
+        - "--deny-config-keys={{ $daemonBlockedConfigOverrides }}"
         {{- end }}
         {{- if .Values.kubeConfigPath }}
         - "--k8s-kubeconfig-path={{ .Values.kubeConfigPath }}"
+        {{- end }}
+        {{- if hasKey .Values.k8s "apiServerURLs" }}
+        - "--k8s-api-server-urls={{ .Values.k8s.apiServerURLs }}"
         {{- end }}
         env:
         - name: K8S_NODE_NAME
@@ -454,13 +512,20 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: metadata.namespace
+        {{- if and .Values.k8sServiceHostRef.name .Values.k8sServiceHostRef.key }}
+        - name: KUBERNETES_SERVICE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.k8sServiceHostRef.name }}
+              key: {{ .Values.k8sServiceHostRef.key }}
+        - name: KUBERNETES_SERVICE_PORT
+          value: {{ include "k8sServicePort" . }}
+        {{- end }}
         {{- if .Values.k8sServiceHost }}
         - name: KUBERNETES_SERVICE_HOST
-          value: {{ .Values.k8sServiceHost | quote }}
-        {{- end }}
-        {{- if .Values.k8sServicePort }}
+          value: {{ include "k8sServiceHost" . }}
         - name: KUBERNETES_SERVICE_PORT
-          value: {{ .Values.k8sServicePort | quote }}
+          value: {{ include "k8sServicePort" . }}
         {{- end }}
         {{- with .Values.extraEnv }}
         {{- toYaml . | nindent 8 }}
@@ -477,6 +542,17 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
         terminationMessagePolicy: FallbackToLogsOnError
+        securityContext:
+          {{- if .Values.securityContext.privileged }}
+          privileged: true
+          {{- else }}
+          capabilities:
+            add:
+              - NET_ADMIN
+            drop:
+              - ALL
+          {{- end}}
+      {{- end }}
       {{- if .Values.cgroup.autoMount.enabled }}
       # Required to mount cgroup2 filesystem on the underlying Kubernetes node.
       # We use nsenter command with host's cgroup and mount namespaces enabled.
@@ -488,9 +564,12 @@ spec:
           value: {{ .Values.cgroup.hostRoot }}
         - name: BIN_PATH
           value: {{ .Values.cni.binPath }}
-        {{- with .Values.cgroup.autoMount.resources }}
+        {{- if .Values.cgroup.autoMount.resources }}
         resources:
-          {{- toYaml . | trim | nindent 10 }}
+          {{- toYaml .Values.cgroup.autoMount.resources | trim | nindent 10 }}
+        {{- else if .Values.initResources }}
+        resources:
+          {{- toYaml .Values.initResources | trim | nindent 10 }}
         {{- end }}
         command:
         - sh
@@ -526,6 +605,8 @@ spec:
             drop:
               - ALL
           {{- end}}
+      {{- end }}
+      {{- if .Values.sysctlfix.enabled }}
       - name: apply-sysctl-overwrites
         image: {{ include "cilium.image" .Values.image | quote }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -591,13 +672,10 @@ spec:
         terminationMessagePolicy: FallbackToLogsOnError
         securityContext:
           privileged: true
-      {{- /* CRI-O already mounts the BPF filesystem */ -}}
-      {{- if and .Values.bpf.autoMount.enabled (not (eq .Values.containerRuntime.integration "crio")) }}
         volumeMounts:
         - name: bpf-maps
           mountPath: /sys/fs/bpf
           mountPropagation: Bidirectional
-        {{- end }}
       {{- end }}
       {{- if and .Values.nodeinit.enabled .Values.nodeinit.bootstrapFile }}
       - name: wait-for-node-init
@@ -644,13 +722,20 @@ spec:
               name: cilium-config
               key: write-cni-conf-when-ready
               optional: true
+        {{- if and .Values.k8sServiceHostRef.name .Values.k8sServiceHostRef.key }}
+        - name: KUBERNETES_SERVICE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.k8sServiceHostRef.name }}
+              key: {{ .Values.k8sServiceHostRef.key }}
+        - name: KUBERNETES_SERVICE_PORT
+          value: {{ include "k8sServicePort" . }}
+        {{- end }}
         {{- if .Values.k8sServiceHost }}
         - name: KUBERNETES_SERVICE_HOST
-          value: {{ .Values.k8sServiceHost | quote }}
-        {{- end }}
-        {{- if .Values.k8sServicePort }}
+          value: {{ include "k8sServiceHost" . }}
         - name: KUBERNETES_SERVICE_PORT
-          value: {{ .Values.k8sServicePort | quote }}
+          value: {{ include "k8sServicePort" . }}
         {{- end }}
         {{- with .Values.extraEnv }}
         {{- toYaml . | nindent 8 }}
@@ -673,11 +758,8 @@ spec:
               - ALL
           {{- end}}
         volumeMounts:
-        {{- /* CRI-O already mounts the BPF filesystem */ -}}
-        {{- if and .Values.bpf.autoMount.enabled (not (eq .Values.containerRuntime.integration "crio")) }}
         - name: bpf-maps
           mountPath: /sys/fs/bpf
-        {{- end }}
           # Required to mount cgroup filesystem from the host to cilium agent pod
         - name: cilium-cgroup
           mountPath: {{ .Values.cgroup.hostRoot }}
@@ -756,23 +838,21 @@ spec:
           - name: cni-path
             mountPath: /host/opt/cni/bin
       {{- end }} # .Values.cni.install
+      {{- if .Values.extraInitContainers }}
+      {{- toYaml .Values.extraInitContainers | nindent 6 }}
+      {{- end }}
       restartPolicy: Always
       priorityClassName: {{ include "cilium.priorityClass" (list $ .Values.priorityClassName "system-node-critical") }}
-      serviceAccount: {{ .Values.serviceAccounts.cilium.name | quote }}
       serviceAccountName: {{ .Values.serviceAccounts.cilium.name | quote }}
       automountServiceAccountToken: {{ .Values.serviceAccounts.cilium.automount }}
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       hostNetwork: true
-      {{- if and .Values.etcd.managed (not .Values.etcd.k8sService) }}
-      # In managed etcd mode, Cilium must be able to resolve the DNS name of
-      # the etcd service
-      dnsPolicy: ClusterFirstWithHostNet
-      {{- else if .Values.dnsPolicy }}
-      dnsPolicy: {{ .Values.dnsPolicy }}
-      {{- end }}
+      {{- include "cilium-agent.dnsPolicy" . | nindent 6 }}
+      {{- if (eq .Values.scheduling.mode "anti-affinity")  }}
       {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
@@ -784,7 +864,7 @@ spec:
       {{- end }}
       {{- if and .Values.clustermesh.config.enabled (not (and .Values.clustermesh.useAPIServer .Values.clustermesh.apiserver.kvstoremesh.enabled )) }}
       hostAliases:
-      {{- range $cluster := .Values.clustermesh.config.clusters }}
+      {{- range $_, $cluster := (include "clustermesh-clusters" . | fromJson) }}
       {{- range $ip := $cluster.ips }}
       - ip: {{ $ip }}
         hostnames: [ "{{ $cluster.name }}.{{ $.Values.clustermesh.config.domain }}" ]
@@ -792,24 +872,37 @@ spec:
       {{- end }}
       {{- end }}
       volumes:
-        # For sharing configuration between the "config" initContainer and the agent
+      {{- if $buildDaemonConfig }}
+      # For sharing configuration between the "config" initContainer and the agent
       - name: tmp
+        {{- if .Values.tmpVolume }}
+          {{- toYaml .Values.tmpVolume | nindent 8 }}
+        {{- else }}
         emptyDir: {}
+        {{- end }}
+      {{- else }}
+      # To read the configuration from the config map
+      - name: cilium-config-path
+        configMap:
+          name: {{ trimPrefix "config-map:" $daemonConfigSources }}
+      {{- end }}
         # To keep state between restarts / upgrades
       - name: cilium-run
         hostPath:
           path: {{ .Values.daemon.runPath }}
           type: DirectoryOrCreate
-      {{- /* CRI-O already mounts the BPF filesystem */ -}}
-      {{- if and .Values.bpf.autoMount.enabled (not (eq .Values.containerRuntime.integration "crio")) }}
+        # To exec into pod network namespaces
+      - name: cilium-netns
+        hostPath:
+          path: /var/run/netns
+          type: DirectoryOrCreate
         # To keep state between restarts / upgrades for bpf maps
       - name: bpf-maps
         hostPath:
           path: /sys/fs/bpf
           type: DirectoryOrCreate
-      {{- end }}
-      {{- if .Values.cgroup.autoMount.enabled }}
-      # To mount cgroup2 filesystem on the host
+      {{- if or .Values.cgroup.autoMount.enabled .Values.sysctlfix.enabled }}
+      # To mount cgroup2 filesystem on the host or apply sysctlfix
       - name: hostproc
         hostPath:
           path: /proc
@@ -845,7 +938,7 @@ spec:
           path: {{ dir .Values.authentication.mutual.spire.adminSocketPath }}
           type: DirectoryOrCreate
       {{- end }}
-      {{- if .Values.envoy.enabled }}
+      {{- if $envoyDS }}
       # Sharing socket with Cilium Envoy on the same node by using a host path
       - name: envoy-sockets
         hostPath:
@@ -875,7 +968,7 @@ spec:
           - key: etcd-config
             path: etcd.config
         # To read the k8s etcd secrets in case the user might want to use TLS
-      {{- if or .Values.etcd.ssl .Values.etcd.managed }}
+      {{- if .Values.etcd.ssl }}
       - name: etcd-secrets
         secret:
           secretName: cilium-etcd-secrets
@@ -916,6 +1009,29 @@ spec:
               - key: {{ .Values.tls.caBundle.key }}
                 path: common-etcd-client-ca.crt
           {{- end }}
+          # note: we configure the volume for the kvstoremesh-specific certificate
+          # regardless of whether KVStoreMesh is enabled or not, so that it can be
+          # automatically mounted in case KVStoreMesh gets subsequently enabled,
+          # without requiring an agent restart.
+          - secret:
+              name: clustermesh-apiserver-local-cert
+              optional: true
+              items:
+              - key: tls.key
+                path: local-etcd-client.key
+              - key: tls.crt
+                path: local-etcd-client.crt
+          {{- if not .Values.tls.caBundle.enabled }}
+              - key: ca.crt
+                path: local-etcd-client-ca.crt
+          {{- else }}
+          - {{ .Values.tls.caBundle.useSecret | ternary "secret" "configMap" }}:
+              name: {{ .Values.tls.caBundle.name }}
+              optional: true
+              items:
+              - key: {{ .Values.tls.caBundle.key }}
+                path: local-etcd-client-ca.crt
+          {{- end }}
       {{- if and .Values.ipMasqAgent .Values.ipMasqAgent.enabled }}
       - name: ip-masq-agent
         configMap:
@@ -928,17 +1044,17 @@ spec:
       {{- if and .Values.encryption.enabled (eq .Values.encryption.type "ipsec") }}
       - name: cilium-ipsec-secrets
         secret:
-          secretName: {{ .Values.encryption.ipsec.secretName | default .Values.encryption.secretName }}
+          secretName: {{ .Values.encryption.ipsec.secretName }}
+      {{- end }}
+      {{- if and .Values.encryption.enabled (eq .Values.encryption.type "ztunnel") }}
+      - name: cilium-ztunnel-secrets
+        secret:
+          secretName: cilium-ztunnel-secrets
       {{- end }}
       {{- if .Values.cni.configMap }}
       - name: cni-configuration
         configMap:
           name: {{ .Values.cni.configMap }}
-      {{- end }}
-      {{- if .Values.bgp.enabled }}
-      - name: bgp-config-path
-        configMap:
-          name: bgp-config
       {{- end }}
       {{- if not .Values.securityContext.privileged }}
       - name: host-proc-sys-net
@@ -957,7 +1073,7 @@ spec:
           defaultMode: 0400
           sources:
           - secret:
-              name: hubble-server-certs
+              name: {{ .Values.hubble.tls.server.existingSecret | default "hubble-server-certs" }}
               optional: true
               items:
               - key: tls.crt
@@ -976,6 +1092,51 @@ spec:
                 path: client-ca.crt
           {{- end }}
       {{- end }}
+      {{- if and .Values.hubble.enabled (or .Values.hubble.metrics.enabled .Values.hubble.metrics.dynamic.enabled) .Values.hubble.metrics.tls.enabled }}
+      - name: hubble-metrics-tls
+        projected:
+          # note: the leading zero means this number is in octal representation: do not remove it
+          defaultMode: 0400
+          sources:
+          - secret:
+              name: {{ .Values.hubble.metrics.tls.server.existingSecret | default "hubble-metrics-server-certs" }}
+              optional: true
+              items:
+              - key: tls.crt
+                path: server.crt
+              - key: tls.key
+                path: server.key
+          {{- if .Values.hubble.metrics.tls.server.mtls.enabled }}
+          {{- if .Values.hubble.metrics.tls.server.mtls.name }}
+          {{/* Use the client CA specified by the user if they configured one */}}
+          - {{ .Values.hubble.metrics.tls.server.mtls.useSecret | ternary "secret" "configMap" }}:
+              name: {{ .Values.hubble.metrics.tls.server.mtls.name }}
+              optional: false
+              items:
+              - key: {{ .Values.hubble.metrics.tls.server.mtls.key }}
+                path: client-ca.crt
+          {{/* If the CA bundle isn't configured use the server CA as the client CA */}}
+          {{- else if not .Values.tls.caBundle.enabled }}
+              - key: ca.crt
+                path: client-ca.crt
+          {{/* Fall back to the caBundle CA if it's been configured */}}
+          {{- else }}
+          - {{ .Values.tls.caBundle.useSecret | ternary "secret" "configMap" }}:
+              name: {{ .Values.tls.caBundle.name }}
+              optional: true
+              items:
+              - key: {{ .Values.tls.caBundle.key }}
+                path: client-ca.crt
+          {{- end }}
+          {{- end }}
+
+      {{- end }}
+      {{- if .Values.hubble.metrics.dynamic.enabled }}
+      - name: hubble-dynamic-metrics-config
+        configMap:
+          name: {{ .Values.hubble.metrics.dynamic.config.configMapName }}
+          optional: true
+      {{- end }}
       {{- if .Values.hubble.export.dynamic.enabled }}
       - name: hubble-flowlog-config
         configMap:
@@ -993,4 +1154,5 @@ spec:
       {{- with .Values.extraVolumes }}
       {{- toYaml . | nindent 6 }}
       {{- end }}
+      {{- include "cilium-agent.volumes.extra" . | nindent 6 }}
 {{- end }}

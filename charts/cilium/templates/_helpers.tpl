@@ -6,6 +6,13 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
+Return the namespace to use for namespaced resources.
+*/}}
+{{- define "cilium.namespace" -}}
+{{- .Values.namespaceOverride | default .Release.Namespace -}}
+{{- end -}}
+
+{{/*
 Render full image name from given values, e.g:
 ```
 image:
@@ -15,14 +22,18 @@ image:
   digest: abcdefgh
 ```
 then `include "cilium.image" .Values.image`
-will return `quay.io/cilium/cilium:v1.10.1@abcdefgh`
+will return `quay.io/cilium/cilium:v1.10.1@abcdefgh`.
+Note that you can omit the tag by setting its value to `null` or `""` (in case
+your container engine doesn't support specifying both the tag and digest for
+instance).
 */}}
 {{- define "cilium.image" -}}
 {{- $digest := (.useDigest | default false) | ternary (printf "@%s" .digest) "" -}}
+{{- $tag := .tag | default "" | eq "" | ternary "" (printf ":%s" .tag) -}}
 {{- if .override -}}
 {{- printf "%s" .override -}}
 {{- else -}}
-{{- printf "%s:%s%s" .repository .tag $digest -}}
+{{- printf "%s%s%s" .repository $tag $digest -}}
 {{- end -}}
 {{- end -}}
 
@@ -43,62 +54,7 @@ where:
 {{- if $priorityClass }}
   {{- $priorityClass }}
 {{- else if and $root.Values.enableCriticalPriorityClass $criticalPriorityClass -}}
-  {{- if and (eq $root.Release.Namespace "kube-system") (semverCompare ">=1.10-0" $root.Capabilities.KubeVersion.Version) -}}
-    {{- $criticalPriorityClass }}
-  {{- else if semverCompare ">=1.17-0" $root.Capabilities.KubeVersion.Version -}}
-    {{- $criticalPriorityClass }}
-  {{- end -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Return the appropriate apiVersion for ingress.
-*/}}
-{{- define "ingress.apiVersion" -}}
-{{- if semverCompare ">=1.16-0, <1.19-0" .Capabilities.KubeVersion.Version -}}
-{{- print "networking.k8s.io/v1beta1" -}}
-{{- else if semverCompare "^1.19-0" .Capabilities.KubeVersion.Version -}}
-{{- print "networking.k8s.io/v1" -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Return the appropriate backend for Hubble UI ingress.
-*/}}
-{{- define "ingress.paths" -}}
-{{ if semverCompare ">=1.4-0, <1.19-0" .Capabilities.KubeVersion.Version -}}
-backend:
-  serviceName: hubble-ui
-  servicePort: http
-{{- else if semverCompare "^1.19-0" .Capabilities.KubeVersion.Version -}}
-pathType: Prefix
-backend:
-  service:
-    name: hubble-ui
-    port:
-      name: http
-{{- end -}}
-{{- end -}}
-
-{{/*
-Return the appropriate apiVersion for cronjob.
-*/}}
-{{- define "cronjob.apiVersion" -}}
-{{- if semverCompare ">=1.21-0" .Capabilities.KubeVersion.Version -}}
-{{- print "batch/v1" -}}
-{{- else -}}
-{{- print "batch/v1beta1" -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Return the appropriate apiVersion for podDisruptionBudget.
-*/}}
-{{- define "podDisruptionBudget.apiVersion" -}}
-{{- if semverCompare ">=1.21-0" .Capabilities.KubeVersion.Version -}}
-{{- print "policy/v1" -}}
-{{- else -}}
-{{- print "policy/v1beta1" -}}
+  {{- $criticalPriorityClass }}
 {{- end -}}
 {{- end -}}
 
@@ -120,7 +76,7 @@ and `commonCASecretName` variables.
     {{- if and $crt $key }}
       {{- $ca = buildCustomCert $crt $key -}}
     {{- else }}
-      {{- with lookup "v1" "Secret" .Release.Namespace $secretName }}
+      {{- with lookup "v1" "Secret" (include "cilium.namespace" .) $secretName }}
         {{- $crt := index .data "ca.crt" }}
         {{- $key := index .data "ca.key" }}
         {{- $ca = buildCustomCert $crt $key -}}
@@ -153,4 +109,115 @@ Validate duration field, return validated duration, 0s when provided duration is
 {{- else -}}
 0s
 {{- end }}
+{{- end }}
+
+{{/*
+Convert a map to a comma-separated string: key1=value1,key2=value2
+*/}}
+{{- define "mapToString" -}}
+{{- $list := list -}}
+{{- range $k, $v := . -}}
+{{- $list = append $list (printf "%s=%s" $k $v) -}}
+{{- end -}}
+{{ join "," $list }}
+{{- end -}}
+
+{{/*
+Enable automatic lookup of k8sServiceHost from the cluster-info ConfigMap
+When `auto`, it defaults to lookup for a `cluster-info` configmap on the `kube-public` namespace (kubeadm-based)
+To override the namespace and configMap when using `auto`:
+`.Values.k8sServiceLookupNamespace` and `.Values.k8sServiceLookupConfigMapName`
+*/}}
+{{- define "k8sServiceHost" }}
+  {{- $configmapName := default "cluster-info" .Values.k8sServiceLookupConfigMapName }}
+  {{- $configmapNamespace := default "kube-public" .Values.k8sServiceLookupNamespace }}
+  {{- if eq .Values.k8sServiceHost "auto" }}
+    {{- $configmap := (lookup "v1" "ConfigMap" $configmapNamespace $configmapName) }}
+    {{- if $configmap }}
+      {{- $kubeconfig := get $configmap.data "kubeconfig" }}
+      {{- $k8sServer := get ($kubeconfig | fromYaml) "clusters" | mustFirst | dig "cluster" "server" "" }}
+      {{- $uri := (split "https://" $k8sServer)._1 | trim }}
+      {{- (split ":" $uri)._0 | quote }}
+    {{- else }}
+      {{- fail (printf "ConfigMap %s/%s not found, please create it or set k8sServiceHost to a valid value" $configmapNamespace $configmapName) }}
+    {{- end }}
+  {{- else }}
+    {{- .Values.k8sServiceHost | quote }}
+  {{- end }}
+{{- end }}
+
+{{/*
+Enable automatic lookup of k8sServicePort from the cluster-info ConfigMap
+When `auto`, it defaults to lookup for a `cluster-info` configmap on the `kube-public` namespace (kubeadm-based)
+To override the namespace and configMap when using `auto`:
+`.Values.k8sServiceLookupNamespace` and `.Values.k8sServiceLookupConfigMapName`
+*/}}
+{{- define "k8sServicePort" }}
+  {{- $configmapName := default "cluster-info" .Values.k8sServiceLookupConfigMapName }}
+  {{- $configmapNamespace := default "kube-public" .Values.k8sServiceLookupNamespace }}
+  {{- if and (eq .Values.k8sServiceHost "auto") (lookup "v1" "ConfigMap" $configmapNamespace $configmapName) }}
+    {{- $configmap := (lookup "v1" "ConfigMap" $configmapNamespace $configmapName) }}
+    {{- $kubeconfig := get $configmap.data "kubeconfig" }}
+    {{- $k8sServer := get ($kubeconfig | fromYaml) "clusters" | mustFirst | dig "cluster" "server" "" }}
+    {{- $uri := (split "https://" $k8sServer)._1 | trim }}
+    {{- (split ":" $uri)._1 | quote }}
+  {{- else }}
+    {{- .Values.k8sServicePort | quote }}
+  {{- end }}
+{{- end }}
+
+{{/*
+Return user specify envoy.enabled or default value based on the upgradeCompatibility
+*/}}
+{{- define "envoyDaemonSetEnabled" }}
+  {{- if not .Values.l7Proxy }}
+    {{- false }}
+  {{- else if (not (kindIs "invalid" .Values.envoy.enabled)) }}
+    {{- .Values.envoy.enabled }}
+  {{- else }}
+    {{- if semverCompare ">=1.16" (default "1.16" .Values.upgradeCompatibility) }}
+      {{- true }}
+    {{- else }}
+      {{- false }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{/*
+Return user specify tls.readSecretsOnlyFromSecretsNamespace and take into account tls.secretsBackend
+*/}}
+{{- define "readSecretsOnlyFromSecretsNamespace" }}
+  {{- if (not (kindIs "invalid" .Values.tls.readSecretsOnlyFromSecretsNamespace)) }}
+    {{- .Values.tls.readSecretsOnlyFromSecretsNamespace }}
+  {{- else if (not (kindIs "invalid" .Values.tls.secretsBackend)) }}
+    {{- if eq .Values.tls.secretsBackend "local" }}
+      {{- true }}
+    {{- else }}
+      {{ false }}
+    {{- end }}
+  {{- else }}
+    {{- true }}
+  {{- end }}
+{{- end }}
+
+{{/*
+Return user specify tls.secretSync.enabled or default value based on the upgradeCompatibility
+*/}}
+{{- define "secretSyncEnabled" }}
+  {{- if (not (kindIs "invalid" .Values.tls.secretSync.enabled)) }}
+    {{- .Values.tls.secretSync.enabled }}
+  {{- else }}
+    {{- if semverCompare ">=1.17" (default "1.17" .Values.upgradeCompatibility) }}
+      {{- true }}
+    {{- else }}
+      {{- false }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{/*
+Determine if CRDs are used for identity allocation
+*/}}
+{{- define "identityAllocationCRD" }}
+  {{- list "crd" "doublewrite-readkvstore" "doublewrite-readcrd" | has .Values.identityAllocationMode }}
 {{- end }}

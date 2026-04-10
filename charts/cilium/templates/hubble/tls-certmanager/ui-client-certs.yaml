@@ -4,7 +4,11 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: hubble-ui-client-certs
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ include "cilium.namespace" . }}
+  {{- with .Values.commonLabels }}
+  labels:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
   {{- with .Values.hubble.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -19,4 +23,9 @@ spec:
   duration: {{ printf "%dh0m0s" (mul .Values.hubble.tls.auto.certValidityDuration 24) }}
   privateKey:
     rotationPolicy: Always
+  isCA: false
+  usages:
+    - signing
+    - key encipherment
+    - client auth
 {{- end }}
