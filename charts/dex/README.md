@@ -1,6 +1,6 @@
 # dex
 
-![version: 0.14.3](https://img.shields.io/badge/version-0.14.3-informational?style=flat-square) ![type: application](https://img.shields.io/badge/type-application-informational?style=flat-square) ![app version: 2.36.0](https://img.shields.io/badge/app%20version-2.36.0-informational?style=flat-square) ![kube version: >=1.14.0-0](https://img.shields.io/badge/kube%20version->=1.14.0--0-informational?style=flat-square) [![artifact hub](https://img.shields.io/badge/artifact%20hub-dex-informational?style=flat-square)](https://artifacthub.io/packages/helm/dex/dex)
+![version: 0.24.0](https://img.shields.io/badge/version-0.24.0-informational?style=flat-square) ![type: application](https://img.shields.io/badge/type-application-informational?style=flat-square) ![app version: 2.44.0](https://img.shields.io/badge/app%20version-2.44.0-informational?style=flat-square) ![kube version: >=1.14.0-0](https://img.shields.io/badge/kube%20version->=1.14.0--0-informational?style=flat-square) [![artifact hub](https://img.shields.io/badge/artifact%20hub-dex-informational?style=flat-square)](https://artifacthub.io/packages/helm/dex/dex)
 
 OpenID Connect (OIDC) identity and OAuth 2.0 provider with pluggable connectors.
 
@@ -115,7 +115,9 @@ ingress:
 | image.repository | string | `"ghcr.io/dexidp/dex"` | Name of the image repository to pull the container image from. |
 | image.pullPolicy | string | `"IfNotPresent"` | [Image pull policy](https://kubernetes.io/docs/concepts/containers/images/#updating-images) for updating already existing images on a node. |
 | image.tag | string | `""` | Image tag override for the default value (chart appVersion). |
+| image.digest | string | `""` | When digest is set to a non-empty value, images will be pulled by digest (regardless of tag value). |
 | imagePullSecrets | list | `[]` | Reference to one or more secrets to be used when [pulling images](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-pod-that-uses-your-secret) (from private registries). |
+| namespaceOverride | string | `""` | A namespace in place of the release namespace for all resources. |
 | nameOverride | string | `""` | A name in place of the chart name for `app:` labels. |
 | fullnameOverride | string | `""` | A name to substitute for the full names of resources. |
 | hostAliases | list | `[]` | A list of hosts and IPs that will be injected into the pod's hosts file if specified. See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#hostname-and-name-resolution) |
@@ -143,10 +145,12 @@ ingress:
 | podDisruptionBudget.maxUnavailable | int/percentage | `nil` | Number or percentage of pods that can be unavailable. |
 | priorityClassName | string | `""` | Specify a priority class name to set [pod priority](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#pod-priority). |
 | podSecurityContext | object | `{}` | Pod [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context) for details. |
+| revisionHistoryLimit | int | `10` | Define the [count of deployment revisions](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#clean-up-policy) to be kept. May be set to 0 in case of GitOps deployment approach. |
 | securityContext | object | `{}` | Container [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context-1) for details. |
 | service.annotations | object | `{}` | Annotations to be added to the service. |
 | service.type | string | `"ClusterIP"` | Kubernetes [service type](https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types). |
 | service.clusterIP | string | `""` | Internal cluster service IP (when applicable) |
+| service.loadBalancerIP | string | `""` | Load balancer service IP (when applicable) |
 | service.ports.http.port | int | `5556` | HTTP service port |
 | service.ports.http.nodePort | int | `nil` | HTTP node port (when applicable) |
 | service.ports.https.port | int | `5554` | HTTPS service port |
@@ -165,8 +169,10 @@ ingress:
 | serviceMonitor.labels | object | `{}` | Labels to be added to the ServiceMonitor. |
 | serviceMonitor.annotations | object | `{}` | Annotations to be added to the ServiceMonitor. |
 | serviceMonitor.scheme | string | `""` | HTTP scheme to use for scraping. Can be used with `tlsConfig` for example if using istio mTLS. |
+| serviceMonitor.path | string | `"/metrics"` | HTTP path to scrape for metrics. |
 | serviceMonitor.tlsConfig | object | `{}` | TLS configuration to use when scraping the endpoint. For example if using istio mTLS. |
 | serviceMonitor.bearerTokenFile | string | `nil` | Prometheus scrape bearerTokenFile |
+| serviceMonitor.honorLabels | bool | `false` | HonorLabels chooses the metric's labels on collisions with target labels. |
 | serviceMonitor.metricRelabelings | list | `[]` | Prometheus scrape metric relabel configs to apply to samples before ingestion. |
 | serviceMonitor.relabelings | list | `[]` | Relabel configs to apply to samples before ingestion. |
 | resources | object | No requests or limits. | Container resource [requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/). See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#resources) for details. |
