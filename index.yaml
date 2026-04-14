@@ -2773,6 +2773,39 @@ entries:
     version: 0.24.0-bs1-alpha1
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: "Update Dex to 2.44.0"
+      artifacthub.io/images: |
+        - name: dex
+          image: ghcr.io/dexidp/dex:v2.44.0
+    apiVersion: v2
+    appVersion: 2.44.0
+    created: "2026-04-14T20:08:42.12824202Z"
+    description: OpenID Connect (OIDC) identity and OAuth 2.0 provider with pluggable
+      connectors.
+    digest: ee6a5724fb7c22dd6f39961e18d91783eaffc45d68cf75bf7e1f5430a6e238c8
+    home: https://dexidp.io/
+    icon: https://dexidp.io/favicons/favicon.png
+    keywords:
+    - oidc
+    - oauth
+    - identity-provider
+    - saml
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: mark.sagikazar@gmail.com
+      name: sagikazarmark
+      url: https://sagikazarmark.com
+    name: dex
+    sources:
+    - https://github.com/dexidp/dex
+    - https://github.com/dexidp/helm-charts/tree/master/charts/dex
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/dex-0.24.0-bs1/dex-0.24.0-bs1.tgz
+    version: 0.24.0-bs1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: "Use updated HorizontalPodAutoscaler API Version which is no longer served in K8s >=1.25"
       artifacthub.io/images: |
@@ -4762,4 +4795,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2026-04-14T19:56:16.757448405Z"
+generated: "2026-04-14T20:08:42.129025895Z"
