@@ -19,8 +19,14 @@ image:
   # -- Image tag override for the default value (chart appVersion).
   tag: ""
 
+  # -- When digest is set to a non-empty value, images will be pulled by digest (regardless of tag value).
+  digest: ""
+
 # -- Reference to one or more secrets to be used when [pulling images](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#create-a-pod-that-uses-your-secret) (from private registries).
 imagePullSecrets: []
+
+# -- A namespace in place of the release namespace for all resources.
+namespaceOverride: ""
 
 # -- A name in place of the chart name for `app:` labels.
 nameOverride: ""
@@ -138,6 +144,10 @@ priorityClassName: ""
 podSecurityContext: {}
   # fsGroup: 2000
 
+# -- Define the [count of deployment revisions](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#clean-up-policy) to be kept.
+# May be set to 0 in case of GitOps deployment approach.
+revisionHistoryLimit: 10
+
 # -- Container [security context](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container).
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context-1) for details.
 securityContext: {}
@@ -157,6 +167,9 @@ service:
 
   # -- Internal cluster service IP (when applicable)
   clusterIP: ""
+
+  # -- Load balancer service IP (when applicable)
+  loadBalancerIP: ""
 
   ports:
     http:
@@ -234,6 +247,9 @@ serviceMonitor:
   # Can be used with `tlsConfig` for example if using istio mTLS.
   scheme: ""
 
+  # -- HTTP path to scrape for metrics.
+  path: /metrics
+
   # -- TLS configuration to use when scraping the endpoint.
   # For example if using istio mTLS.
   ## Of type: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#tlsconfig
@@ -241,6 +257,9 @@ serviceMonitor:
 
   # -- Prometheus scrape bearerTokenFile
   bearerTokenFile:
+
+  # -- HonorLabels chooses the metric's labels on collisions with target labels.
+  honorLabels: false
 
   # -- Prometheus scrape metric relabel configs
   # to apply to samples before ingestion.
@@ -281,9 +300,9 @@ resources: {}
 autoscaling:
   enabled: false
   minReplicas: 1
-  maxReplicas: 10
-  targetCPU: 80
-  targetMemory: 80
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
 
 # -- [Node selector](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector) configuration.
 nodeSelector: {}
