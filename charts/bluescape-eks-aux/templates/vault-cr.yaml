@@ -25,6 +25,9 @@ spec:
 
   vaultPodSpec:
     priorityClassName: "{{ .Values.vault_cr.priorityClassName }}"
+  {{- if .Values.vault_cr.vaultContainerSpec }}
+  vaultContainerSpec: {{ toYaml .Values.vault_cr.vaultContainerSpec | nindent 4 }}
+  {{- end }}
   vaultConfigurerPodSpec:
     priorityClassName: "{{ .Values.vault_cr.priorityClassName }}"
 
@@ -45,7 +48,8 @@ spec:
   volumeMounts:
     - name: vault-raft
       mountPath: /vault/file
-  veleroEnabled: true
+  veleroEnabled: {{ .Values.vault_cr.veleroEnabled }}
+  veleroFsfreezeImage: "{{ .Values.vault_cr.veleroFsfreezeImage }}"
 
   caNamespaces:
     - "*"
@@ -57,6 +61,9 @@ spec:
       secretNamespace: vault
 
   config:
+    {{- if ne .Values.vault_cr.disable_mlock nil }}
+    disable_mlock: {{ .Values.vault_cr.disable_mlock }}
+    {{- end }}
     storage:
       raft:
         path: "/vault/file"
