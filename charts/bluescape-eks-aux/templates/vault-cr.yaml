@@ -48,7 +48,8 @@ spec:
   volumeMounts:
     - name: vault-raft
       mountPath: /vault/file
-  veleroEnabled: true
+  veleroEnabled: {{ .Values.vault_cr.veleroEnabled }}
+  veleroFsfreezeImage: "{{ .Values.vault_cr.veleroFsfreezeImage }}"
 
   caNamespaces:
     - "*"
