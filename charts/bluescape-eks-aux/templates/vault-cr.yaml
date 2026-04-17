@@ -25,6 +25,9 @@ spec:
 
   vaultPodSpec:
     priorityClassName: "{{ .Values.vault_cr.priorityClassName }}"
+  {{- if .Values.vault_cr.vaultContainerSpec }}
+  vaultContainerSpec: {{ toYaml .Values.vault_cr.vaultContainerSpec | nindent 4 }}
+  {{- end }}
   vaultConfigurerPodSpec:
     priorityClassName: "{{ .Values.vault_cr.priorityClassName }}"
 
