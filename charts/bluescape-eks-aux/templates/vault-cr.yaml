@@ -60,6 +60,9 @@ spec:
       secretNamespace: vault
 
   config:
+    {{- if ne .Values.vault_cr.disable_mlock nil }}
+    disable_mlock: {{ .Values.vault_cr.disable_mlock }}
+    {{- end }}
     storage:
       raft:
         path: "/vault/file"
