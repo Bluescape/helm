@@ -1,0 +1,39 @@
+{
+  "images": {
+    "pilot": {
+      "values": {
+        "image": "${ref}"
+      }
+    },
+    "proxy": {
+      "values": {
+        "global": {
+          "proxy": {
+            "image": "${ref}"
+          }
+        }
+      }
+    },
+    "proxy-init": {
+      "values": {
+        "global": {
+          "proxy_init": {
+            "image": "${ref}"
+          }
+        }
+      }
+    }
+  },
+  "test": {
+    "cases": [
+      {
+        "name": "default",
+        "images": [
+          "pilot",
+          "proxy",
+          "proxy-init"
+        ]
+      }
+    ]
+  }
+}
