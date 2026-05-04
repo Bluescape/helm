@@ -255,6 +255,16 @@ entries:
   bluescape-eks-aux:
   - apiVersion: v2
     appVersion: 1.17.0
+    created: "2026-05-04T17:57:53.076965042Z"
+    description: A Helm chart for Kubernetes
+    digest: 8be13138b12a7c40ab640332301109c4d946566e6c07f84603cab41b632b0b95
+    name: bluescape-eks-aux
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-eks-aux-0.19.0/bluescape-eks-aux-0.19.0.tgz
+    version: 0.19.0
+  - apiVersion: v2
+    appVersion: 1.17.0
     created: "2026-05-04T17:23:44.688248352Z"
     description: A Helm chart for Kubernetes
     digest: 1ed2b942fabb6129b5b89d1fd5c8e178c5d981e16707131556d730985c590576
@@ -4897,4 +4907,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2026-05-04T17:23:44.689052564Z"
+generated: "2026-05-04T17:57:53.077757995Z"
