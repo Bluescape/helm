@@ -3605,6 +3605,16 @@ entries:
   istio-additions:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2026-05-04T17:18:01.646281544Z"
+    description: A Helm chart for Kubernetes
+    digest: ce225d6e1835446c2a489685aabc7c269fe14e33d7756f08f162e704551efb7d
+    name: istio-additions
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/istio-additions-0.2.7/istio-additions-0.2.7.tgz
+    version: 0.2.7
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2026-04-24T16:27:28.257722186Z"
     description: A Helm chart for Kubernetes
     digest: 3dd14b238a4c0214780d79886610caa3d00d407544060dbc4a993dcd1ed2e8f6
@@ -3775,6 +3785,22 @@ entries:
     - https://github.com/Bluescape/helm/releases/download/istio-monitoring-0.1.0-alpha1/istio-monitoring-0.1.0-alpha1.tgz
     version: 0.1.0-alpha1
   istiod:
+  - apiVersion: v2
+    appVersion: 1.29.2
+    created: "2026-05-04T17:18:01.81140387Z"
+    description: Helm chart for istio control plane
+    digest: 420845494c7c97178cbb2ec289307b24547dcd9543e31ea258a24f481e8cc19a
+    icon: https://istio.io/latest/favicons/android-192x192.png
+    keywords:
+    - istio
+    - istiod
+    - istio-discovery
+    name: istiod
+    sources:
+    - https://github.com/istio/istio
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/istiod-1.29.2/istiod-1.29.2.tgz
+    version: 1.29.2
   - apiVersion: v2
     appVersion: 1.29.2
     created: "2026-04-24T16:27:28.451313131Z"
@@ -4861,4 +4887,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2026-04-24T16:27:28.452023835Z"
+generated: "2026-05-04T17:18:01.811973185Z"
