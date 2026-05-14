@@ -15,6 +15,10 @@ images:
     repository: envoyproxy/envoy
     tag: v1.23.0
     pullPolicy: Always
+  certServer:
+    repository: saarasio/cert-server
+    tag: v0.1.0
+    pullPolicy: Always
 
 imagePullSecrets: []
 nameOverride: ""

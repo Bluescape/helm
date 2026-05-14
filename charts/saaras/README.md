@@ -33,6 +33,9 @@ EnRoute API Gateway
 | envoySettings | object | `{"logLevel":"debug"}` | One of ["trace", "debug", "info", "error"] |
 | fullnameOverride | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
+| images.certServer.pullPolicy | string | `"Always"` |  |
+| images.certServer.repository | string | `"saarasio/cert-server"` |  |
+| images.certServer.tag | string | `"v0.1.0"` |  |
 | images.enrouteService.pullPolicy | string | `"Always"` |  |
 | images.enrouteService.repository | string | `"saarasio/enroute-gwi"` |  |
 | images.enrouteService.tag | string | `nil` |  |
@@ -71,4 +74,3 @@ EnRoute API Gateway
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
 | tolerations | list | `[]` |  |
-
