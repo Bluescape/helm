@@ -1,3 +1,4 @@
+{{- if .Values.service.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -27,4 +28,5 @@ spec:
     {{- end }}
   selector:
     {{- include "enroute.selectorLabels" . | nindent 4 }}
-  type: LoadBalancer
+  type: {{ .Values.service.type | default "LoadBalancer" }}
+{{- end }}
