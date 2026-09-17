@@ -2,6 +2,9 @@
 
 replicaCount: 1
 
+global:
+  imageRegistry: ""
+
 images:
   enrouteService:
     registry: ""
