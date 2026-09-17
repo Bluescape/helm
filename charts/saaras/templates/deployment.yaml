@@ -70,7 +70,7 @@ spec:
             periodSeconds: 5
         {{- end }}
         # ENROUTE CONTAINER
-        - image: "{{ .Values.images.enrouteService.repository }}:{{ .Values.images.enrouteService.tag | default .Chart.AppVersion }}"
+        - image: {{ include "enroute.image" (dict "image" .Values.images.enrouteService "defaultTag" .Chart.AppVersion) | quote }}
           imagePullPolicy: {{ .Values.images.enrouteService.pullPolicy }}
           name: enroute
           ports:
@@ -127,7 +127,7 @@ spec:
   {{- if .Values.istio.enable }}
         # ISTIO Cert Server
         - name: cert-server
-          image: "{{ .Values.images.certServer.repository }}:{{ .Values.images.certServer.tag | default "latest" }}"
+          image: {{ include "enroute.image" (dict "image" .Values.images.certServer "defaultTag" "latest") | quote }}
           imagePullPolicy: {{ .Values.images.certServer.pullPolicy }}
           command:
             - /usr/local/bin/cert-server
@@ -151,7 +151,7 @@ spec:
             readOnlyRootFilesystem: true
    {{- end }}
         # REDIS CONTAINER
-        - image: "{{ .Values.images.redis.repository }}:{{ .Values.images.redis.tag | default "latest" }}"
+        - image: {{ include "enroute.image" (dict "image" .Values.images.redis "defaultTag" "latest") | quote }}
           imagePullPolicy: {{ .Values.images.redis.pullPolicy }}
           name: redis
           command: ["redis-server"]
@@ -165,7 +165,7 @@ spec:
           resources:
             {{- toYaml .Values.resources.redis | nindent 12 }}
         # ENVOY CONTAINER
-        - image: "{{ .Values.images.envoy.repository }}:{{ .Values.images.envoy.tag | default "latest" }}"
+        - image: {{ include "enroute.image" (dict "image" .Values.images.envoy "defaultTag" "latest") | quote }}
           imagePullPolicy: {{ .Values.images.envoy.pullPolicy }}
           name: envoy
           ports:
@@ -210,7 +210,7 @@ spec:
           resources:
             {{- toYaml .Values.resources.envoy | nindent 12 }}
       initContainers:
-        - image: "{{ .Values.images.enrouteService.repository }}:{{ .Values.images.enrouteService.tag | default .Chart.AppVersion }}"
+        - image: {{ include "enroute.image" (dict "image" .Values.images.enrouteService "defaultTag" .Chart.AppVersion) | quote }}
           imagePullPolicy: {{ .Values.images.enrouteService.pullPolicy }}
           name: envoy-initconfig
           command: ["/bin/enroute"]

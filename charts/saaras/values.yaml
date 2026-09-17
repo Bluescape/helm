@@ -4,18 +4,22 @@ replicaCount: 1
 
 images:
   enrouteService:
+    registry: ""
     repository: saarasio/enroute-gwi
     tag: ~ # Chart.appVersion is used
     pullPolicy: Always
   redis:
+    registry: ""
     repository: redis
     tag: 7.0.10
     pullPolicy: Always
   envoy:
+    registry: ""
     repository: envoyproxy/envoy
     tag: v1.23.0
     pullPolicy: Always
   certServer:
+    registry: ""
     repository: saarasio/cert-server
     tag: v0.1.0
     pullPolicy: Always
