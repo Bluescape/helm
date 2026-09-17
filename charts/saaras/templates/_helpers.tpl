@@ -61,3 +61,8 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "enroute.image" -}}
+{{- $registry := default .image.registry .global.imageRegistry -}}
+{{- with $registry }}{{ trimSuffix "/" . }}/{{ end }}{{ .image.repository }}:{{ default .defaultTag .image.tag }}
+{{- end }}
