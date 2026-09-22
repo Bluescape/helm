@@ -66,3 +66,35 @@ Create the name of the service account to use
 {{- $registry := default .image.registry .global.imageRegistry -}}
 {{- with $registry }}{{ trimSuffix "/" . }}/{{ end }}{{ .image.repository }}:{{ default .defaultTag .image.tag }}
 {{- end }}
+
+{{/*
+Return global and chart-specific Docker registry secret names.
+Both string entries and LocalObjectReference-style objects are supported.
+*/}}
+{{- define "enroute.imagePullSecrets" -}}
+{{- $pullSecrets := list -}}
+{{- range (default (list) .Values.global.imagePullSecrets) -}}
+  {{- if kindIs "map" . -}}
+    {{- with .name -}}
+      {{- $pullSecrets = append $pullSecrets . -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $pullSecrets = append $pullSecrets . -}}
+  {{- end -}}
+{{- end -}}
+{{- range (default (list) .Values.imagePullSecrets) -}}
+  {{- if kindIs "map" . -}}
+    {{- with .name -}}
+      {{- $pullSecrets = append $pullSecrets . -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $pullSecrets = append $pullSecrets . -}}
+  {{- end -}}
+{{- end -}}
+{{- if $pullSecrets }}
+imagePullSecrets:
+{{- range ($pullSecrets | uniq) }}
+  - name: {{ . | quote }}
+{{- end }}
+{{- end }}
+{{- end }}

@@ -4,6 +4,9 @@ replicaCount: 1
 
 global:
   imageRegistry: ""
+  # Docker registry secret names shared by the parent chart and its subcharts.
+  # Entries may be secret names or objects such as `{ name: regcred }`.
+  imagePullSecrets: []
 
 images:
   enrouteService:
@@ -27,6 +30,8 @@ images:
     tag: v0.1.0
     pullPolicy: Always
 
+# Additional image pull secrets for this chart. These are merged with
+# global.imagePullSecrets.
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
