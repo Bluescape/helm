@@ -1550,6 +1550,22 @@ entries:
     version: 0.3.0-beta
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2026-11-06T17:29:31.699000653Z"
+    dependencies:
+    - alias: bluescape-monitoring-dashboards
+      condition: custom_dashboards.enable
+      name: bluescape-monitoring-dashboards
+      repository: https://bluescape.github.io/helm
+      version: 0.2.12
+    description: A Helm chart for Kubernetes
+    digest: 0cc088749d6ef4bc4f2ceb075dd41f609f6f78953ea4b0290b7c94a941bec40d
+    name: bluescape-monitoring-grafana
+    type: application
+    urls:
+    - https://github.com/Bluescape/helm/releases/download/bluescape-monitoring-grafana-0.2.12/bluescape-monitoring-grafana-0.2.12.tgz
+    version: 0.2.12
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-02-13T17:53:01.888444999Z"
     dependencies:
     - alias: bluescape-monitoring-dashboards
@@ -5032,4 +5048,4 @@ entries:
     urls:
     - https://github.com/Bluescape/helm/releases/download/splunk-connect-for-kubernetes-1.5.4-alpha/splunk-connect-for-kubernetes-1.5.4-alpha.tgz
     version: 1.5.4-alpha
-generated: "2026-09-22T19:02:03.588877608Z"
+generated: "2026-11-06T17:29:31.699690467Z"
