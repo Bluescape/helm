@@ -35,9 +35,8 @@ grafana:
   ha_mode: false
 
   config:
-    security:
-      admin_password: "ZTFmZmNkMDUwMDg0ZWI5YmNhOWM2YTRmODliMGRiNjcxZTc1"
-      admin_user: root
+    # Optional admin_user and admin_password overrides; no credentials are set by default.
+    security: {}
     auth:
       users:
         auto_assign_org_role: "Editor"

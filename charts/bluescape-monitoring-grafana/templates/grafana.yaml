@@ -79,8 +79,14 @@ items:
         level: warn
         mode: console
       security:
-        admin_password: {{ .Values.grafana.config.security.admin_password }}
-        admin_user: {{ .Values.grafana.config.security.admin_user }}
+        {{- with .Values.grafana.config.security }}
+        {{- with .admin_password }}
+        admin_password: {{ . | quote }}
+        {{- end }}
+        {{- with .admin_user }}
+        admin_user: {{ . | quote }}
+        {{- end }}
+        {{- end }}
         allow_embedding: false
       server:
         domain: "grafana.{{ .Values.grafana.domain_name }}"
